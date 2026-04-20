@@ -2,6 +2,13 @@
 
 **Data:** 19/04/2026
 
+## Participantes
+
+- Lucas Abdalla Nery
+- Gustavo Antonio Rodrigues e Silva
+- Gabriel Velho de Souza
+- Sauhan Ferreira Melo
+  
 ## 1. Decisões Tomadas
 
 - Os requisitos funcionais atuais não estão bem definidos.
