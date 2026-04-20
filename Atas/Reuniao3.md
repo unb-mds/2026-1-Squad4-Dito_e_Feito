@@ -4,7 +4,6 @@
 
 ## Participantes
 
-- Lucas Abdalla Nery
 - Gustavo Antonio Rodrigues e Silva
 - Gabriel Velho de Souza
 - Sauhan Ferreira Melo
