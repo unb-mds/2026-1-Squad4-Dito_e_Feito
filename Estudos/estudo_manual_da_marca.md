@@ -80,7 +80,7 @@ As regras de ouro para o design são:
 
 Abaixo estão as 3 opções de paletas geradas com base no Manual de Marca. 
 
-### Opção 1: "GovTech Moderna" (🌟 Recomendada)
+### atual paleta de cores
 Tons baseados em ardósia (*slate*). É a paleta que melhor equilibra o aspecto "governamental sério" com a modernidade das startups de dados. As cores de alerta ganham destaque natural sem cansar a vista.
 
 | Elemento da Interface | Cor Hexadecimal | Referência Visual |
@@ -92,60 +92,3 @@ Tons baseados em ardósia (*slate*). É a paleta que melhor equilibra o aspecto 
 | **Destaque (Ações/Links)** | `#0F766E` | 🟦 *(Azul Petróleo)* |
 | **Positivo (Coerência)** | `#166534` | 🟩 *(Verde Floresta)* |
 | **Alerta/Erro (Incoerência)** | `#831843` | 🟫 *(Bordô Profundo)* |
-
-### Opção 2: "Sóbria & Analítica"
-Uma abordagem que reduz ainda mais a saturação do fundo, puxando para o cinza-grafite. Excelente para dar total protagonismo aos gráficos de barras e visualizações de dados complexas.
-
-| Elemento da Interface | Cor Hexadecimal | Referência Visual |
-| :--- | :--- | :--- |
-| **Fundo Principal** | `#121212` | ⬛ *(Quase Preto Puro)* |
-| **Superfícies/Cards** | `#27272A` | 🔲 *(Grafite)* |
-| **Texto Principal** | `#FAFAFA` | ⬜ *(Branco)* |
-| **Texto Secundário** | `#A1A1AA` | 🌫️ *(Cinza Neutro)* |
-| **Destaque (Ações/Links)** | `#006064` | 🟦 *(Cyan Muito Escuro)* |
-| **Positivo (Coerência)** | `#2E7D32` | 🟩 *(Verde Padrão)* |
-| **Alerta/Erro (Incoerência)** | `#641E16` | 🟫 *(Bordô Queimado)* |
-
-### Opção 3: "Alto Contraste Noturno"
-Ideal caso o portal exiba densos blocos de texto lado a lado (ex: Discurso vs. Voto). O fundo é extremamente escuro, forçando um recorte perfeito dos *cards* de conteúdo.
-
-| Elemento da Interface | Cor Hexadecimal | Referência Visual |
-| :--- | :--- | :--- |
-| **Fundo Principal** | `#080C14` | ⬛ *(Azul Noturno)* |
-| **Superfícies/Cards** | `#151E2E` | 🔲 *(Azul Marinho Base)* |
-| **Texto Principal** | `#FFFFFF` | ⬜ *(Branco Puro)* |
-| **Texto Secundário** | `#8AA2C2` | 🌫️ *(Cinza Claro Frio)* |
-| **Destaque (Ações/Links)** | `#115E59` | 🟦 *(Petróleo Esmeralda)* |
-| **Positivo (Coerência)** | `#065F46` | 🟩 *(Verde Institucional)* |
-| **Alerta/Erro (Incoerência)** | `#722F37` | 🟫 *(Vinho Clássico)* |
-
----
-
-## 🛠️ Guia de Implementação (Código)
-
-Para evitar *hardcoding* (repetir o código hexadecimal em vários arquivos), a equipe de desenvolvimento deve inserir as cores escolhidas em um arquivo CSS global através de **Variáveis CSS**. 
-
-Caso a equipe opte pela **Opção 1**, o código CSS base será:
-
-```css
-/* arquivo: global.css ou variables.css */
-:root {
-  /* Fundo e Superfícies */
-  --cor-fundo-principal: #0F172A;
-  --cor-surface-card: #1E293B;
-  
-  /* Tipografia */
-  --cor-texto-primario: #F8FAFC;
-  --cor-texto-secundario: #94A3B8;
-  
-  /* Destaques e Status */
-  --cor-primaria-petroleo: #0F766E;
-  --cor-status-sucesso: #166534;
-  --cor-status-alerta: #831843;
-}
-
-/* Exemplo de uso: */
-body {
-  background-color: var(--cor-fundo-principal);
-  color: var(--cor-texto-primario);
-}
