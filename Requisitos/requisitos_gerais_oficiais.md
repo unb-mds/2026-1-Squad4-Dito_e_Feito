@@ -27,6 +27,7 @@ Sistema para análise de coerência entre discursos e votos de parlamentares, ut
 | RF05 | filtro por partido | 🔴 Alta | ter na aba principal uma maneira de filtrar politicos por partido para selecionar |
 | RF06 | filtro por estado | 🔴 Alta | ter na aba principal uma maneira de filtrar politicos por estado para selecionar |
 | RF07 | aba visão geral com ferramenta de busca | 🔴 Alta | ter na aba principal uma maneira de filtrar politicos por estado para selecionar |
+| RF07.1 | tema Dark | 🔴 Alta | colocar um modo Dark no site |
 | RF08 | Evolução do posicionamento no tempo | 🟠 Média | Visualizar linha do tempo com mudanças de posição detectadas, destacando viradas significativas. |
 | RF09 | Filtros e busca avançada | 🟠 Média | Filtrar por parlamentar, partido, tema/etiqueta, período, UF e tipo de votação. |
 | RF10 | Comparação entre parlamentares | 🟠 Média | Permitir comparação lado a lado de scores de coerência e evolução entre dois ou mais parlamentares. |
