@@ -78,8 +78,6 @@ As regras de ouro para o design são:
 
 ## 🧪 Propostas de Paletas Estudadas
 
-Abaixo estão as 3 opções de paletas geradas com base no Manual de Marca. 
-
 ### atual paleta de cores
 Tons baseados em ardósia (*slate*). É a paleta que melhor equilibra o aspecto "governamental sério" com a modernidade das startups de dados. As cores de alerta ganham destaque natural sem cansar a vista.
 
