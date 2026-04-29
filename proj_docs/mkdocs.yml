@@ -1,0 +1,90 @@
+site_name: Dito e Feito — Documentação
+site_description: Sistema de análise de coerência entre discursos e votos de parlamentares brasileiros usando IA.
+site_author: Squad 4 — MDS 2026/1 (UnB)
+site_url: https://unb-mds.github.io/2026-1-Squad4-Dito_e_Feito/
+
+repo_name: unb-mds/2026-1-Squad4-Dito_e_Feito
+repo_url: https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito
+
+theme:
+  name: material
+  language: pt
+  palette:
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Mudar para modo claro
+    - scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Mudar para modo escuro
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search:
+      lang: pt
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - Início: index.md
+
+  - Sprints:
+      - Sprint 01 — Abertura: sprints/sprint01.md
+      - Sprint 02 — Definições: sprints/sprint02.md
+      - Sprint 03 — Refinamento: sprints/sprint03.md
+
+  - Requisitos:
+      - Levantamento Inicial: requisitos/levantamento_inicial.md
+      - Requisitos Gerais Oficiais: requisitos/requisitos.md
+
+  - Tecnologias:
+      - Stack do Projeto: tecnologias/stack.md
+
+  - Estudos:
+      - Índice de Estudos: estudos/index.md
+      - Ciclo de Vida de Software: estudos/ciclo_de_vida.md
+      - Engenharia de Requisitos + IA: estudos/requisitos_e_ia.md
+      - Manual de Marca: estudos/manual_da_marca.md
+      - Aplicação do Scrum: estudos/scrum.md
+      - Git — Guia de Referência: estudos/git_cheatsheet.md
+      - Banco de Dados:
+          - Visão Geral: estudos/banco_de_dados/index.md
+          - Introdução ao PostgreSQL: estudos/banco_de_dados/introducao_postgresql.md
+      - PLN / Inteligência Artificial:
+          - Visão Geral: estudos/pln_ia/index.md
+          - Arquitetura de IA: estudos/pln_ia/arquitetura_ia.md
+          - Deploy do Modelo: estudos/pln_ia/deploy_modelo.md
