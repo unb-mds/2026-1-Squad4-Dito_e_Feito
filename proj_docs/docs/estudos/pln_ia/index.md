@@ -19,6 +19,7 @@ O módulo de IA é o coração do sistema. Ele é responsável por:
 
 - [Arquitetura de IA para Monitoramento Político](arquitetura_ia.md) — análise técnica e política completa
 - [Deploy do Modelo de IA](deploy_modelo.md) — estratégias de colocação em produção
+- [Especificação da Camada de Coleta de Dados](coleta_dados.md) — estudo de coleta de dados
 
 ---
 
