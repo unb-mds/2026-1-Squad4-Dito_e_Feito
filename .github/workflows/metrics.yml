@@ -29,9 +29,6 @@ jobs:
       - name: Install dependencies
         run: npm install axios
 
-      - name: Create public directory
-        run: mkdir -p public
-
       - name: Generate metrics dashboard
         run: node scripts/collect.js
         env:
@@ -51,6 +48,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./
           publish_branch: gh-pages
           force_orphan: true
