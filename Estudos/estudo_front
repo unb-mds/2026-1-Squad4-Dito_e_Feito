@@ -1,0 +1,70 @@
+# 🖥️ Documentação de Engenharia Frontend
+
+Este documento fornece uma visão panorâmica sobre o desenvolvimento Frontend, seu papel na arquitetura de software e uma análise comparativa das tecnologias líderes de mercado para fundamentar a escolha da stack do projeto.
+
+---
+
+## 1. O que é o Frontend?
+
+O **Frontend** é a camada de apresentação de uma aplicação. É a interface direta entre o usuário e o sistema (Client-side). Sua função vai além de apenas "exibir cores e botões"; ele é responsável por:
+
+* **Interface do Usuário (UI):** Renderizar elementos visuais seguindo o Manual de Marca.
+* **Experiência do Usuário (UX):** Garantir que a navegação seja fluida, rápida e intuitiva.
+* **Consumo de Dados:** Comunicar-se com o Backend via APIs (REST/GraphQL) para exibir informações dinâmicas.
+* **Lógica de Estado:** Gerenciar o que acontece na tela quando o usuário clica, digita ou filtra dados.
+
+---
+
+## 2. A "Trindade" Base do Web Frontend
+
+Independente do framework escolhido, todo frontend moderno é construído sobre três pilares:
+
+1.  **HTML5 (Estrutura):** Define o esqueleto da página (títulos, parágrafos, seções).
+2.  **CSS3 (Estilo):** Define a estética (cores, fontes, espaçamentos, animações).
+3.  **JavaScript/TypeScript (Comportamento):** Define a inteligência e interatividade da página.
+
+---
+
+## 3. Comparativo: Frameworks e Tecnologias
+
+Atualmente, não se constrói frontends complexos apenas com JS puro. Utilizamos **Frameworks** para ganhar velocidade e organização. Abaixo, uma comparação das melhores opções:
+
+| Tecnologia | Linguagem Base | Curva de Aprendizado | Performance | Justificativa de Uso |
+| :--- | :--- | :--- | :--- | :--- |
+| **React** | JavaScript/TS | Média | Alta | Líder de mercado. Ideal para dashboards complexos e componentes reutilizáveis. |
+| **Vue.js** | JavaScript/TS | Baixa | Alta | Extremamente fácil de integrar. Ótimo para prototipagem rápida e legibilidade. |
+| **Angular** | TypeScript | Alta | Alta | Um framework completo (opinionated). Melhor para sistemas corporativos gigantescos. |
+| **Svelte** | JS / TS | Baixa | Altíssima | Não usa Virtual DOM; compila o código antes de enviar ao browser. Muito veloz. |
+| **Next.js** | React (TS) | Média | Altíssima | Focado em SEO e renderização no servidor (SSR). O padrão atual para produção. |
+
+---
+
+## 4. Tópicos Essenciais de Estudo
+
+Para dominar o desenvolvimento desta camada, a equipe deve focar nos seguintes conceitos:
+
+### 🌐 Consumo de APIs (REST)
+O frontend não possui os dados; ele os solicita. É necessário dominar o uso de ferramentas como `Fetch API` ou bibliotecas como `Axios` para trazer os dados do Backend (votos e discursos) para a tela.
+
+### 🧩 Componentização
+A prática de quebrar a interface em pedaços pequenos e independentes (Ex: um botão, um card de parlamentar, um gráfico). Isso facilita a manutenção e evita repetição de código.
+
+### 🎨 Design Systems e Tokens
+A tradução do design (Figma) para o código. No nosso caso, o uso de variáveis (Tokens) para o **Azul Petróleo** e o **Bordô** garante que o site seja visualmente consistente em todas as telas.
+
+### 📊 Visualização de Dados (DataViz)
+Para projetos analíticos, o frontend deve saber manipular bibliotecas de gráficos (como **Recharts** ou **Chart.js**), garantindo que as tendências de coerência sejam fáceis de interpretar.
+
+---
+
+## 5. Estratégia Recomendada para o Projeto
+
+Considerando que o **Dito e Feito** exige um dashboard analítico e integração com IA, a recomendação de arquitetura é:
+
+* **Linguagem:** TypeScript (pela segurança de tipos e menos bugs).
+* **Framework:** React (pela vasta biblioteca de gráficos e facilidade de componentização).
+* **Estilização:** Tailwind CSS (pela velocidade em aplicar o nosso Manual de Marca diretamente no HTML).
+* **Build Tool:** Vite (para um ambiente de desenvolvimento ultra-rápido).
+
+---
+*Este guia serve como base técnica para a Sprint 1 de desenvolvimento.*
