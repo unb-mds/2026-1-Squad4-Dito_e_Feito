@@ -8,6 +8,7 @@ Esta seção reúne todos os materiais de estudo produzidos pelo **Squad 4** ao 
 
 | Área | Conteúdo |
 |---|---|
+| [Frontend](front.md) | Engenharia Frontend e escolha da stack |
 | [Ciclo de Vida de Software](ciclo_de_vida.md) | SDLC, modelos e boas práticas |
 | [Engenharia de Requisitos + IA](requisitos_e_ia.md) | O que são requisitos, como a IA auxilia |
 | [Manual de Marca](manual_da_marca.md) | Identidade visual, paleta de cores, tipografia |

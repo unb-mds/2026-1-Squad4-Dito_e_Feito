@@ -66,16 +66,21 @@ nav:
       - Sprint 01 — Abertura: sprints/sprint01.md
       - Sprint 02 — Definições: sprints/sprint02.md
       - Sprint 03 — Refinamento: sprints/sprint03.md
+      - Sprint 04 — Alinhamento: sprints/sprint04.md
 
   - Requisitos:
       - Levantamento Inicial: requisitos/levantamento_inicial.md
       - Requisitos Gerais Oficiais: requisitos/requisitos.md
+
+  - Design:
+      - Protótipo Figma: design/figma.md
 
   - Tecnologias:
       - Stack do Projeto: tecnologias/stack.md
 
   - Estudos:
       - Índice de Estudos: estudos/index.md
+      - Frontend: estudos/front.md
       - Ciclo de Vida de Software: estudos/ciclo_de_vida.md
       - Engenharia de Requisitos + IA: estudos/requisitos_e_ia.md
       - Manual de Marca: estudos/manual_da_marca.md
@@ -84,7 +89,10 @@ nav:
       - Banco de Dados:
           - Visão Geral: estudos/banco_de_dados/index.md
           - Introdução ao PostgreSQL: estudos/banco_de_dados/introducao_postgresql.md
+          - Tipos de Dados: estudos/banco_de_dados/tipos_dados.md
+          - Modelagem de Entidades: estudos/banco_de_dados/modelagem_entidades.md
       - PLN / Inteligência Artificial:
           - Visão Geral: estudos/pln_ia/index.md
           - Arquitetura de IA: estudos/pln_ia/arquitetura_ia.md
+          - Coleta de Dados: estudos/pln_ia/coleta_dados.md
           - Deploy do Modelo: estudos/pln_ia/deploy_modelo.md
