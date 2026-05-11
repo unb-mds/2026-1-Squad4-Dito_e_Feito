@@ -1,16 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+
+  <title>GitHub Productivity Metrics</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+      gap: 20px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow:
+        0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      margin-bottom: 12px;
+      color: #94a3b8;
+    }
+
+    .card p {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    pre {
+      margin-top: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
 <body>
-  <h1>Github Metrics</h1>
+
+  <h1> GitHub Productivity Dashboard</h1>
+
+  <div id="app" class="grid"></div>
 
   <script>
     fetch('./metrics.json')
       .then(r => r.json())
       .then(data => {
-        document.body.innerHTML += `
-          <pre>${JSON.stringify(data, null, 2)}</pre>
+
+        const app = document.getElementById('app');
+
+        app.innerHTML = `
+          <div class="card">
+            <h2>Total Commits</h2>
+            <p>${data.totalCommits}</p>
+          </div>
+
+          <div class="card">
+            <h2>Total Issues</h2>
+            <p>${data.totalIssues}</p>
+          </div>
+
+          <div class="card">
+            <h2>Avg Commit Interval</h2>
+            <p>${data.avgCommitIntervalHours.toFixed(2)}h</p>
+          </div>
+
+          <div class="card">
+            <h2>Avg Issue Close Time</h2>
+            <p>${data.avgIssueCloseHours.toFixed(2)}h</p>
+          </div>
+
+          <div class="card">
+            <h2>Commits Per Author</h2>
+
+            <pre>
+${JSON.stringify(data.commitsPerAuthor, null, 2)}
+            </pre>
+          </div>
         `;
       });
   </script>
+
 </body>
 </html>
