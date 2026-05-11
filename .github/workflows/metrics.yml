@@ -13,26 +13,66 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install deps
+      - name: Create package.json if missing
+        run: |
+          if [ ! -f package.json ]; then
+            npm init -y
+          fi
+
+      - name: Install dependencies
         run: npm install axios
 
-      - name: Create output dir
+      - name: Create public directory
         run: mkdir -p public
 
-      - name: Generate metrics
+      - name: Ensure index.html exists
+        run: |
+          if [ ! -f public/index.html ]; then
+            cat > public/index.html << 'EOF'
+            <!DOCTYPE html>
+            <html>
+            <body>
+              <h1>Github Metrics</h1>
+
+              <script>
+                fetch('./metrics.json')
+                  .then(r => r.json())
+                  .then(data => {
+                    document.body.innerHTML += `
+                      <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                  })
+                  .catch(err => {
+                    document.body.innerHTML += `
+                      <p>metrics.json not found</p>
+                    `;
+                    console.error(err);
+                  });
+              </script>
+            </body>
+            </html>
+            EOF
+          fi
+
+      - name: Generate metrics JSON
         run: node scripts/collect.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           BRANCH: dev
+
+      - name: Show generated files
+        run: |
+          echo "=== PUBLIC FOLDER ==="
+          ls -R public
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -40,3 +80,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
+          force_orphan: true
