@@ -32,6 +32,8 @@ O banco de dados é responsável por persistir:
 ## Conteúdo
 
 - [Introdução ao PostgreSQL](introducao_postgresql.md) — o que é, diferenças, vantagens
+- [Tipos de Dados](tipos_dados.md) — os tipos mais relevantes para o projeto
+- [Modelagem de Entidades](modelagem_entidades.md) — esboço do modelo relacional
 
 ---
 
