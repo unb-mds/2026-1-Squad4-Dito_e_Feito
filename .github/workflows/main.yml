@@ -38,11 +38,11 @@ jobs:
 
       - name: Debug generated files
         run: |
-          echo "=== PUBLIC FILES ==="
-          ls -R public
+          echo "=== GENERATED FILES ==="
+          ls -la index.html metrics.json
 
           echo "=== METRICS JSON ==="
-          cat public/metrics.json
+          cat metrics.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
