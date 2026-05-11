@@ -1,12 +1,12 @@
 {
     "generatedAt": "2026-05-11T12:00:00.000Z",
-    "totalCommits": 152,
+    "totalCommits": 2,
     "commitsPerAuthor": {
-        "Gustavo": 74,
-        "Ana": 41,
-        "Lucas": 37
+        "Gustavo": 2,
+        "Gabriel": 0,
+        "Lucas": 0
     },
-    "avgCommitIntervalHours": 3.42,
-    "totalIssues": 28,
+    "avgCommitIntervalHours": 12.75,
+    "totalIssues": 1,
     "avgIssueCloseHours": 12.75
 }
