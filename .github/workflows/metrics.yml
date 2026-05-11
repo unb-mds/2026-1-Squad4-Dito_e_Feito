@@ -2,6 +2,11 @@ name: Repo Metrics
 
 on:
   workflow_dispatch:
+
+  push:
+    branches:
+      - dev
+
   schedule:
     - cron: '0 * * * *'
 
@@ -21,58 +26,26 @@ jobs:
         with:
           node-version: 20
 
-      - name: Create package.json if missing
-        run: |
-          if [ ! -f package.json ]; then
-            npm init -y
-          fi
-
       - name: Install dependencies
         run: npm install axios
 
       - name: Create public directory
         run: mkdir -p public
 
-      - name: Ensure index.html exists
-        run: |
-          if [ ! -f public/index.html ]; then
-            cat > public/index.html << 'EOF'
-            <!DOCTYPE html>
-            <html>
-            <body>
-              <h1>Github Metrics</h1>
-
-              <script>
-                fetch('./metrics.json')
-                  .then(r => r.json())
-                  .then(data => {
-                    document.body.innerHTML += `
-                      <pre>${JSON.stringify(data, null, 2)}</pre>
-                    `;
-                  })
-                  .catch(err => {
-                    document.body.innerHTML += `
-                      <p>metrics.json not found</p>
-                    `;
-                    console.error(err);
-                  });
-              </script>
-            </body>
-            </html>
-            EOF
-          fi
-
-      - name: Generate metrics JSON
+      - name: Generate metrics dashboard
         run: node scripts/collect.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           BRANCH: dev
 
-      - name: Show generated files
+      - name: Debug generated files
         run: |
-          echo "=== PUBLIC FOLDER ==="
+          echo "=== PUBLIC FILES ==="
           ls -R public
+
+          echo "=== METRICS JSON ==="
+          cat public/metrics.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
