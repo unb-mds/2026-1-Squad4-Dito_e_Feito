@@ -120,7 +120,13 @@ function generateHTML() {
 
   <script>
     fetch('./metrics.json')
-      .then(r => r.json())
+      .then(async r => {
+  const text = await r.text();
+
+  console.log(text);
+
+  return JSON.parse(text);
+})
       .then(data => {
         const app = document.getElementById('app');
 
