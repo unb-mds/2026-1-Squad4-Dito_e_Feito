@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Github Metrics</h1>
+
+  <script>
+    fetch('./metrics.json')
+      .then(r => r.json())
+      .then(data => {
+        document.body.innerHTML += `
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+        `;
+      });
+  </script>
+</body>
+</html>
