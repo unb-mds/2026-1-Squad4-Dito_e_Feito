@@ -5,10 +5,10 @@ on:
 
   push:
     branches:
-      - dev
+      - main
 
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/5 * * * *'
 
 permissions:
   contents: write
@@ -34,7 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          BRANCH: dev
+          BRANCH: main
 
       - name: Debug generated files
         run: |
