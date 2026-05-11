@@ -82,7 +82,7 @@ async function main() {
   };
 
   fs.writeFileSync(
-    "public/metrics.json",
+    "metrics.json",
     JSON.stringify(data, null, 2)
   );
 
@@ -156,7 +156,7 @@ function generateHTML() {
 </html>
 `;
 
-  fs.writeFileSync("public/index.html", html);
+  fs.writeFileSync("index.html", html);
 }
 
 main();
