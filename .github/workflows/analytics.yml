@@ -58,6 +58,9 @@ jobs:
       - name: Copy metrics JSON to build output
         run: cp analytics/data/processed/team_metrics.json analytics/frontend/dist/
 
+      - name: Disable Jekyll for GitHub Pages
+        run: touch analytics/frontend/dist/.nojekyll
+
       # ── Deploy ───────────────────────────────────────────
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
