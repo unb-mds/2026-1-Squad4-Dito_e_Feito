@@ -65,4 +65,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: analytics/frontend/dist
           publish_branch: gh-pages
-          force_orphan: true
+          destination_dir: analytics
+          keep_files: true
