@@ -1,0 +1,111 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@11.9.0
+2 info using node@v24.14.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/gustavo/Library/Caches/typescript/5.9/.npmrc
+5 silly config load:file:/Users/gustavo/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install types-registry@latest
+8 verbose argv "install" "--ignore-scripts" "types-registry@latest"
+9 verbose logfile logs-max:10 dir:/Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/.npm-cache/_logs/2026-05-12T19_55_42_620Z-
+10 verbose logfile /Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/.npm-cache/_logs/2026-05-12T19_55_42_620Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+13 silly packumentCache corgi:https://registry.npmjs.org/types-registry cache-miss
+14 http fetch GET 200 https://registry.npmjs.org/types-registry 1704ms (cache updated)
+15 silly packumentCache corgi:https://registry.npmjs.org/types-registry set size:undefined disposed:false
+16 silly idealTree buildDeps
+17 silly fetch manifest types-registry@0.1.769
+18 silly packumentCache full:https://registry.npmjs.org/types-registry cache-miss
+19 http fetch GET 200 https://registry.npmjs.org/types-registry 183ms (cache updated)
+20 silly packumentCache full:https://registry.npmjs.org/types-registry set size:undefined disposed:false
+21 silly placeDep ROOT types-registry@0.1.769 REPLACE for:  want: 0.1.769
+22 silly reify moves {}
+23 silly audit bulk request {
+23 silly audit   '@types/accepts': [ '1.3.7' ],
+23 silly audit   '@types/bcrypt': [ '6.0.0' ],
+23 silly audit   '@types/body-parser': [ '1.19.6' ],
+23 silly audit   '@types/braces': [ '3.0.5' ],
+23 silly audit   '@types/bytes': [ '3.1.5' ],
+23 silly audit   '@types/connect': [ '3.4.38' ],
+23 silly audit   '@types/content-disposition': [ '0.5.9' ],
+23 silly audit   '@types/content-type': [ '1.1.9' ],
+23 silly audit   '@types/cookie-signature': [ '1.1.2' ],
+23 silly audit   '@types/debug': [ '4.1.13' ],
+23 silly audit   '@types/depd': [ '1.1.37' ],
+23 silly audit   '@types/ee-first': [ '1.1.3' ],
+23 silly audit   '@types/encodeurl': [ '1.0.3' ],
+23 silly audit   '@types/escape-html': [ '1.0.4' ],
+23 silly audit   '@types/etag': [ '1.8.4' ],
+23 silly audit   '@types/express': [ '5.0.6' ],
+23 silly audit   '@types/express-serve-static-core': [ '5.1.1' ],
+23 silly audit   '@types/express-session': [ '1.18.2' ],
+23 silly audit   '@types/fill-range': [ '7.0.3' ],
+23 silly audit   '@types/finalhandler': [ '1.2.4' ],
+23 silly audit   '@types/forwarded': [ '0.1.4' ],
+23 silly audit   '@types/fresh': [ '0.5.3' ],
+23 silly audit   '@types/function-bind': [ '1.1.10' ],
+23 silly audit   '@types/get-intrinsic': [ '1.2.3' ],
+23 silly audit   '@types/glob-parent': [ '5.1.3' ],
+23 silly audit   '@types/gopd': [ '1.0.3' ],
+23 silly audit   '@types/http-errors': [ '2.0.5' ],
+23 silly audit   '@types/ignore-by-default': [ '0.0.0' ],
+23 silly audit   '@types/inherits': [ '2.0.0' ],
+23 silly audit   '@types/is-extglob': [ '2.1.0' ],
+23 silly audit   '@types/is-glob': [ '4.0.4' ],
+23 silly audit   '@types/is-number': [ '7.0.5' ],
+23 silly audit   '@types/jsonwebtoken': [ '9.0.10' ],
+23 silly audit   '@types/jws': [ '3.2.11' ],
+23 silly audit   '@types/less': [ '3.0.8' ],
+23 silly audit   '@types/lodash': [ '4.17.24' ],
+23 silly audit   '@types/lodash.includes': [ '4.3.9' ],
+23 silly audit   '@types/lodash.isboolean': [ '3.0.9' ],
+23 silly audit   '@types/lodash.isinteger': [ '4.0.9' ],
+23 silly audit   '@types/lodash.isnumber': [ '3.0.9' ],
+23 silly audit   '@types/lodash.isplainobject': [ '4.0.9' ],
+23 silly audit   '@types/lodash.isstring': [ '4.0.9' ],
+23 silly audit   '@types/lodash.once': [ '4.1.9' ],
+23 silly audit   '@types/media-typer': [ '1.1.3' ],
+23 silly audit   '@types/mime-db': [ '1.43.6' ],
+23 silly audit   '@types/mime-types': [ '3.0.1' ],
+23 silly audit   '@types/ms': [ '2.1.0' ],
+23 silly audit   '@types/negotiator': [ '0.6.4' ],
+23 silly audit   '@types/node': [ '25.5.0' ],
+23 silly audit   '@types/normalize-path': [ '3.0.2' ],
+23 silly audit   '@types/object-inspect': [ '1.13.0' ],
+23 silly audit   '@types/on-finished': [ '2.3.5' ],
+23 silly audit   '@types/on-headers': [ '1.0.4' ],
+23 silly audit   '@types/once': [ '1.4.5' ],
+23 silly audit   '@types/parseurl': [ '1.3.3' ],
+23 silly audit   '@types/picomatch': [ '4.0.2' ],
+23 silly audit   '@types/proxy-addr': [ '2.0.3' ],
+23 silly audit   '@types/qs': [ '6.15.0' ],
+23 silly audit   '@types/random-bytes': [ '1.0.3' ],
+23 silly audit   '@types/range-parser': [ '1.2.7' ],
+23 silly audit   '@types/react': [ '19.2.14' ],
+23 silly audit   '@types/react-dom': [ '19.2.3' ],
+23 silly audit   '@types/react-syntax-highlighter': [ '15.5.13' ],
+23 silly audit   '@types/safer-buffer': [ '2.1.3' ],
+23 silly audit   '@types/semver': [ '7.7.1' ],
+23 silly audit   '@types/send': [ '1.2.1' ],
+23 silly audit   '@types/serve-static': [ '2.2.0' ],
+23 silly audit   '@types/statuses': [ '2.0.6' ],
+23 silly audit   '@types/stylus': [ '0.48.43' ],
+23 silly audit   '@types/to-regex-range': [ '5.0.3' ],
+23 silly audit   '@types/toidentifier': [ '1.0.2' ],
+23 silly audit   '@types/touch': [ '3.1.5' ],
+23 silly audit   '@types/type-is': [ '1.6.7' ],
+23 silly audit   '@types/uid-safe': [ '2.1.5' ],
+23 silly audit   '@types/vary': [ '1.1.3' ],
+23 silly audit   csstype: [ '3.2.3' ],
+23 silly audit   'undici-types': [ '7.18.2' ],
+23 silly audit   'types-registry': [ '0.1.769' ]
+23 silly audit }
+24 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 365ms
+25 silly audit report {}
+26 verbose cwd /Users/gustavo/Library/Caches/typescript/5.9
+27 verbose os Darwin 21.6.0
+28 verbose node v24.14.0
+29 verbose npm  v11.9.0
+30 verbose exit 0
+31 info ok

@@ -1,0 +1,36 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@11.9.0
+2 info using node@v24.14.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/analytics/frontend/.npmrc
+5 silly config load:file:/Users/gustavo/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm run dev
+8 verbose argv "run" "dev"
+9 verbose logfile logs-max:10 dir:/Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/.npm-cache/_logs/2026-05-12T15_27_30_548Z-
+10 verbose logfile /Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/.npm-cache/_logs/2026-05-12T15_27_30_548Z-debug-0.log
+11 silly logfile done cleaning log files
+12 verbose stack Error: Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/analytics/frontend/package.json'
+12 verbose stack     at async open (node:internal/fs/promises:637:25)
+12 verbose stack     at async readFile (node:internal/fs/promises:1269:14)
+12 verbose stack     at async read (/usr/local/lib/node_modules/npm/node_modules/@npmcli/package-json/lib/read-package.js:9:18)
+12 verbose stack     at async PackageJson.load (/usr/local/lib/node_modules/npm/node_modules/@npmcli/package-json/lib/index.js:131:31)
+12 verbose stack     at async PackageJson.normalize (/usr/local/lib/node_modules/npm/node_modules/@npmcli/package-json/lib/index.js:117:5)
+12 verbose stack     at async #run (/usr/local/lib/node_modules/npm/lib/commands/run.js:90:13)
+12 verbose stack     at async RunScript.exec (/usr/local/lib/node_modules/npm/lib/commands/run.js:44:7)
+12 verbose stack     at async Npm.exec (/usr/local/lib/node_modules/npm/lib/npm.js:208:9)
+12 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli/entry.js:67:5)
+13 error code ENOENT
+14 error syscall open
+15 error path /Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/analytics/frontend/package.json
+16 error errno -2
+17 error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/analytics/frontend/package.json'
+18 error enoent This is related to npm not being able to find a file.
+18 error enoent
+19 verbose cwd /Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/analytics/frontend
+20 verbose os Darwin 21.6.0
+21 verbose node v24.14.0
+22 verbose npm  v11.9.0
+23 verbose exit -2
+24 verbose code -2
+25 error A complete log of this run can be found in: /Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/.npm-cache/_logs/2026-05-12T15_27_30_548Z-debug-0.log
