@@ -1,0 +1,68 @@
+name: GitHub Team Analytics
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+      - aula-11-05
+
+  schedule:
+    - cron: '0 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  analytics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Python pipeline ──────────────────────────────────
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install -r analytics/miner/requirements.txt
+
+      - name: Run miner & analytics
+        run: python analytics/miner/main.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+
+      - name: Show processed metrics
+        run: cat analytics/data/processed/team_metrics.json | head -40
+
+      # ── React build ──────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install frontend dependencies
+        working-directory: analytics/frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: analytics/frontend
+        run: npm run build
+
+      - name: Copy metrics JSON to build output
+        run: cp analytics/data/processed/team_metrics.json analytics/frontend/dist/
+
+      # ── Deploy ───────────────────────────────────────────
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: analytics/frontend/dist
+          publish_branch: gh-pages
+          force_orphan: true
