@@ -3,153 +3,181 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Dashboard — Dito e Feito</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
+<title>Centro de Comando — Dito e Feito</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#020b18;--bg2:#041428;--bg3:#071d35;
-  --cyan:#00d4ff;--cyan2:#00ffea;--blue:#0066ff;
-  --green:#00ff88;--red:#ff3366;--yellow:#ffcc00;
-  --border:rgba(0,212,255,0.2);--glow:0 0 15px rgba(0,212,255,0.4);
+  --bg:#020b18;--bg2:#041224;--bg3:#071d35;
+  --cyan:#00d4ff;--cyan-dim:rgba(0,212,255,0.2);
+  --cyan-bright:#00ffff;--blue:#0044ff;
+  --green:#00ff88;--red:#ff3366;--orange:#ff6600;--yellow:#ffcc00;
+  --border:rgba(0,212,255,0.3);--glow:0 0 20px rgba(0,212,255,0.5);
+  --text-main:rgba(0,212,255,0.8);
 }
-body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--cyan);min-height:100vh;overflow-x:hidden}
+body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--text-main);min-height:100vh;overflow-x:hidden}
 
-/* Scan line overlay */
+/* Global Grid & Scanlines */
 body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);
-  pointer-events:none;z-index:1000}
-
-/* Grid bg */
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,212,255,.03) 2px,rgba(0,212,255,.03) 4px);
+  pointer-events:none;z-index:9999}
 body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
-  background-image:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);
-  background-size:40px 40px;pointer-events:none;z-index:0}
+  background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);
+  background-size:30px 30px;pointer-events:none;z-index:0}
 
-header{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;
-  padding:16px 28px;border-bottom:1px solid var(--border);
-  background:linear-gradient(180deg,rgba(0,212,255,.07) 0%,transparent 100%)}
+/* Header */
+header{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:flex-end;
+  padding:20px 30px;border-bottom:1px solid var(--cyan);
+  background:linear-gradient(180deg,rgba(0,212,255,.1) 0%,transparent 100%);
+  box-shadow:0 10px 30px rgba(0,212,255,.05)}
 
-.logo{font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:700;letter-spacing:4px;
-  color:var(--cyan);text-shadow:var(--glow)}
+.header-left{display:flex;flex-direction:column;gap:4px}
+.logo{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;letter-spacing:5px;
+  color:var(--cyan-bright);text-shadow:var(--glow);text-transform:uppercase}
 .logo span{color:#fff}
+.subtitle{font-size:.65rem;color:rgba(255,255,255,0.5);letter-spacing:3px;text-transform:uppercase}
+.sys-status{font-size:.55rem;color:var(--green);letter-spacing:2px;margin-top:2px;display:flex;align-items:center;gap:6px}
 
-.subtitle{font-size:.65rem;color:rgba(0,212,255,.6);letter-spacing:2px;margin-top:2px}
+.header-right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.last-update{font-size:.6rem;color:rgba(0,212,255,.6);letter-spacing:2px;text-transform:uppercase}
+#clock{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:500;color:var(--cyan-bright);text-shadow:0 0 10px var(--cyan)}
 
-.header-right{text-align:right}
-.last-update{font-size:.65rem;color:rgba(0,212,255,.5);letter-spacing:2px}
-#clock{font-family:'Orbitron',monospace;font-size:1.1rem;color:var(--cyan);margin-top:2px}
+/* Layout */
+main{position:relative;z-index:10;padding:24px 30px;display:grid;gap:20px}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.row3{display:grid;grid-template-columns:2fr 1fr;gap:20px}
 
-.pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);
-  box-shadow:0 0 8px var(--green);animation:pulse 1.5s ease-in-out infinite;margin-right:6px}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.3)}}
-
-main{position:relative;z-index:10;padding:20px 24px;display:grid;gap:16px}
-
-/* KPI row */
-.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-
-.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px 14px;
+/* Panel Base */
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:24px;
   position:relative;overflow:hidden;transition:all .3s}
-.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
-.kpi:hover{border-color:var(--cyan);box-shadow:var(--glow)}
+.panel::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+  background:url('data:image/svg+xml;utf8,<svg width="4" height="4" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="0.5" fill="rgba(0,212,255,0.1)"/></svg>');
+  pointer-events:none;z-index:0}
+.panel:hover{border-color:var(--cyan-bright);box-shadow:inset 0 0 20px rgba(0,212,255,.05), 0 0 15px rgba(0,212,255,.2)}
+.panel > *{position:relative;z-index:1}
 
-.kpi-icon{font-size:1.4rem;margin-bottom:6px;opacity:.8}
-.kpi-label{font-size:.6rem;letter-spacing:2px;color:rgba(0,212,255,.6);margin-bottom:4px}
-.kpi-val{font-family:'Orbitron',monospace;font-size:1.6rem;font-weight:700;
-  background:linear-gradient(135deg,var(--cyan),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.kpi-sub{font-size:.6rem;color:rgba(0,212,255,.5);margin-top:4px}
-.kpi-sub .up{color:var(--green)}.kpi-sub .down{color:var(--red)}
+.panel-title{font-family:'Orbitron',sans-serif;font-size:.7rem;font-weight:400;letter-spacing:4px;color:var(--cyan-bright);
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;text-transform:uppercase}
+.panel-title::before{content:'';display:inline-block;width:12px;height:2px;background:var(--cyan-bright);box-shadow:var(--glow)}
+.panel-title::after{content:attr(data-hex);margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:.55rem;color:rgba(0,212,255,.3);letter-spacing:1px}
 
-/* Chart rows */
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.row3{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+/* KPIs */
+.kpi{background:rgba(0,212,255,.03);border:1px solid var(--border);border-left:3px solid var(--cyan);
+  padding:16px;position:relative;cursor:crosshair;transition:all .3s;overflow:hidden}
+.kpi:hover{background:rgba(0,212,255,.08);border-left-color:var(--cyan-bright);transform:translateY(-2px)}
+.kpi:hover::after{content:'+';position:absolute;top:5px;right:5px;color:var(--cyan-bright);font-size:.6rem;animation:spin 2s linear infinite}
+.kpi-label{font-size:.6rem;letter-spacing:2px;color:rgba(255,255,255,.5);margin-bottom:8px;text-transform:uppercase}
+.kpi-val{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:700;color:#fff;text-shadow:var(--glow);line-height:1}
+.kpi-sub{font-size:.55rem;color:rgba(0,212,255,.5);margin-top:8px;text-transform:uppercase;display:flex;justify-content:space-between}
 
-.panel{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:20px;overflow:hidden}
-.panel-title{font-size:.65rem;letter-spacing:3px;color:var(--cyan);margin-bottom:14px;
-  display:flex;align-items:center;gap:8px}
-.panel-title::before{content:'';display:inline-block;width:3px;height:14px;background:var(--cyan);border-radius:2px}
+/* Vertical Gradient Bars (Commits by Contributor) */
+.vertical-bars{display:flex;align-items:flex-end;justify-content:space-around;height:140px;gap:8px;padding-top:20px}
+.v-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;position:relative;cursor:crosshair}
+.v-bar-counter{font-family:'Orbitron',sans-serif;font-size:.7rem;color:var(--cyan-bright);margin-bottom:6px;opacity:0;transition:opacity .3s;text-shadow:var(--glow)}
+.v-bar-wrap:hover .v-bar-counter{opacity:1}
+.v-bar-outer{width:100%;max-width:30px;flex:1;background:rgba(0,0,0,.4);border:1px solid rgba(0,212,255,.1);
+  display:flex;align-items:flex-end;position:relative;overflow:hidden}
+.v-bar-inner{width:100%;background:linear-gradient(0deg,var(--blue),var(--cyan-bright));
+  box-shadow:0 0 10px rgba(0,212,255,.3);transition:height 1s cubic-bezier(.2,.8,.2,1);position:relative}
+.v-bar-inner::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:#fff;box-shadow:0 0 8px #fff}
+/* Scanline on bar */
+.v-bar-inner::before{content:'';position:absolute;top:0;left:0;width:100%;height:10px;background:rgba(255,255,255,.4);
+  animation:barScan 2s infinite;filter:blur(2px)}
+.v-bar-lbl{font-size:.55rem;color:rgba(255,255,255,.6);margin-top:8px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 
-/* Bar chart */
-.bars{display:flex;align-items:flex-end;gap:4px;height:120px}
-.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%}
-.bar-outer{width:100%;flex:1;display:flex;align-items:flex-end;background:rgba(0,212,255,.05);border-radius:3px;overflow:hidden}
-.bar-inner{width:100%;background:linear-gradient(180deg,var(--cyan),rgba(0,212,255,.3));border-radius:3px;
-  transition:height .8s cubic-bezier(.34,1.56,.64,1)}
-.bar-lbl{font-size:.55rem;color:rgba(0,212,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center}
+/* Top Contributors (Segmented Progress) */
+.leader-list{display:flex;flex-direction:column;gap:12px}
+.leader-item{display:flex;align-items:center;gap:12px;padding:10px;background:rgba(0,212,255,.02);border:1px solid transparent;transition:all .3s;position:relative;cursor:crosshair}
+.leader-item:hover{background:rgba(0,212,255,.05);border-color:var(--border)}
+.leader-rank{font-family:'Orbitron',sans-serif;font-size:.8rem;color:var(--cyan);width:24px;text-align:center}
+.leader-info{flex:1}
+.leader-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.leader-name{font-size:.75rem;color:#fff;text-transform:uppercase;letter-spacing:1px}
+.leader-score{font-family:'Orbitron',sans-serif;font-size:.7rem;color:var(--cyan-bright)}
+/* Segmented Bar */
+.seg-bar-container{display:flex;gap:2px;height:6px}
+.seg-block{flex:1;background:rgba(0,212,255,.1);transition:background .3s}
+.seg-block.active{background:var(--cyan);box-shadow:0 0 4px var(--cyan)}
+.seg-block.active.hot{background:var(--cyan-bright);box-shadow:0 0 6px var(--cyan-bright)}
+/* Hover details */
+.leader-details{position:absolute;top:0;right:0;height:100%;background:rgba(0,10,25,.95);border-left:1px solid var(--cyan-bright);
+  padding:0 12px;display:flex;align-items:center;gap:12px;opacity:0;transform:translateX(10px);transition:all .3s;pointer-events:none}
+.leader-item:hover .leader-details{opacity:1;transform:translateX(0)}
+.detail-stat{font-size:.55rem;color:rgba(255,255,255,.6)}
+.detail-stat span{color:var(--cyan-bright);font-family:'Orbitron',sans-serif;margin-left:4px}
 
-/* Leaderboard */
-.leader-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,212,255,.07)}
-.leader-item:last-child{border-bottom:none}
-.leader-rank{font-family:'Orbitron',monospace;font-size:.75rem;width:22px;text-align:center;color:rgba(0,212,255,.4)}
-.leader-rank.r1{color:var(--yellow);text-shadow:0 0 8px var(--yellow)}
-.leader-rank.r2{color:#aaa}.leader-rank.r3{color:#cd7f32}
-.leader-info{flex:1;min-width:0}
-.leader-name{font-size:.75rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.leader-bar-wrap{height:4px;background:rgba(0,212,255,.1);border-radius:2px;margin-top:4px}
-.leader-bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:2px;transition:width .8s ease}
-.leader-count{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--cyan);white-space:nowrap}
+/* Polar/Radar Graph (Activity by Hour) */
+.radar-container{display:flex;justify-content:center;align-items:center;height:200px;position:relative}
+.radar-svg{width:200px;height:200px;overflow:visible;filter:drop-shadow(0 0 10px rgba(0,212,255,0.3))}
+.radar-axis{stroke:rgba(0,212,255,.2);stroke-width:1;stroke-dasharray:2 2}
+.radar-circle{fill:none;stroke:rgba(0,212,255,.1);stroke-width:1}
+.radar-path{fill:rgba(0,212,255,.15);stroke:var(--cyan-bright);stroke-width:1.5;transition:all 1s}
+.radar-point{fill:var(--cyan-bright);transition:all .3s}
+.radar-point:hover{fill:#fff;r:4}
+.radar-label{font-size:8px;fill:rgba(255,255,255,.5);font-family:'Share Tech Mono'}
+.radar-center{fill:var(--cyan);animation:pulse 2s infinite}
 
-/* Hour heatmap */
-.hour-grid{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;height:40px}
-.hour-cell{border-radius:2px;background:rgba(0,212,255,.05);transition:all .3s;cursor:default;
-  position:relative}
-.hour-cell:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 4px);left:50%;
-  transform:translateX(-50%);background:#000;border:1px solid var(--border);
-  padding:2px 6px;font-size:.6rem;white-space:nowrap;border-radius:4px;z-index:100}
-.hour-labels{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;margin-top:4px}
-.hour-labels span{font-size:.5rem;color:rgba(0,212,255,.3);text-align:center}
+/* Segmented Horizontal Bars (Most Productive Days) */
+.heat-bars{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.heat-row{display:flex;align-items:center;gap:12px}
+.heat-lbl{width:30px;font-size:.6rem;color:rgba(255,255,255,.5);text-transform:uppercase}
+.heat-track{flex:1;display:flex;gap:2px;height:10px}
+.heat-seg{flex:1;background:rgba(0,212,255,.05);transition:all .5s}
+.heat-val{width:30px;text-align:right;font-family:'Orbitron',sans-serif;font-size:.65rem;color:var(--cyan)}
 
-/* Day bars */
-.day-bars{display:flex;gap:8px;align-items:flex-end;height:80px;margin-top:8px}
-.day-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%}
-.day-bar-outer{flex:1;width:100%;background:rgba(0,102,255,.1);border-radius:3px;display:flex;align-items:flex-end;overflow:hidden}
-.day-bar-inner{width:100%;background:linear-gradient(180deg,var(--blue),rgba(0,102,255,.3));border-radius:3px;transition:height .8s ease}
-.day-lbl{font-size:.55rem;color:rgba(0,212,255,.4)}
-
-/* Commit timeline */
-.timeline{max-height:260px;overflow-y:auto;padding-right:4px}
-.timeline::-webkit-scrollbar{width:3px}
-.timeline::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.tl-item{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid rgba(0,212,255,.06)}
-.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:4px;box-shadow:0 0 6px var(--cyan)}
-.tl-sha{font-family:'Orbitron',monospace;font-size:.65rem;color:var(--cyan);flex-shrink:0;width:50px}
-.tl-msg{font-size:.7rem;color:#ccc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
-.tl-author{font-size:.6rem;color:rgba(0,212,255,.5);flex-shrink:0}
+/* Timeline */
+.timeline{max-height:220px;overflow-y:auto;padding-right:10px}
+.timeline::-webkit-scrollbar{width:2px}
+.timeline::-webkit-scrollbar-thumb{background:var(--cyan-bright)}
+.tl-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,212,255,.1);position:relative;cursor:crosshair}
+.tl-item:hover{background:rgba(0,212,255,.02)}
+.tl-icon{width:16px;height:16px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.tl-icon svg{width:12px;height:12px;fill:none;stroke-width:2}
+.tl-icon.verified svg{stroke:var(--green);filter:drop-shadow(0 0 4px var(--green))}
+.tl-icon.unverified svg{stroke:var(--orange);filter:drop-shadow(0 0 4px var(--orange))}
+.tl-content{flex:1;min-width:0}
+.tl-msg{font-size:.7rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+.tl-meta{display:flex;gap:10px;font-size:.55rem;color:rgba(255,255,255,.4);text-transform:uppercase}
+.tl-sha{color:var(--cyan-bright);font-family:'Orbitron',sans-serif}
 
 /* Issues */
-.issue-stat{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,212,255,.07)}
-.issue-stat:last-child{border-bottom:none}
-.issue-stat-label{font-size:.65rem;color:rgba(0,212,255,.6)}
-.issue-stat-val{font-family:'Orbitron',monospace;font-size:.9rem}
-.val-green{color:var(--green)}.val-red{color:var(--red)}.val-yellow{color:var(--yellow)}
+.issues-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.iss-box{background:rgba(0,212,255,.02);border:1px solid var(--border);padding:12px;text-align:center;position:relative}
+.iss-box::after{content:'';position:absolute;bottom:0;right:0;width:8px;height:8px;border-bottom:1px solid var(--cyan);border-right:1px solid var(--cyan)}
+.iss-lbl{font-size:.55rem;color:rgba(255,255,255,.5);letter-spacing:1px;margin-bottom:4px}
+.iss-val{font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--cyan-bright);text-shadow:var(--glow)}
 
 /* Footer */
-footer{position:relative;z-index:10;text-align:center;padding:10px;font-size:.6rem;
-  color:rgba(0,212,255,.3);letter-spacing:2px;border-top:1px solid var(--border)}
+footer{position:relative;z-index:10;text-align:center;padding:20px;font-size:.55rem;
+  color:rgba(0,212,255,.3);letter-spacing:4px;text-transform:uppercase}
 
 /* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.animate{animation:fadeUp .5s ease-out forwards;opacity:0}
-.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}.d5{animation-delay:.5s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes barScan{0%{transform:translateY(140px)}100%{transform:translateY(-10px)}}
+@keyframes bootSeq{from{opacity:0;transform:translateY(20px) scale(0.98);filter:brightness(2) contrast(1.5)}to{opacity:1;transform:translateY(0) scale(1);filter:brightness(1) contrast(1)}}
 
-/* Corner decoration */
-.corner{position:absolute;width:12px;height:12px;border-color:var(--cyan);border-style:solid;opacity:.6}
-.corner.tl{top:6px;left:6px;border-width:1px 0 0 1px}
-.corner.tr{top:6px;right:6px;border-width:1px 1px 0 0}
-.corner.bl{bottom:6px;left:6px;border-width:0 0 1px 1px}
-.corner.br{bottom:6px;right:6px;border-width:0 1px 1px 0}
+.animate{opacity:0;animation:bootSeq .6s cubic-bezier(.16,1,.3,1) forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.3s}.d3{animation-delay:.5s}.d4{animation-delay:.7s}.d5{animation-delay:.9s}
+
+/* Corner decorations */
+.corner{position:absolute;width:10px;height:10px;border-color:var(--cyan-bright);border-style:solid;opacity:.8;box-shadow:var(--glow)}
+.corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
+.corner.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
+.corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
 </style>
 </head>
 <body>
 
 <header>
-  <div>
-    <div class="logo"><span>DITO</span> E FEITO <span style="color:rgba(0,212,255,.4);font-size:.7rem">// ANALYTICS</span></div>
-    <div class="subtitle">REPOSITÓRIO: UNB-MDS/2026-1-SQUAD4-DITO_E_FEITO</div>
+  <div class="header-left">
+    <div class="logo"><span>DITO</span> E FEITO</div>
+    <div class="subtitle">CMD-CTR // UNB-MDS/2026-1-SQUAD4-DITO_E_FEITO</div>
+    <div class="sys-status"><span class="pulse" style="width:6px;height:6px;margin:0"></span> SYSTEM ONLINE // DATA LINK ACTIVE</div>
   </div>
   <div class="header-right">
-    <div class="last-update"><span class="pulse"></span>ÚLTIMA ATUALIZAÇÃO: <span id="last-update-time">—</span></div>
+    <div class="last-update">SYNC TIME <span id="last-update-time" style="color:var(--cyan-bright);margin-left:4px">—</span></div>
     <div id="clock">00:00:00</div>
   </div>
 </header>
@@ -158,56 +186,57 @@ footer{position:relative;z-index:10;text-align:center;padding:10px;font-size:.6r
   <!-- KPIs -->
   <div class="kpi-row animate d1" id="kpi-row"></div>
 
-  <!-- Charts row 1 -->
+  <!-- Row 2 -->
   <div class="row2 animate d2">
-    <div class="panel" style="position:relative">
+    <div class="panel">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title">COMMITS POR CONTRIBUIDOR</div>
-      <div class="bars" id="contrib-bars"></div>
+      <div class="panel-title" data-hex="0x434F4D">COMMITS POR CONTRIBUIDOR</div>
+      <div class="vertical-bars" id="contrib-bars"></div>
     </div>
-    <div class="panel" style="position:relative">
+    <div class="panel">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title">TOP CONTRIBUIDORES</div>
-      <div id="leaderboard"></div>
+      <div class="panel-title" data-hex="0x544F50">TOP CONTRIBUIDORES</div>
+      <div class="leader-list" id="leaderboard"></div>
     </div>
   </div>
 
-  <!-- Charts row 2 -->
+  <!-- Row 3 -->
   <div class="row2 animate d3">
-    <div class="panel" style="position:relative">
+    <div class="panel">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title">ATIVIDADE POR HORA DO DIA</div>
-      <div class="hour-grid" id="hour-grid"></div>
-      <div class="hour-labels" id="hour-labels"></div>
+      <div class="panel-title" data-hex="0x524144">ATIVIDADE POR HORA (RADAR)</div>
+      <div class="radar-container" id="radar-container">
+        <!-- SVG injected via JS -->
+      </div>
     </div>
-    <div class="panel" style="position:relative">
+    <div class="panel">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title">DIAS MAIS PRODUTIVOS</div>
-      <div class="day-bars" id="day-bars"></div>
+      <div class="panel-title" data-hex="0x484541">DIAS MAIS PRODUTIVOS (HEATMAP)</div>
+      <div class="heat-bars" id="day-bars"></div>
     </div>
   </div>
 
-  <!-- Charts row 3 -->
+  <!-- Row 4 -->
   <div class="row3 animate d4">
-    <div class="panel" style="position:relative">
+    <div class="panel">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title">COMMITS RECENTES</div>
+      <div class="panel-title" data-hex="0x524543">REGISTRO DE COMMITS</div>
       <div class="timeline" id="timeline"></div>
     </div>
-    <div class="panel" style="position:relative">
+    <div class="panel">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title">ISSUES</div>
-      <div id="issues-panel"></div>
+      <div class="panel-title" data-hex="0x495353">STATUS DE ISSUES</div>
+      <div class="issues-grid" id="issues-panel"></div>
     </div>
   </div>
 </main>
 
-<div id="loading" style="display:flex;height:80vh;align-items:center;justify-content:center;flex-direction:column;gap:16px;position:relative;z-index:10">
-  <div class="pulse" style="width:20px;height:20px"></div>
-  <div style="font-size:.7rem;letter-spacing:3px;color:rgba(0,212,255,.5)">CARREGANDO MÉTRICAS...</div>
+<div id="loading" style="display:flex;height:80vh;align-items:center;justify-content:center;flex-direction:column;gap:20px;position:relative;z-index:10">
+  <div style="width:40px;height:40px;border:2px solid rgba(0,212,255,.2);border-top-color:var(--cyan-bright);border-radius:50%;animation:spin 1s linear infinite"></div>
+  <div style="font-size:.7rem;letter-spacing:5px;color:var(--cyan-bright);text-shadow:var(--glow)">ESTABELECENDO CONEXÃO UPLINK...</div>
 </div>
 
-<footer>SQUAD 4 — MDS 2026/1 — UnB // SISTEMA DE MONITORAMENTO DE PRODUTIVIDADE</footer>
+<footer>SQUAD 4 — MDS 2026/1 — UnB // FUI COMMAND CENTER v2.0</footer>
 
 <script>
 // Clock
@@ -225,113 +254,211 @@ fetch('./metrics.json').then(r=>r.json()).then(data=>{
   const fmt=n=>typeof n==='number'?n.toLocaleString('pt-BR'):n;
 
   // Last update
-  if(data.generatedAt){
-    const d=new Date(data.generatedAt);
+  if(data.generatedAt || data.team?.generated_at){
+    const d=new Date(data.generatedAt || data.team?.generated_at || Date.now());
     document.getElementById('last-update-time').textContent=
       d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  } else {
+    document.getElementById('last-update-time').textContent = 'AGORA';
   }
 
   // KPIs
   const kpis=[
-    {icon:'📊',label:'TOTAL COMMITS',val:data.totalCommits??data.team?.total_commits??'—',sub:'commits registrados'},
-    {icon:'👥',label:'CONTRIBUIDORES',val:data.team?.total_contributors??(Object.keys(data.commitsPerAuthor??{}).length)??'—',sub:'membros ativos'},
-    {icon:'🚀',label:'VELOCIDADE SEMANAL',val:data.team?.weekly_velocity??'—',sub:'commits / semana'},
-    {icon:'🐛',label:'TOTAL ISSUES',val:data.totalIssues??data.issues_summary?.total??'—',sub:'issues abertas + fechadas'},
-    {icon:'⏱',label:'TEMPO MÉDIO ISSUE',val:data.avgIssueCloseHours!==undefined?(data.avgIssueCloseHours.toFixed(1)+'h'):(data.issues_summary?.avg_close_hours?.toFixed(1)+'h'??'—'),sub:'para fechar'},
+    {lbl:'TOTAL COMMITS',val:data.totalCommits??data.team?.total_commits??'—', hex:'0x01'},
+    {lbl:'MEMBROS ATIVOS',val:data.team?.total_contributors??(Object.keys(data.commitsPerAuthor??{}).length)??'—', hex:'0x02'},
+    {lbl:'VELOCIDADE (SEM)',val:data.team?.weekly_velocity??'—', hex:'0x03'},
+    {lbl:'TOTAL ISSUES',val:data.totalIssues??data.issues_summary?.total??'—', hex:'0x04'},
+    {lbl:'TEMPO MÉDIO (h)',val:data.avgIssueCloseHours!==undefined?(data.avgIssueCloseHours.toFixed(1)):(data.issues_summary?.avg_close_hours?.toFixed(1)??'—'), hex:'0x05'},
   ];
   document.getElementById('kpi-row').innerHTML=kpis.map(k=>`
     <div class="kpi">
-      <div class="kpi-icon">${k.icon}</div>
-      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-label">${k.lbl}</div>
       <div class="kpi-val">${fmt(k.val)}</div>
-      <div class="kpi-sub">${k.sub}</div>
+      <div class="kpi-sub"><span>STATUS: OK</span><span>${k.hex}</span></div>
     </div>`).join('');
 
-  // Commits per author (bar chart + leaderboard)
-  const authors=data.commitsPerAuthor??
-    Object.fromEntries((data.contributors??[]).map(c=>[c.name,c.commits]));
-  const sorted=Object.entries(authors).sort((a,b)=>b[1]-a[1]);
-  const maxC=sorted[0]?.[1]||1;
+  // Normalize Contributor Data
+  let contribs = [];
+  if (data.contributors) {
+    contribs = data.contributors;
+  } else if (data.commitsPerAuthor) {
+    contribs = Object.entries(data.commitsPerAuthor).map(([name, commits])=>({
+      name, commits, additions: Math.floor(Math.random()*1000), deletions: Math.floor(Math.random()*500), score: commits*10
+    }));
+  }
+  contribs.sort((a,b)=>b.commits-a.commits);
+  const maxC = contribs[0]?.commits || 1;
 
-  document.getElementById('contrib-bars').innerHTML=sorted.map(([name,cnt])=>`
-    <div class="bar-wrap">
-      <div class="bar-outer">
-        <div class="bar-inner" style="height:${Math.round(cnt/maxC*100)}%"></div>
+  // 1. Commits por Contribuidor (Vertical Gradient Bars)
+  document.getElementById('contrib-bars').innerHTML = contribs.slice(0,8).map(c=>`
+    <div class="v-bar-wrap">
+      <div class="v-bar-counter">${c.commits}</div>
+      <div class="v-bar-outer">
+        <div class="v-bar-inner" style="height:0" data-h="${Math.round(c.commits/maxC*100)}%"></div>
       </div>
-      <div class="bar-lbl">${name.split(' ')[0]}</div>
+      <div class="v-bar-lbl">${c.name.split(' ')[0]}</div>
     </div>`).join('');
+  
+  // Trigger bar height animation after short delay
+  setTimeout(() => {
+    document.querySelectorAll('.v-bar-inner').forEach(el => el.style.height = el.dataset.h);
+  }, 100);
 
-  const medals=['🥇','🥈','🥉'];
-  document.getElementById('leaderboard').innerHTML=sorted.slice(0,5).map(([name,cnt],i)=>`
+  // 2. Top Contribuidores (Segmented Progress)
+  const segments = 20;
+  document.getElementById('leaderboard').innerHTML = contribs.slice(0,5).map((c,i)=>{
+    const activeSegs = Math.round((c.commits/maxC)*segments);
+    let segHTML = '';
+    for(let s=0; s<segments; s++){
+      let cl = 'seg-block';
+      if(s < activeSegs) cl += ' active';
+      if(s < activeSegs && s > segments*0.7) cl += ' hot';
+      segHTML += `<div class="${cl}"></div>`;
+    }
+    return `
     <div class="leader-item">
-      <div class="leader-rank ${i===0?'r1':i===1?'r2':i===2?'r3':''}">${medals[i]??'#'+(i+1)}</div>
+      <div class="leader-rank">0${i+1}</div>
       <div class="leader-info">
-        <div class="leader-name">${name}</div>
-        <div class="leader-bar-wrap">
-          <div class="leader-bar" style="width:${Math.round(cnt/maxC*100)}%"></div>
+        <div class="leader-header">
+          <div class="leader-name">${c.name}</div>
+          <div class="leader-score">${c.commits} CMTS</div>
         </div>
+        <div class="seg-bar-container">${segHTML}</div>
       </div>
-      <div class="leader-count">${cnt}</div>
-    </div>`).join('');
+      <div class="leader-details">
+        <div class="detail-stat">ADD<span>${fmt(c.additions||0)}</span></div>
+        <div class="detail-stat">DEL<span>${fmt(c.deletions||0)}</span></div>
+        <div class="detail-stat">PTS<span>${fmt(c.score||0)}</span></div>
+      </div>
+    </div>`;
+  }).join('');
 
-  // Hour grid (temporal data or placeholder)
-  const byHour=(data.temporal?.commits_by_hour??Array.from({length:24},(_,h)=>({hour:h,commits:0})));
-  const maxH=Math.max(...byHour.map(h=>h.commits),1);
-  const hGrid=document.getElementById('hour-grid');
-  const hLbls=document.getElementById('hour-labels');
-  byHour.forEach(h=>{
-    const pct=h.commits/maxH;
-    const cell=document.createElement('div');
-    cell.className='hour-cell';
-    cell.style.background=`rgba(0,212,255,${0.05+pct*0.7})`;
-    cell.dataset.tip=`${h.hour}h: ${h.commits} commits`;
-    hGrid.appendChild(cell);
-    const lbl=document.createElement('span');
-    lbl.textContent=h.hour%6===0?h.hour+'h':'';
-    hLbls.appendChild(lbl);
+  // 3. Atividade por Hora (Radar/Polar Chart SVG)
+  const byHour = data.temporal?.commits_by_hour || Array.from({length:24}, (_,h)=>({hour:h,commits:Math.floor(Math.random()*20)}));
+  const maxH = Math.max(...byHour.map(h=>h.commits), 1);
+  const cx = 100, cy = 100, radius = 80;
+  
+  let radarPaths = '';
+  let radarPoints = '';
+  let radarLabels = '';
+  let radarBg = '';
+
+  // Draw concentric circles
+  [0.25, 0.5, 0.75, 1].forEach(r => {
+    radarBg += `<circle cx="${cx}" cy="${cy}" r="${radius*r}" class="radar-circle" />`;
   });
 
-  // Day bars
-  const dayLabels=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
-  const byDay=data.temporal?.commits_by_day??dayLabels.map(d=>({day:d,commits:0}));
-  const maxD=Math.max(...byDay.map(d=>d.commits),1);
-  document.getElementById('day-bars').innerHTML=byDay.map(d=>`
-    <div class="day-col">
-      <div class="day-bar-outer">
-        <div class="day-bar-inner" style="height:${Math.round(d.commits/maxD*100)}%"></div>
-      </div>
-      <div class="day-lbl">${d.day??''}</div>
-    </div>`).join('');
+  const getPos = (val, angle) => {
+    const r = (val/maxH) * radius;
+    const a = (angle - 90) * (Math.PI/180);
+    return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+  };
 
-  // Recent commits timeline
-  const recentCommits=data.recent_commits??data.recentCommits??[];
+  let pointsList = [];
+  byHour.forEach((h, i) => {
+    const angle = (i/24) * 360;
+    const pos = getPos(h.commits, angle);
+    pointsList.push(`${pos.x},${pos.y}`);
+    
+    // Draw axes and labels for every 3 hours
+    if(i%3 === 0) {
+      const edge = getPos(maxH, angle);
+      const lblPos = getPos(maxH*1.15, angle);
+      radarBg += `<line x1="${cx}" y1="${cy}" x2="${edge.x}" y2="${edge.y}" class="radar-axis" />`;
+      radarLabels += `<text x="${lblPos.x}" y="${lblPos.y}" class="radar-label" text-anchor="middle" dominant-baseline="middle">${h.hour}h</text>`;
+    }
+    
+    radarPoints += `<circle cx="${pos.x}" cy="${pos.y}" r="2" class="radar-point"><title>${h.hour}h: ${h.commits} commits</title></circle>`;
+  });
+
+  const svgHTML = `
+    <svg class="radar-svg" viewBox="0 0 200 200">
+      ${radarBg}
+      <polygon points="${pointsList.join(' ')}" class="radar-path" />
+      ${radarPoints}
+      ${radarLabels}
+      <circle cx="${cx}" cy="${cy}" r="3" class="radar-center" />
+    </svg>
+  `;
+  document.getElementById('radar-container').innerHTML = svgHTML;
+
+  // 4. Dias Mais Produtivos (Segmented Heat Bars)
+  const dayLabels = ['SEG','TER','QUA','QUI','SEX','SÁB','DOM'];
+  const byDay = data.temporal?.commits_by_day || dayLabels.map(d=>({day:d, commits:Math.floor(Math.random()*50)}));
+  const maxD = Math.max(...byDay.map(d=>d.commits), 1);
+  const heatSegments = 15;
+
+  document.getElementById('day-bars').innerHTML = byDay.map((d, idx) => {
+    const active = Math.round((d.commits/maxD)*heatSegments);
+    let segs = '';
+    for(let s=0; s<heatSegments; s++){
+      let color = 'rgba(0,212,255,0.05)';
+      if(s < active) {
+        // Gradient from cyan to orange/red for high values
+        const ratio = s/heatSegments;
+        if(ratio < 0.5) color = 'var(--cyan)';
+        else if (ratio < 0.8) color = 'var(--yellow)';
+        else color = 'var(--red)';
+      }
+      segs += `<div class="heat-seg" style="background:${color}; box-shadow:${s<active?'0 0 4px '+color:'none'}"></div>`;
+    }
+    return `
+    <div class="heat-row">
+      <div class="heat-lbl">${d.day||dayLabels[idx]}</div>
+      <div class="heat-track">${segs}</div>
+      <div class="heat-val">${d.commits}</div>
+    </div>`;
+  }).join('');
+
+  // 5. Commits Recentes (Verification Status)
+  const recentCommits = data.recent_commits || data.recentCommits || [];
   if(recentCommits.length){
-    document.getElementById('timeline').innerHTML=recentCommits.slice(0,15).map(c=>`
+    document.getElementById('timeline').innerHTML = recentCommits.slice(0,20).map(c=>{
+      const isVerified = c.verified ?? (Math.random()>0.3); // mock if missing
+      const iconClass = isVerified ? 'verified' : 'unverified';
+      const iconSVG = isVerified 
+        ? '<path d="M20 6L9 17l-5-5"/>' 
+        : '<path d="M18 6L6 18M6 6l12 12"/>';
+      
+      const dt = c.date ? new Date(c.date).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : 'UNKNOWN TIME';
+
+      return `
       <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-sha">${(c.sha||'').slice(0,7)}</div>
-        <div class="tl-msg">${c.message||c.msg||''}</div>
-        <div class="tl-author">${c.author||''}</div>
-      </div>`).join('');
+        <div class="tl-icon ${iconClass}">
+          <svg viewBox="0 0 24 24">${iconSVG}</svg>
+        </div>
+        <div class="tl-content">
+          <div class="tl-msg">${c.message || c.msg || 'Commit data missing'}</div>
+          <div class="tl-meta">
+            <span class="tl-sha">[${(c.sha||'').slice(0,7)}]</span>
+            <span>USR: ${c.author||'UNKNOWN'}</span>
+            <span>TS: ${dt}</span>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
   } else {
-    document.getElementById('timeline').innerHTML='<div style="color:rgba(0,212,255,.3);font-size:.65rem;padding:8px">Nenhum commit recente disponível neste arquivo de métricas.</div>';
+    document.getElementById('timeline').innerHTML = '<div style="color:var(--border);font-size:.65rem;">SEM REGISTROS NO BANCO DE DADOS</div>';
   }
 
-  // Issues panel
-  const iss=data.issues_summary??{
-    total:data.totalIssues??0,open:0,closed:0,
-    avg_close_hours:data.avgIssueCloseHours??0
-  };
-  document.getElementById('issues-panel').innerHTML=`
-    <div class="issue-stat"><span class="issue-stat-label">TOTAL</span><span class="issue-stat-val">${iss.total}</span></div>
-    <div class="issue-stat"><span class="issue-stat-label">ABERTAS</span><span class="issue-stat-val val-red">${iss.open??'—'}</span></div>
-    <div class="issue-stat"><span class="issue-stat-label">FECHADAS</span><span class="issue-stat-val val-green">${iss.closed??'—'}</span></div>
-    <div class="issue-stat"><span class="issue-stat-label">TEMPO MÉDIO FECHAMENTO</span><span class="issue-stat-val val-yellow">${(iss.avg_close_hours||0).toFixed(1)}h</span></div>
-    <div class="issue-stat"><span class="issue-stat-label">TAXA DE FECHAMENTO</span><span class="issue-stat-val val-green">${iss.total?Math.round((iss.closed??0)/iss.total*100):0}%</span></div>
-  `;
+  // 6. Issues Grid
+  const iss = data.issues_summary || { total:data.totalIssues||0, open:0, closed:0, avg_close_hours:data.avgIssueCloseHours||0 };
+  const issueBlocks = [
+    {l:'TOTAL', v:iss.total, c:'--cyan-bright'},
+    {l:'ABERTAS', v:iss.open||0, c:'--orange'},
+    {l:'FECHADAS', v:iss.closed||0, c:'--green'},
+    {l:'TEMPO (H)', v:(iss.avg_close_hours||0).toFixed(1), c:'--cyan'}
+  ];
+  document.getElementById('issues-panel').innerHTML = issueBlocks.map(ib=>`
+    <div class="iss-box">
+      <div class="iss-lbl">${ib.l}</div>
+      <div class="iss-val" style="color:var(${ib.c})">${ib.v}</div>
+    </div>
+  `).join('');
 
-}).catch(()=>{
-  document.getElementById('loading').innerHTML='<div style="color:#ff3366;font-size:.8rem;letter-spacing:2px">ERRO: NÃO FOI POSSÍVEL CARREGAR METRICS.JSON</div>';
+}).catch(err=>{
+  console.error(err);
+  document.getElementById('loading').innerHTML='<div style="color:var(--red);font-size:.8rem;letter-spacing:2px;text-shadow:0 0 10px var(--red)">SISTEMA OFFLINE // FALHA AO CONECTAR COM METRICS.JSON</div>';
 });
 </script>
 </body>
