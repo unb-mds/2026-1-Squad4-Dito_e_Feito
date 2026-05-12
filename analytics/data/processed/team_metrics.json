@@ -1,0 +1,401 @@
+{
+  "generated_at": "2026-05-12T14:16:58.924600Z",
+  "repository": "unb-mds/2026-1-Squad4-Dito_e_Feito",
+  "team": {
+    "total_commits": 29,
+    "total_additions": 86825,
+    "total_deletions": 279,
+    "total_files_changed": 238,
+    "weekly_velocity": 9.7,
+    "most_active": "gus-ant",
+    "total_contributors": 5
+  },
+  "contributors": [
+    {
+      "name": "gus-ant",
+      "commits": 11,
+      "additions": 42705,
+      "deletions": 2,
+      "files_changed": 112,
+      "avg_commit_hour": 11.3,
+      "favorite_hour": 2,
+      "active_days": 6,
+      "current_streak": 2,
+      "score": 21687.1
+    },
+    {
+      "name": "nerylucas",
+      "commits": 10,
+      "additions": 240,
+      "deletions": 217,
+      "files_changed": 12,
+      "avg_commit_hour": 6.1,
+      "favorite_hour": 2,
+      "active_days": 2,
+      "current_streak": 1,
+      "score": 309.1
+    },
+    {
+      "name": "IndianoDev",
+      "commits": 3,
+      "additions": 42578,
+      "deletions": 0,
+      "files_changed": 96,
+      "avg_commit_hour": 14.0,
+      "favorite_hour": 13,
+      "active_days": 2,
+      "current_streak": 1,
+      "score": 21511.0
+    },
+    {
+      "name": "Velho008",
+      "commits": 3,
+      "additions": 11,
+      "deletions": 60,
+      "files_changed": 3,
+      "avg_commit_hour": 14.7,
+      "favorite_hour": 15,
+      "active_days": 3,
+      "current_streak": 2,
+      "score": 59.5
+    },
+    {
+      "name": "SUDOTMOX",
+      "commits": 2,
+      "additions": 1291,
+      "deletions": 0,
+      "files_changed": 15,
+      "avg_commit_hour": 0.5,
+      "favorite_hour": 0,
+      "active_days": 2,
+      "current_streak": 1,
+      "score": 695.5
+    }
+  ],
+  "temporal": {
+    "commits_by_hour": [
+      {
+        "hour": 0,
+        "commits": 1
+      },
+      {
+        "hour": 1,
+        "commits": 1
+      },
+      {
+        "hour": 2,
+        "commits": 12
+      },
+      {
+        "hour": 3,
+        "commits": 0
+      },
+      {
+        "hour": 4,
+        "commits": 0
+      },
+      {
+        "hour": 5,
+        "commits": 0
+      },
+      {
+        "hour": 6,
+        "commits": 0
+      },
+      {
+        "hour": 7,
+        "commits": 0
+      },
+      {
+        "hour": 8,
+        "commits": 0
+      },
+      {
+        "hour": 9,
+        "commits": 0
+      },
+      {
+        "hour": 10,
+        "commits": 0
+      },
+      {
+        "hour": 11,
+        "commits": 0
+      },
+      {
+        "hour": 12,
+        "commits": 0
+      },
+      {
+        "hour": 13,
+        "commits": 3
+      },
+      {
+        "hour": 14,
+        "commits": 1
+      },
+      {
+        "hour": 15,
+        "commits": 5
+      },
+      {
+        "hour": 16,
+        "commits": 2
+      },
+      {
+        "hour": 17,
+        "commits": 0
+      },
+      {
+        "hour": 18,
+        "commits": 0
+      },
+      {
+        "hour": 19,
+        "commits": 0
+      },
+      {
+        "hour": 20,
+        "commits": 1
+      },
+      {
+        "hour": 21,
+        "commits": 0
+      },
+      {
+        "hour": 22,
+        "commits": 2
+      },
+      {
+        "hour": 23,
+        "commits": 1
+      }
+    ],
+    "commits_by_day": [
+      {
+        "day": "Mon",
+        "commits": 16
+      },
+      {
+        "day": "Tue",
+        "commits": 2
+      },
+      {
+        "day": "Wed",
+        "commits": 6
+      },
+      {
+        "day": "Thu",
+        "commits": 2
+      },
+      {
+        "day": "Fri",
+        "commits": 3
+      },
+      {
+        "day": "Sat",
+        "commits": 0
+      },
+      {
+        "day": "Sun",
+        "commits": 0
+      }
+    ],
+    "daily_activity": [
+      {
+        "date": "2026-04-20",
+        "commits": 13
+      },
+      {
+        "date": "2026-04-22",
+        "commits": 4
+      },
+      {
+        "date": "2026-04-23",
+        "commits": 2
+      },
+      {
+        "date": "2026-04-24",
+        "commits": 1
+      },
+      {
+        "date": "2026-04-28",
+        "commits": 1
+      },
+      {
+        "date": "2026-04-29",
+        "commits": 1
+      },
+      {
+        "date": "2026-05-01",
+        "commits": 2
+      },
+      {
+        "date": "2026-05-05",
+        "commits": 1
+      },
+      {
+        "date": "2026-05-06",
+        "commits": 1
+      },
+      {
+        "date": "2026-05-11",
+        "commits": 3
+      }
+    ]
+  },
+  "recent_commits": [
+    {
+      "sha": "10048f7",
+      "message": "Atualiza\u00e7\u00e3o mkdocs sprint 4",
+      "author": "gus-ant",
+      "date": "2026-05-11T15:41:13Z",
+      "verified": false
+    },
+    {
+      "sha": "f552bb2",
+      "message": "Renomear estudo_front to estudo_front.md",
+      "author": "gus-ant",
+      "date": "2026-05-11T13:47:58Z",
+      "verified": true
+    },
+    {
+      "sha": "6c66063",
+      "message": "estudo front",
+      "author": "SUDOTMOX",
+      "date": "2026-05-11T00:12:21Z",
+      "verified": false
+    },
+    {
+      "sha": "c874a81",
+      "message": "Add files via upload",
+      "author": "nerylucas",
+      "date": "2026-05-06T22:02:32Z",
+      "verified": true
+    },
+    {
+      "sha": "6820c23",
+      "message": "Adi\u00e7\u00e3o do estudo de Coleta e Ingest\u00e3o de Dados",
+      "author": "gus-ant",
+      "date": "2026-05-05T02:49:19Z",
+      "verified": false
+    },
+    {
+      "sha": "01f397e",
+      "message": "Merge branch 'main' of https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito",
+      "author": "IndianoDev",
+      "date": "2026-05-01T13:01:35Z",
+      "verified": false
+    },
+    {
+      "sha": "a8fa26f",
+      "message": "feat: inclus\u00e3o dos t\u00f3picos 02 (tipos de dados) e 03 (modelagem ER)",
+      "author": "IndianoDev",
+      "date": "2026-05-01T13:01:28Z",
+      "verified": false
+    },
+    {
+      "sha": "486d8d8",
+      "message": "Atualiza\u00e7\u00e3o da documenta\u00e7\u00e3o e cria\u00e7\u00e3o do MKdocs do projeto",
+      "author": "gus-ant",
+      "date": "2026-04-29T20:52:14Z",
+      "verified": false
+    },
+    {
+      "sha": "45ceae3",
+      "message": "inicio do projeto figma, documentando altera\u00e7\u00f5es",
+      "author": "Velho008",
+      "date": "2026-04-28T15:09:55Z",
+      "verified": false
+    },
+    {
+      "sha": "e8e66e1",
+      "message": "realizando a parte 1 do estudo de banco de dados",
+      "author": "IndianoDev",
+      "date": "2026-04-24T16:05:03Z",
+      "verified": false
+    },
+    {
+      "sha": "139df27",
+      "message": "Estudo de Arquitetura para Deploy de Modelos de IA",
+      "author": "gus-ant",
+      "date": "2026-04-23T22:06:03Z",
+      "verified": true
+    },
+    {
+      "sha": "fa521bd",
+      "message": "Update estudo_manual_da_marca.md",
+      "author": "Velho008",
+      "date": "2026-04-23T14:56:13Z",
+      "verified": true
+    },
+    {
+      "sha": "6cb62a4",
+      "message": "Rename file for consistency in directory structure",
+      "author": "gus-ant",
+      "date": "2026-04-22T16:07:48Z",
+      "verified": true
+    },
+    {
+      "sha": "fa0811e",
+      "message": "Update estudo_manual_da_marca.md",
+      "author": "Velho008",
+      "date": "2026-04-22T15:55:19Z",
+      "verified": true
+    },
+    {
+      "sha": "4e6c4c4",
+      "message": "Update requisitos_gerais_oficiais.md",
+      "author": "gus-ant",
+      "date": "2026-04-22T15:33:11Z",
+      "verified": true
+    },
+    {
+      "sha": "a7a4ef7",
+      "message": "Rename Estudos/Arquitetura de Intelig\u00eancia Artificial para Monitoramento da Coer",
+      "author": "gus-ant",
+      "date": "2026-04-22T15:15:53Z",
+      "verified": true
+    },
+    {
+      "sha": "c3d69be",
+      "message": "Add files via upload",
+      "author": "nerylucas",
+      "date": "2026-04-20T23:09:11Z",
+      "verified": true
+    },
+    {
+      "sha": "6719ec2",
+      "message": "Remove Lucas Abdalla Nery from participants list",
+      "author": "gus-ant",
+      "date": "2026-04-20T02:54:17Z",
+      "verified": true
+    },
+    {
+      "sha": "8aa56cb",
+      "message": "Update Reuniao3.md",
+      "author": "gus-ant",
+      "date": "2026-04-20T02:54:07Z",
+      "verified": true
+    },
+    {
+      "sha": "d075417",
+      "message": "Add meeting notes for Sprint 03",
+      "author": "gus-ant",
+      "date": "2026-04-20T02:52:04Z",
+      "verified": true
+    }
+  ],
+  "issues_summary": {
+    "total": 17,
+    "open": 0,
+    "closed": 17,
+    "avg_close_hours": 164.8
+  },
+  "collaboration": {
+    "total_prs": 0,
+    "merged_prs": 0,
+    "open_prs": 0,
+    "merge_rate": 0
+  }
+}

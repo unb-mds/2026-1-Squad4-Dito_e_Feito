@@ -1,0 +1,2379 @@
+[
+  {
+    "sha": "10048f71e09d0c9cb34ca6a7729300bbd6340db1",
+    "node_id": "C_kwDORqqLFtoAKDEwMDQ4ZjcxZTA5ZDBjOWNiMzRjYTZhNzcyOTMwMGJiZDYzNDBkYjE",
+    "commit": {
+      "author": {
+        "name": "gus-ant",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-05-11T15:41:13Z"
+      },
+      "committer": {
+        "name": "gus-ant",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-05-11T15:41:13Z"
+      },
+      "message": "Atualiza\u00e7\u00e3o mkdocs sprint 4",
+      "tree": {
+        "sha": "ed04858865ec46267f8f12ca550239409dfc46c3",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/ed04858865ec46267f8f12ca550239409dfc46c3"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/10048f71e09d0c9cb34ca6a7729300bbd6340db1",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/10048f71e09d0c9cb34ca6a7729300bbd6340db1",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/10048f71e09d0c9cb34ca6a7729300bbd6340db1",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/10048f71e09d0c9cb34ca6a7729300bbd6340db1/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "f552bb2c36837bd2c9fd3fd27eeb4a51c53c0a89",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/f552bb2c36837bd2c9fd3fd27eeb4a51c53c0a89",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/f552bb2c36837bd2c9fd3fd27eeb4a51c53c0a89"
+      }
+    ]
+  },
+  {
+    "sha": "f552bb2c36837bd2c9fd3fd27eeb4a51c53c0a89",
+    "node_id": "C_kwDORqqLFtoAKGY1NTJiYjJjMzY4MzdiZDJjOWZkM2ZkMjdlZWI0YTUxYzUzYzBhODk",
+    "commit": {
+      "author": {
+        "name": "Gustavo Antonio",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-05-11T13:47:58Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-05-11T13:47:58Z"
+      },
+      "message": "Renomear estudo_front to estudo_front.md",
+      "tree": {
+        "sha": "b02eb607ee1b1086c297aa6c10ce23b7e90ce824",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/b02eb607ee1b1086c297aa6c10ce23b7e90ce824"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/f552bb2c36837bd2c9fd3fd27eeb4a51c53c0a89",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqAd4OCRC1aQ7uu5UhlAAAGkMQAAxbkHGT8QpGwBf4Ps3cfqEU\nG/GSEbFadAACutWB9wkP/oonOuKmlEpGTOR1rk2ZJj3iaKwq/I1PC9XR4AVGq77f\nhxynr/SwLxpMWiT1kd69ZorMi1EmQFX4B6MdN/KifQvpXrivPMZh20ieeMDfu27t\nO3gD/jh741kgJ4NVpQDZPjZMO8ElntLRs/y2M2NeoVAP2VpgXzwh7lDVp0ivohr+\nd4oht4n1QwdGdYGegltzj/fOgMzTHf0n6XsM3+RfASXzlUzrzmjfVgkyburHufMR\nhruoghOvnt8Ow8gs1q+5AdyGYXMyJaTpNxQNOVvu/01uSzU98YD7a9/aLUmrxbFg\nQttiZ6qT2ycDDc92TfUtNGf+7jvD+zYPsyffNDHAV87LM2YSRT8P4R7cOioGNBxT\nhfhMX1eVvqZtLlUmubda6rdnvXuJpHoea46dATloYH+Fu0Rb1KVGWPPNgm5korp7\nTunzQtrBpDhWrAbna9ryGpvjCyJHwD82zLyEP2QocxpseEXd+VvCQ+op6J8xaR7g\nxxGjzaLGLkYOk34W6S84ECK+g1JMsDPBsihPFcggd4NtIru531s4hRoPcvgdXxx1\ndcwCprDlKIzE2HFloMaTrITQOR8ZO4hAQbecZPZ9ndA0ao9G4zODqcqrbN2ZMiSB\nA8r+TG2eLKm9tQVfIgu0\n=Hr4c\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree b02eb607ee1b1086c297aa6c10ce23b7e90ce824\nparent 6c660633f1db3bad2138fff6bb9c03c41b59d0a9\nauthor Gustavo Antonio <gus.ant.rod.10@gmail.com> 1778507278 -0300\ncommitter GitHub <noreply@github.com> 1778507278 -0300\n\nRenomear estudo_front to estudo_front.md",
+        "verified_at": "2026-05-11T13:47:59Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/f552bb2c36837bd2c9fd3fd27eeb4a51c53c0a89",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/f552bb2c36837bd2c9fd3fd27eeb4a51c53c0a89",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/f552bb2c36837bd2c9fd3fd27eeb4a51c53c0a89/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "6c660633f1db3bad2138fff6bb9c03c41b59d0a9",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6c660633f1db3bad2138fff6bb9c03c41b59d0a9",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/6c660633f1db3bad2138fff6bb9c03c41b59d0a9"
+      }
+    ]
+  },
+  {
+    "sha": "6c660633f1db3bad2138fff6bb9c03c41b59d0a9",
+    "node_id": "C_kwDORqqLFtoAKDZjNjYwNjMzZjFkYjNiYWQyMTM4ZmZmNmJiOWMwM2M0MWI1OWQwYTk",
+    "commit": {
+      "author": {
+        "name": "SUDOTMOX",
+        "email": "242024923@aluno.unb.br",
+        "date": "2026-05-11T00:12:21Z"
+      },
+      "committer": {
+        "name": "SUDOTMOX",
+        "email": "242024923@aluno.unb.br",
+        "date": "2026-05-11T00:12:21Z"
+      },
+      "message": "estudo front",
+      "tree": {
+        "sha": "57df35853b7d8484f91ceec11387b315ac924c43",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/57df35853b7d8484f91ceec11387b315ac924c43"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/6c660633f1db3bad2138fff6bb9c03c41b59d0a9",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6c660633f1db3bad2138fff6bb9c03c41b59d0a9",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/6c660633f1db3bad2138fff6bb9c03c41b59d0a9",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6c660633f1db3bad2138fff6bb9c03c41b59d0a9/comments",
+    "author": {
+      "login": "SUDOTMOX",
+      "id": 248756952,
+      "node_id": "U_kgDODtO62A",
+      "avatar_url": "https://avatars.githubusercontent.com/u/248756952?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/SUDOTMOX",
+      "html_url": "https://github.com/SUDOTMOX",
+      "followers_url": "https://api.github.com/users/SUDOTMOX/followers",
+      "following_url": "https://api.github.com/users/SUDOTMOX/following{/other_user}",
+      "gists_url": "https://api.github.com/users/SUDOTMOX/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/SUDOTMOX/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/SUDOTMOX/subscriptions",
+      "organizations_url": "https://api.github.com/users/SUDOTMOX/orgs",
+      "repos_url": "https://api.github.com/users/SUDOTMOX/repos",
+      "events_url": "https://api.github.com/users/SUDOTMOX/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/SUDOTMOX/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "SUDOTMOX",
+      "id": 248756952,
+      "node_id": "U_kgDODtO62A",
+      "avatar_url": "https://avatars.githubusercontent.com/u/248756952?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/SUDOTMOX",
+      "html_url": "https://github.com/SUDOTMOX",
+      "followers_url": "https://api.github.com/users/SUDOTMOX/followers",
+      "following_url": "https://api.github.com/users/SUDOTMOX/following{/other_user}",
+      "gists_url": "https://api.github.com/users/SUDOTMOX/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/SUDOTMOX/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/SUDOTMOX/subscriptions",
+      "organizations_url": "https://api.github.com/users/SUDOTMOX/orgs",
+      "repos_url": "https://api.github.com/users/SUDOTMOX/repos",
+      "events_url": "https://api.github.com/users/SUDOTMOX/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/SUDOTMOX/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "c874a818e03c859624a055f9b594806371535674",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/c874a818e03c859624a055f9b594806371535674",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/c874a818e03c859624a055f9b594806371535674"
+      }
+    ]
+  },
+  {
+    "sha": "c874a818e03c859624a055f9b594806371535674",
+    "node_id": "C_kwDORqqLFtoAKGM4NzRhODE4ZTAzYzg1OTYyNGEwNTVmOWI1OTQ4MDYzNzE1MzU2NzQ",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-05-06T22:02:32Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-05-06T22:02:32Z"
+      },
+      "message": "Add files via upload",
+      "tree": {
+        "sha": "8569e8b4df806b6a1c06bb74601fd2a446c1814a",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/8569e8b4df806b6a1c06bb74601fd2a446c1814a"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/c874a818e03c859624a055f9b594806371535674",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp+7p4CRC1aQ7uu5UhlAAAi+YQAHvhSiR0tixX7GpBboFAESjf\ncyPrQuEAsfxCzBdXdYha8wdiTZ2EDtuIJpbLumqZNyax1HBoTTdIsb/DjOKpgRAR\npHIHIJsArRXl+CZ+zGesnFOcs0KOwTcpiRVtOWUjBi2FR1eB7n8seA6L4ADL7lIA\n+xxIQE8vLg80+ziWmRWTr3FAOGsXET0NcFI8DlZtfgKI9uSdFzusBZqEJl258J8H\nnsZqmk5/N4Egt3443jXkZmyII+2F/sCTZgxx0cfRqDboYI4Gnk/+JuM5J1w4h3zJ\ndu2tUc0mlddJRlFfJvPpc/ahOgl2JLG1lHJXB6jdCFF2j9oAsE+Vq4PLscx75y61\n/4QOefmzSm0Kck/gPQ6igrY+SAjR+Lwy8fy2OBnR4Nengck5ic7hwnH0quFMgpm8\ncksECQj8fO8A+RNBjIWiSB2KI8hl6GcHlL8ejb5+ysyoDIGkY+zZhsr73FN5lt4q\n6J4XujruhLjd/uqHQjYtcpA2q2+LaBQRZFA4jwS5SVm+d3uXikuPz9Eza8GE4Ldo\nNMfHmlTBDIFnfHHPS6mSHDDDfkLZcGT5d4ix6RMJuEVcJ3BFD2nhv/TnLHPUwJd+\nhl+GyxpDONzUlUkZiVm8w/AUwzUFNGoSpz1Up64DPeetcsjLo+HGFZpRil5ztOZz\nYqfiqbedc5VvLAfxQLd8\n=Or5M\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 8569e8b4df806b6a1c06bb74601fd2a446c1814a\nparent 6820c238a963bda033ce0cbcc52f82a60a1f3069\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1778104952 -0300\ncommitter GitHub <noreply@github.com> 1778104952 -0300\n\nAdd files via upload",
+        "verified_at": "2026-05-06T22:02:32Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/c874a818e03c859624a055f9b594806371535674",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/c874a818e03c859624a055f9b594806371535674",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/c874a818e03c859624a055f9b594806371535674/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "6820c238a963bda033ce0cbcc52f82a60a1f3069",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6820c238a963bda033ce0cbcc52f82a60a1f3069",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/6820c238a963bda033ce0cbcc52f82a60a1f3069"
+      }
+    ]
+  },
+  {
+    "sha": "6820c238a963bda033ce0cbcc52f82a60a1f3069",
+    "node_id": "C_kwDORqqLFtoAKDY4MjBjMjM4YTk2M2JkYTAzM2NlMGNiY2M1MmY4MmE2MGExZjMwNjk",
+    "commit": {
+      "author": {
+        "name": "gus-ant",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-05-05T02:49:19Z"
+      },
+      "committer": {
+        "name": "gus-ant",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-05-05T02:49:19Z"
+      },
+      "message": "Adi\u00e7\u00e3o do estudo de Coleta e Ingest\u00e3o de Dados",
+      "tree": {
+        "sha": "0c101450e8e9052f4edc392d0298ed83d05a8847",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/0c101450e8e9052f4edc392d0298ed83d05a8847"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/6820c238a963bda033ce0cbcc52f82a60a1f3069",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6820c238a963bda033ce0cbcc52f82a60a1f3069",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/6820c238a963bda033ce0cbcc52f82a60a1f3069",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6820c238a963bda033ce0cbcc52f82a60a1f3069/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "01f397e2ef039d93b81e6f5a371fa26a21455a86",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/01f397e2ef039d93b81e6f5a371fa26a21455a86",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/01f397e2ef039d93b81e6f5a371fa26a21455a86"
+      }
+    ]
+  },
+  {
+    "sha": "01f397e2ef039d93b81e6f5a371fa26a21455a86",
+    "node_id": "C_kwDORqqLFtoAKDAxZjM5N2UyZWYwMzlkOTNiODFlNmY1YTM3MWZhMjZhMjE0NTVhODY",
+    "commit": {
+      "author": {
+        "name": "indianodev",
+        "email": "juan75indiano@gmail.com",
+        "date": "2026-05-01T13:01:35Z"
+      },
+      "committer": {
+        "name": "indianodev",
+        "email": "juan75indiano@gmail.com",
+        "date": "2026-05-01T13:01:35Z"
+      },
+      "message": "Merge branch 'main' of https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito",
+      "tree": {
+        "sha": "6df8fc7d76dc958eb066c526371b9b3ed3ef20e2",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/6df8fc7d76dc958eb066c526371b9b3ed3ef20e2"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/01f397e2ef039d93b81e6f5a371fa26a21455a86",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/01f397e2ef039d93b81e6f5a371fa26a21455a86",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/01f397e2ef039d93b81e6f5a371fa26a21455a86",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/01f397e2ef039d93b81e6f5a371fa26a21455a86/comments",
+    "author": {
+      "login": "IndianoDev",
+      "id": 81726993,
+      "node_id": "MDQ6VXNlcjgxNzI2OTkz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81726993?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/IndianoDev",
+      "html_url": "https://github.com/IndianoDev",
+      "followers_url": "https://api.github.com/users/IndianoDev/followers",
+      "following_url": "https://api.github.com/users/IndianoDev/following{/other_user}",
+      "gists_url": "https://api.github.com/users/IndianoDev/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/IndianoDev/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/IndianoDev/subscriptions",
+      "organizations_url": "https://api.github.com/users/IndianoDev/orgs",
+      "repos_url": "https://api.github.com/users/IndianoDev/repos",
+      "events_url": "https://api.github.com/users/IndianoDev/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/IndianoDev/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "IndianoDev",
+      "id": 81726993,
+      "node_id": "MDQ6VXNlcjgxNzI2OTkz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81726993?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/IndianoDev",
+      "html_url": "https://github.com/IndianoDev",
+      "followers_url": "https://api.github.com/users/IndianoDev/followers",
+      "following_url": "https://api.github.com/users/IndianoDev/following{/other_user}",
+      "gists_url": "https://api.github.com/users/IndianoDev/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/IndianoDev/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/IndianoDev/subscriptions",
+      "organizations_url": "https://api.github.com/users/IndianoDev/orgs",
+      "repos_url": "https://api.github.com/users/IndianoDev/repos",
+      "events_url": "https://api.github.com/users/IndianoDev/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/IndianoDev/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "a8fa26f40a933545c6831c69e3393aafb31c244c",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/a8fa26f40a933545c6831c69e3393aafb31c244c",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/a8fa26f40a933545c6831c69e3393aafb31c244c"
+      },
+      {
+        "sha": "486d8d82f649bd2474db107cde3ddf1a0c03eec6",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/486d8d82f649bd2474db107cde3ddf1a0c03eec6",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/486d8d82f649bd2474db107cde3ddf1a0c03eec6"
+      }
+    ]
+  },
+  {
+    "sha": "a8fa26f40a933545c6831c69e3393aafb31c244c",
+    "node_id": "C_kwDORqqLFtoAKGE4ZmEyNmY0MGE5MzM1NDVjNjgzMWM2OWUzMzkzYWFmYjMxYzI0NGM",
+    "commit": {
+      "author": {
+        "name": "indianodev",
+        "email": "juan75indiano@gmail.com",
+        "date": "2026-05-01T13:01:28Z"
+      },
+      "committer": {
+        "name": "indianodev",
+        "email": "juan75indiano@gmail.com",
+        "date": "2026-05-01T13:01:28Z"
+      },
+      "message": "feat: inclus\u00e3o dos t\u00f3picos 02 (tipos de dados) e 03 (modelagem ER)",
+      "tree": {
+        "sha": "bb34fc2db87ebe7d965b50f19909f2d6d3774617",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/bb34fc2db87ebe7d965b50f19909f2d6d3774617"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/a8fa26f40a933545c6831c69e3393aafb31c244c",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/a8fa26f40a933545c6831c69e3393aafb31c244c",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/a8fa26f40a933545c6831c69e3393aafb31c244c",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/a8fa26f40a933545c6831c69e3393aafb31c244c/comments",
+    "author": {
+      "login": "IndianoDev",
+      "id": 81726993,
+      "node_id": "MDQ6VXNlcjgxNzI2OTkz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81726993?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/IndianoDev",
+      "html_url": "https://github.com/IndianoDev",
+      "followers_url": "https://api.github.com/users/IndianoDev/followers",
+      "following_url": "https://api.github.com/users/IndianoDev/following{/other_user}",
+      "gists_url": "https://api.github.com/users/IndianoDev/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/IndianoDev/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/IndianoDev/subscriptions",
+      "organizations_url": "https://api.github.com/users/IndianoDev/orgs",
+      "repos_url": "https://api.github.com/users/IndianoDev/repos",
+      "events_url": "https://api.github.com/users/IndianoDev/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/IndianoDev/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "IndianoDev",
+      "id": 81726993,
+      "node_id": "MDQ6VXNlcjgxNzI2OTkz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81726993?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/IndianoDev",
+      "html_url": "https://github.com/IndianoDev",
+      "followers_url": "https://api.github.com/users/IndianoDev/followers",
+      "following_url": "https://api.github.com/users/IndianoDev/following{/other_user}",
+      "gists_url": "https://api.github.com/users/IndianoDev/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/IndianoDev/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/IndianoDev/subscriptions",
+      "organizations_url": "https://api.github.com/users/IndianoDev/orgs",
+      "repos_url": "https://api.github.com/users/IndianoDev/repos",
+      "events_url": "https://api.github.com/users/IndianoDev/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/IndianoDev/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e8e66e1f57a240e01f4d76e6fb7198d051a66360",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/e8e66e1f57a240e01f4d76e6fb7198d051a66360",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/e8e66e1f57a240e01f4d76e6fb7198d051a66360"
+      }
+    ]
+  },
+  {
+    "sha": "486d8d82f649bd2474db107cde3ddf1a0c03eec6",
+    "node_id": "C_kwDORqqLFtoAKDQ4NmQ4ZDgyZjY0OWJkMjQ3NGRiMTA3Y2RlM2RkZjFhMGMwM2VlYzY",
+    "commit": {
+      "author": {
+        "name": "gus-ant",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-04-29T20:52:14Z"
+      },
+      "committer": {
+        "name": "gus-ant",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-04-29T20:52:14Z"
+      },
+      "message": "Atualiza\u00e7\u00e3o da documenta\u00e7\u00e3o e cria\u00e7\u00e3o do MKdocs do projeto",
+      "tree": {
+        "sha": "fee44795d5f514810cad0026a78a6a3e5a1cef4b",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/fee44795d5f514810cad0026a78a6a3e5a1cef4b"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/486d8d82f649bd2474db107cde3ddf1a0c03eec6",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/486d8d82f649bd2474db107cde3ddf1a0c03eec6",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/486d8d82f649bd2474db107cde3ddf1a0c03eec6",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/486d8d82f649bd2474db107cde3ddf1a0c03eec6/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "45ceae3901859e9b88e74430518590c0d6bbe901",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/45ceae3901859e9b88e74430518590c0d6bbe901",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/45ceae3901859e9b88e74430518590c0d6bbe901"
+      }
+    ]
+  },
+  {
+    "sha": "45ceae3901859e9b88e74430518590c0d6bbe901",
+    "node_id": "C_kwDORqqLFtoAKDQ1Y2VhZTM5MDE4NTllOWI4OGU3NDQzMDUxODU5MGMwZDZiYmU5MDE",
+    "commit": {
+      "author": {
+        "name": "Velho008",
+        "email": "gabrielvelho08@gmail.com",
+        "date": "2026-04-28T15:09:55Z"
+      },
+      "committer": {
+        "name": "Velho008",
+        "email": "gabrielvelho08@gmail.com",
+        "date": "2026-04-28T15:09:55Z"
+      },
+      "message": "inicio do projeto figma, documentando altera\u00e7\u00f5es",
+      "tree": {
+        "sha": "1c28c67f6deba19f950e7b4cdf13c00c54b0bed7",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/1c28c67f6deba19f950e7b4cdf13c00c54b0bed7"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/45ceae3901859e9b88e74430518590c0d6bbe901",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/45ceae3901859e9b88e74430518590c0d6bbe901",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/45ceae3901859e9b88e74430518590c0d6bbe901",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/45ceae3901859e9b88e74430518590c0d6bbe901/comments",
+    "author": {
+      "login": "Velho008",
+      "id": 186762566,
+      "node_id": "U_kgDOCyHFRg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/186762566?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Velho008",
+      "html_url": "https://github.com/Velho008",
+      "followers_url": "https://api.github.com/users/Velho008/followers",
+      "following_url": "https://api.github.com/users/Velho008/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Velho008/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Velho008/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Velho008/subscriptions",
+      "organizations_url": "https://api.github.com/users/Velho008/orgs",
+      "repos_url": "https://api.github.com/users/Velho008/repos",
+      "events_url": "https://api.github.com/users/Velho008/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Velho008/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Velho008",
+      "id": 186762566,
+      "node_id": "U_kgDOCyHFRg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/186762566?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Velho008",
+      "html_url": "https://github.com/Velho008",
+      "followers_url": "https://api.github.com/users/Velho008/followers",
+      "following_url": "https://api.github.com/users/Velho008/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Velho008/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Velho008/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Velho008/subscriptions",
+      "organizations_url": "https://api.github.com/users/Velho008/orgs",
+      "repos_url": "https://api.github.com/users/Velho008/repos",
+      "events_url": "https://api.github.com/users/Velho008/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Velho008/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e8e66e1f57a240e01f4d76e6fb7198d051a66360",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/e8e66e1f57a240e01f4d76e6fb7198d051a66360",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/e8e66e1f57a240e01f4d76e6fb7198d051a66360"
+      }
+    ]
+  },
+  {
+    "sha": "e8e66e1f57a240e01f4d76e6fb7198d051a66360",
+    "node_id": "C_kwDORqqLFtoAKGU4ZTY2ZTFmNTdhMjQwZTAxZjRkNzZlNmZiNzE5OGQwNTFhNjYzNjA",
+    "commit": {
+      "author": {
+        "name": "indianodev",
+        "email": "juan75indiano@gmail.com",
+        "date": "2026-04-24T16:05:03Z"
+      },
+      "committer": {
+        "name": "indianodev",
+        "email": "juan75indiano@gmail.com",
+        "date": "2026-04-24T16:05:03Z"
+      },
+      "message": "realizando a parte 1 do estudo de banco de dados",
+      "tree": {
+        "sha": "71c9b1bf6fe98e800a91129ae6cb22b0b644ad45",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/71c9b1bf6fe98e800a91129ae6cb22b0b644ad45"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/e8e66e1f57a240e01f4d76e6fb7198d051a66360",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/e8e66e1f57a240e01f4d76e6fb7198d051a66360",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/e8e66e1f57a240e01f4d76e6fb7198d051a66360",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/e8e66e1f57a240e01f4d76e6fb7198d051a66360/comments",
+    "author": {
+      "login": "IndianoDev",
+      "id": 81726993,
+      "node_id": "MDQ6VXNlcjgxNzI2OTkz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81726993?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/IndianoDev",
+      "html_url": "https://github.com/IndianoDev",
+      "followers_url": "https://api.github.com/users/IndianoDev/followers",
+      "following_url": "https://api.github.com/users/IndianoDev/following{/other_user}",
+      "gists_url": "https://api.github.com/users/IndianoDev/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/IndianoDev/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/IndianoDev/subscriptions",
+      "organizations_url": "https://api.github.com/users/IndianoDev/orgs",
+      "repos_url": "https://api.github.com/users/IndianoDev/repos",
+      "events_url": "https://api.github.com/users/IndianoDev/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/IndianoDev/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "IndianoDev",
+      "id": 81726993,
+      "node_id": "MDQ6VXNlcjgxNzI2OTkz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81726993?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/IndianoDev",
+      "html_url": "https://github.com/IndianoDev",
+      "followers_url": "https://api.github.com/users/IndianoDev/followers",
+      "following_url": "https://api.github.com/users/IndianoDev/following{/other_user}",
+      "gists_url": "https://api.github.com/users/IndianoDev/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/IndianoDev/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/IndianoDev/subscriptions",
+      "organizations_url": "https://api.github.com/users/IndianoDev/orgs",
+      "repos_url": "https://api.github.com/users/IndianoDev/repos",
+      "events_url": "https://api.github.com/users/IndianoDev/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/IndianoDev/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "139df27ca5ef3c5dd2c3731379fa6de9cc7d01b8",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/139df27ca5ef3c5dd2c3731379fa6de9cc7d01b8",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/139df27ca5ef3c5dd2c3731379fa6de9cc7d01b8"
+      }
+    ]
+  },
+  {
+    "sha": "139df27ca5ef3c5dd2c3731379fa6de9cc7d01b8",
+    "node_id": "C_kwDORqqLFtoAKDEzOWRmMjdjYTVlZjNjNWRkMmMzNzMxMzc5ZmE2ZGU5Y2M3ZDAxYjg",
+    "commit": {
+      "author": {
+        "name": "Gustavo Antonio",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-04-23T22:06:03Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-23T22:06:03Z"
+      },
+      "message": "Estudo de Arquitetura para Deploy de Modelos de IA",
+      "tree": {
+        "sha": "2bd0cb357b37c423ab9a8d5b8bc330926621affd",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/2bd0cb357b37c423ab9a8d5b8bc330926621affd"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/139df27ca5ef3c5dd2c3731379fa6de9cc7d01b8",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp6pfLCRC1aQ7uu5UhlAAAiMAQAD5MIn/SEarB9EqpL72M6OVl\nS462ZpvUypqJRmPXuw02CuGjL5uoMr7V8h5kGJpNxHrDodcUHjWBvmNoVDW8KTfx\n+A6X3S5M1DL1HheIQF9CyIQBCgzLOo7nNgLGWpiKHd3b9TCuvO7dPDhreY3VxQuT\nO8vfFmmoy44jIiQ0XmQIPCbEeW6recFEJALd9S2ddrT6MhGY/bzq7frB4sj2cNXw\neBIK8YX8q+16/gzMcAS3Kch68hKPk6NlFFNbp7ZK4+uaQR6YK3OU4yecEO2eAhUb\nSWcgkkQmDZSMmtBLslggpmaVQ93rA68gQZkLoLJh2U5z2u/1ssQvrs+3d7/8qlcY\nPTWTd4Kfzz44mgBhl0E5uDvfBDtYyNkezKeAHO4xn/uRYc80gzn3zQgrc0Fo+QcK\nDHsTPdDJVl3EfwfiffKdHu9JMyovOXMTu75V2YtgJjXlYd8lDtxYg0MpozsYd6Cw\nSTkSXDP6trEW+qiC0EOenym2uTQ9ih8wqRbChxq6IK++lngL9CzrGQFmrSqaaXQU\nE3QDm7uq0avAcAUp9K63eZhIrvP4RlpDU5mjvtbRwh+tqiPMvsCTy9BYsb6dBMfQ\nRWmDO7auC9RHSijpT5cWseJvzq6gpx0ovdIhvQ6d69TxU05EkMQCxQ3wMif3zdV/\nG6dDJ6DtaSdzvTEAHGtR\n=2vNr\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 2bd0cb357b37c423ab9a8d5b8bc330926621affd\nparent fa521bd130d11da008fe00d8d9383027c90f8586\nauthor Gustavo Antonio <gus.ant.rod.10@gmail.com> 1776981963 -0300\ncommitter GitHub <noreply@github.com> 1776981963 -0300\n\nEstudo de Arquitetura para Deploy de Modelos de IA",
+        "verified_at": "2026-04-23T22:06:03Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/139df27ca5ef3c5dd2c3731379fa6de9cc7d01b8",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/139df27ca5ef3c5dd2c3731379fa6de9cc7d01b8",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/139df27ca5ef3c5dd2c3731379fa6de9cc7d01b8/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "fa521bd130d11da008fe00d8d9383027c90f8586",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/fa521bd130d11da008fe00d8d9383027c90f8586",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/fa521bd130d11da008fe00d8d9383027c90f8586"
+      }
+    ]
+  },
+  {
+    "sha": "fa521bd130d11da008fe00d8d9383027c90f8586",
+    "node_id": "C_kwDORqqLFtoAKGZhNTIxYmQxMzBkMTFkYTAwOGZlMDBkOGQ5MzgzMDI3YzkwZjg1ODY",
+    "commit": {
+      "author": {
+        "name": "Gabriel Velho de Souza",
+        "email": "gabrielvelho08@gmail.com",
+        "date": "2026-04-23T14:56:13Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-23T14:56:13Z"
+      },
+      "message": "Update estudo_manual_da_marca.md\n\numa linha apagada apenas",
+      "tree": {
+        "sha": "6afc2e0e5fab972aa5d84eea895e0ff4d428eba7",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/6afc2e0e5fab972aa5d84eea895e0ff4d428eba7"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/fa521bd130d11da008fe00d8d9383027c90f8586",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp6jMNCRC1aQ7uu5UhlAAAMgsQAJioZ4TkRm01qxQVqBhHsIML\no59e321iogMfRe2Aqv+HIrJTGTYVxaLQ0snDl+1YkD0iXSqK8/tlcVbKDQxgflGV\nKpovst3HsKkl4tUFFd1LwlOEUlCzqAqPPEps2S+n6DeUduTKvsSQCstF6u4ndbSt\nLJJMkE2LDwo7U3w9Dg6oAZ5extzTskXl6hgbxRGGLPoBZ3ZcnZtcANd0hccJDQzG\nfhFxtZz/U8wwxkShD4fq2cckXER/JyFTWiJoVdh8aEMANAu3sGKfxJEL0WMZnUs7\nQJvwYGUxsfbgcFOrCTRRcFVNZ2Aoe7NHFVjiXfRGT4pQjI4LbMXpjfEhYjvri4M/\nWdJduqKQEL2thNkFVxP5FT6pp7g8TeNL23neUR9ACvSI/vExfLuP3d+zWpgTPRh2\nYs42iXig1KTDzIsV7zAETRGrRWU/1YwBUDwV2klANuA2bkfaQUMr1C2LbOgp7ajH\nh8O7lWoqWxSJA0YwIvXQufczy/0Y8jIef0luemWIF0hoJ7FZykUZzHr2FRcnGfxj\nBcltt/60YPP+7lLWSfARTQm3Re2PA4IFqker//l4qYevOHOyyZa2EPyJPcmZlfIM\nVOyARIZY6wnIBreYQO2gtLVlnvlGxqyuReHDcWK1IX8irFQXDSgFYk6e9vrA6eCB\nt54YQwcdHl/5Mz+v57s+\n=5HPG\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 6afc2e0e5fab972aa5d84eea895e0ff4d428eba7\nparent 6cb62a4f2424d3dc95c9e2cf80fd091bb02d1105\nauthor Gabriel Velho de Souza <gabrielvelho08@gmail.com> 1776956173 -0300\ncommitter GitHub <noreply@github.com> 1776956173 -0300\n\nUpdate estudo_manual_da_marca.md\n\numa linha apagada apenas",
+        "verified_at": "2026-04-23T14:56:15Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/fa521bd130d11da008fe00d8d9383027c90f8586",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/fa521bd130d11da008fe00d8d9383027c90f8586",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/fa521bd130d11da008fe00d8d9383027c90f8586/comments",
+    "author": {
+      "login": "Velho008",
+      "id": 186762566,
+      "node_id": "U_kgDOCyHFRg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/186762566?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Velho008",
+      "html_url": "https://github.com/Velho008",
+      "followers_url": "https://api.github.com/users/Velho008/followers",
+      "following_url": "https://api.github.com/users/Velho008/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Velho008/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Velho008/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Velho008/subscriptions",
+      "organizations_url": "https://api.github.com/users/Velho008/orgs",
+      "repos_url": "https://api.github.com/users/Velho008/repos",
+      "events_url": "https://api.github.com/users/Velho008/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Velho008/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "6cb62a4f2424d3dc95c9e2cf80fd091bb02d1105",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6cb62a4f2424d3dc95c9e2cf80fd091bb02d1105",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/6cb62a4f2424d3dc95c9e2cf80fd091bb02d1105"
+      }
+    ]
+  },
+  {
+    "sha": "6cb62a4f2424d3dc95c9e2cf80fd091bb02d1105",
+    "node_id": "C_kwDORqqLFtoAKDZjYjYyYTRmMjQyNGQzZGM5NWM5ZTJjZjgwZmQwOTFiYjAyZDExMDU",
+    "commit": {
+      "author": {
+        "name": "Gustavo Antonio",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-04-22T16:07:48Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-22T16:07:48Z"
+      },
+      "message": "Rename file for consistency in directory structure",
+      "tree": {
+        "sha": "6abfa5c650c175e9a468742a07ce54b61e5f74b3",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/6abfa5c650c175e9a468742a07ce54b61e5f74b3"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/6cb62a4f2424d3dc95c9e2cf80fd091bb02d1105",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp6PJVCRC1aQ7uu5UhlAAAcN8QADUPD3rcNqPrehLF7Z+ZcwYr\nN2PgaH7H92jv+DBKZT1qBfbaK2bPGBpqvq1HDVnvN9xjhOxCo/Wzc82Wb2xAboad\nAeghhaZnP3/DVwYIPBO0jbkQRJfESlk0YJga3yTIN5wgQeEsD7TSc3mdanD99XjG\nzEkGt4NmJsF+TD2KDrTEp7qg12rh/hIkdVNScg1vmJtDtWRwi1YrVrI8vtXgtuk6\nLvqDt+NlmVPvtVbxrwdpOkMMjZuAkE2eLDOGBxLxKhh+dg8fUR2l39Qeg+jO8fzs\nsSbnEgHspfw4w0Kju8x6DisnZctYc9a6IZPe8XMZykoZtxjC0E5d05pd1Ra8su7x\nVa0SdJTtWAgfmzHjb959Jb9yTYmfrnszT3vwJEsCJ/tZOXqjqUFVKA2MVv1zD2Cb\ntuLbfdVvQhtNHYPqnuhQtnjkFYnqcVj6hNzQ2vfm6VghiA2rtgh6YL8B0ODw2JhY\nQX7cKpQJvWkcVew4vEl2vPB7QxGawIzE9iIAh6wvkOLQ92qD8bmt74pgKy1SdmXP\nLsgclZ/pN975TuE1Aot24yZmOyMAZYd1eIFUDp1zOBSFOeSPyu/ycBqvA8blrmmB\n/yRFyxUzXtIWGQxFr73G4uoFuBJzDfTbt/+HEUuDOTwJHWjFRewAvuhSnS5G16sf\nEAivchD4BTsSctGr/WDH\n=zZIa\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 6abfa5c650c175e9a468742a07ce54b61e5f74b3\nparent fa0811e5a5b185184f084b4ae481f83bd83c3e01\nauthor Gustavo Antonio <gus.ant.rod.10@gmail.com> 1776874068 -0300\ncommitter GitHub <noreply@github.com> 1776874068 -0300\n\nRename file for consistency in directory structure",
+        "verified_at": "2026-04-22T16:07:49Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6cb62a4f2424d3dc95c9e2cf80fd091bb02d1105",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/6cb62a4f2424d3dc95c9e2cf80fd091bb02d1105",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6cb62a4f2424d3dc95c9e2cf80fd091bb02d1105/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "fa0811e5a5b185184f084b4ae481f83bd83c3e01",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/fa0811e5a5b185184f084b4ae481f83bd83c3e01",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/fa0811e5a5b185184f084b4ae481f83bd83c3e01"
+      }
+    ]
+  },
+  {
+    "sha": "fa0811e5a5b185184f084b4ae481f83bd83c3e01",
+    "node_id": "C_kwDORqqLFtoAKGZhMDgxMWU1YTViMTg1MTg0ZjA4NGI0YWU0ODFmODNiZDgzYzNlMDE",
+    "commit": {
+      "author": {
+        "name": "Gabriel Velho de Souza",
+        "email": "gabrielvelho08@gmail.com",
+        "date": "2026-04-22T15:55:19Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-22T15:55:19Z"
+      },
+      "message": "Update estudo_manual_da_marca.md",
+      "tree": {
+        "sha": "ffdfb4905c7cb6b7e827e1e55d9ad166e008ef8e",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/ffdfb4905c7cb6b7e827e1e55d9ad166e008ef8e"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/fa0811e5a5b185184f084b4ae481f83bd83c3e01",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp6O9nCRC1aQ7uu5UhlAAA9WwQABxDqTJDj7c7U6Q/V40zMeZH\nWuHWjdqSjxTJart7AHeT7AwV24JvuIZeoEVt7FjM6Pilg/ICI5xJ+Z6Md2WzALix\n0+phuApACzI2u61nKUesb18iMCAzmVZLAoCqkDBB8/iJsejyWXhRqCxIn3WVaaRB\nY6ziEFIwmAMoHtXkK3EQLws8WM7tEqM30do5Abn/JI1J7fNSJZYJyATXulGwc36z\nNUqWoI7zr1iG6hujjJQghyrANJ3e5E9xCJd/G80uuFjEl4zA/CCCpqjIG2GT1uLh\nHHbU+Klzqk620euZZGyQ/Kjzk+6tQfNrFehrrUfoSe3Ibue/Q19582zLQfGkAMyi\nECItlSqPpnJtvo0ufzx83OoVhV3LJ02ye5AINL8rqSBUCs/6lhGRm5NollgxEPK3\nbrnVlDSUN8PHdeEF60aiucARX8VEMrEbsM8TEMiHZZLaNAictkochrO5zFOpT3hr\nvUqqqoEy85xPoStH6zGkwMXsmvP1Bb7dF52PYhtLONuCBFMlcVw1G3vrzargS5BJ\nD0Kditlc0VCua8vnsqhbejJ3IPu43n31IWdYaUCHtqPy9JgjcHjCKpaCblcJ6TAJ\nhWxIWc+MW25i85YmhaHLIFKE3E6sVctlkx0EcRqmYlVSEQ0dLF1wBd9IZH29Kjfn\nVQ1/UFGh4AL38JMKR2r5\n=ThL+\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree ffdfb4905c7cb6b7e827e1e55d9ad166e008ef8e\nparent 4e6c4c4b4367381732acead5d0316de40046dc98\nauthor Gabriel Velho de Souza <gabrielvelho08@gmail.com> 1776873319 -0300\ncommitter GitHub <noreply@github.com> 1776873319 -0300\n\nUpdate estudo_manual_da_marca.md",
+        "verified_at": "2026-04-22T15:55:19Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/fa0811e5a5b185184f084b4ae481f83bd83c3e01",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/fa0811e5a5b185184f084b4ae481f83bd83c3e01",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/fa0811e5a5b185184f084b4ae481f83bd83c3e01/comments",
+    "author": {
+      "login": "Velho008",
+      "id": 186762566,
+      "node_id": "U_kgDOCyHFRg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/186762566?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Velho008",
+      "html_url": "https://github.com/Velho008",
+      "followers_url": "https://api.github.com/users/Velho008/followers",
+      "following_url": "https://api.github.com/users/Velho008/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Velho008/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Velho008/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Velho008/subscriptions",
+      "organizations_url": "https://api.github.com/users/Velho008/orgs",
+      "repos_url": "https://api.github.com/users/Velho008/repos",
+      "events_url": "https://api.github.com/users/Velho008/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Velho008/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "4e6c4c4b4367381732acead5d0316de40046dc98",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/4e6c4c4b4367381732acead5d0316de40046dc98",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/4e6c4c4b4367381732acead5d0316de40046dc98"
+      }
+    ]
+  },
+  {
+    "sha": "4e6c4c4b4367381732acead5d0316de40046dc98",
+    "node_id": "C_kwDORqqLFtoAKDRlNmM0YzRiNDM2NzM4MTczMmFjZWFkNWQwMzE2ZGU0MDA0NmRjOTg",
+    "commit": {
+      "author": {
+        "name": "Gustavo Antonio",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-04-22T15:33:11Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-22T15:33:11Z"
+      },
+      "message": "Update requisitos_gerais_oficiais.md",
+      "tree": {
+        "sha": "c31364d514bc88f5a8ba545f2136798063a9b993",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/c31364d514bc88f5a8ba545f2136798063a9b993"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/4e6c4c4b4367381732acead5d0316de40046dc98",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp6Oo3CRC1aQ7uu5UhlAAANVcQAIAJjybvAqxVugcOvYyIg6eM\nmDWCMPeEjro+oRD9nTzgEPxsg3MV4y3cdbyRtfx9f3FXybvCcl+0GHTp40nSw9BH\nxro1P/gNg3YUuNylHYWS9vC4vJnjhbGMJSK8DC/uHjkGQD0G0h7inF4/R8GNcJB2\nEooUUtideI51Ep/b5hgwmPzOrl6/SDGEBEs5lZZRpuVfFJfpWz+fHS0R+HW3N7h1\npqBXVGrpDRSSh7Qjx6pfeZ3WqjmY3KcweXBlSbeS21otJL2V5sVtJtiemIppx+1v\n8xPJ4xqgLxdp/YcFkSYvhQXU4r8zjsE8p6ajDiKnesCeTk2pyCNeoPPFpHqrBUZD\nlawjfbQKQNjqI12XDpuWD+kHNB17HPQwR6vopLRyKAaqJqMWTYEzwlcI6b00t4E5\n4/YB3ApkcHtkWqSmxSblArW1C8lC/xhpEcQyraTizzYOlj9BDMMCfLkV/jSN0tXf\np9BNksshrntSiENuhXkbCdZjcqr9xmAWljVm9No8Ydb+5Hsri88zBI63I5XyT2U1\nX9eL6uliBPRuh+RCTTE8eZcNa2Gu4DwmV6oeusiQhCBG6bIy4cFrDHJB1zcf3bdy\ndhQ2MrFWIMNtaE4s2dnZuYjLy5FmRHvO3Gg+QcPjfzCIym4iSygUCBzuQAF2T+SL\np8nFbXq2lrqbQQoxZqre\n=beth\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree c31364d514bc88f5a8ba545f2136798063a9b993\nparent a7a4ef7fc2a19b804573fc92aa11bd6ae64973c6\nauthor Gustavo Antonio <gus.ant.rod.10@gmail.com> 1776871991 -0300\ncommitter GitHub <noreply@github.com> 1776871991 -0300\n\nUpdate requisitos_gerais_oficiais.md",
+        "verified_at": "2026-04-22T15:33:12Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/4e6c4c4b4367381732acead5d0316de40046dc98",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/4e6c4c4b4367381732acead5d0316de40046dc98",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/4e6c4c4b4367381732acead5d0316de40046dc98/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "a7a4ef7fc2a19b804573fc92aa11bd6ae64973c6",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/a7a4ef7fc2a19b804573fc92aa11bd6ae64973c6",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/a7a4ef7fc2a19b804573fc92aa11bd6ae64973c6"
+      }
+    ]
+  },
+  {
+    "sha": "a7a4ef7fc2a19b804573fc92aa11bd6ae64973c6",
+    "node_id": "C_kwDORqqLFtoAKGE3YTRlZjdmYzJhMTliODA0NTczZmM5MmFhMTFiZDZhZTY0OTczYzY",
+    "commit": {
+      "author": {
+        "name": "Gustavo Antonio",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-04-22T15:15:53Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-22T15:15:53Z"
+      },
+      "message": "Rename Estudos/Arquitetura de Intelig\u00eancia Artificial para Monitoramento da Coer\u00eancia entre Discurso e Comportamento Legislativo_ Uma An\u00e1lise T\u00e9cnica e Pol\u00edtica no Contexto Brasileiro.md to Estudos/PNL/Arquitetura de Intelig\u00eancia Artificial para Monitoramento da Coer\u00eancia entre Discurso e Comportamento Legislativo_ Uma An\u00e1lise T\u00e9cnica e Pol\u00edtica no Contexto Brasileiro.md",
+      "tree": {
+        "sha": "e8ed0e961b93f443526d254e173dea70e512c174",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/e8ed0e961b93f443526d254e173dea70e512c174"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/a7a4ef7fc2a19b804573fc92aa11bd6ae64973c6",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp6OYpCRC1aQ7uu5UhlAAArwEQAAA/Is85cgs5jmhb9GVIQ2cr\naKHLJWwdB0a8XYV0QeJ0nRSMqJShiCJ/k8wUdha0ligYpHSrEYhw+x1qukLebDzA\n1wk/osf3RGbgglFaId3wCGUVB6cKAPYBTPFCX3K9yWf4BZ1VWBu4jC9xVWAnhoGW\nkV1989DJrPhXYKhtDFyYsSDPJBWQj2Ys3d8SI3Rs/Rp3fVSye2u/LsDzwyU/rSiG\nHUKU/G6ypVto6Ui3Bw0h4fF/DhadDce5OmF4Czp7YgNnQDE3nqBZ505zfuvWqcEc\n0i5U5JIpzx2OSioon+7Tojiv78RQDNt7RasDJombTJ/nPCDtVpshaE5CAs7g6chJ\nhYJsLQiIQnit2k8Cq1+bGfX3v49Qu7jDfU/491Ri/qhGhOSbAfLtoMN/ESA1NnRz\n7Tap+P8XAQ4tAIA45YoNd1IHQs26YzktjhdK00/s3t4/LooiS7BulOP4MBr9By3f\nMZdScvYuXlfZYI804GyqpObtu9i/qJ8O+Vb4RSsvlMKFiZWy6lcEECbUmoXsMAdT\ns2fBy6llhqAi4IjyrWyblpUZi4E0Quo7GWFZ2UO8tUkzDfmV5g0NC0q/+iK+D0pH\n47p3LGVDgn4WAzCzlPpWm8OBYaAePgHp+RDkJNXZUc5bIPJlRmB61/DuMNc+OJRR\n8VEKYgcLdqTxcoLScozo\n=xbz4\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree e8ed0e961b93f443526d254e173dea70e512c174\nparent c3d69be187980323b0194e0fc7d29ad0ba35d94c\nauthor Gustavo Antonio <gus.ant.rod.10@gmail.com> 1776870953 -0300\ncommitter GitHub <noreply@github.com> 1776870953 -0300\n\nRename Estudos/Arquitetura de Intelig\u00eancia Artificial para Monitoramento da Coer\u00eancia entre Discurso e Comportamento Legislativo_ Uma An\u00e1lise T\u00e9cnica e Pol\u00edtica no Contexto Brasileiro.md to Estudos/PNL/Arquitetura de Intelig\u00eancia Artificial para Monitoramento da Coer\u00eancia entre Discurso e Comportamento Legislativo_ Uma An\u00e1lise T\u00e9cnica e Pol\u00edtica no Contexto Brasileiro.md",
+        "verified_at": "2026-04-22T15:15:54Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/a7a4ef7fc2a19b804573fc92aa11bd6ae64973c6",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/a7a4ef7fc2a19b804573fc92aa11bd6ae64973c6",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/a7a4ef7fc2a19b804573fc92aa11bd6ae64973c6/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "c3d69be187980323b0194e0fc7d29ad0ba35d94c",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/c3d69be187980323b0194e0fc7d29ad0ba35d94c",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/c3d69be187980323b0194e0fc7d29ad0ba35d94c"
+      }
+    ]
+  },
+  {
+    "sha": "c3d69be187980323b0194e0fc7d29ad0ba35d94c",
+    "node_id": "C_kwDORqqLFtoAKGMzZDY5YmUxODc5ODAzMjNiMDE5NGUwZmM3ZDI5YWQwYmEzNWQ5NGM",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-04-20T23:09:11Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T23:09:11Z"
+      },
+      "message": "Add files via upload",
+      "tree": {
+        "sha": "ec134f3586ea7bbbf7965afbd596f9c5a20c9e2c",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/ec134f3586ea7bbbf7965afbd596f9c5a20c9e2c"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/c3d69be187980323b0194e0fc7d29ad0ba35d94c",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5rIXCRC1aQ7uu5UhlAAAcmgQAHbWPpjV9EInjuEjFEDPhEpk\nmyA1OXz5lMvZ1/XaoH6iseMx+y/WxJfnHdrkIKBgafewAASYf3/nOzNVYxDaucWA\nrCpxN70SeLQVVBEzkI6DkDqi97weiRrS5h5uTNup9mFdFKcrFkgliAYWRBWZpuEK\n/oWkHJNSQB5XDAOUAaa5NwpD1xGUds9H+VwXcwN3CbOLdovr000avWETyjAHB2s1\nA/VV1YU5sQ2lbsN7ikaBDGD1t82RIXWHnXXYovwT0e08fWIGRH4mIJV/eC1qFtW8\nkDN2VSXJnK3CveSA22p6iFWqRbyuU7EQLN22hqzKuzIDeoLoYDrsmLmajUopYowK\nQIqh9XBpQuSc0yI3spsyeqfppPC6OPY3R4Uiky4cVj3HM2Z4c3i1eic4EDXleg7U\nRM8/NKxQE9PbmNME7S3ZvGOlUSdh8QVhonqVgSzCThja85L9thNfKecdRJP3b6Tt\nrk12C+PzqMSlUqonwscgufQGpJfsL9bXcv0zJYOYZZYpo2Ar0nsd07NOgc4KhY2F\n85GySprqtcuD5Lgz94jBI+OvR3vqATFvUWIleVML+9SSUneiU4GOT79Bn7Dkx7wv\n6E2ZQ3UFV6CEftEu7ezmn4xd9Y0Bycm6pZZbflGO5NLD25OjC+sHD2tRlH6f6TxT\nYfTDzeKAtDGGN22xieA1\n=mLtm\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree ec134f3586ea7bbbf7965afbd596f9c5a20c9e2c\nparent 6719ec221748a41b0ccacad10bfc05ed061cf7e4\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1776726551 -0300\ncommitter GitHub <noreply@github.com> 1776726551 -0300\n\nAdd files via upload",
+        "verified_at": "2026-04-20T23:09:11Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/c3d69be187980323b0194e0fc7d29ad0ba35d94c",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/c3d69be187980323b0194e0fc7d29ad0ba35d94c",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/c3d69be187980323b0194e0fc7d29ad0ba35d94c/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "6719ec221748a41b0ccacad10bfc05ed061cf7e4",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6719ec221748a41b0ccacad10bfc05ed061cf7e4",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/6719ec221748a41b0ccacad10bfc05ed061cf7e4"
+      }
+    ]
+  },
+  {
+    "sha": "6719ec221748a41b0ccacad10bfc05ed061cf7e4",
+    "node_id": "C_kwDORqqLFtoAKDY3MTllYzIyMTc0OGE0MWIwY2NhY2FkMTBiZmMwNWVkMDYxY2Y3ZTQ",
+    "commit": {
+      "author": {
+        "name": "Gustavo Antonio",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-04-20T02:54:17Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:54:17Z"
+      },
+      "message": "Remove Lucas Abdalla Nery from participants list",
+      "tree": {
+        "sha": "9544d05f012c8053e96bcc419d56e844165c3009",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/9544d05f012c8053e96bcc419d56e844165c3009"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/6719ec221748a41b0ccacad10bfc05ed061cf7e4",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5ZVZCRC1aQ7uu5UhlAAAzngQAHEDxeNeUwJQUiXxn6ONTYaN\njNwk0WlbUV01muOBnVc1HQQ26Vyt4q2ONEJMb3tbCBRQP5F6kCDl/SYEPwzdPmpT\np0b6oLP8KazmEryPq+2Y83EWMUJOP5Y879jUqAWbpk3oxT+JR6BU7JUesZwZXCfz\nkRFb32lqm1uO9zRRsd19SY4B8v/yJcc4dNjisMInRcThsws9DSoPludTQvffn0IJ\nILK6ATEkKM99ASNj95w3dR3HlkKVjru9DS9lizYSKEssY5psgUK15ziNdrxplA2g\nanYsOUbsLauxJrBJmuV9t1Encu6yHfTig7ego7moBxRxhC6g5e7+TYFEHGH6nVAq\nm8Xaq9mxYvpujkoDiuXiKUSRvAkI54lglbMfJeuCg8TopTrzcV6KcVY4cttO1MEj\n6jJ+WjLnMS5cXS9qaeYglEbLhOtQPCUz+LEdU2keElFegLAc+xtqDPzlWLqW7nC5\n4dOqKpups+YqKBY7qWtEwbmo7wqYjbkfAnbPnovP08/0jbjWORv9LyMk7EAfyO5E\n5vIQrN7WIPF44cofzWmbjnN+bYUgzzSz7/aFmOIT0/xKCwCHiv83rEWuVKdOZ9oO\nvkn53AaDhmBF4BloZ8pQOxflpfjaeONdnY1cTOVDFZd1J+V/Q1vaLej7mHMcaDtp\nIXTHNCNLF5lLmhI+cw+S\n=0ArZ\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 9544d05f012c8053e96bcc419d56e844165c3009\nparent 8aa56cb2baf545fc653301fb064fa4f1cc6bae7e\nauthor Gustavo Antonio <gus.ant.rod.10@gmail.com> 1776653657 -0300\ncommitter GitHub <noreply@github.com> 1776653657 -0300\n\nRemove Lucas Abdalla Nery from participants list",
+        "verified_at": "2026-04-20T02:54:18Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6719ec221748a41b0ccacad10bfc05ed061cf7e4",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/6719ec221748a41b0ccacad10bfc05ed061cf7e4",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/6719ec221748a41b0ccacad10bfc05ed061cf7e4/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "8aa56cb2baf545fc653301fb064fa4f1cc6bae7e",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/8aa56cb2baf545fc653301fb064fa4f1cc6bae7e",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/8aa56cb2baf545fc653301fb064fa4f1cc6bae7e"
+      }
+    ]
+  },
+  {
+    "sha": "8aa56cb2baf545fc653301fb064fa4f1cc6bae7e",
+    "node_id": "C_kwDORqqLFtoAKDhhYTU2Y2IyYmFmNTQ1ZmM2NTMzMDFmYjA2NGZhNGYxY2M2YmFlN2U",
+    "commit": {
+      "author": {
+        "name": "Gustavo Antonio",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-04-20T02:54:07Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:54:07Z"
+      },
+      "message": "Update Reuniao3.md",
+      "tree": {
+        "sha": "0009f27ad222385cb78098698fbb52a3daad6c92",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/0009f27ad222385cb78098698fbb52a3daad6c92"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/8aa56cb2baf545fc653301fb064fa4f1cc6bae7e",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5ZVPCRC1aQ7uu5UhlAAAikcQAHVymaeICLhuKyycwwmKDrdp\nYZxOKWjytFYTlD59gAqUWgKBpDpC2ewVm5z9DTjTqujfB1Fo2vZrwo0wRjIyzpfj\nQGF/ChtPfIjGXaye3tJRcXLQACkkFwp9ofY+Iq1lSyjuXb79E+mhRZFyvYXK1Dqx\naB9FRbnHhHRYTfb+rMB4c6pHXeQsFR3sX+j0QC6sUVZVxwuKrIztj4JZcOWsXt2E\nUa4FKY6QPZnfT0UOE+m7qyROBL/gw3ZF8xjWyyafnoE3+OUIUEwtu2iKP8P5b2Bb\nhS7aasS1dLvwbC4NdMbPGJj+dPdWYYqB7aN7Zytk0/THtbkbRPPDSWblQw8QAOf8\ntIbOtKstHjYxXjPxrw3tFC0vc2uOMI9Xycvnx1KfCLqyQj204uOK53KEZtvcHnTV\nh+u5BKmIbWzo/aIkcNce2Rmf1xNqua/zusmF74WOWL88BBfXZEmhf44f+LsJ/vjr\nsMlaPfMCLfxtchVkEbvPzRgHAEnC10ZAncNr23VzuS/GNdD/HgD4JGyNcn6wTMjc\n0t3BFr78iN+mXaOpwqGldhgklorUqZRAXuYpqhZUxC8DrUXS4pko/0wD1e2s2AH9\nRPGiJD8GhCUwN96PGA7vE+yanBEFxDaY+EAA8vYjvHRT2/MpPXIUVwZNNlaY3ZRP\nrp2mVf+EtQjNZt8utBOA\n=htPU\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 0009f27ad222385cb78098698fbb52a3daad6c92\nparent d075417d500b082c1624c465594d8ddea6518f7e\nauthor Gustavo Antonio <gus.ant.rod.10@gmail.com> 1776653647 -0300\ncommitter GitHub <noreply@github.com> 1776653647 -0300\n\nUpdate Reuniao3.md",
+        "verified_at": "2026-04-20T02:54:07Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/8aa56cb2baf545fc653301fb064fa4f1cc6bae7e",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/8aa56cb2baf545fc653301fb064fa4f1cc6bae7e",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/8aa56cb2baf545fc653301fb064fa4f1cc6bae7e/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d075417d500b082c1624c465594d8ddea6518f7e",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/d075417d500b082c1624c465594d8ddea6518f7e",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/d075417d500b082c1624c465594d8ddea6518f7e"
+      }
+    ]
+  },
+  {
+    "sha": "d075417d500b082c1624c465594d8ddea6518f7e",
+    "node_id": "C_kwDORqqLFtoAKGQwNzU0MTdkNTAwYjA4MmMxNjI0YzQ2NTU5NGQ4ZGRlYTY1MThmN2U",
+    "commit": {
+      "author": {
+        "name": "Gustavo Antonio",
+        "email": "gus.ant.rod.10@gmail.com",
+        "date": "2026-04-20T02:52:04Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:52:04Z"
+      },
+      "message": "Add meeting notes for Sprint 03",
+      "tree": {
+        "sha": "955cdbb5c2086bb1eae15b934e296c908ac1ee4d",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/955cdbb5c2086bb1eae15b934e296c908ac1ee4d"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/d075417d500b082c1624c465594d8ddea6518f7e",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5ZTUCRC1aQ7uu5UhlAAABCoQAIjIEGYW5qKMhwMYJj4qmTYP\n9uWFm8ZMGgwrd0qHiWH/mLY4mnBOCY7V0QZsXF8Lvg1bo0LJ95w/Or5TXPQTAcFO\nbg89jeH3r9UVyG/IpWUndAGQVw79TjtsvqOnPkQ7WKwCCRulGhiZzrlN5CXi/gN8\nGwE6Lx7N9K45kpjGQ09wFpJ+Q6kUGr4Z/WxrGwYv9sbKzOJy0RweyE9NN4vPC3ee\nAgV9K5CXIErfyYYZWp2iuialyCTGcVBUwvRy1aQmSXOLfayuSm/QcYHJkOIT7wEk\nO3/QtNdsTspzeB92oFdKK9CbSa9y4i/OgJtlEYz1pw3Gx0XL3le+XJzpYCIXLVlX\nqUs7hYItY75t/ptxovuxvT3aGlhLK/bjSK3m8nLSToAuqYJm4z8pnRogGG0WEl56\nxfIdRAqmf84Ve+9EDc5laoGS6n+G0PcusODSTKFQkamSdnGkPSc7KPdEZVnyVFRl\nvFwaLmAb2UzsBIOLTMSkNw7f+oQo18VmxTd8oAhAVN2Vi1NwzXPnIVZQi+R9XFIj\ns4SsdU3euakOO52NmjVGRJ+rZ3JVpAxTXZzbQ6SMHum6cE0/3rt05g9yzgpFv3hB\n9KKALkyz59ull+ouPeDLR2q+U6w5pI0jFEa+w0sPZxzS7juOI2wvZApDcjsxjrTt\ny8FqQPe8+YIZC33JNG5m\n=qJz3\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 955cdbb5c2086bb1eae15b934e296c908ac1ee4d\nparent 4e570d7f766848d2cae89ef71b2815892f8e0cf4\nauthor Gustavo Antonio <gus.ant.rod.10@gmail.com> 1776653524 -0300\ncommitter GitHub <noreply@github.com> 1776653524 -0300\n\nAdd meeting notes for Sprint 03",
+        "verified_at": "2026-04-20T02:52:05Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/d075417d500b082c1624c465594d8ddea6518f7e",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/d075417d500b082c1624c465594d8ddea6518f7e",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/d075417d500b082c1624c465594d8ddea6518f7e/comments",
+    "author": {
+      "login": "gus-ant",
+      "id": 176245725,
+      "node_id": "U_kgDOCoFL3Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176245725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gus-ant",
+      "html_url": "https://github.com/gus-ant",
+      "followers_url": "https://api.github.com/users/gus-ant/followers",
+      "following_url": "https://api.github.com/users/gus-ant/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gus-ant/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gus-ant/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gus-ant/subscriptions",
+      "organizations_url": "https://api.github.com/users/gus-ant/orgs",
+      "repos_url": "https://api.github.com/users/gus-ant/repos",
+      "events_url": "https://api.github.com/users/gus-ant/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gus-ant/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "4e570d7f766848d2cae89ef71b2815892f8e0cf4",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/4e570d7f766848d2cae89ef71b2815892f8e0cf4",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/4e570d7f766848d2cae89ef71b2815892f8e0cf4"
+      }
+    ]
+  },
+  {
+    "sha": "4e570d7f766848d2cae89ef71b2815892f8e0cf4",
+    "node_id": "C_kwDORqqLFtoAKDRlNTcwZDdmNzY2ODQ4ZDJjYWU4OWVmNzFiMjgxNTg5MmY4ZTBjZjQ",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-04-20T02:41:45Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:41:45Z"
+      },
+      "message": "Create meeting minutes for Sprint 01",
+      "tree": {
+        "sha": "d35f46dbe479db728e8cd19113470971a6cea0ff",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/d35f46dbe479db728e8cd19113470971a6cea0ff"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/4e570d7f766848d2cae89ef71b2815892f8e0cf4",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5ZJpCRC1aQ7uu5UhlAAA12gQAIyPZ9tbzSSVk2rpNJYGy7HA\n1jvCoxCeNzROzotSvuqAD9WTw2XZULjNGiC2H7DjtfhYPczTOB1Kwnks3VUYR0xy\nZVIyxqYn6JxD5jkK5dSNJpvz/JldKXB7rMMrg9WW/mwxqeXEwbAr7NxFAezn9ihk\nFGtBOs/zBmYzGEsVjU0dwHtL7EdhK77sEYn39Gv/IuJIcOPJf4yF/yj1VHySrj4t\nDuFyWrHeWUwja8GnJbcMTrRq+3TQuQ2tfYZaPJcp9gO14CVRXeLqAF0+4vjW6jfd\nWz98gP3IKu2EznHpfimdqmMSY3dGy49/uN+P/IZhQYjpwgdp1P17eAqnpBOmS/Ju\nZh9kAS9V+XCzeepikkt/tykQivsLXkLCsG9MRBj0z4+1CDxBzaNsYm9blDYtpGKI\ni7xrn1usdcuhvgu/tPOmTHzj1TrTdn1D4SgTofHPFHVIdcEArquRvrQA0mPOGgf4\nJcJbpNOpxMX9PrPG3ZHgze33a/3DUwGZ2Q7QJNeGkeoVM5rlPrCGYOpBTj5XKU7X\n6vrH3I+/TN8/0XJsYU057u8MEq271Aq4d6/CBsnByt6LGGGD2euT07rwTUel7p35\nwH4dLl66N1krMkD3agM6Fsant/sTrNeyvsQhaseKhmrpbBOgfMqCtT3VbmzNXNl0\nRDj+p8Eq8nPuDN4dx5Vf\n=p/sB\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree d35f46dbe479db728e8cd19113470971a6cea0ff\nparent d09f93aeb98c109dfa765cfd33aa29f65612b5da\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1776652905 -0300\ncommitter GitHub <noreply@github.com> 1776652905 -0300\n\nCreate meeting minutes for Sprint 01",
+        "verified_at": "2026-04-20T02:41:46Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/4e570d7f766848d2cae89ef71b2815892f8e0cf4",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/4e570d7f766848d2cae89ef71b2815892f8e0cf4",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/4e570d7f766848d2cae89ef71b2815892f8e0cf4/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d09f93aeb98c109dfa765cfd33aa29f65612b5da",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/d09f93aeb98c109dfa765cfd33aa29f65612b5da",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/d09f93aeb98c109dfa765cfd33aa29f65612b5da"
+      }
+    ]
+  },
+  {
+    "sha": "d09f93aeb98c109dfa765cfd33aa29f65612b5da",
+    "node_id": "C_kwDORqqLFtoAKGQwOWY5M2FlYjk4YzEwOWRmYTc2NWNmZDMzYWEyOWY2NTYxMmI1ZGE",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-04-20T02:40:51Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:40:51Z"
+      },
+      "message": "Update and rename Reuniao1 to Reuniao1.md",
+      "tree": {
+        "sha": "6a17ae9349d8283159e7c1b34083202bbd2ab90e",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/6a17ae9349d8283159e7c1b34083202bbd2ab90e"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/d09f93aeb98c109dfa765cfd33aa29f65612b5da",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5ZIzCRC1aQ7uu5UhlAAAsa4QAD8IICuuMgOvszENhoc8RRus\nWE36GvCktEaDKoRad9JvhZZ3E8AmT8dfTkaj4rwmQ8goIIU0Y879q7HEMVMXAwOS\nR8un1pQyJLr3Dzv6LKVS9/r4nxO7sh4l3dyjGEqiY5YHVBIIsjU/+RDsfUpLdw3G\n2+QHT4E4OJUinLUWKD3EieKSoFbA0Y5eT3GlYwZgWDnQz2B8/5/YptrFaJWwHu2H\n6TIoCMxuEQiUVyeKwSzgY4Qy4rLMbTRAWl08FSiNt/Ghf+am7GnGlzCVuZov5WI6\nmFjJVmdZyrtEdwA95oqc/N2ToiUb9q2YvwTFdMwkl2UzFKZolDdMnX0q8lC1rnGX\nRBJZrpalAPXdKu1ZTPeIBzreYh0WRsipr3794S+hvCZQjg9ZaJyllyMragwY1UK+\n8E37gwUWrHX2OOKQ2dMvL0NJ3YLfI+m6Qf3wGO3l2kWw7CFNA+6KkqXdQF73gw1o\nzoOh9ocjK9R0UZ/Nz4kIkkqHK72H5noAgLxR1ZdT1r1F2Ndl6nofh7e98yHi82XY\n94O2JMurV2cNtzlQ1WiN7OXyIUiimmqFqiGy9jq3MOyPFLn/+2EJjR4gp5Qy8V7p\ncEcO/qlqBTGv2AHiQJZwpEUyV6sbT1qU2VVeAWaOe+x+In9O8Ii3Qy26Ck1M3Les\nBOw6RI0L2jV/csX/ztFP\n=OOyP\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 6a17ae9349d8283159e7c1b34083202bbd2ab90e\nparent 1438b1b936b88b8fb4d610dd977cfbe8231c7ba9\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1776652851 -0300\ncommitter GitHub <noreply@github.com> 1776652851 -0300\n\nUpdate and rename Reuniao1 to Reuniao1.md",
+        "verified_at": "2026-04-20T02:40:52Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/d09f93aeb98c109dfa765cfd33aa29f65612b5da",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/d09f93aeb98c109dfa765cfd33aa29f65612b5da",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/d09f93aeb98c109dfa765cfd33aa29f65612b5da/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "1438b1b936b88b8fb4d610dd977cfbe8231c7ba9",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/1438b1b936b88b8fb4d610dd977cfbe8231c7ba9",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/1438b1b936b88b8fb4d610dd977cfbe8231c7ba9"
+      }
+    ]
+  },
+  {
+    "sha": "1438b1b936b88b8fb4d610dd977cfbe8231c7ba9",
+    "node_id": "C_kwDORqqLFtoAKDE0MzhiMWI5MzZiODhiOGZiNGQ2MTBkZDk3N2NmYmU4MjMxYzdiYTk",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-04-20T02:40:28Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:40:28Z"
+      },
+      "message": "Add new file Reuniao1",
+      "tree": {
+        "sha": "8741c6df81d19582e430ccd8be184db1cfa17b32",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/8741c6df81d19582e430ccd8be184db1cfa17b32"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/1438b1b936b88b8fb4d610dd977cfbe8231c7ba9",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5ZIcCRC1aQ7uu5UhlAAAfLQQAIidWs4fatU/OXQovE7vObU4\nx9w1xKgmA70g/luvGHjnwEXgsqIoP5RL5gGgB6oUssIWB2KBi1c3/dnhLbOqAJVc\nB7awPwjKN5zjiWFeLrac8jS9I5ow6AGOzv/Fp1GxH7xIvn4GfJ2sp2B1ltR5kSNx\nR9z7DSQX6MJxIbaLUJPQ5qXfZX82LBNU0R8wfwRwI7likVFb+pcl+m7x8fw+UObU\nEZc+vOtI7LG8UKTA13c1EuBW2se+uudwq6zInRHwRzp7508A4++Fw0u+/sccUXIr\nGdaCbuSVqcPF7hIxJJcKOEQBWsmO7J7rcP2VluaawruxPAl48UdkXPmFzYNpVQao\npUXFi8z7q5NTuMecbQroTgWFgAZOr1oSXuAXu6dEP60n1ac46H8MqqK/U9nf+Ffw\n5Q+tF0nXF58a7JJespsYfbEVmxFOo5tx3ti2NFa4UJciPb66ZJMtlKwoksz5lDaZ\ntEX44HnPga9U70+iLhnehdD8x9zJIu2aFQfjjsmNHrSsZI0zTlqMaKSpvHjmWEtg\nShroyRQooo8aIcNTUc0u6ba8IPsYJ3U2siN78b/RDi9rcEZUW1jaOcHpmAnKxSZK\nGh4S8B9wMmORHWO+78auRNoD9G63C8UrvrO95nndD5YDMsMltyZKrv1PlZ8heb7B\nRozUQvVYZISXaS01ZgXF\n=DX8P\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 8741c6df81d19582e430ccd8be184db1cfa17b32\nparent 18b793e93894d9f49ce20faa044ed9e530a1cdf5\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1776652828 -0300\ncommitter GitHub <noreply@github.com> 1776652828 -0300\n\nAdd new file Reuniao1",
+        "verified_at": "2026-04-20T02:40:28Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/1438b1b936b88b8fb4d610dd977cfbe8231c7ba9",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/1438b1b936b88b8fb4d610dd977cfbe8231c7ba9",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/1438b1b936b88b8fb4d610dd977cfbe8231c7ba9/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "18b793e93894d9f49ce20faa044ed9e530a1cdf5",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/18b793e93894d9f49ce20faa044ed9e530a1cdf5",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/18b793e93894d9f49ce20faa044ed9e530a1cdf5"
+      }
+    ]
+  },
+  {
+    "sha": "18b793e93894d9f49ce20faa044ed9e530a1cdf5",
+    "node_id": "C_kwDORqqLFtoAKDE4Yjc5M2U5Mzg5NGQ5ZjQ5Y2UyMGZhYTA0NGVkOWU1MzBhMWNkZjU",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-04-20T02:39:04Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:39:04Z"
+      },
+      "message": "Delete Atas/Reuniao2.md",
+      "tree": {
+        "sha": "db12350319f180a3d0c7ff17fea214766f1cb1b6",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/db12350319f180a3d0c7ff17fea214766f1cb1b6"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/18b793e93894d9f49ce20faa044ed9e530a1cdf5",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5ZHICRC1aQ7uu5UhlAAA2ssQAAJ2Z47bGdiDJs9fV7cfvIeE\n0tjLAWdalcqrMKzVW4qmEYq2I1hyrxC+SzzeCAhnMM//GgU4FUKyBnuTb1L0uk5o\nqA1IiSBSI3KoX0Esa8KlVwzdr3ytMgc7pp4RMs1isjxnSLePdDk/ReTgtLLsePg/\nNLRUUr8JjgeRCpt9kT6oCaG1RoIASI5rJ5nYPjSGPlpHCEvCja6ojgMDXgwgG4BP\nmY+NC8LI0Fo070nkIKecmm5osYxdNjavYKOjB0M1+NsX2uFhLgGKbbnWISNgEM1d\nZ7/RTJYuthwiizxVtYERQ20zJMx05sEcmJDdX38YUFcn5dJSv4t4Zn6SAviKzINI\n6YhnyfMaymyWrc5UDBAlSEEuv9k9Ug06gNtszkzuyyyPp9r0SY4PMi3du3Fpx2bh\n3lS8X3GS87EyPWNSkW39mAeza26W05NM9pyQvTVlOpCNr6X/VmgonvII7jD3VAWu\n/oXfr5kn6GWyyNyJvC0ioXdOtq5v6ngGbB1jZ+t12keNRn+bjirFIPA7C8NOGOPC\nP6I8Mh8/qfm6k1ShI/1A8NQA/3yk2uyuPzPP6gVB9izB+mBz4v1ukrYA2EBp58ql\nzx2JnVzcUWZTDEgaHMfgqeGguHjw8imr8028hprNrvSar8pV/dhvT3hSF+eQBJbp\nisx5zn7bfCZxZTivQ6TU\n=U8O8\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree db12350319f180a3d0c7ff17fea214766f1cb1b6\nparent a78e8611b78cd62dc67148e00c518856e8d00653\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1776652744 -0300\ncommitter GitHub <noreply@github.com> 1776652744 -0300\n\nDelete Atas/Reuniao2.md",
+        "verified_at": "2026-04-20T02:39:04Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/18b793e93894d9f49ce20faa044ed9e530a1cdf5",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/18b793e93894d9f49ce20faa044ed9e530a1cdf5",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/18b793e93894d9f49ce20faa044ed9e530a1cdf5/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "a78e8611b78cd62dc67148e00c518856e8d00653",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/a78e8611b78cd62dc67148e00c518856e8d00653",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/a78e8611b78cd62dc67148e00c518856e8d00653"
+      }
+    ]
+  },
+  {
+    "sha": "a78e8611b78cd62dc67148e00c518856e8d00653",
+    "node_id": "C_kwDORqqLFtoAKGE3OGU4NjExYjc4Y2Q2MmRjNjcxNDhlMDBjNTE4ODU2ZThkMDA2NTM",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-04-20T02:38:45Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:38:45Z"
+      },
+      "message": "Delete Atas/Reuniao1.md",
+      "tree": {
+        "sha": "7a4d19067d85769ed3378b2c86bd63f56cec32ae",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/7a4d19067d85769ed3378b2c86bd63f56cec32ae"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/a78e8611b78cd62dc67148e00c518856e8d00653",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5ZG2CRC1aQ7uu5UhlAAADTUQAE0Ta0AFdA2E9OE3fMMltEw2\nvYLALfQsrEeCy0aLbyERNYLMQFEqSI+JYwN208Yf4BzB7FBh1iVYYz2lFyg8HdX+\nn+KvPvpDpdTBy9ZRx+8FobxN4C2jW74UHAm1sf2R/TCLab6PQGK0neVsmAUj8bjF\nUZtJCgtfiw2vTWwlwKC2Deypyk/CIgyr5V0SpwILPvSolCOV1vUcv+5qbaGyqlaL\nVrGeZ3kDgn8hrI70vIfHldwUEOMszLkwjbhfAQHOUfxvAYu7enh6TbdkzAS1Dx4Y\nz6UMXwyPiuCwa6OqDhHLblUDBSCXTrIQqJfP4S1gx+z5qf/g06VsufC7/Sc4fopC\nJX7BE3YJxxHRZTEyMr8TWoYcODEaJbVBBdOqLFdO0nCmy6LXxT3ikd3ZS0jeHLk2\n/2w0jI1k8X2Ds0+RfLplKRS0r64v3p9WwiHfKyY23f6Ugqgxffcw3iijWYwy3pBg\nN2nDn0IwO0zXZl2E4CsToR6z64/h9o79qV7PqabpUXQpx03cx5hrU3AY54Y5ewyl\nECPePcfwLXaucR5TleY+XMNZ/pgPTWYw0ILGaw6Yhbf/js1HKAiiC4svHnpBCa52\n2T1pRe+w7zZHFmQcVuJytyrYhNjqhwEwcBZrVChwwJw1iXw+lV4IRUYjERsOZccp\npPVNPmrmRU2naPl8iqCN\n=bkue\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 7a4d19067d85769ed3378b2c86bd63f56cec32ae\nparent 2753602c4f79aa826a91a7a41ceab619d3908925\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1776652725 -0300\ncommitter GitHub <noreply@github.com> 1776652725 -0300\n\nDelete Atas/Reuniao1.md",
+        "verified_at": "2026-04-20T02:38:46Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/a78e8611b78cd62dc67148e00c518856e8d00653",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/a78e8611b78cd62dc67148e00c518856e8d00653",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/a78e8611b78cd62dc67148e00c518856e8d00653/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "2753602c4f79aa826a91a7a41ceab619d3908925",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/2753602c4f79aa826a91a7a41ceab619d3908925",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/2753602c4f79aa826a91a7a41ceab619d3908925"
+      }
+    ]
+  },
+  {
+    "sha": "2753602c4f79aa826a91a7a41ceab619d3908925",
+    "node_id": "C_kwDORqqLFtoAKDI3NTM2MDJjNGY3OWFhODI2YTkxYTdhNDFjZWFiNjE5ZDM5MDg5MjU",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-04-20T02:03:26Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:03:26Z"
+      },
+      "message": "Add files via upload",
+      "tree": {
+        "sha": "5fe1c417862e3449d96463967e82e752a2ccab70",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/5fe1c417862e3449d96463967e82e752a2ccab70"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/2753602c4f79aa826a91a7a41ceab619d3908925",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5YluCRC1aQ7uu5UhlAAAnxQQAF54l0Y9TS5OBmcjIoNkx9LM\nEoZNPjYHpztY+5nSwmtTi1XwP2bSHtpfxorDPFw4tNyGinPQV17CkNF7k4qm4l7z\nDU3Tz/wUf0SD3Gz2bcOPoE4EDQjHY+x2Z1zGE162/vI+vBqqMrf1OVdx5zGFirJm\n2SU2m97dOOXHJd3E52t7OrmkxeVuOHBGSunU7+6Nj6b0uaP8TQqsLbg9fXtLkCJ2\nrJc1SiAv3BmJouCAzSsRLqDODADmjz6vsGtMrMUJzI6IqA6ssSdnhWDusjcaj91a\n8LjWr+1vedu7zylrQ8mVi4aSvriiBcCOMIUtxAaJv+VHJp20R/+VtvR0e1PUzK47\nhTok5lX3qIk8JsFwT0jRIn02OaajaDqZZTxjqGwi7j1rr/+/uCUvYMEgV3i5EidF\nvMyPb0tlYXvahoPQyuVhIgJg+XiWSffkhPcJNC9H/OU8iaEFBF+fXYnGTl7cbx+2\nIHyqjUehf6cceg0Te31VtLuL787yMBg7ac96cgh6uJkUiJMJ5b2F/weJmQK0RIhu\nv1omiJMOIyLu8s4s18VPtESxYiZvNQSRJD1P/T7rl+FEdwV7MLzu+mDb2DrtlTWE\nec4n2V3a1E2+D9eQ4YF0QFD6Cp/SsLxWom46EyRqsgJpzA5ZhjBvByd1a8jROPiK\nnf1lZx4NJ0QgbWPtMIFF\n=cDEs\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 5fe1c417862e3449d96463967e82e752a2ccab70\nparent 9ac875d99b000b6cc4355c025c818dda97d8b974\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1776650606 -0300\ncommitter GitHub <noreply@github.com> 1776650606 -0300\n\nAdd files via upload",
+        "verified_at": "2026-04-20T02:03:27Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/2753602c4f79aa826a91a7a41ceab619d3908925",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/2753602c4f79aa826a91a7a41ceab619d3908925",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/2753602c4f79aa826a91a7a41ceab619d3908925/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9ac875d99b000b6cc4355c025c818dda97d8b974",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/9ac875d99b000b6cc4355c025c818dda97d8b974",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/9ac875d99b000b6cc4355c025c818dda97d8b974"
+      }
+    ]
+  },
+  {
+    "sha": "9ac875d99b000b6cc4355c025c818dda97d8b974",
+    "node_id": "C_kwDORqqLFtoAKDlhYzg3NWQ5OWIwMDBiNmNjNDM1NWMwMjVjODE4ZGRhOTdkOGI5NzQ",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-04-20T02:02:53Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:02:53Z"
+      },
+      "message": "Delete Estudos/estudo_ciclo_de_vida_de_software.md",
+      "tree": {
+        "sha": "64834dbffa01bb925cdb2d3d27a192480f5e8e11",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/64834dbffa01bb925cdb2d3d27a192480f5e8e11"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/9ac875d99b000b6cc4355c025c818dda97d8b974",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5YlNCRC1aQ7uu5UhlAAAV6wQAAq6oqEDCTk//QII5wsbHiI0\nC0Jeav0IWa6h/3wXzSmxa+rh7KLS+IBsaCrGwwEAWG6hFHlwvh9dnfhvEnFmTe3b\n7qQiD3dIcz63TsY6AY+x+kvzsEFoCUE/0HPs5K9m4eUH6WD6Ea/k4eRGkowBeUV0\nOJTZzHv70Rafn/hiLwMaAcA+i4FUGzg8qyKf5zyGRadgeV1BfGzUvwyy+J8METei\nsguTHPXRMWijJVyasMnZGSyO6/DTCC984DR5K/Z+VXYeROc9S/Od9tOdAkxGGTzl\n38Zq4SoqJPvDPxj6fRylDjd20nfOpshTfrWTAbu0/kLJjzf3gXDx1ZYFMcd6r/Hk\nbKpQDRgMewJAr4yXIJUvjgurK2e/EAw0zLwf18aH1EKjvK0v47f/kEuU5Ld/z77c\n9+lTFR3+U/4mCjyZakdIzGBlurfbpMkoxHcDXv4sNac8ZBxB2oE+SzHAUv7gvpkU\ndcJEf1qy+ZvNNyR2HM7g1EB5dg836cpe0Zxz2/psM/9EHcMhKkA1HqT/nELOgBfR\nGsYsTsDtyJSILQeBBVbtuGUgrlvOniAxiHUdrG1WKuesMyCnH/oaccaZS8M2ue3v\nmbFpuitPdtmQbDHNcv/dfz3femjSgutrG6LWBO8gh/B+gJI5hMPrbcPJ7/TQF8qj\njx4sDFqPUjenqbveMVwm\n=m0qY\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 64834dbffa01bb925cdb2d3d27a192480f5e8e11\nparent dfc30732d1fa512405e9cfcd0155936cca412e5c\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1776650573 -0300\ncommitter GitHub <noreply@github.com> 1776650573 -0300\n\nDelete Estudos/estudo_ciclo_de_vida_de_software.md",
+        "verified_at": "2026-04-20T02:02:54Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/9ac875d99b000b6cc4355c025c818dda97d8b974",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/9ac875d99b000b6cc4355c025c818dda97d8b974",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/9ac875d99b000b6cc4355c025c818dda97d8b974/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "dfc30732d1fa512405e9cfcd0155936cca412e5c",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/dfc30732d1fa512405e9cfcd0155936cca412e5c",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/dfc30732d1fa512405e9cfcd0155936cca412e5c"
+      }
+    ]
+  },
+  {
+    "sha": "dfc30732d1fa512405e9cfcd0155936cca412e5c",
+    "node_id": "C_kwDORqqLFtoAKGRmYzMwNzMyZDFmYTUxMjQwNWU5Y2ZjZDAxNTU5MzZjY2E0MTJlNWM",
+    "commit": {
+      "author": {
+        "name": "Lucas Abdalla Nery",
+        "email": "97478323+nerylucas@users.noreply.github.com",
+        "date": "2026-04-20T02:02:33Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-04-20T02:02:33Z"
+      },
+      "message": "Delete Estudos/estudo_tecnologias.md",
+      "tree": {
+        "sha": "b3095b76b925e21b00044941cdc9e77236a6a3f4",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/b3095b76b925e21b00044941cdc9e77236a6a3f4"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/dfc30732d1fa512405e9cfcd0155936cca412e5c",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJp5Yk5CRC1aQ7uu5UhlAAAUJMQADdKrVKqtn/AoyUz6rawfbVJ\nckTmfdNhMUTwqGWzPl+XAeEXER2UVkh59jj37Srh0UXbilWj6pOFuedYLVc0oMtN\n1MiewMTFX+OqvooUiK5t+ePbiNB00UQszNTVv+paRaZUHXOBQo94hVMwNCAdmL0j\nXiDeHKOVWsG/LOvNLPTHzXwvLoGaXE56rvS71WAYEvHF0B0koXIhbTA/qWxXVc3j\nD9uJ74yus0ds9HNHMQTsP81uuEmz3arUKgUe3Vjvjz+hSbWOoPBpQB0DRbJZy/3V\nFcOj6wnSOluyk7bEbriYp5eaXp7pR5lNJdK5k61eAaVEo5lTH16G4aZa8yJJFVTK\nGqS7wEpb6yiOtkQng6NfkWBDchYUlBcvXQmZHzKAKQKinkKP0bn9wFn70QiOOkvL\nFyiUYGJV+YtPquSVexni3TieBZzVSOul/gnS2Y3iJxgoD2/alhoUGwS9Tyd6fWtB\nXpzcoEUckPo7JdwwckSs4QMEETvu/PbCYMLUComJL8Nd1BBrRB1qMIrtEUM9G9c0\no4Oa4XYtF/jE2OGDbAazals+ZUiruGdjStmmvz2Ntz6ldzEmyE5wtYsKntZPBwPZ\nFv6CENYIIFpuEezq1sCmgYeK/coD+g6lvRBaesTr3TH2Zia0ykpXcYgqO1MrLjO8\nv3nTyuxrnJQBtj/D8jYb\n=CS0T\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree b3095b76b925e21b00044941cdc9e77236a6a3f4\nparent d113ade7fdc904c437ae1761ccc9b7d27f6a9a9b\nauthor Lucas Abdalla Nery <97478323+nerylucas@users.noreply.github.com> 1776650553 -0300\ncommitter GitHub <noreply@github.com> 1776650553 -0300\n\nDelete Estudos/estudo_tecnologias.md",
+        "verified_at": "2026-04-20T02:02:34Z"
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/dfc30732d1fa512405e9cfcd0155936cca412e5c",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/dfc30732d1fa512405e9cfcd0155936cca412e5c",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/dfc30732d1fa512405e9cfcd0155936cca412e5c/comments",
+    "author": {
+      "login": "nerylucas",
+      "id": 97478323,
+      "node_id": "U_kgDOBc9msw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97478323?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nerylucas",
+      "html_url": "https://github.com/nerylucas",
+      "followers_url": "https://api.github.com/users/nerylucas/followers",
+      "following_url": "https://api.github.com/users/nerylucas/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nerylucas/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nerylucas/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nerylucas/subscriptions",
+      "organizations_url": "https://api.github.com/users/nerylucas/orgs",
+      "repos_url": "https://api.github.com/users/nerylucas/repos",
+      "events_url": "https://api.github.com/users/nerylucas/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nerylucas/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d113ade7fdc904c437ae1761ccc9b7d27f6a9a9b",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/d113ade7fdc904c437ae1761ccc9b7d27f6a9a9b",
+        "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/d113ade7fdc904c437ae1761ccc9b7d27f6a9a9b"
+      }
+    ]
+  },
+  {
+    "sha": "d113ade7fdc904c437ae1761ccc9b7d27f6a9a9b",
+    "node_id": "C_kwDORqqLFtoAKGQxMTNhZGU3ZmRjOTA0YzQzN2FlMTc2MWNjYzliN2QyN2Y2YTlhOWI",
+    "commit": {
+      "author": {
+        "name": "SUDOTMOX",
+        "email": "242024923@aluno.unb.br",
+        "date": "2026-04-20T01:38:33Z"
+      },
+      "committer": {
+        "name": "SUDOTMOX",
+        "email": "242024923@aluno.unb.br",
+        "date": "2026-04-20T01:38:33Z"
+      },
+      "message": "Estudo sobre o front e cores",
+      "tree": {
+        "sha": "03651cbb38886dcd430d1ad37b71ff55087816e5",
+        "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/trees/03651cbb38886dcd430d1ad37b71ff55087816e5"
+      },
+      "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/git/commits/d113ade7fdc904c437ae1761ccc9b7d27f6a9a9b",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/d113ade7fdc904c437ae1761ccc9b7d27f6a9a9b",
+    "html_url": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito/commit/d113ade7fdc904c437ae1761ccc9b7d27f6a9a9b",
+    "comments_url": "https://api.github.com/repos/unb-mds/2026-1-Squad4-Dito_e_Feito/commits/d113ade7fdc904c437ae1761ccc9b7d27f6a9a9b/comments",
+    "author": {
+      "login": "SUDOTMOX",
+      "id": 248756952,
+      "node_id": "U_kgDODtO62A",
+      "avatar_url": "https://avatars.githubusercontent.com/u/248756952?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/SUDOTMOX",
+      "html_url": "https://github.com/SUDOTMOX",
+      "followers_url": "https://api.github.com/users/SUDOTMOX/followers",
+      "following_url": "https://api.github.com/users/SUDOTMOX/following{/other_user}",
+      "gists_url": "https://api.github.com/users/SUDOTMOX/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/SUDOTMOX/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/SUDOTMOX/subscriptions",
+      "organizations_url": "https://api.github.com/users/SUDOTMOX/orgs",
+      "repos_url": "https://api.github.com/users/SUDOTMOX/repos",
+      "events_url": "https://api.github.com/users/SUDOTMOX/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/SUDOTMOX/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "SUDOTMOX",
+      "id": 248756952,
+      "node_id": "U_kgDODtO62A",
+      "avatar_url": "https://avatars.githubusercontent.com/u/248756952?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/SUDOTMOX",
+      "html_url": "https://github.com/SUDOTMOX",
+      "followers_url": "https://api.github.com/users/SUDOTMOX/followers",
+      "following_url": "https://api.github.com/users/SUDOTMOX/following{/other_user}",
+      "gists_url": "https://api.github.com/users/SUDOTMOX/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/SUDOTMOX/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/SUDOTMOX/subscriptions",
+      "organizations_url": "https://api.github.com/users/SUDOTMOX/orgs",
+      "repos_url": "https://api.github.com/users/SUDOTMOX/repos",
+      "events_url": "https://api.github.com/users/SUDOTMOX/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/SUDOTMOX/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": []
+  }
+]
