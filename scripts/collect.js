@@ -27,6 +27,22 @@ async function getPullRequests() {
   return res.data;
 }
 
+async function getContributorStats() {
+  const url = `https://api.github.com/repos/${repo}/stats/contributors`;
+  try {
+    const res = await axios.get(url, { headers });
+    // GitHub API pode retornar 202 se os dados estiverem sendo cacheados
+    if (res.status === 202 || !res.data) {
+      console.log("GitHub API retornou 202 (processando status). Algumas métricas reais podem faltar na primeira run.");
+      return [];
+    }
+    return res.data;
+  } catch (error) {
+    console.warn("Aviso: Não foi possível buscar as estatísticas de contribuidores:", error.message);
+    return [];
+  }
+}
+
 function averageTimeBetweenCommits(commits) {
   if (commits.length < 2) return 0;
   let total = 0;
@@ -54,8 +70,43 @@ async function main() {
     const commits = await getCommits();
     const issues = await getIssues();
     const prs = await getPullRequests();
+    const stats = await getContributorStats();
 
     const commitsPerAuthor = {};
+    const detailedContributors = {};
+    let weeklyVelocity = 0;
+
+    // Encontrar o timestamp da semana mais recente nos status para calcular velocidade real
+    let latestWeekTS = 0;
+    stats.forEach(contributor => {
+      if (contributor.weeks && contributor.weeks.length > 0) {
+        const lastWeek = contributor.weeks[contributor.weeks.length - 1].w;
+        if (lastWeek > latestWeekTS) latestWeekTS = lastWeek;
+      }
+    });
+
+    // Processar status avançados (adições, deleções)
+    stats.forEach(contributor => {
+      const login = contributor.author ? contributor.author.login : 'Desconhecido';
+      let additions = 0;
+      let deletions = 0;
+      
+      contributor.weeks.forEach(week => {
+        additions += week.a;
+        deletions += week.d;
+        // Somar commits da última semana para a métrica de "Velocidade (Semana)"
+        if (week.w === latestWeekTS) {
+          weeklyVelocity += week.c;
+        }
+      });
+      
+      detailedContributors[login] = {
+        commits: contributor.total,
+        additions,
+        deletions
+      };
+    });
+
     const commitsByHour = Array.from({ length: 24 }, (_, i) => ({ hour: i, commits: 0 }));
     const daysMap = { 0: 'Dom', 1: 'Seg', 2: 'Ter', 3: 'Qua', 4: 'Qui', 5: 'Sex', 6: 'Sáb' };
     const commitsByDay = Object.values(daysMap).map(d => ({ day: d, commits: 0 }));
@@ -82,8 +133,12 @@ async function main() {
 
     const data = {
       generatedAt: new Date().toISOString(),
+      team: {
+        weekly_velocity: weeklyVelocity || "N/A"
+      },
       totalCommits: commits.length,
       commitsPerAuthor,
+      detailedContributors,
       avgCommitIntervalHours: averageTimeBetweenCommits(commits) / 1000 / 60 / 60,
       totalIssues: issues.length,
       avgIssueCloseHours: issueCloseTime(issues) / 1000 / 60 / 60,

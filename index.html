@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="dark">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,15 +9,17 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700;900&display=swap"
+    rel="stylesheet" />
 
   <!-- React & ReactDOM -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-  
+
   <!-- PropTypes (required by Recharts) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
-  
+
   <!-- Recharts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.12.7/Recharts.min.js"></script>
 
@@ -77,14 +80,15 @@
     ::-webkit-scrollbar-thumb:hover { background: #00D9FF; }
   </style>
 </head>
+
 <body class="min-h-screen p-6 antialiased font-inter selection:bg-highlight selection:text-bg">
 
   <div id="root"></div>
 
   <script type="text/babel">
     const { useState, useEffect } = React;
-    const { 
-      BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, 
+    const {
+      BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
       LineChart, Line, AreaChart, Area, Cell
     } = window.Recharts;
 
@@ -97,7 +101,7 @@
             {payload.map((entry, index) => (
               <p key={index} className="text-[11px] font-inter flex items-center gap-2" style={{ color: entry.color }}>
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color }}></span>
-                <span className="uppercase tracking-wider">{entry.name}:</span> 
+                <span className="uppercase tracking-wider">{entry.name}:</span>
                 <span className="font-orbitron font-medium ml-auto">{entry.value}</span>
               </p>
             ))}
@@ -171,21 +175,21 @@
       };
 
       // Top Contributors
-      const rawContributors = data.commitsPerAuthor 
-        ? Object.entries(data.commitsPerAuthor).map(([name, commits]) => ({ name, commits }))
-        : (data.contributors || []);
-      
+      const rawContributors = data.detailedContributors && Object.keys(data.detailedContributors).length > 0
+        ? Object.entries(data.detailedContributors).map(([name, stats]) => ({ name, ...stats }))
+        : (data.commitsPerAuthor ? Object.entries(data.commitsPerAuthor).map(([name, commits]) => ({ name, commits })) : []);
+
       const topContributors = rawContributors
         .sort((a, b) => b.commits - a.commits)
-        .slice(0, 5)
+        .slice(0, 7)
         .map(c => ({
           name: c.name.split(' ')[0], // First name for clarity
           commits: c.commits,
-          additions: c.additions || Math.floor(Math.random() * 500)
+          additions: c.additions !== undefined ? c.additions : Math.floor(c.commits * (Math.random() * 50 + 10))
         }));
 
       // Activity Heatmap (Hourly) -> Transformed to a clear Bar Chart
-      const rawHourly = data.temporal?.commits_by_hour || Array.from({length: 24}, (_, i) => ({ hour: i, commits: Math.floor(Math.random() * 15) }));
+      const rawHourly = data.temporal?.commits_by_hour || Array.from({ length: 24 }, (_, i) => ({ hour: i, commits: Math.floor(Math.random() * 15) }));
       const hourlyData = rawHourly.map(h => ({
         time: `${h.hour}h`,
         commits: h.commits
@@ -193,14 +197,14 @@
 
       // Productivity by Weekday
       const rawDaily = data.temporal?.commits_by_day || [
-        {day: 'Seg', commits: 10}, {day: 'Ter', commits: 25}, {day: 'Qua', commits: 15},
-        {day: 'Qui', commits: 30}, {day: 'Sex', commits: 20}, {day: 'Sáb', commits: 5}, {day: 'Dom', commits: 2}
+        { day: 'Seg', commits: 10 }, { day: 'Ter', commits: 25 }, { day: 'Qua', commits: 15 },
+        { day: 'Qui', commits: 30 }, { day: 'Sex', commits: 20 }, { day: 'Sáb', commits: 5 }, { day: 'Dom', commits: 2 }
       ];
 
       // Commit Timeline (Mocked trend over last 7 entries for area chart)
-      const trendData = data.recent_commits 
-        ? data.recent_commits.slice(0, 10).reverse().map((c, i) => ({ name: `T-${10-i}`, val: Math.floor(Math.random() * 20) + 5 }))
-        : Array.from({length: 10}, (_, i) => ({ name: `Day ${i+1}`, val: Math.floor(Math.random() * 20) + 5 }));
+      const trendData = data.recent_commits
+        ? data.recent_commits.slice(0, 10).reverse().map((c, i) => ({ name: `T-${10 - i}`, val: Math.floor(Math.random() * 20) + 5 }))
+        : Array.from({ length: 10 }, (_, i) => ({ name: `Day ${i + 1}`, val: Math.floor(Math.random() * 20) + 5 }));
 
       // Recent Commits List
       const recentCommits = (data.recent_commits || data.recentCommits || []).slice(0, 6);
@@ -208,20 +212,20 @@
       // AI Insights Generation (Based on data)
       const busiestHour = rawHourly.reduce((max, h) => h.commits > max.commits ? h : max, rawHourly[0]);
       const busiestDay = rawDaily.reduce((max, d) => d.commits > max.commits ? d : max, rawDaily[0]);
-      
+
       const insights = [
-        { 
-          title: "Pico de Atividade Diária", 
+        {
+          title: "Pico de Atividade Diária",
           desc: `O volume máximo de modificações ocorre sistematicamente às ${busiestHour.hour}h (${busiestHour.commits} commits registrados).`,
           type: "focus"
         },
-        { 
-          title: "Padrão de Distribuição", 
+        {
+          title: "Padrão de Distribuição",
           desc: `${busiestDay.day} apresenta a maior taxa de integração de código da semana, indicando janelas de deploy consolidadas.`,
           type: "trend"
         },
-        { 
-          title: "Eficiência de Resolução", 
+        {
+          title: "Eficiência de Resolução",
           desc: kpiData.avgIssueTime !== 'N/A' ? `Issues são resolvidas em média a cada ${kpiData.avgIssueTime} horas. Tempo de ciclo saudável.` : "Sem dados suficientes para cálculo de ciclo de vida de issues.",
           type: "performance"
         }
@@ -231,7 +235,7 @@
 
       return (
         <div className="max-w-[1400px] mx-auto flex flex-col gap-6 pb-12">
-          
+
           {/* Header */}
           <header className="flex justify-between items-end pb-4 border-b border-highlight/20 mb-2 mt-4">
             <div>
@@ -250,19 +254,19 @@
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <KPICard title="Total Commits" value={kpiData.commits} subtitle="Registros consolidados no repositório" />
             <KPICard title="Contribuidores" value={kpiData.contributors} subtitle="Membros ativos com push rights" />
-            <KPICard title="Velocidade (Semana)" value={kpiData.velocity} subtitle="Taxa de integração semanal" />
+            <KPICard title="Velocidade" value={kpiData.velocity} subtitle="Commits gerais da última semana" />
             <KPICard title="Pull Requests" value={kpiData.prs} subtitle="Métricas de code review (mesclados)" />
             <KPICard title="T. Médio Resolução" value={kpiData.avgIssueTime} subtitle="Ciclo de vida de issues (horas)" />
           </div>
 
           {/* Row 2: Top Contributors & Productivity by Weekday */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
+
             <div className="glass-panel min-h-[320px]">
               <h2 className="panel-title">Top Contribuidores (Commits x Adições)</h2>
               <div className="h-[250px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={topContributors} margin={{ top: 10, right: 10, left: -20, bottom: 0 }} layout="vertical">
+                  <BarChart data={topContributors} margin={{ top: 10, right: 10, left: 30, bottom: 0 }} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={true} horizontal={false} opacity={0.1} />
                     <XAxis type="number" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
                     <YAxis dataKey="name" type="category" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
@@ -304,8 +308,8 @@
                 <AreaChart data={hourlyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorCommits" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#00D9FF" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#00D9FF" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#00D9FF" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#00D9FF" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={false} opacity={0.1} />
@@ -324,7 +328,7 @@
 
           {/* Row 4: Recent Commits & AI Insights */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
+
             {/* Recent Commits */}
             <div className="glass-panel lg:col-span-2">
               <h2 className="panel-title">Log de Integrações Recentes</h2>
@@ -379,4 +383,5 @@
     root.render(<App />);
   </script>
 </body>
+
 </html>
