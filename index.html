@@ -169,7 +169,7 @@
       const kpiData = {
         commits: data.totalCommits ?? data.team?.total_commits ?? 0,
         contributors: data.team?.total_contributors ?? Object.keys(data.commitsPerAuthor ?? {}).length ?? 0,
-        velocity: data.team?.weekly_velocity ?? 'N/A',
+        issues: data.totalIssues ?? 0,
         prs: data.totalPRs ?? data.pull_requests_summary?.total ?? 0,
         avgIssueTime: data.avgIssueCloseHours !== undefined ? data.avgIssueCloseHours.toFixed(1) : (data.issues_summary?.avg_close_hours?.toFixed(1) ?? 'N/A')
       };
@@ -254,7 +254,7 @@
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <KPICard title="Total Commits" value={kpiData.commits} subtitle="Registros consolidados no repositório" />
             <KPICard title="Contribuidores" value={kpiData.contributors} subtitle="Membros ativos com push rights" />
-            <KPICard title="Velocidade" value={kpiData.velocity} subtitle="Commits gerais da última semana" />
+            <KPICard title="Total Issues" value={kpiData.issues} subtitle="Rastreamento de tarefas e bugs" />
             <KPICard title="Pull Requests" value={kpiData.prs} subtitle="Métricas de code review (mesclados)" />
             <KPICard title="T. Médio Resolução" value={kpiData.avgIssueTime} subtitle="Ciclo de vida de issues (horas)" />
           </div>
