@@ -87,6 +87,12 @@
       {"day": "Qui", "commits": 50},
       {"day": "Sex", "commits": 25},
       {"day": "Sáb", "commits": 12}
+    ],
+    "issues_by_week": [
+      {"week": "2026-04-13", "count": 2},
+      {"week": "2026-04-20", "count": 4},
+      {"week": "2026-04-27", "count": 3},
+      {"week": "2026-05-04", "count": 5}
     ]
   }
 }
