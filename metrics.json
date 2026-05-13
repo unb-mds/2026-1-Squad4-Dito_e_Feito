@@ -1,5 +1,8 @@
 {
   "generatedAt": "2026-05-12T21:23:45Z",
+  "team": {
+    "weekly_velocity": 45
+  },
   "totalCommits": 48,
   "commitsPerAuthor": {
     "gus-ant": 18,
@@ -8,6 +11,14 @@
     "Lucas Abdalla Nery": 5,
     "IndianoDev": 3,
     "Velho008": 2
+  },
+  "detailedContributors": {
+    "gus-ant": { "commits": 18, "additions": 4320, "deletions": 1200 },
+    "Gustavo Antonio": { "commits": 12, "additions": 2150, "deletions": 400 },
+    "SUDOTMOX": { "commits": 8, "additions": 1890, "deletions": 850 },
+    "Lucas Abdalla Nery": { "commits": 5, "additions": 840, "deletions": 120 },
+    "IndianoDev": { "commits": 3, "additions": 450, "deletions": 50 },
+    "Velho008": { "commits": 2, "additions": 120, "deletions": 10 }
   },
   "avgCommitIntervalHours": 8.4,
   "totalIssues": 14,
