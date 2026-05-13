@@ -1,0 +1,345 @@
+{
+  "generatedAt": "2026-05-13T15:36:18.558Z",
+  "team": {
+    "weekly_velocity": 3
+  },
+  "totalCommits": 51,
+  "commitsPerAuthor": {
+    "gus-ant": 15,
+    "Gustavo Antonio": 10,
+    "Velho008": 7,
+    "Gabriel Velho de Souza": 4,
+    "SUDOTMOX": 2,
+    "Lucas Abdalla Nery": 10,
+    "indianodev": 3
+  },
+  "detailedContributors": {
+    "SUDOTMOX": {
+      "commits": 2,
+      "additions": 1291,
+      "deletions": 0
+    },
+    "IndianoDev": {
+      "commits": 2,
+      "additions": 596,
+      "deletions": 0
+    },
+    "Velho008": {
+      "commits": 3,
+      "additions": 11,
+      "deletions": 60
+    },
+    "nerylucas": {
+      "commits": 10,
+      "additions": 240,
+      "deletions": 217
+    },
+    "gus-ant": {
+      "commits": 11,
+      "additions": 43150,
+      "deletions": 447
+    }
+  },
+  "avgCommitIntervalHours": 11.319083333333333,
+  "totalIssues": 18,
+  "avgIssueCloseHours": 164.7955882352941,
+  "totalPRs": 0,
+  "recent_commits": [
+    {
+      "sha": "0923f4f717eb900db57e508b8af530f65735d355",
+      "message": "Adiciona issues-por-semana e update do Dashboard UI com o ranking dos contribuidores",
+      "author": "gus-ant",
+      "date": "2026-05-13T15:35:48Z",
+      "verified": false
+    },
+    {
+      "sha": "9aecbc1170f54759be2ea6b191c30a875e673a0d",
+      "message": "feat: replace weekly velocity KPI with total issues tracking in dashboard",
+      "author": "gus-ant",
+      "date": "2026-05-13T01:15:38Z",
+      "verified": false
+    },
+    {
+      "sha": "00ad97875b0649a2e3386fc98ac490cc8b4ba2e1",
+      "message": "Update da formatação de nomes e aumento de contribuidores para 7",
+      "author": "gus-ant",
+      "date": "2026-05-13T01:07:07Z",
+      "verified": false
+    },
+    {
+      "sha": "4d4ae1dcaf26ef7840fcf5dded605e49675d13fe",
+      "message": "Melhoria da legibilidade do dashboard",
+      "author": "gus-ant",
+      "date": "2026-05-13T00:26:16Z",
+      "verified": false
+    },
+    {
+      "sha": "7656a10aa1485c80ac71d13ee335c44e49291540",
+      "message": "Alteração e aprimoramento das métricas principais",
+      "author": "gus-ant",
+      "date": "2026-05-12T21:35:40Z",
+      "verified": false
+    },
+    {
+      "sha": "84f1f33f6e211e8f93894892535e373ced248672",
+      "message": "Update do Dashboard para exibir melhores métricas",
+      "author": "gus-ant",
+      "date": "2026-05-12T20:55:36Z",
+      "verified": false
+    },
+    {
+      "sha": "bbd9c1441f8d02bd1a525685bbb9c088d3dbaaee",
+      "message": "adiciona suporte dinamico para as branches e gatilho para aula-11-05",
+      "author": "gus-ant",
+      "date": "2026-05-11T21:12:18Z",
+      "verified": false
+    },
+    {
+      "sha": "f201f6da07db5458a2255445a8b9a1b835e60d95",
+      "message": "Atualiza branch para main e configura cron para 5 min",
+      "author": "gus-ant",
+      "date": "2026-05-11T20:51:19Z",
+      "verified": false
+    },
+    {
+      "sha": "e8637c71de0e67a127e5a51fa3d41ee3f1a6b98a",
+      "message": "Atualizar a versão do Node.js de 20 para 24 nos arquivos de workflow.",
+      "author": "gus-ant",
+      "date": "2026-05-11T20:25:01Z",
+      "verified": false
+    },
+    {
+      "sha": "4d98e0661b9412a05c6573a58ee86fffc2a0efd3",
+      "message": "Atualização do github metrics",
+      "author": "gus-ant",
+      "date": "2026-05-11T20:14:44Z",
+      "verified": false
+    },
+    {
+      "sha": "0a7662a4af4bf5fe14ab50b1c363d7a2a9b4a088",
+      "message": "Adicao do metrics",
+      "author": "gus-ant",
+      "date": "2026-05-11T16:40:05Z",
+      "verified": false
+    },
+    {
+      "sha": "98072b833d3ef8800fb2343ddf781458190dc144",
+      "message": "Edit collect.js para carregar index corretamente",
+      "author": "gus-ant",
+      "date": "2026-05-11T16:31:15Z",
+      "verified": false
+    },
+    {
+      "sha": "f16abb069464d91d7312c42322edb5854ca902da",
+      "message": "modificar metrics workflow for push trigger and renaming\n\nUpdated workflow to include push event trigger and renamed steps for clarity.",
+      "author": "Gustavo Antonio",
+      "date": "2026-05-11T16:26:43Z",
+      "verified": true
+    },
+    {
+      "sha": "51ea2a9164114c69dab292bbeeabb778f1908f23",
+      "message": "troquei local do index",
+      "author": "Velho008",
+      "date": "2026-05-11T16:21:31Z",
+      "verified": false
+    },
+    {
+      "sha": "edf90734df3097276bd5fe39c7b4e02962c2102e",
+      "message": "Update HTML structure and content for dashboard",
+      "author": "Gustavo Antonio",
+      "date": "2026-05-11T16:20:09Z",
+      "verified": true
+    },
+    {
+      "sha": "6f404b28c12996cfd413a7e249459385d3dc2125",
+      "message": "Add GitHub Actions workflow for repo metrics",
+      "author": "Gabriel Velho de Souza",
+      "date": "2026-05-11T16:15:50Z",
+      "verified": true
+    },
+    {
+      "sha": "e1ffa5c6ffebb3a4efcbc4b95ac4254223b59a21",
+      "message": "index criado no braço e yml atualizado",
+      "author": "Velho008",
+      "date": "2026-05-11T16:11:51Z",
+      "verified": false
+    },
+    {
+      "sha": "72254f0f19071b40eac7c51036efee64be6c3338",
+      "message": "tirei readme pra não dar conflito",
+      "author": "Velho008",
+      "date": "2026-05-11T16:07:43Z",
+      "verified": false
+    },
+    {
+      "sha": "866057ee34db589c57520f7d78f01fd7b4ae46a3",
+      "message": "removi conflito",
+      "author": "Velho008",
+      "date": "2026-05-11T16:05:16Z",
+      "verified": false
+    },
+    {
+      "sha": "c5966db494c6123180d8c203c32016ad67bb55c7",
+      "message": "metrics atualizado",
+      "author": "Velho008",
+      "date": "2026-05-11T16:01:56Z",
+      "verified": false
+    }
+  ],
+  "temporal": {
+    "commits_by_hour": [
+      {
+        "hour": 0,
+        "commits": 2
+      },
+      {
+        "hour": 1,
+        "commits": 3
+      },
+      {
+        "hour": 2,
+        "commits": 12
+      },
+      {
+        "hour": 3,
+        "commits": 0
+      },
+      {
+        "hour": 4,
+        "commits": 0
+      },
+      {
+        "hour": 5,
+        "commits": 0
+      },
+      {
+        "hour": 6,
+        "commits": 0
+      },
+      {
+        "hour": 7,
+        "commits": 0
+      },
+      {
+        "hour": 8,
+        "commits": 0
+      },
+      {
+        "hour": 9,
+        "commits": 0
+      },
+      {
+        "hour": 10,
+        "commits": 0
+      },
+      {
+        "hour": 11,
+        "commits": 0
+      },
+      {
+        "hour": 12,
+        "commits": 0
+      },
+      {
+        "hour": 13,
+        "commits": 3
+      },
+      {
+        "hour": 14,
+        "commits": 1
+      },
+      {
+        "hour": 15,
+        "commits": 8
+      },
+      {
+        "hour": 16,
+        "commits": 12
+      },
+      {
+        "hour": 17,
+        "commits": 0
+      },
+      {
+        "hour": 18,
+        "commits": 0
+      },
+      {
+        "hour": 19,
+        "commits": 0
+      },
+      {
+        "hour": 20,
+        "commits": 5
+      },
+      {
+        "hour": 21,
+        "commits": 2
+      },
+      {
+        "hour": 22,
+        "commits": 2
+      },
+      {
+        "hour": 23,
+        "commits": 1
+      }
+    ],
+    "commits_by_day": [
+      {
+        "day": "Dom",
+        "commits": 0
+      },
+      {
+        "day": "Seg",
+        "commits": 32
+      },
+      {
+        "day": "Ter",
+        "commits": 4
+      },
+      {
+        "day": "Qua",
+        "commits": 10
+      },
+      {
+        "day": "Qui",
+        "commits": 2
+      },
+      {
+        "day": "Sex",
+        "commits": 3
+      },
+      {
+        "day": "Sáb",
+        "commits": 0
+      }
+    ],
+    "issues_by_week": [
+      {
+        "week": "2026-03-23",
+        "count": 5
+      },
+      {
+        "week": "2026-03-30",
+        "count": 3
+      },
+      {
+        "week": "2026-04-06",
+        "count": 4
+      },
+      {
+        "week": "2026-04-13",
+        "count": 1
+      },
+      {
+        "week": "2026-04-20",
+        "count": 4
+      },
+      {
+        "week": "2026-05-11",
+        "count": 1
+      }
+    ]
+  }
+}
