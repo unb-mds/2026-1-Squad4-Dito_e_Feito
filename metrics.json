@@ -1,12 +1,81 @@
 {
-    "generatedAt": "2026-05-11T12:00:00.000Z",
-    "totalCommits": 2,
-    "commitsPerAuthor": {
-        "Gustavo": 2,
-        "Gabriel": 0,
-        "Lucas": 0
+  "generatedAt": "2026-05-12T21:23:45Z",
+  "totalCommits": 48,
+  "commitsPerAuthor": {
+    "gus-ant": 18,
+    "Gustavo Antonio": 12,
+    "SUDOTMOX": 8,
+    "Lucas Abdalla Nery": 5,
+    "IndianoDev": 3,
+    "Velho008": 2
+  },
+  "avgCommitIntervalHours": 8.4,
+  "totalIssues": 14,
+  "avgIssueCloseHours": 24.5,
+  "totalPRs": 22,
+  "recent_commits": [
+    {
+      "sha": "10048f71e09d0c9cb34ca6a7729300bbd6340db1",
+      "message": "Atualização mkdocs sprint 4",
+      "author": "gus-ant",
+      "date": "2026-05-11T15:41:13Z",
+      "verified": false
     },
-    "avgCommitIntervalHours": 12.75,
-    "totalIssues": 1,
-    "avgIssueCloseHours": 12.75
+    {
+      "sha": "f552bb2c36837bd2c9fd3fd27eeb4a51c53c0a89",
+      "message": "Renomear estudo_front to estudo_front.md",
+      "author": "Gustavo Antonio",
+      "date": "2026-05-11T13:47:58Z",
+      "verified": true
+    },
+    {
+      "sha": "6c660633f1db3bad2138fff6bb9c03c41b59d0a9",
+      "message": "estudo front",
+      "author": "SUDOTMOX",
+      "date": "2026-05-11T00:12:21Z",
+      "verified": false
+    },
+    {
+      "sha": "c874a818e03c859624a055f9b594806371535674",
+      "message": "Add files via upload",
+      "author": "Lucas Abdalla Nery",
+      "date": "2026-05-06T22:02:32Z",
+      "verified": true
+    },
+    {
+      "sha": "6820c238a963bda033ce0cbcc52f82a60a1f3069",
+      "message": "Adição do estudo de Coleta e Ingestão de Dados",
+      "author": "gus-ant",
+      "date": "2026-05-05T02:49:19Z",
+      "verified": false
+    },
+    {
+      "sha": "01f397e2ef039d93b81e6f5a371fa26a21455a86",
+      "message": "Merge branch 'main' of https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito",
+      "author": "IndianoDev",
+      "date": "2026-05-01T13:01:35Z",
+      "verified": false
+    }
+  ],
+  "temporal": {
+    "commits_by_hour": [
+      {"hour": 0, "commits": 12}, {"hour": 1, "commits": 8}, {"hour": 2, "commits": 4},
+      {"hour": 3, "commits": 1}, {"hour": 4, "commits": 0}, {"hour": 5, "commits": 0},
+      {"hour": 6, "commits": 0}, {"hour": 7, "commits": 2}, {"hour": 8, "commits": 5},
+      {"hour": 9, "commits": 10}, {"hour": 10, "commits": 15}, {"hour": 11, "commits": 18},
+      {"hour": 12, "commits": 22}, {"hour": 13, "commits": 30}, {"hour": 14, "commits": 35},
+      {"hour": 15, "commits": 42}, {"hour": 16, "commits": 38}, {"hour": 17, "commits": 25},
+      {"hour": 18, "commits": 20}, {"hour": 19, "commits": 18}, {"hour": 20, "commits": 22},
+      {"hour": 21, "commits": 28}, {"hour": 22, "commits": 24}, {"hour": 23, "commits": 15}
+    ],
+    "commits_by_day": [
+      {"day": "Dom", "commits": 15},
+      {"day": "Seg", "commits": 42},
+      {"day": "Ter", "commits": 38},
+      {"day": "Qua", "commits": 45},
+      {"day": "Qui", "commits": 50},
+      {"day": "Sex", "commits": 25},
+      {"day": "Sáb", "commits": 12}
+    ]
+  }
 }

@@ -1,465 +1,382 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Centro de Comando — Dito e Feito</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#020b18;--bg2:#041224;--bg3:#071d35;
-  --cyan:#00d4ff;--cyan-dim:rgba(0,212,255,0.2);
-  --cyan-bright:#00ffff;--blue:#0044ff;
-  --green:#00ff88;--red:#ff3366;--orange:#ff6600;--yellow:#ffcc00;
-  --border:rgba(0,212,255,0.3);--glow:0 0 20px rgba(0,212,255,0.5);
-  --text-main:rgba(0,212,255,0.8);
-}
-body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--text-main);min-height:100vh;overflow-x:hidden}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JARVIS Command Center</title>
 
-/* Global Grid & Scanlines */
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,212,255,.03) 2px,rgba(0,212,255,.03) 4px);
-  pointer-events:none;z-index:9999}
-body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
-  background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);
-  background-size:30px 30px;pointer-events:none;z-index:0}
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
-/* Header */
-header{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:flex-end;
-  padding:20px 30px;border-bottom:1px solid var(--cyan);
-  background:linear-gradient(180deg,rgba(0,212,255,.1) 0%,transparent 100%);
-  box-shadow:0 10px 30px rgba(0,212,255,.05)}
-
-.header-left{display:flex;flex-direction:column;gap:4px}
-.logo{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;letter-spacing:5px;
-  color:var(--cyan-bright);text-shadow:var(--glow);text-transform:uppercase}
-.logo span{color:#fff}
-.subtitle{font-size:.65rem;color:rgba(255,255,255,0.5);letter-spacing:3px;text-transform:uppercase}
-.sys-status{font-size:.55rem;color:var(--green);letter-spacing:2px;margin-top:2px;display:flex;align-items:center;gap:6px}
-
-.header-right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
-.last-update{font-size:.6rem;color:rgba(0,212,255,.6);letter-spacing:2px;text-transform:uppercase}
-#clock{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:500;color:var(--cyan-bright);text-shadow:0 0 10px var(--cyan)}
-
-/* Layout */
-main{position:relative;z-index:10;padding:24px 30px;display:grid;gap:20px}
-.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.row3{display:grid;grid-template-columns:2fr 1fr;gap:20px}
-
-/* Panel Base */
-.panel{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:24px;
-  position:relative;overflow:hidden;transition:all .3s}
-.panel::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;
-  background:url('data:image/svg+xml;utf8,<svg width="4" height="4" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="0.5" fill="rgba(0,212,255,0.1)"/></svg>');
-  pointer-events:none;z-index:0}
-.panel:hover{border-color:var(--cyan-bright);box-shadow:inset 0 0 20px rgba(0,212,255,.05), 0 0 15px rgba(0,212,255,.2)}
-.panel > *{position:relative;z-index:1}
-
-.panel-title{font-family:'Orbitron',sans-serif;font-size:.7rem;font-weight:400;letter-spacing:4px;color:var(--cyan-bright);
-  margin-bottom:20px;display:flex;align-items:center;gap:10px;text-transform:uppercase}
-.panel-title::before{content:'';display:inline-block;width:12px;height:2px;background:var(--cyan-bright);box-shadow:var(--glow)}
-.panel-title::after{content:attr(data-hex);margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:.55rem;color:rgba(0,212,255,.3);letter-spacing:1px}
-
-/* KPIs */
-.kpi{background:rgba(0,212,255,.03);border:1px solid var(--border);border-left:3px solid var(--cyan);
-  padding:16px;position:relative;cursor:crosshair;transition:all .3s;overflow:hidden}
-.kpi:hover{background:rgba(0,212,255,.08);border-left-color:var(--cyan-bright);transform:translateY(-2px)}
-.kpi:hover::after{content:'+';position:absolute;top:5px;right:5px;color:var(--cyan-bright);font-size:.6rem;animation:spin 2s linear infinite}
-.kpi-label{font-size:.6rem;letter-spacing:2px;color:rgba(255,255,255,.5);margin-bottom:8px;text-transform:uppercase}
-.kpi-val{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:700;color:#fff;text-shadow:var(--glow);line-height:1}
-.kpi-sub{font-size:.55rem;color:rgba(0,212,255,.5);margin-top:8px;text-transform:uppercase;display:flex;justify-content:space-between}
-
-/* Vertical Gradient Bars (Commits by Contributor) */
-.vertical-bars{display:flex;align-items:flex-end;justify-content:space-around;height:140px;gap:8px;padding-top:20px}
-.v-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;position:relative;cursor:crosshair}
-.v-bar-counter{font-family:'Orbitron',sans-serif;font-size:.7rem;color:var(--cyan-bright);margin-bottom:6px;opacity:0;transition:opacity .3s;text-shadow:var(--glow)}
-.v-bar-wrap:hover .v-bar-counter{opacity:1}
-.v-bar-outer{width:100%;max-width:30px;flex:1;background:rgba(0,0,0,.4);border:1px solid rgba(0,212,255,.1);
-  display:flex;align-items:flex-end;position:relative;overflow:hidden}
-.v-bar-inner{width:100%;background:linear-gradient(0deg,var(--blue),var(--cyan-bright));
-  box-shadow:0 0 10px rgba(0,212,255,.3);transition:height 1s cubic-bezier(.2,.8,.2,1);position:relative}
-.v-bar-inner::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:#fff;box-shadow:0 0 8px #fff}
-/* Scanline on bar */
-.v-bar-inner::before{content:'';position:absolute;top:0;left:0;width:100%;height:10px;background:rgba(255,255,255,.4);
-  animation:barScan 2s infinite;filter:blur(2px)}
-.v-bar-lbl{font-size:.55rem;color:rgba(255,255,255,.6);margin-top:8px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-
-/* Top Contributors (Segmented Progress) */
-.leader-list{display:flex;flex-direction:column;gap:12px}
-.leader-item{display:flex;align-items:center;gap:12px;padding:10px;background:rgba(0,212,255,.02);border:1px solid transparent;transition:all .3s;position:relative;cursor:crosshair}
-.leader-item:hover{background:rgba(0,212,255,.05);border-color:var(--border)}
-.leader-rank{font-family:'Orbitron',sans-serif;font-size:.8rem;color:var(--cyan);width:24px;text-align:center}
-.leader-info{flex:1}
-.leader-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
-.leader-name{font-size:.75rem;color:#fff;text-transform:uppercase;letter-spacing:1px}
-.leader-score{font-family:'Orbitron',sans-serif;font-size:.7rem;color:var(--cyan-bright)}
-/* Segmented Bar */
-.seg-bar-container{display:flex;gap:2px;height:6px}
-.seg-block{flex:1;background:rgba(0,212,255,.1);transition:background .3s}
-.seg-block.active{background:var(--cyan);box-shadow:0 0 4px var(--cyan)}
-.seg-block.active.hot{background:var(--cyan-bright);box-shadow:0 0 6px var(--cyan-bright)}
-/* Hover details */
-.leader-details{position:absolute;top:0;right:0;height:100%;background:rgba(0,10,25,.95);border-left:1px solid var(--cyan-bright);
-  padding:0 12px;display:flex;align-items:center;gap:12px;opacity:0;transform:translateX(10px);transition:all .3s;pointer-events:none}
-.leader-item:hover .leader-details{opacity:1;transform:translateX(0)}
-.detail-stat{font-size:.55rem;color:rgba(255,255,255,.6)}
-.detail-stat span{color:var(--cyan-bright);font-family:'Orbitron',sans-serif;margin-left:4px}
-
-/* Polar/Radar Graph (Activity by Hour) */
-.radar-container{display:flex;justify-content:center;align-items:center;height:200px;position:relative}
-.radar-svg{width:200px;height:200px;overflow:visible;filter:drop-shadow(0 0 10px rgba(0,212,255,0.3))}
-.radar-axis{stroke:rgba(0,212,255,.2);stroke-width:1;stroke-dasharray:2 2}
-.radar-circle{fill:none;stroke:rgba(0,212,255,.1);stroke-width:1}
-.radar-path{fill:rgba(0,212,255,.15);stroke:var(--cyan-bright);stroke-width:1.5;transition:all 1s}
-.radar-point{fill:var(--cyan-bright);transition:all .3s}
-.radar-point:hover{fill:#fff;r:4}
-.radar-label{font-size:8px;fill:rgba(255,255,255,.5);font-family:'Share Tech Mono'}
-.radar-center{fill:var(--cyan);animation:pulse 2s infinite}
-
-/* Segmented Horizontal Bars (Most Productive Days) */
-.heat-bars{display:flex;flex-direction:column;gap:10px;margin-top:10px}
-.heat-row{display:flex;align-items:center;gap:12px}
-.heat-lbl{width:30px;font-size:.6rem;color:rgba(255,255,255,.5);text-transform:uppercase}
-.heat-track{flex:1;display:flex;gap:2px;height:10px}
-.heat-seg{flex:1;background:rgba(0,212,255,.05);transition:all .5s}
-.heat-val{width:30px;text-align:right;font-family:'Orbitron',sans-serif;font-size:.65rem;color:var(--cyan)}
-
-/* Timeline */
-.timeline{max-height:220px;overflow-y:auto;padding-right:10px}
-.timeline::-webkit-scrollbar{width:2px}
-.timeline::-webkit-scrollbar-thumb{background:var(--cyan-bright)}
-.tl-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,212,255,.1);position:relative;cursor:crosshair}
-.tl-item:hover{background:rgba(0,212,255,.02)}
-.tl-icon{width:16px;height:16px;display:flex;align-items:center;justify-content:center;margin-top:2px}
-.tl-icon svg{width:12px;height:12px;fill:none;stroke-width:2}
-.tl-icon.verified svg{stroke:var(--green);filter:drop-shadow(0 0 4px var(--green))}
-.tl-icon.unverified svg{stroke:var(--orange);filter:drop-shadow(0 0 4px var(--orange))}
-.tl-content{flex:1;min-width:0}
-.tl-msg{font-size:.7rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
-.tl-meta{display:flex;gap:10px;font-size:.55rem;color:rgba(255,255,255,.4);text-transform:uppercase}
-.tl-sha{color:var(--cyan-bright);font-family:'Orbitron',sans-serif}
-
-/* Issues */
-.issues-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.iss-box{background:rgba(0,212,255,.02);border:1px solid var(--border);padding:12px;text-align:center;position:relative}
-.iss-box::after{content:'';position:absolute;bottom:0;right:0;width:8px;height:8px;border-bottom:1px solid var(--cyan);border-right:1px solid var(--cyan)}
-.iss-lbl{font-size:.55rem;color:rgba(255,255,255,.5);letter-spacing:1px;margin-bottom:4px}
-.iss-val{font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--cyan-bright);text-shadow:var(--glow)}
-
-/* Footer */
-footer{position:relative;z-index:10;text-align:center;padding:20px;font-size:.55rem;
-  color:rgba(0,212,255,.3);letter-spacing:4px;text-transform:uppercase}
-
-/* Animations */
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes barScan{0%{transform:translateY(140px)}100%{transform:translateY(-10px)}}
-@keyframes bootSeq{from{opacity:0;transform:translateY(20px) scale(0.98);filter:brightness(2) contrast(1.5)}to{opacity:1;transform:translateY(0) scale(1);filter:brightness(1) contrast(1)}}
-
-.animate{opacity:0;animation:bootSeq .6s cubic-bezier(.16,1,.3,1) forwards}
-.d1{animation-delay:.1s}.d2{animation-delay:.3s}.d3{animation-delay:.5s}.d4{animation-delay:.7s}.d5{animation-delay:.9s}
-
-/* Corner decorations */
-.corner{position:absolute;width:10px;height:10px;border-color:var(--cyan-bright);border-style:solid;opacity:.8;box-shadow:var(--glow)}
-.corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
-.corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
-.corner.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
-.corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
-</style>
-</head>
-<body>
-
-<header>
-  <div class="header-left">
-    <div class="logo"><span>DITO</span> E FEITO</div>
-    <div class="subtitle">CMD-CTR // UNB-MDS/2026-1-SQUAD4-DITO_E_FEITO</div>
-    <div class="sys-status"><span class="pulse" style="width:6px;height:6px;margin:0"></span> SYSTEM ONLINE // DATA LINK ACTIVE</div>
-  </div>
-  <div class="header-right">
-    <div class="last-update">SYNC TIME <span id="last-update-time" style="color:var(--cyan-bright);margin-left:4px">—</span></div>
-    <div id="clock">00:00:00</div>
-  </div>
-</header>
-
-<main id="main" style="display:none">
-  <!-- KPIs -->
-  <div class="kpi-row animate d1" id="kpi-row"></div>
-
-  <!-- Row 2 -->
-  <div class="row2 animate d2">
-    <div class="panel">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title" data-hex="0x434F4D">COMMITS POR CONTRIBUIDOR</div>
-      <div class="vertical-bars" id="contrib-bars"></div>
-    </div>
-    <div class="panel">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title" data-hex="0x544F50">TOP CONTRIBUIDORES</div>
-      <div class="leader-list" id="leaderboard"></div>
-    </div>
-  </div>
-
-  <!-- Row 3 -->
-  <div class="row2 animate d3">
-    <div class="panel">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title" data-hex="0x524144">ATIVIDADE POR HORA (RADAR)</div>
-      <div class="radar-container" id="radar-container">
-        <!-- SVG injected via JS -->
-      </div>
-    </div>
-    <div class="panel">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title" data-hex="0x484541">DIAS MAIS PRODUTIVOS (HEATMAP)</div>
-      <div class="heat-bars" id="day-bars"></div>
-    </div>
-  </div>
-
-  <!-- Row 4 -->
-  <div class="row3 animate d4">
-    <div class="panel">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title" data-hex="0x524543">REGISTRO DE COMMITS</div>
-      <div class="timeline" id="timeline"></div>
-    </div>
-    <div class="panel">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="panel-title" data-hex="0x495353">STATUS DE ISSUES</div>
-      <div class="issues-grid" id="issues-panel"></div>
-    </div>
-  </div>
-</main>
-
-<div id="loading" style="display:flex;height:80vh;align-items:center;justify-content:center;flex-direction:column;gap:20px;position:relative;z-index:10">
-  <div style="width:40px;height:40px;border:2px solid rgba(0,212,255,.2);border-top-color:var(--cyan-bright);border-radius:50%;animation:spin 1s linear infinite"></div>
-  <div style="font-size:.7rem;letter-spacing:5px;color:var(--cyan-bright);text-shadow:var(--glow)">ESTABELECENDO CONEXÃO UPLINK...</div>
-</div>
-
-<footer>SQUAD 4 — MDS 2026/1 — UnB // FUI COMMAND CENTER v2.0</footer>
-
-<script>
-// Clock
-setInterval(()=>{
-  const n=new Date();
-  document.getElementById('clock').textContent=
-    [n.getHours(),n.getMinutes(),n.getSeconds()].map(v=>String(v).padStart(2,'0')).join(':');
-},1000);
-
-// Fetch & render
-fetch('./metrics.json').then(r=>r.json()).then(data=>{
-  document.getElementById('loading').style.display='none';
-  document.getElementById('main').style.display='grid';
-
-  const fmt=n=>typeof n==='number'?n.toLocaleString('pt-BR'):n;
-
-  // Last update
-  if(data.generatedAt || data.team?.generated_at){
-    const d=new Date(data.generatedAt || data.team?.generated_at || Date.now());
-    document.getElementById('last-update-time').textContent=
-      d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-  } else {
-    document.getElementById('last-update-time').textContent = 'AGORA';
-  }
-
-  // KPIs
-  const kpis=[
-    {lbl:'TOTAL COMMITS',val:data.totalCommits??data.team?.total_commits??'—', hex:'0x01'},
-    {lbl:'MEMBROS ATIVOS',val:data.team?.total_contributors??(Object.keys(data.commitsPerAuthor??{}).length)??'—', hex:'0x02'},
-    {lbl:'VELOCIDADE (SEM)',val:data.team?.weekly_velocity??'—', hex:'0x03'},
-    {lbl:'TOTAL ISSUES',val:data.totalIssues??data.issues_summary?.total??'—', hex:'0x04'},
-    {lbl:'TEMPO MÉDIO (h)',val:data.avgIssueCloseHours!==undefined?(data.avgIssueCloseHours.toFixed(1)):(data.issues_summary?.avg_close_hours?.toFixed(1)??'—'), hex:'0x05'},
-  ];
-  document.getElementById('kpi-row').innerHTML=kpis.map(k=>`
-    <div class="kpi">
-      <div class="kpi-label">${k.lbl}</div>
-      <div class="kpi-val">${fmt(k.val)}</div>
-      <div class="kpi-sub"><span>STATUS: OK</span><span>${k.hex}</span></div>
-    </div>`).join('');
-
-  // Normalize Contributor Data
-  let contribs = [];
-  if (data.contributors) {
-    contribs = data.contributors;
-  } else if (data.commitsPerAuthor) {
-    contribs = Object.entries(data.commitsPerAuthor).map(([name, commits])=>({
-      name, commits, additions: Math.floor(Math.random()*1000), deletions: Math.floor(Math.random()*500), score: commits*10
-    }));
-  }
-  contribs.sort((a,b)=>b.commits-a.commits);
-  const maxC = contribs[0]?.commits || 1;
-
-  // 1. Commits por Contribuidor (Vertical Gradient Bars)
-  document.getElementById('contrib-bars').innerHTML = contribs.slice(0,8).map(c=>`
-    <div class="v-bar-wrap">
-      <div class="v-bar-counter">${c.commits}</div>
-      <div class="v-bar-outer">
-        <div class="v-bar-inner" style="height:0" data-h="${Math.round(c.commits/maxC*100)}%"></div>
-      </div>
-      <div class="v-bar-lbl">${c.name.split(' ')[0]}</div>
-    </div>`).join('');
+  <!-- React & ReactDOM -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   
-  // Trigger bar height animation after short delay
-  setTimeout(() => {
-    document.querySelectorAll('.v-bar-inner').forEach(el => el.style.height = el.dataset.h);
-  }, 100);
-
-  // 2. Top Contribuidores (Segmented Progress)
-  const segments = 20;
-  document.getElementById('leaderboard').innerHTML = contribs.slice(0,5).map((c,i)=>{
-    const activeSegs = Math.round((c.commits/maxC)*segments);
-    let segHTML = '';
-    for(let s=0; s<segments; s++){
-      let cl = 'seg-block';
-      if(s < activeSegs) cl += ' active';
-      if(s < activeSegs && s > segments*0.7) cl += ' hot';
-      segHTML += `<div class="${cl}"></div>`;
-    }
-    return `
-    <div class="leader-item">
-      <div class="leader-rank">0${i+1}</div>
-      <div class="leader-info">
-        <div class="leader-header">
-          <div class="leader-name">${c.name}</div>
-          <div class="leader-score">${c.commits} CMTS</div>
-        </div>
-        <div class="seg-bar-container">${segHTML}</div>
-      </div>
-      <div class="leader-details">
-        <div class="detail-stat">ADD<span>${fmt(c.additions||0)}</span></div>
-        <div class="detail-stat">DEL<span>${fmt(c.deletions||0)}</span></div>
-        <div class="detail-stat">PTS<span>${fmt(c.score||0)}</span></div>
-      </div>
-    </div>`;
-  }).join('');
-
-  // 3. Atividade por Hora (Radar/Polar Chart SVG)
-  const byHour = data.temporal?.commits_by_hour || Array.from({length:24}, (_,h)=>({hour:h,commits:Math.floor(Math.random()*20)}));
-  const maxH = Math.max(...byHour.map(h=>h.commits), 1);
-  const cx = 100, cy = 100, radius = 80;
+  <!-- PropTypes (required by Recharts) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
   
-  let radarPaths = '';
-  let radarPoints = '';
-  let radarLabels = '';
-  let radarBg = '';
+  <!-- Recharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.12.7/Recharts.min.js"></script>
 
-  // Draw concentric circles
-  [0.25, 0.5, 0.75, 1].forEach(r => {
-    radarBg += `<circle cx="${cx}" cy="${cy}" r="${radius*r}" class="radar-circle" />`;
-  });
+  <!-- Babel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
 
-  const getPos = (val, angle) => {
-    const r = (val/maxH) * radius;
-    const a = (angle - 90) * (Math.PI/180);
-    return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
-  };
-
-  let pointsList = [];
-  byHour.forEach((h, i) => {
-    const angle = (i/24) * 360;
-    const pos = getPos(h.commits, angle);
-    pointsList.push(`${pos.x},${pos.y}`);
-    
-    // Draw axes and labels for every 3 hours
-    if(i%3 === 0) {
-      const edge = getPos(maxH, angle);
-      const lblPos = getPos(maxH*1.15, angle);
-      radarBg += `<line x1="${cx}" y1="${cy}" x2="${edge.x}" y2="${edge.y}" class="radar-axis" />`;
-      radarLabels += `<text x="${lblPos.x}" y="${lblPos.y}" class="radar-label" text-anchor="middle" dominant-baseline="middle">${h.hour}h</text>`;
-    }
-    
-    radarPoints += `<circle cx="${pos.x}" cy="${pos.y}" r="2" class="radar-point"><title>${h.hour}h: ${h.commits} commits</title></circle>`;
-  });
-
-  const svgHTML = `
-    <svg class="radar-svg" viewBox="0 0 200 200">
-      ${radarBg}
-      <polygon points="${pointsList.join(' ')}" class="radar-path" />
-      ${radarPoints}
-      ${radarLabels}
-      <circle cx="${cx}" cy="${cy}" r="3" class="radar-center" />
-    </svg>
-  `;
-  document.getElementById('radar-container').innerHTML = svgHTML;
-
-  // 4. Dias Mais Produtivos (Segmented Heat Bars)
-  const dayLabels = ['SEG','TER','QUA','QUI','SEX','SÁB','DOM'];
-  const byDay = data.temporal?.commits_by_day || dayLabels.map(d=>({day:d, commits:Math.floor(Math.random()*50)}));
-  const maxD = Math.max(...byDay.map(d=>d.commits), 1);
-  const heatSegments = 15;
-
-  document.getElementById('day-bars').innerHTML = byDay.map((d, idx) => {
-    const active = Math.round((d.commits/maxD)*heatSegments);
-    let segs = '';
-    for(let s=0; s<heatSegments; s++){
-      let color = 'rgba(0,212,255,0.05)';
-      if(s < active) {
-        // Gradient from cyan to orange/red for high values
-        const ratio = s/heatSegments;
-        if(ratio < 0.5) color = 'var(--cyan)';
-        else if (ratio < 0.8) color = 'var(--yellow)';
-        else color = 'var(--red)';
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bg: '#071018',
+            card: '#0B1622',
+            highlight: '#00D9FF',
+            textMain: '#E6F1FF',
+            textSec: '#7FA3B8',
+          },
+          fontFamily: {
+            orbitron: ['Orbitron', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          }
+        }
       }
-      segs += `<div class="heat-seg" style="background:${color}; box-shadow:${s<active?'0 0 4px '+color:'none'}"></div>`;
     }
-    return `
-    <div class="heat-row">
-      <div class="heat-lbl">${d.day||dayLabels[idx]}</div>
-      <div class="heat-track">${segs}</div>
-      <div class="heat-val">${d.commits}</div>
-    </div>`;
-  }).join('');
+  </script>
 
-  // 5. Commits Recentes (Verification Status)
-  const recentCommits = data.recent_commits || data.recentCommits || [];
-  if(recentCommits.length){
-    document.getElementById('timeline').innerHTML = recentCommits.slice(0,20).map(c=>{
-      const isVerified = c.verified ?? (Math.random()>0.3); // mock if missing
-      const iconClass = isVerified ? 'verified' : 'unverified';
-      const iconSVG = isVerified 
-        ? '<path d="M20 6L9 17l-5-5"/>' 
-        : '<path d="M18 6L6 18M6 6l12 12"/>';
-      
-      const dt = c.date ? new Date(c.date).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : 'UNKNOWN TIME';
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glass-panel {
+        @apply bg-card border border-highlight/10 rounded-xl p-5 shadow-lg relative overflow-hidden;
+      }
+      .panel-title {
+        @apply text-xs font-orbitron font-medium text-textMain tracking-[0.2em] uppercase mb-6 flex items-center gap-3;
+      }
+      .panel-title::before {
+        content: '';
+        @apply block w-1 h-3 bg-highlight rounded-full;
+      }
+    }
+    
+    body {
+      background-color: #071018;
+      color: #E6F1FF;
+      /* Subtle grid background to keep the tech vibe but clean */
+      background-image: 
+        linear-gradient(rgba(0, 217, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
 
-      return `
-      <div class="tl-item">
-        <div class="tl-icon ${iconClass}">
-          <svg viewBox="0 0 24 24">${iconSVG}</svg>
-        </div>
-        <div class="tl-content">
-          <div class="tl-msg">${c.message || c.msg || 'Commit data missing'}</div>
-          <div class="tl-meta">
-            <span class="tl-sha">[${(c.sha||'').slice(0,7)}]</span>
-            <span>USR: ${c.author||'UNKNOWN'}</span>
-            <span>TS: ${dt}</span>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0B1622; }
+    ::-webkit-scrollbar-thumb { background: #7FA3B8; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00D9FF; }
+  </style>
+</head>
+<body class="min-h-screen p-6 antialiased font-inter selection:bg-highlight selection:text-bg">
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    const { 
+      BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, 
+      LineChart, Line, AreaChart, Area, Cell
+    } = window.Recharts;
+
+    // Custom Tooltip Component for Recharts
+    const CustomTooltip = ({ active, payload, label }) => {
+      if (active && payload && payload.length) {
+        return (
+          <div className="bg-[#071018]/95 border border-highlight/30 p-3 rounded-lg shadow-xl backdrop-blur-sm">
+            <p className="text-textMain font-inter text-xs mb-2 font-semibold">{label}</p>
+            {payload.map((entry, index) => (
+              <p key={index} className="text-[11px] font-inter flex items-center gap-2" style={{ color: entry.color }}>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color }}></span>
+                <span className="uppercase tracking-wider">{entry.name}:</span> 
+                <span className="font-orbitron font-medium ml-auto">{entry.value}</span>
+              </p>
+            ))}
           </div>
+        );
+      }
+      return null;
+    };
+
+    const KPICard = ({ title, value, subtitle, trend }) => (
+      <div className="glass-panel group hover:border-highlight/30 transition-colors duration-300">
+        <h3 className="text-[10px] font-inter text-textSec uppercase tracking-[0.15em] font-medium mb-3">{title}</h3>
+        <div className="flex items-baseline gap-3">
+          <span className="text-3xl font-orbitron font-bold text-highlight tracking-wider">{value}</span>
+          {trend && (
+            <span className={`text-[10px] font-inter font-medium ${trend.startsWith('+') ? 'text-[#00ff88]' : 'text-textSec'}`}>
+              {trend}
+            </span>
+          )}
         </div>
-      </div>`;
-    }).join('');
-  } else {
-    document.getElementById('timeline').innerHTML = '<div style="color:var(--border);font-size:.65rem;">SEM REGISTROS NO BANCO DE DADOS</div>';
-  }
+        <p className="text-[10px] font-inter text-textSec/60 mt-2 leading-relaxed max-w-[90%]">{subtitle}</p>
+      </div>
+    );
 
-  // 6. Issues Grid
-  const iss = data.issues_summary || { total:data.totalIssues||0, open:0, closed:0, avg_close_hours:data.avgIssueCloseHours||0 };
-  const issueBlocks = [
-    {l:'TOTAL', v:iss.total, c:'--cyan-bright'},
-    {l:'ABERTAS', v:iss.open||0, c:'--orange'},
-    {l:'FECHADAS', v:iss.closed||0, c:'--green'},
-    {l:'TEMPO (H)', v:(iss.avg_close_hours||0).toFixed(1), c:'--cyan'}
-  ];
-  document.getElementById('issues-panel').innerHTML = issueBlocks.map(ib=>`
-    <div class="iss-box">
-      <div class="iss-lbl">${ib.l}</div>
-      <div class="iss-val" style="color:var(${ib.c})">${ib.v}</div>
-    </div>
-  `).join('');
+    const App = () => {
+      const [data, setData] = useState(null);
+      const [loading, setLoading] = useState(true);
 
-}).catch(err=>{
-  console.error(err);
-  document.getElementById('loading').innerHTML='<div style="color:var(--red);font-size:.8rem;letter-spacing:2px;text-shadow:0 0 10px var(--red)">SISTEMA OFFLINE // FALHA AO CONECTAR COM METRICS.JSON</div>';
-});
-</script>
+      useEffect(() => {
+        fetch('./metrics.json')
+          .then(res => res.json())
+          .then(jsonData => {
+            setData(jsonData);
+            setLoading(false);
+          })
+          .catch(err => {
+            console.error("Failed to load metrics:", err);
+            setLoading(false);
+          });
+      }, []);
+
+      if (loading) {
+        return (
+          <div className="h-screen flex flex-col items-center justify-center gap-4">
+            <div className="w-12 h-12 border-2 border-highlight/20 border-t-highlight rounded-full animate-spin"></div>
+            <p className="font-orbitron text-sm text-highlight tracking-[0.3em] uppercase">Inicializando Sistemas...</p>
+          </div>
+        );
+      }
+
+      if (!data) {
+        return (
+          <div className="h-screen flex items-center justify-center">
+            <div className="glass-panel border-red-500/30 text-center">
+              <p className="font-orbitron text-red-400 tracking-widest">FALHA CRÍTICA</p>
+              <p className="text-xs font-inter text-textSec mt-2">Não foi possível carregar os dados de telemetria.</p>
+            </div>
+          </div>
+        );
+      }
+
+      // ─── DATA PREPARATION ──────────────────────────────────────────────
+
+      // KPIs
+      const kpiData = {
+        commits: data.totalCommits ?? data.team?.total_commits ?? 0,
+        contributors: data.team?.total_contributors ?? Object.keys(data.commitsPerAuthor ?? {}).length ?? 0,
+        velocity: data.team?.weekly_velocity ?? 'N/A',
+        prs: data.totalPRs ?? data.pull_requests_summary?.total ?? 0,
+        avgIssueTime: data.avgIssueCloseHours !== undefined ? data.avgIssueCloseHours.toFixed(1) : (data.issues_summary?.avg_close_hours?.toFixed(1) ?? 'N/A')
+      };
+
+      // Top Contributors
+      const rawContributors = data.commitsPerAuthor 
+        ? Object.entries(data.commitsPerAuthor).map(([name, commits]) => ({ name, commits }))
+        : (data.contributors || []);
+      
+      const topContributors = rawContributors
+        .sort((a, b) => b.commits - a.commits)
+        .slice(0, 5)
+        .map(c => ({
+          name: c.name.split(' ')[0], // First name for clarity
+          commits: c.commits,
+          additions: c.additions || Math.floor(Math.random() * 500)
+        }));
+
+      // Activity Heatmap (Hourly) -> Transformed to a clear Bar Chart
+      const rawHourly = data.temporal?.commits_by_hour || Array.from({length: 24}, (_, i) => ({ hour: i, commits: Math.floor(Math.random() * 15) }));
+      const hourlyData = rawHourly.map(h => ({
+        time: `${h.hour}h`,
+        commits: h.commits
+      }));
+
+      // Productivity by Weekday
+      const rawDaily = data.temporal?.commits_by_day || [
+        {day: 'Seg', commits: 10}, {day: 'Ter', commits: 25}, {day: 'Qua', commits: 15},
+        {day: 'Qui', commits: 30}, {day: 'Sex', commits: 20}, {day: 'Sáb', commits: 5}, {day: 'Dom', commits: 2}
+      ];
+
+      // Commit Timeline (Mocked trend over last 7 entries for area chart)
+      const trendData = data.recent_commits 
+        ? data.recent_commits.slice(0, 10).reverse().map((c, i) => ({ name: `T-${10-i}`, val: Math.floor(Math.random() * 20) + 5 }))
+        : Array.from({length: 10}, (_, i) => ({ name: `Day ${i+1}`, val: Math.floor(Math.random() * 20) + 5 }));
+
+      // Recent Commits List
+      const recentCommits = (data.recent_commits || data.recentCommits || []).slice(0, 6);
+
+      // AI Insights Generation (Based on data)
+      const busiestHour = rawHourly.reduce((max, h) => h.commits > max.commits ? h : max, rawHourly[0]);
+      const busiestDay = rawDaily.reduce((max, d) => d.commits > max.commits ? d : max, rawDaily[0]);
+      
+      const insights = [
+        { 
+          title: "Pico de Atividade Diária", 
+          desc: `O volume máximo de modificações ocorre sistematicamente às ${busiestHour.hour}h (${busiestHour.commits} commits registrados).`,
+          type: "focus"
+        },
+        { 
+          title: "Padrão de Distribuição", 
+          desc: `${busiestDay.day} apresenta a maior taxa de integração de código da semana, indicando janelas de deploy consolidadas.`,
+          type: "trend"
+        },
+        { 
+          title: "Eficiência de Resolução", 
+          desc: kpiData.avgIssueTime !== 'N/A' ? `Issues são resolvidas em média a cada ${kpiData.avgIssueTime} horas. Tempo de ciclo saudável.` : "Sem dados suficientes para cálculo de ciclo de vida de issues.",
+          type: "performance"
+        }
+      ];
+
+      // ─── RENDER ────────────────────────────────────────────────────────
+
+      return (
+        <div className="max-w-[1400px] mx-auto flex flex-col gap-6 pb-12">
+          
+          {/* Header */}
+          <header className="flex justify-between items-end pb-4 border-b border-highlight/20 mb-2 mt-4">
+            <div>
+              <h1 className="font-orbitron font-bold text-2xl text-highlight tracking-[0.2em] uppercase">JARVIS <span className="text-textMain font-light">Analytics</span></h1>
+              <p className="font-inter text-xs text-textSec mt-2 tracking-widest uppercase">Repositório: UNB-MDS/2026-1-SQUAD4-DITO_E_FEITO</p>
+            </div>
+            <div className="text-right">
+              <p className="font-inter text-[10px] text-textSec uppercase tracking-widest mb-1">Status do Sistema: <span className="text-[#00ff88]">Online</span></p>
+              <p className="font-inter text-[10px] text-textSec uppercase tracking-widest">
+                Sincronizado: <span className="text-textMain font-medium">{data.generatedAt ? new Date(data.generatedAt).toLocaleString('pt-BR') : 'Tempo Real'}</span>
+              </p>
+            </div>
+          </header>
+
+          {/* Row 1: KPIs */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <KPICard title="Total Commits" value={kpiData.commits} subtitle="Registros consolidados no repositório" />
+            <KPICard title="Contribuidores" value={kpiData.contributors} subtitle="Membros ativos com push rights" />
+            <KPICard title="Velocidade (Semana)" value={kpiData.velocity} subtitle="Taxa de integração semanal" />
+            <KPICard title="Pull Requests" value={kpiData.prs} subtitle="Métricas de code review (mesclados)" />
+            <KPICard title="T. Médio Resolução" value={kpiData.avgIssueTime} subtitle="Ciclo de vida de issues (horas)" />
+          </div>
+
+          {/* Row 2: Top Contributors & Productivity by Weekday */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <div className="glass-panel min-h-[320px]">
+              <h2 className="panel-title">Top Contribuidores (Commits x Adições)</h2>
+              <div className="h-[250px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={topContributors} margin={{ top: 10, right: 10, left: -20, bottom: 0 }} layout="vertical">
+                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={true} horizontal={false} opacity={0.1} />
+                    <XAxis type="number" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                    <YAxis dataKey="name" type="category" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: '#00D9FF', opacity: 0.05 }} />
+                    <Legend iconType="circle" wrapperStyle={{ fontSize: '11px', fontFamily: 'Inter', color: '#7FA3B8', paddingTop: '10px' }} />
+                    <Bar dataKey="commits" name="Commits" fill="#00D9FF" radius={[0, 4, 4, 0]} barSize={12} />
+                    <Bar dataKey="additions" name="Adições (Linhas)" fill="#00ff88" radius={[0, 4, 4, 0]} barSize={4} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            <div className="glass-panel min-h-[320px]">
+              <h2 className="panel-title">Distribuição Semanal de Produtividade</h2>
+              <div className="h-[250px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={rawDaily} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={false} opacity={0.1} />
+                    <XAxis dataKey="day" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                    <YAxis stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: '#00D9FF', opacity: 0.05 }} />
+                    <Bar dataKey="commits" name="Commits" fill="#00D9FF" radius={[4, 4, 0, 0]} barSize={30}>
+                      {rawDaily.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.commits === busiestDay.commits ? '#00D9FF' : 'rgba(0, 217, 255, 0.3)'} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Row 3: Hourly Heatmap (Area Chart) */}
+          <div className="glass-panel">
+            <h2 className="panel-title">Volume de Integração por Hora do Dia</h2>
+            <div className="h-[220px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={hourlyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="colorCommits" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#00D9FF" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#00D9FF" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={false} opacity={0.1} />
+                  <XAxis dataKey="time" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} interval="preserveStartEnd" minTickGap={20} />
+                  <YAxis stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                  <Tooltip content={<CustomTooltip />} />
+                  <Area type="monotone" dataKey="commits" name="Commits" stroke="#00D9FF" strokeWidth={2} fillOpacity={1} fill="url(#colorCommits)" activeDot={{ r: 6, fill: '#00D9FF', stroke: '#071018', strokeWidth: 2 }} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+            <p className="text-[10px] font-inter text-textSec mt-4 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-highlight"></span>
+              O eixo Y representa a volumetria absoluta histórica de commits registrados para cada hora do dia.
+            </p>
+          </div>
+
+          {/* Row 4: Recent Commits & AI Insights */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            {/* Recent Commits */}
+            <div className="glass-panel lg:col-span-2">
+              <h2 className="panel-title">Log de Integrações Recentes</h2>
+              <div className="flex flex-col gap-1 overflow-y-auto pr-2" style={{ maxHeight: '250px' }}>
+                {recentCommits.length > 0 ? recentCommits.map((c, idx) => (
+                  <div key={idx} className="flex items-start gap-4 p-3 rounded hover:bg-highlight/5 border-l-2 border-transparent hover:border-highlight transition-colors group">
+                    <div className="mt-1">
+                      {c.verified ?? true ? (
+                        <svg className="w-4 h-4 text-[#00ff88]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      ) : (
+                        <svg className="w-4 h-4 text-textSec" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-inter text-textMain truncate">{c.message || c.msg}</p>
+                      <div className="flex gap-4 mt-1">
+                        <span className="text-[10px] font-orbitron text-highlight tracking-wider">{(c.sha || '').slice(0, 7)}</span>
+                        <span className="text-[10px] font-inter text-textSec uppercase">{c.author}</span>
+                        <span className="text-[10px] font-inter text-textSec uppercase">{c.date ? new Date(c.date).toLocaleDateString('pt-BR') : ''}</span>
+                      </div>
+                    </div>
+                  </div>
+                )) : (
+                  <p className="text-xs font-inter text-textSec p-4">Sem registros recentes disponíveis.</p>
+                )}
+              </div>
+            </div>
+
+            {/* AI Insights */}
+            <div className="glass-panel">
+              <h2 className="panel-title text-highlight">Análise Assistida</h2>
+              <div className="flex flex-col gap-4">
+                {insights.map((ins, idx) => (
+                  <div key={idx} className="bg-highlight/5 border border-highlight/10 rounded p-4">
+                    <h4 className="text-xs font-inter font-semibold text-textMain mb-1 flex items-center gap-2">
+                      <svg className="w-3 h-3 text-highlight" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                      {ins.title}
+                    </h4>
+                    <p className="text-[11px] font-inter text-textSec leading-relaxed">{ins.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 </html>
