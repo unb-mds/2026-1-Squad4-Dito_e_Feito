@@ -179,14 +179,19 @@
         ? Object.entries(data.detailedContributors).map(([name, stats]) => ({ name, ...stats }))
         : (data.commitsPerAuthor ? Object.entries(data.commitsPerAuthor).map(([name, commits]) => ({ name, commits })) : []);
 
-      const topContributors = rawContributors
+      const mappedContributors = rawContributors.map(c => ({
+        name: c.name.split(' ')[0], // First name for clarity
+        commits: c.commits,
+        additions: c.additions !== undefined ? c.additions : Math.floor(c.commits * (Math.random() * 50 + 10))
+      }));
+
+      const topByCommits = [...mappedContributors]
         .sort((a, b) => b.commits - a.commits)
-        .slice(0, 7)
-        .map(c => ({
-          name: c.name.split(' ')[0], // First name for clarity
-          commits: c.commits,
-          additions: c.additions !== undefined ? c.additions : Math.floor(c.commits * (Math.random() * 50 + 10))
-        }));
+        .slice(0, 7);
+
+      const topByAdditions = [...mappedContributors]
+        .sort((a, b) => b.additions - a.additions)
+        .slice(0, 7);
 
       // Activity Heatmap (Hourly) -> Transformed to a clear Bar Chart
       const rawHourly = data.temporal?.commits_by_hour || Array.from({ length: 24 }, (_, i) => ({ hour: i, commits: Math.floor(Math.random() * 15) }));
@@ -200,6 +205,9 @@
         { day: 'Seg', commits: 10 }, { day: 'Ter', commits: 25 }, { day: 'Qua', commits: 15 },
         { day: 'Qui', commits: 30 }, { day: 'Sex', commits: 20 }, { day: 'Sáb', commits: 5 }, { day: 'Dom', commits: 2 }
       ];
+
+      // Issues by week
+      const issuesByWeekData = data.temporal?.issues_by_week || [];
 
       // Commit Timeline (Mocked trend over last 7 entries for area chart)
       const trendData = data.recent_commits
@@ -260,20 +268,33 @@
           </div>
 
           {/* Row 2: Top Contributors & Productivity by Weekday */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
             <div className="glass-panel min-h-[320px]">
-              <h2 className="panel-title">Top Contribuidores (Commits x Adições)</h2>
+              <h2 className="panel-title">Ranking de Commits</h2>
               <div className="h-[250px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={topContributors} margin={{ top: 10, right: 10, left: 30, bottom: 0 }} layout="vertical">
+                  <BarChart data={topByCommits} margin={{ top: 10, right: 30, left: 30, bottom: 0 }} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={true} horizontal={false} opacity={0.1} />
                     <XAxis type="number" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
                     <YAxis dataKey="name" type="category" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
                     <Tooltip content={<CustomTooltip />} cursor={{ fill: '#00D9FF', opacity: 0.05 }} />
-                    <Legend iconType="circle" wrapperStyle={{ fontSize: '11px', fontFamily: 'Inter', color: '#7FA3B8', paddingTop: '10px' }} />
-                    <Bar dataKey="commits" name="Commits" fill="#00D9FF" radius={[0, 4, 4, 0]} barSize={12} />
-                    <Bar dataKey="additions" name="Adições (Linhas)" fill="#00ff88" radius={[0, 4, 4, 0]} barSize={4} />
+                    <Bar dataKey="commits" name="Commits" fill="#00D9FF" radius={[0, 4, 4, 0]} barSize={16} label={{ position: 'right', fill: '#E6F1FF', fontSize: 10, fontFamily: 'Inter' }} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            <div className="glass-panel min-h-[320px]">
+              <h2 className="panel-title">Ranking de Adições de Linhas</h2>
+              <div className="h-[250px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={topByAdditions} margin={{ top: 10, right: 40, left: 30, bottom: 0 }} layout="vertical">
+                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={true} horizontal={false} opacity={0.1} />
+                    <XAxis type="number" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                    <YAxis dataKey="name" type="category" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: '#00ff88', opacity: 0.05 }} />
+                    <Bar dataKey="additions" name="Adições" fill="#00ff88" radius={[0, 4, 4, 0]} barSize={16} label={{ position: 'right', fill: '#E6F1FF', fontSize: 10, fontFamily: 'Inter' }} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -300,30 +321,53 @@
 
           </div>
 
-          {/* Row 3: Hourly Heatmap (Area Chart) */}
-          <div className="glass-panel">
-            <h2 className="panel-title">Volume de Integração por Hora do Dia</h2>
-            <div className="h-[220px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={hourlyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="colorCommits" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#00D9FF" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#00D9FF" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={false} opacity={0.1} />
-                  <XAxis dataKey="time" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} interval="preserveStartEnd" minTickGap={20} />
-                  <YAxis stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Area type="monotone" dataKey="commits" name="Commits" stroke="#00D9FF" strokeWidth={2} fillOpacity={1} fill="url(#colorCommits)" activeDot={{ r: 6, fill: '#00D9FF', stroke: '#071018', strokeWidth: 2 }} />
-                </AreaChart>
-              </ResponsiveContainer>
+          {/* Row 3: Hourly Heatmap & Issues by Week */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <div className="glass-panel lg:col-span-2">
+              <h2 className="panel-title">Volume de Integração por Hora do Dia</h2>
+              <div className="h-[220px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={hourlyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="colorCommits" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#00D9FF" stopOpacity={0.3} />
+                        <stop offset="95%" stopColor="#00D9FF" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={false} opacity={0.1} />
+                    <XAxis dataKey="time" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} interval="preserveStartEnd" minTickGap={20} />
+                    <YAxis stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Area type="monotone" dataKey="commits" name="Commits" stroke="#00D9FF" strokeWidth={2} fillOpacity={1} fill="url(#colorCommits)" activeDot={{ r: 6, fill: '#00D9FF', stroke: '#071018', strokeWidth: 2 }} />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+              <p className="text-[10px] font-inter text-textSec mt-4 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-highlight"></span>
+                O eixo Y representa a volumetria absoluta histórica de commits registrados para cada hora do dia.
+              </p>
             </div>
-            <p className="text-[10px] font-inter text-textSec mt-4 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-highlight"></span>
-              O eixo Y representa a volumetria absoluta histórica de commits registrados para cada hora do dia.
-            </p>
+
+            <div className="glass-panel">
+              <h2 className="panel-title">Issues Abertas por Semana</h2>
+              <div className="h-[220px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={issuesByWeekData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={false} opacity={0.1} />
+                    <XAxis dataKey="week" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} tickFormatter={(tick) => tick.slice(5)} />
+                    <YAxis stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Line type="monotone" dataKey="count" name="Issues" stroke="#00ff88" strokeWidth={2} dot={{ r: 4, fill: '#00ff88', stroke: '#071018', strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              <p className="text-[10px] font-inter text-textSec mt-4 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#00ff88]"></span>
+                Volume de criação ao longo do tempo.
+              </p>
+            </div>
+
           </div>
 
           {/* Row 4: Recent Commits & AI Insights */}
@@ -331,7 +375,7 @@
 
             {/* Recent Commits */}
             <div className="glass-panel lg:col-span-2">
-              <h2 className="panel-title">Log de Integrações Recentes</h2>
+              <h2 className="panel-title">Log de Commits Recentes</h2>
               <div className="flex flex-col gap-1 overflow-y-auto pr-2" style={{ maxHeight: '250px' }}>
                 {recentCommits.length > 0 ? recentCommits.map((c, idx) => (
                   <div key={idx} className="flex items-start gap-4 p-3 rounded hover:bg-highlight/5 border-l-2 border-transparent hover:border-highlight transition-colors group">

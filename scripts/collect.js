@@ -111,6 +111,19 @@ async function main() {
     const daysMap = { 0: 'Dom', 1: 'Seg', 2: 'Ter', 3: 'Qua', 4: 'Qui', 5: 'Sex', 6: 'Sáb' };
     const commitsByDay = Object.values(daysMap).map(d => ({ day: d, commits: 0 }));
 
+    const issuesByWeekMap = {};
+    issues.forEach(issue => {
+      const d = new Date(issue.created_at);
+      const day = d.getDay() || 7; 
+      d.setHours(-24 * (day - 1)); // Start of the week (Monday)
+      const weekStr = d.toISOString().split('T')[0];
+      issuesByWeekMap[weekStr] = (issuesByWeekMap[weekStr] || 0) + 1;
+    });
+
+    const issuesByWeek = Object.entries(issuesByWeekMap)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([week, count]) => ({ week, count }));
+
     commits.forEach(c => {
       const name = c.commit.author.name;
       commitsPerAuthor[name] = (commitsPerAuthor[name] || 0) + 1;
@@ -146,7 +159,8 @@ async function main() {
       recent_commits: recentCommits,
       temporal: {
         commits_by_hour: commitsByHour,
-        commits_by_day: commitsByDay
+        commits_by_day: commitsByDay,
+        issues_by_week: issuesByWeek
       }
     };
 
