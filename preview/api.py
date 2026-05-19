@@ -128,16 +128,28 @@ def computar_top10():
     global top10_status
     top10_status["status"] = "computing"
     try:
-        lista = requests.get(f"{BASE_SENADO}/senador/lista/atual",
-                             headers={'Accept':'application/json'}, timeout=15
-                             ).json()['ListaParlamentarEmExercicio']['Parlamentares']['Parlamentar']
-        sample = lista[:30]
-        top10_status["total"] = len(sample)
+        alvos = []
+        if os.path.exists(TOP10_FILE):
+            print("[INFO] JSON existente encontrado. Lendo os parlamentares salvos para renovar discursos...")
+            with open(TOP10_FILE, encoding='utf-8') as f:
+                antigos = json.load(f).get("dados", [])
+                alvos = [{"sid": a["id"], "nome": a["nome"], "part": a.get("partido",""), "uf": a.get("uf","")} for a in antigos]
+                
+        if not alvos:
+            print("[INFO] JSON não encontrado. Pegando amostra de 30 senadores...")
+            lista = requests.get(f"{BASE_SENADO}/senador/lista/atual",
+                                 headers={'Accept':'application/json'}, timeout=15
+                                 ).json()['ListaParlamentarEmExercicio']['Parlamentares']['Parlamentar']
+            alvos = [{"sid": s['IdentificacaoParlamentar']['CodigoParlamentar'], 
+                      "nome": s['IdentificacaoParlamentar']['NomeParlamentar'],
+                      "part": s['IdentificacaoParlamentar'].get('SiglaPartidoParlamentar',''),
+                      "uf": s['IdentificacaoParlamentar'].get('UfParlamentar','')} for s in lista[:30]]
+
+        top10_status["total"] = len(alvos)
         resultados = []
-        for i, s in enumerate(sample):
-            ident = s['IdentificacaoParlamentar']
-            sid   = ident['CodigoParlamentar']
-            nome  = ident['NomeParlamentar']
+        for i, alvo in enumerate(alvos):
+            sid = alvo['sid']
+            nome = alvo['nome']
             top10_status["progresso"] = i + 1
             try:
                 discs = scrape_senado_discursos(sid, qtd=2)
@@ -149,8 +161,8 @@ def computar_top10():
                 melhor = max(scores_v, key=lambda x: x[1])
                 resultados.append({
                     "id": sid, "nome": nome,
-                    "partido": ident.get('SiglaPartidoParlamentar',''),
-                    "uf": ident.get('UfParlamentar',''),
+                    "partido": alvo['part'],
+                    "uf": alvo['uf'],
                     "score_medio": round(avg, 4),
                     "total_votos": len(votos),
                     "discurso_preview": discs[0]['preview'],
@@ -160,14 +172,14 @@ def computar_top10():
                     "data_analise": time.strftime('%Y-%m-%d %H:%M')
                 })
             except Exception as e2:
-                print(f"Erro analisando senador {sid}: {e2}")
+                print(f"Erro analisando parlamentar {sid}: {e2}")
         resultados.sort(key=lambda x: x['score_medio'], reverse=True)
         top10 = resultados[:10]
         top10_status.update({"status": "done", "dados": top10})
         with open(TOP10_FILE, 'w', encoding='utf-8') as f:
             json.dump({"gerado_em": time.strftime('%Y-%m-%d %H:%M'), "dados": top10},
                       f, ensure_ascii=False, indent=2)
-        print(f"[OK] Top 10 computado e salvo em {TOP10_FILE}")
+        print(f"[OK] Top 10 atualizado e salvo em {TOP10_FILE}")
     except Exception as e:
         top10_status.update({"status": "erro", "erro": str(e)})
         print(f"[ERRO] computar_top10: {e}")
