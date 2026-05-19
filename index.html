@@ -1,431 +1,582 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JARVIS Command Center</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dito e Feito — Monitoramento Legislativo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --card: #1a2236;
+    --border: #2a3650;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --text: #e2e8f0;
+    --muted: #64748b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700;900&display=swap"
-    rel="stylesheet" />
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  header p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .status-dot {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--muted);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+  .dot.online { background: var(--green); box-shadow: 0 0 8px var(--green); }
 
-  <!-- React & ReactDOM -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  /* MAIN */
+  main { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
-  <!-- PropTypes (required by Recharts) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
+  /* SEARCH CARD */
+  .search-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    margin-bottom: 32px;
+  }
+  .search-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+  .search-card p { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
 
-  <!-- Recharts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.12.7/Recharts.min.js"></script>
+  .form-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: 14px;
+    align-items: end;
+  }
+  label { display: block; font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.6px; }
+  select, input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color .2s;
+    appearance: none;
+  }
+  select:focus, input:focus { border-color: var(--accent); }
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '▾';
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); pointer-events: none; font-size: 12px;
+  }
 
-  <!-- Babel -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  /* Search input with icon */
+  .input-wrap { position: relative; }
+  .input-wrap input { padding-left: 36px; }
+  .input-wrap .search-icon {
+    position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 15px;
+  }
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            bg: '#071018',
-            card: '#0B1622',
-            highlight: '#00D9FF',
-            textMain: '#E6F1FF',
-            textSec: '#7FA3B8',
-          },
-          fontFamily: {
-            orbitron: ['Orbitron', 'sans-serif'],
-            inter: ['Inter', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
+  .btn-search {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none; border-radius: 10px; color: #fff;
+    font-size: 14px; font-weight: 600; font-family: inherit;
+    padding: 11px 28px; cursor: pointer;
+    transition: opacity .2s, transform .1s;
+    white-space: nowrap;
+  }
+  .btn-search:hover { opacity: .88; }
+  .btn-search:active { transform: scale(.97); }
+  .btn-search:disabled { opacity: .4; cursor: default; }
 
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .glass-panel {
-        @apply bg-card border border-highlight/10 rounded-xl p-5 shadow-lg relative overflow-hidden;
-      }
-      .panel-title {
-        @apply text-xs font-orbitron font-medium text-textMain tracking-[0.2em] uppercase mb-6 flex items-center gap-3;
-      }
-      .panel-title::before {
-        content: '';
-        @apply block w-1 h-3 bg-highlight rounded-full;
-      }
-    }
-    
-    body {
-      background-color: #071018;
-      color: #E6F1FF;
-      /* Subtle grid background to keep the tech vibe but clean */
-      background-image: 
-        linear-gradient(rgba(0, 217, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 217, 255, 0.02) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
+  /* Dropdown results */
+  .dropdown {
+    position: absolute; z-index: 100;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: 100%; top: calc(100% + 6px);
+    max-height: 240px; overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    display: none;
+  }
+  .dropdown.show { display: block; }
+  .dropdown-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+    transition: background .15s;
+  }
+  .dropdown-item:last-child { border-bottom: none; }
+  .dropdown-item:hover { background: rgba(59,130,246,.12); }
+  .dropdown-item .partido-badge {
+    font-size: 10px; font-weight: 700;
+    background: rgba(59,130,246,.2); color: var(--accent);
+    border-radius: 5px; padding: 2px 6px;
+    white-space: nowrap;
+  }
+  .dropdown-item .uf { font-size: 11px; color: var(--muted); margin-left: auto; }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #0B1622; }
-    ::-webkit-scrollbar-thumb { background: #7FA3B8; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00D9FF; }
-  </style>
+  /* Selected pill */
+  .selected-pill {
+    display: none;
+    align-items: center; gap: 10px;
+    background: rgba(59,130,246,.12);
+    border: 1px solid rgba(59,130,246,.35);
+    border-radius: 10px; padding: 10px 14px;
+    font-size: 14px; margin-top: 8px;
+  }
+  .selected-pill.show { display: flex; }
+  .selected-pill img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+  .selected-pill .clear-btn {
+    margin-left: auto; cursor: pointer;
+    color: var(--muted); font-size: 16px;
+    background: none; border: none; color: var(--muted);
+  }
+  .selected-pill .clear-btn:hover { color: var(--red); }
+
+  /* LOADING */
+  .loading {
+    display: none;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px; padding: 60px 20px;
+  }
+  .loading.show { display: flex; }
+  .spinner {
+    width: 48px; height: 48px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading p { color: var(--muted); font-size: 14px; }
+
+  /* RESULTS */
+  .results { display: none; }
+  .results.show { display: block; }
+
+  .results-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .results-header h3 { font-size: 17px; font-weight: 600; }
+  .meta-pill {
+    font-size: 12px; color: var(--muted);
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 12px;
+  }
+
+  /* STATS */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px; margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px 20px;
+    text-align: center;
+  }
+  .stat-card .val { font-size: 26px; font-weight: 700; }
+  .stat-card .lbl { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .5px; }
+  .val.green { color: var(--green); }
+  .val.yellow { color: var(--yellow); }
+  .val.red { color: var(--red); }
+
+  /* TABLE */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--card); }
+  th {
+    padding: 14px 16px; text-align: left;
+    font-size: 11px; font-weight: 600; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .6px;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 14px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,.025); }
+
+  .ementa-text { max-width: 360px; line-height: 1.5; }
+  .voto-badge {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 6px;
+    white-space: nowrap;
+  }
+  .voto-sim { background: rgba(16,185,129,.15); color: var(--green); }
+  .voto-nao { background: rgba(239,68,68,.15); color: var(--red); }
+  .voto-outro { background: rgba(100,116,139,.15); color: var(--muted); }
+
+  .status-badge {
+    font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+  }
+  .status-coerente { background: rgba(16,185,129,.15); color: var(--green); border: 1px solid rgba(16,185,129,.3); }
+  .status-parcial  { background: rgba(245,158,11,.15); color: var(--yellow); border: 1px solid rgba(245,158,11,.3); }
+  .status-divergente { background: rgba(239,68,68,.15); color: var(--red); border: 1px solid rgba(239,68,68,.3); }
+
+  .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .score-bar-bg { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 3px; transition: width .5s ease; }
+  .score-val { font-size: 11px; color: var(--muted); width: 36px; text-align: right; }
+
+  /* EMPTY / ERROR */
+  .msg-box {
+    display: none; text-align: center; padding: 50px 20px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  }
+  .msg-box.show { display: block; }
+  .msg-box .icon { font-size: 40px; margin-bottom: 12px; }
+  .msg-box p { color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 700px) {
+    .form-row { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    th, td { padding: 10px 12px; }
+  }
+</style>
 </head>
+<body>
 
-<body class="min-h-screen p-6 antialiased font-inter selection:bg-highlight selection:text-bg">
+<header>
+  <div class="logo-icon">⚖️</div>
+  <div>
+    <h1>Dito e Feito</h1>
+    <p>Monitoramento de Coerência Parlamentar</p>
+  </div>
+  <div class="status-dot">
+    <div class="dot" id="statusDot"></div>
+    <span id="statusText">Verificando API...</span>
+  </div>
+</header>
 
-  <div id="root"></div>
+<main>
 
-  <script type="text/babel">
-    const { useState, useEffect } = React;
-    const {
-      BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-      LineChart, Line, AreaChart, Area, Cell
-    } = window.Recharts;
+  <!-- SEARCH CARD -->
+  <div class="search-card">
+    <h2>🔍 Pesquisar Parlamentar</h2>
+    <p>Selecione o tipo de parlamentar, busque pelo nome e clique em Analisar para ver o relatório de coerência.</p>
 
-    // Custom Tooltip Component for Recharts
-    const CustomTooltip = ({ active, payload, label }) => {
-      if (active && payload && payload.length) {
-        return (
-          <div className="bg-[#071018]/95 border border-highlight/30 p-3 rounded-lg shadow-xl backdrop-blur-sm">
-            <p className="text-textMain font-inter text-xs mb-2 font-semibold">{label}</p>
-            {payload.map((entry, index) => (
-              <p key={index} className="text-[11px] font-inter flex items-center gap-2" style={{ color: entry.color }}>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color }}></span>
-                <span className="uppercase tracking-wider">{entry.name}:</span>
-                <span className="font-orbitron font-medium ml-auto">{entry.value}</span>
-              </p>
-            ))}
-          </div>
-        );
-      }
-      return null;
-    };
-
-    const KPICard = ({ title, value, subtitle, trend }) => (
-      <div className="glass-panel group hover:border-highlight/30 transition-colors duration-300">
-        <h3 className="text-[10px] font-inter text-textSec uppercase tracking-[0.15em] font-medium mb-3">{title}</h3>
-        <div className="flex items-baseline gap-3">
-          <span className="text-3xl font-orbitron font-bold text-highlight tracking-wider">{value}</span>
-          {trend && (
-            <span className={`text-[10px] font-inter font-medium ${trend.startsWith('+') ? 'text-[#00ff88]' : 'text-textSec'}`}>
-              {trend}
-            </span>
-          )}
+    <div class="form-row">
+      <div>
+        <label>Tipo</label>
+        <div class="select-wrap">
+          <select id="tipoSelect" onchange="onTipoChange()">
+            <option value="senador">Senador</option>
+            <option value="deputado">Deputado</option>
+          </select>
         </div>
-        <p className="text-[10px] font-inter text-textSec/60 mt-2 leading-relaxed max-w-[90%]">{subtitle}</p>
       </div>
-    );
 
-    const App = () => {
-      const [data, setData] = useState(null);
-      const [loading, setLoading] = useState(true);
-
-      useEffect(() => {
-        fetch('./metrics.json')
-          .then(res => res.json())
-          .then(jsonData => {
-            setData(jsonData);
-            setLoading(false);
-          })
-          .catch(err => {
-            console.error("Failed to load metrics:", err);
-            setLoading(false);
-          });
-      }, []);
-
-      if (loading) {
-        return (
-          <div className="h-screen flex flex-col items-center justify-center gap-4">
-            <div className="w-12 h-12 border-2 border-highlight/20 border-t-highlight rounded-full animate-spin"></div>
-            <p className="font-orbitron text-sm text-highlight tracking-[0.3em] uppercase">Inicializando Sistemas...</p>
-          </div>
-        );
-      }
-
-      if (!data) {
-        return (
-          <div className="h-screen flex items-center justify-center">
-            <div className="glass-panel border-red-500/30 text-center">
-              <p className="font-orbitron text-red-400 tracking-widest">FALHA CRÍTICA</p>
-              <p className="text-xs font-inter text-textSec mt-2">Não foi possível carregar os dados de telemetria.</p>
-            </div>
-          </div>
-        );
-      }
-
-      // ─── DATA PREPARATION ──────────────────────────────────────────────
-
-      // KPIs
-      const kpiData = {
-        commits: data.totalCommits ?? data.team?.total_commits ?? 0,
-        contributors: data.team?.total_contributors ?? Object.keys(data.commitsPerAuthor ?? {}).length ?? 0,
-        issues: data.totalIssues ?? 0,
-        prs: data.totalPRs ?? data.pull_requests_summary?.total ?? 0,
-        avgIssueTime: data.avgIssueCloseHours !== undefined ? data.avgIssueCloseHours.toFixed(1) : (data.issues_summary?.avg_close_hours?.toFixed(1) ?? 'N/A')
-      };
-
-      // Top Contributors
-      const rawContributors = data.detailedContributors && Object.keys(data.detailedContributors).length > 0
-        ? Object.entries(data.detailedContributors).map(([name, stats]) => ({ name, ...stats }))
-        : (data.commitsPerAuthor ? Object.entries(data.commitsPerAuthor).map(([name, commits]) => ({ name, commits })) : []);
-
-      const mappedContributors = rawContributors.map(c => ({
-        name: c.name.split(' ')[0], // First name for clarity
-        commits: c.commits,
-        additions: c.additions !== undefined ? c.additions : Math.floor(c.commits * (Math.random() * 50 + 10))
-      }));
-
-      const topByCommits = [...mappedContributors]
-        .sort((a, b) => b.commits - a.commits)
-        .slice(0, 7);
-
-      const topByAdditions = [...mappedContributors]
-        .sort((a, b) => b.additions - a.additions)
-        .slice(0, 7);
-
-      // Activity Heatmap (Hourly) -> Transformed to a clear Bar Chart
-      const rawHourly = data.temporal?.commits_by_hour || Array.from({ length: 24 }, (_, i) => ({ hour: i, commits: Math.floor(Math.random() * 15) }));
-      const hourlyData = rawHourly.map(h => ({
-        time: `${h.hour}h`,
-        commits: h.commits
-      }));
-
-      // Productivity by Weekday
-      const rawDaily = data.temporal?.commits_by_day || [
-        { day: 'Seg', commits: 10 }, { day: 'Ter', commits: 25 }, { day: 'Qua', commits: 15 },
-        { day: 'Qui', commits: 30 }, { day: 'Sex', commits: 20 }, { day: 'Sáb', commits: 5 }, { day: 'Dom', commits: 2 }
-      ];
-
-      // Issues by week
-      const issuesByWeekData = data.temporal?.issues_by_week || [];
-
-      // Commit Timeline (Mocked trend over last 7 entries for area chart)
-      const trendData = data.recent_commits
-        ? data.recent_commits.slice(0, 10).reverse().map((c, i) => ({ name: `T-${10 - i}`, val: Math.floor(Math.random() * 20) + 5 }))
-        : Array.from({ length: 10 }, (_, i) => ({ name: `Day ${i + 1}`, val: Math.floor(Math.random() * 20) + 5 }));
-
-      // Recent Commits List
-      const recentCommits = (data.recent_commits || data.recentCommits || []).slice(0, 6);
-
-      // AI Insights Generation (Based on data)
-      const busiestHour = rawHourly.reduce((max, h) => h.commits > max.commits ? h : max, rawHourly[0]);
-      const busiestDay = rawDaily.reduce((max, d) => d.commits > max.commits ? d : max, rawDaily[0]);
-
-      const insights = [
-        {
-          title: "Pico de Atividade Diária",
-          desc: `O volume máximo de modificações ocorre sistematicamente às ${busiestHour.hour}h (${busiestHour.commits} commits registrados).`,
-          type: "focus"
-        },
-        {
-          title: "Padrão de Distribuição",
-          desc: `${busiestDay.day} apresenta a maior taxa de integração de código da semana, indicando janelas de deploy consolidadas.`,
-          type: "trend"
-        },
-        {
-          title: "Eficiência de Resolução",
-          desc: kpiData.avgIssueTime !== 'N/A' ? `Issues são resolvidas em média a cada ${kpiData.avgIssueTime} horas. Tempo de ciclo saudável.` : "Sem dados suficientes para cálculo de ciclo de vida de issues.",
-          type: "performance"
-        }
-      ];
-
-      // ─── RENDER ────────────────────────────────────────────────────────
-
-      return (
-        <div className="max-w-[1400px] mx-auto flex flex-col gap-6 pb-12">
-
-          {/* Header */}
-          <header className="flex justify-between items-end pb-4 border-b border-highlight/20 mb-2 mt-4">
-            <div>
-              <h1 className="font-orbitron font-bold text-2xl text-highlight tracking-[0.2em] uppercase">JARVIS <span className="text-textMain font-light">Analytics</span></h1>
-              <p className="font-inter text-xs text-textSec mt-2 tracking-widest uppercase">Repositório: UNB-MDS/2026-1-SQUAD4-DITO_E_FEITO</p>
-            </div>
-            <div className="text-right">
-              <p className="font-inter text-[10px] text-textSec uppercase tracking-widest mb-1">Status do Sistema: <span className="text-[#00ff88]">Online</span></p>
-              <p className="font-inter text-[10px] text-textSec uppercase tracking-widest">
-                Sincronizado: <span className="text-textMain font-medium">{data.generatedAt ? new Date(data.generatedAt).toLocaleString('pt-BR') : 'Tempo Real'}</span>
-              </p>
-            </div>
-          </header>
-
-          {/* Row 1: KPIs */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <KPICard title="Total Commits" value={kpiData.commits} subtitle="Registros consolidados no repositório" />
-            <KPICard title="Contribuidores" value={kpiData.contributors} subtitle="Membros ativos com push rights" />
-            <KPICard title="Total Issues" value={kpiData.issues} subtitle="Rastreamento de tarefas e bugs" />
-            <KPICard title="Pull Requests" value={kpiData.prs} subtitle="Métricas de code review (mesclados)" />
-            <KPICard title="T. Médio Resolução" value={kpiData.avgIssueTime} subtitle="Ciclo de vida de issues (horas)" />
-          </div>
-
-          {/* Row 2: Top Contributors & Productivity by Weekday */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            <div className="glass-panel min-h-[320px]">
-              <h2 className="panel-title">Ranking de Commits</h2>
-              <div className="h-[250px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={topByCommits} margin={{ top: 10, right: 30, left: 30, bottom: 0 }} layout="vertical">
-                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={true} horizontal={false} opacity={0.1} />
-                    <XAxis type="number" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
-                    <YAxis dataKey="name" type="category" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
-                    <Tooltip content={<CustomTooltip />} cursor={{ fill: '#00D9FF', opacity: 0.05 }} />
-                    <Bar dataKey="commits" name="Commits" fill="#00D9FF" radius={[0, 4, 4, 0]} barSize={16} label={{ position: 'right', fill: '#E6F1FF', fontSize: 10, fontFamily: 'Inter' }} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            <div className="glass-panel min-h-[320px]">
-              <h2 className="panel-title">Ranking de Adições de Linhas</h2>
-              <div className="h-[250px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={topByAdditions} margin={{ top: 10, right: 40, left: 30, bottom: 0 }} layout="vertical">
-                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={true} horizontal={false} opacity={0.1} />
-                    <XAxis type="number" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
-                    <YAxis dataKey="name" type="category" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
-                    <Tooltip content={<CustomTooltip />} cursor={{ fill: '#00ff88', opacity: 0.05 }} />
-                    <Bar dataKey="additions" name="Adições" fill="#00ff88" radius={[0, 4, 4, 0]} barSize={16} label={{ position: 'right', fill: '#E6F1FF', fontSize: 10, fontFamily: 'Inter' }} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            <div className="glass-panel min-h-[320px]">
-              <h2 className="panel-title">Distribuição Semanal de Produtividade</h2>
-              <div className="h-[250px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={rawDaily} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={false} opacity={0.1} />
-                    <XAxis dataKey="day" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
-                    <YAxis stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
-                    <Tooltip content={<CustomTooltip />} cursor={{ fill: '#00D9FF', opacity: 0.05 }} />
-                    <Bar dataKey="commits" name="Commits" fill="#00D9FF" radius={[4, 4, 0, 0]} barSize={30}>
-                      {rawDaily.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.commits === busiestDay.commits ? '#00D9FF' : 'rgba(0, 217, 255, 0.3)'} />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Row 3: Hourly Heatmap & Issues by Week */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            <div className="glass-panel lg:col-span-2">
-              <h2 className="panel-title">Volume de Integração por Hora do Dia</h2>
-              <div className="h-[220px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={hourlyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="colorCommits" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#00D9FF" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#00D9FF" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={false} opacity={0.1} />
-                    <XAxis dataKey="time" stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} interval="preserveStartEnd" minTickGap={20} />
-                    <YAxis stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Area type="monotone" dataKey="commits" name="Commits" stroke="#00D9FF" strokeWidth={2} fillOpacity={1} fill="url(#colorCommits)" activeDot={{ r: 6, fill: '#00D9FF', stroke: '#071018', strokeWidth: 2 }} />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-              <p className="text-[10px] font-inter text-textSec mt-4 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-highlight"></span>
-                O eixo Y representa a volumetria absoluta histórica de commits registrados para cada hora do dia.
-              </p>
-            </div>
-
-            <div className="glass-panel">
-              <h2 className="panel-title">Issues Abertas por Semana</h2>
-              <div className="h-[220px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={issuesByWeekData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#7FA3B8" vertical={false} opacity={0.1} />
-                    <XAxis dataKey="week" stroke="#7FA3B8" tick={{ fill: '#E6F1FF', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} tickFormatter={(tick) => tick.slice(5)} />
-                    <YAxis stroke="#7FA3B8" tick={{ fill: '#7FA3B8', fontSize: 10, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Line type="monotone" dataKey="count" name="Issues" stroke="#00ff88" strokeWidth={2} dot={{ r: 4, fill: '#00ff88', stroke: '#071018', strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-              <p className="text-[10px] font-inter text-textSec mt-4 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#00ff88]"></span>
-                Volume de criação ao longo do tempo.
-              </p>
-            </div>
-
-          </div>
-
-          {/* Row 4: Recent Commits & AI Insights */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            {/* Recent Commits */}
-            <div className="glass-panel lg:col-span-2">
-              <h2 className="panel-title">Log de Commits Recentes</h2>
-              <div className="flex flex-col gap-1 overflow-y-auto pr-2" style={{ maxHeight: '250px' }}>
-                {recentCommits.length > 0 ? recentCommits.map((c, idx) => (
-                  <div key={idx} className="flex items-start gap-4 p-3 rounded hover:bg-highlight/5 border-l-2 border-transparent hover:border-highlight transition-colors group">
-                    <div className="mt-1">
-                      {c.verified ?? true ? (
-                        <svg className="w-4 h-4 text-[#00ff88]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                      ) : (
-                        <svg className="w-4 h-4 text-textSec" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-inter text-textMain truncate">{c.message || c.msg}</p>
-                      <div className="flex gap-4 mt-1">
-                        <span className="text-[10px] font-orbitron text-highlight tracking-wider">{(c.sha || '').slice(0, 7)}</span>
-                        <span className="text-[10px] font-inter text-textSec uppercase">{c.author}</span>
-                        <span className="text-[10px] font-inter text-textSec uppercase">{c.date ? new Date(c.date).toLocaleDateString('pt-BR') : ''}</span>
-                      </div>
-                    </div>
-                  </div>
-                )) : (
-                  <p className="text-xs font-inter text-textSec p-4">Sem registros recentes disponíveis.</p>
-                )}
-              </div>
-            </div>
-
-            {/* AI Insights */}
-            <div className="glass-panel">
-              <h2 className="panel-title text-highlight">Análise Assistida</h2>
-              <div className="flex flex-col gap-4">
-                {insights.map((ins, idx) => (
-                  <div key={idx} className="bg-highlight/5 border border-highlight/10 rounded p-4">
-                    <h4 className="text-xs font-inter font-semibold text-textMain mb-1 flex items-center gap-2">
-                      <svg className="w-3 h-3 text-highlight" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                      {ins.title}
-                    </h4>
-                    <p className="text-[11px] font-inter text-textSec leading-relaxed">{ins.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-          </div>
-
+      <div>
+        <label>Nome do Parlamentar</label>
+        <div class="input-wrap" style="position:relative">
+          <span class="search-icon">🔎</span>
+          <input type="text" id="searchInput" placeholder="Digite o nome..." autocomplete="off"
+                 oninput="onSearch()" onfocus="showDropdown()" onblur="hideDropdown()">
+          <div class="dropdown" id="dropdown"></div>
         </div>
-      );
-    };
+        <div class="selected-pill" id="selectedPill">
+          <img id="selectedFoto" src="" alt="">
+          <div>
+            <div id="selectedNome" style="font-weight:600;font-size:13px"></div>
+            <div id="selectedInfo" style="font-size:11px;color:var(--muted)"></div>
+          </div>
+          <button class="clear-btn" onclick="clearSelection()">✕</button>
+        </div>
+      </div>
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
+      <div>
+        <label>&nbsp;</label>
+        <button class="btn-search" id="btnAnalisar" onclick="analisar()" disabled>Analisar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p id="loadingText">Buscando votos e discursos...</p>
+  </div>
+
+  <!-- ERROR BOX -->
+  <div class="msg-box" id="errorBox">
+    <div class="icon">⚠️</div>
+    <p id="errorMsg"></p>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="results-header">
+      <h3 id="resultsTitle">Top 10 Votações por Coerência</h3>
+      <span class="meta-pill" id="metaPill"></span>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="val green" id="statCoerente">—</div>
+        <div class="lbl">Coerente</div>
+      </div>
+      <div class="stat-card">
+        <div class="val yellow" id="statParcial">—</div>
+        <div class="lbl">Parcialmente Alinhado</div>
+      </div>
+      <div class="stat-card">
+        <div class="val red" id="statDivergente">—</div>
+        <div class="lbl">Divergente</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Data</th>
+            <th>Ementa da Votação</th>
+            <th>Voto</th>
+            <th>Afinidade</th>
+            <th>Status de Coerência</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const API = 'http://localhost:5000/api';
+let parlamentares = [];
+let selectedParl = null;
+let dropdownVisible = false;
+
+// ── Inicialização ──
+window.onload = async () => {
+  await checkHealth();
+  await carregarParlamentares();
+};
+
+async function checkHealth() {
+  try {
+    const res = await fetch(`${API}/health`);
+    const data = await res.json();
+    document.getElementById('statusDot').classList.add('online');
+    document.getElementById('statusText').textContent = `API online${data.bert_disponivel ? ' · BERT ativo' : ' · Similaridade Jaccard'}`;
+  } catch {
+    document.getElementById('statusText').textContent = 'API offline — inicie api.py';
+  }
+}
+
+async function carregarParlamentares() {
+  const tipo = document.getElementById('tipoSelect').value;
+  const endpoint = tipo === 'deputado' ? 'deputados' : 'senadores';
+  try {
+    const res = await fetch(`${API}/${endpoint}`);
+    const data = await res.json();
+    parlamentares = data.dados || [];
+  } catch {
+    parlamentares = [];
+  }
+}
+
+function onTipoChange() {
+  clearSelection();
+  carregarParlamentares();
+}
+
+// ── Busca / Dropdown ──
+function onSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  selectedParl = null;
+  document.getElementById('selectedPill').classList.remove('show');
+  document.getElementById('btnAnalisar').disabled = true;
+
+  if (q.length < 2) { hideDropdownNow(); return; }
+
+  const filtered = parlamentares.filter(p => p.nome.toLowerCase().includes(q)).slice(0, 8);
+  renderDropdown(filtered);
+}
+
+function renderDropdown(lista) {
+  const dd = document.getElementById('dropdown');
+  if (!lista.length) { dd.classList.remove('show'); return; }
+  dd.innerHTML = lista.map(p => `
+    <div class="dropdown-item" onmousedown="selectParl(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+      <span>${p.nome}</span>
+      <span class="partido-badge">${p.partido}</span>
+      <span class="uf">${p.uf}</span>
+    </div>
+  `).join('');
+  dd.classList.add('show');
+}
+
+function showDropdown() { dropdownVisible = true; }
+function hideDropdown() { setTimeout(hideDropdownNow, 150); }
+function hideDropdownNow() {
+  document.getElementById('dropdown').classList.remove('show');
+}
+
+function selectParl(p) {
+  selectedParl = p;
+  document.getElementById('searchInput').value = p.nome;
+  hideDropdownNow();
+
+  const pill = document.getElementById('selectedPill');
+  const foto = document.getElementById('selectedFoto');
+  foto.src = p.foto || '';
+  foto.style.display = p.foto ? 'block' : 'none';
+  document.getElementById('selectedNome').textContent = p.nome;
+  document.getElementById('selectedInfo').textContent = `${p.partido} · ${p.uf}`;
+  pill.classList.add('show');
+  document.getElementById('btnAnalisar').disabled = false;
+}
+
+function clearSelection() {
+  selectedParl = null;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('selectedPill').classList.remove('show');
+  document.getElementById('btnAnalisar').disabled = true;
+  hideDropdownNow();
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('errorBox').classList.remove('show');
+}
+
+// ── Análise ──
+async function analisar() {
+  if (!selectedParl) return;
+
+  const tipo = document.getElementById('tipoSelect').value;
+
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('errorBox').classList.remove('show');
+  document.getElementById('loading').classList.add('show');
+  document.getElementById('loadingText').textContent = 'Buscando votos e discursos... isso pode levar ~30s';
+  document.getElementById('btnAnalisar').disabled = true;
+
+  try {
+    const res = await fetch(`${API}/analisar`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: selectedParl.id, tipo })
+    });
+
+    const data = await res.json();
+    document.getElementById('loading').classList.remove('show');
+
+    if (data.status === 'erro') {
+      showError(data.mensagem);
+      return;
+    }
+
+    if (data.status === 'aviso' || !data.dados?.length) {
+      showError(data.mensagem || 'Sem dados suficientes para análise.');
+      return;
+    }
+
+    renderResults(data, selectedParl, tipo);
+
+  } catch (e) {
+    document.getElementById('loading').classList.remove('show');
+    showError('Erro de conexão. Verifique se a api.py está rodando (python api.py).');
+  } finally {
+    document.getElementById('btnAnalisar').disabled = false;
+  }
+}
+
+function showError(msg) {
+  document.getElementById('errorMsg').textContent = msg;
+  document.getElementById('errorBox').classList.add('show');
+}
+
+function renderResults(data, parl, tipo) {
+  document.getElementById('resultsTitle').textContent =
+    `Top 10 Votações — ${parl.nome}`;
+  document.getElementById('metaPill').textContent =
+    `${data.total_votos_analisados} votos analisados · Modelo: ${data.modelo_usado}`;
+
+  let coerente = 0, parcial = 0, divergente = 0;
+  const rows = data.dados.map((item, i) => {
+    if (item.status === 'Coerente') coerente++;
+    else if (item.status === 'Parcialmente Alinhado') parcial++;
+    else divergente++;
+
+    const pct = Math.round(item.afinidade * 100);
+    const barColor = item.afinidade >= 0.7 ? 'var(--green)' : item.afinidade >= 0.6 ? 'var(--yellow)' : 'var(--red)';
+
+    let votoBadge = `<span class="voto-badge voto-outro">${item.voto}</span>`;
+    const vl = (item.voto || '').toLowerCase();
+    if (vl.includes('sim') || vl === 's') votoBadge = `<span class="voto-badge voto-sim">${item.voto}</span>`;
+    else if (vl.includes('não') || vl.includes('nao') || vl === 'n') votoBadge = `<span class="voto-badge voto-nao">${item.voto}</span>`;
+
+    let statusBadge, statusClass;
+    if (item.status === 'Coerente') { statusBadge = '✅ Coerente'; statusClass = 'status-coerente'; }
+    else if (item.status === 'Parcialmente Alinhado') { statusBadge = '🟡 Parcial'; statusClass = 'status-parcial'; }
+    else { statusBadge = '❌ Divergente'; statusClass = 'status-divergente'; }
+
+    return `<tr>
+      <td style="color:var(--muted);font-weight:600">${i+1}</td>
+      <td style="white-space:nowrap;color:var(--muted)">${item.data}</td>
+      <td class="ementa-text">${item.ementa || '—'}</td>
+      <td>${votoBadge}</td>
+      <td>
+        <div class="score-bar-wrap">
+          <div class="score-bar-bg">
+            <div class="score-bar-fill" style="width:${pct}%;background:${barColor}"></div>
+          </div>
+          <span class="score-val">${pct}%</span>
+        </div>
+      </td>
+      <td><span class="status-badge ${statusClass}">${statusBadge}</span></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('statCoerente').textContent = coerente;
+  document.getElementById('statParcial').textContent = parcial;
+  document.getElementById('statDivergente').textContent = divergente;
+  document.getElementById('tableBody').innerHTML = rows;
+  document.getElementById('results').classList.add('show');
+}
+</script>
 </body>
-
 </html>
