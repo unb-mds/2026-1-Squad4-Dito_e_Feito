@@ -1,0 +1,54 @@
+name: Repo Metrics
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+      - aula-11-05
+
+  schedule:
+    - cron: '*/5 * * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm install axios
+
+      - name: Generate metrics dashboard
+        run: node scripts/collect.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+
+      - name: Debug generated files
+        run: |
+          echo "=== GENERATED FILES ==="
+          ls -la index.html metrics.json
+
+          echo "=== METRICS JSON ==="
+          cat metrics.json
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
+          force_orphan: true
