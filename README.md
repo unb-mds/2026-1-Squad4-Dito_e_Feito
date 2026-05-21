@@ -1,7 +1,12 @@
 # Dito e Feito  
+
 ### Análise política com IA
 
 O **Dito e Feito** é um sistema de análise de coerência política que compara discursos de parlamentares com seus votos reais em plenário. O objetivo do projeto é promover transparência e apoiar a análise de comportamento legislativo por meio de dados e inteligência artificial.
+
+# Dashboard de métricas
+
+Link Dashboard de métricas de produtividade: https://unb-mds.github.io/2026-1-Squad4-Dito_e_Feito/analytics/
 
 ---
 
