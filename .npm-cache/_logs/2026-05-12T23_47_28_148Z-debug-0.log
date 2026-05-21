@@ -13,3 +13,13 @@
 12 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
 13 http fetch GET 200 https://registry.npmjs.org/create-vite 1073ms (cache miss)
 14 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+15 verbose cwd /Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/analytics/frontend
+16 verbose os Darwin 21.6.0
+17 verbose node v24.14.0
+18 verbose npm  v11.9.0
+19 error Exit handler never called!
+20 error This is an error with npm itself. Please report this error at:
+21 error   <https://github.com/npm/cli/issues>
+22 verbose exit 1
+23 verbose code 1
+24 error A complete log of this run can be found in: /Users/gustavo/Documents/mds/2026-1-Squad4-Dito_e_Feito/.npm-cache/_logs/2026-05-12T23_47_28_148Z-debug-0.log
