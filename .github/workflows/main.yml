@@ -45,10 +45,27 @@ jobs:
           echo "=== METRICS JSON ==="
           cat metrics.json
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs Material
+        run: pip install mkdocs-material
+
+      - name: Build MkDocs documentation
+        run: mkdocs build -f proj_docs/mkdocs.yml -d ../dist
+
+      - name: Prepare Dashboard for subroute /analytics
+        run: |
+          mkdir -p dist/analytics
+          cp analytics/index.html dist/analytics/index.html
+          cp metrics.json dist/analytics/metrics.json
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./dist
           publish_branch: gh-pages
           force_orphan: true
