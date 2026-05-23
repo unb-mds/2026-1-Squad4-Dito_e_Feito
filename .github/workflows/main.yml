@@ -54,7 +54,7 @@ jobs:
         run: pip install mkdocs-material
 
       - name: Build MkDocs documentation
-        run: mkdocs build -f proj_docs/mkdocs.yml -d ../dist
+        run: mkdocs build -f mkdocs.yml -d dist
 
       - name: Prepare Dashboard for subroute /analytics
         run: |
