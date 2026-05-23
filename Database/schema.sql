@@ -1,6 +1,3 @@
--- Habilitar UUID
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-
 -- Parlamentar
 CREATE TABLE parlamentar (
     id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -18,15 +15,17 @@ CREATE TABLE parlamentar (
 
 -- Discurso
 CREATE TABLE discurso (
-    id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    id_externo      BIGINT UNIQUE,
-    parlamentar_id  UUID NOT NULL REFERENCES parlamentar(id) ON DELETE CASCADE,
-    data_hora       TIMESTAMPTZ NOT NULL,
-    sumario         TEXT,
-    transcricao     TEXT,
-    palavras_chave  TEXT[],
-    dados_api       JSONB,
-    criado_em       TIMESTAMPTZ DEFAULT now()
+    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id_externo        BIGINT UNIQUE,
+    parlamentar_id    UUID NOT NULL REFERENCES parlamentar(id) ON DELETE CASCADE,
+    data_hora         TIMESTAMPTZ NOT NULL,
+    sumario           TEXT,
+    transcricao       TEXT,
+    palavras_chave    TEXT[],
+    embedding         vector(768),
+    modelo_embedding  TEXT DEFAULT 'neuralmind/bert-base-portuguese-cased',
+    dados_api         JSONB,
+    criado_em         TIMESTAMPTZ DEFAULT now()
 );
 
 -- Proposição
@@ -43,14 +42,15 @@ CREATE TABLE proposicao (
 
 -- Votação
 CREATE TABLE votacao (
-    id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    id_externo      TEXT UNIQUE,
-    proposicao_id   UUID REFERENCES proposicao(id) ON DELETE SET NULL,
-    data_hora       TIMESTAMPTZ NOT NULL,
-    descricao       TEXT,
-    aprovada        BOOLEAN,
-    dados_api       JSONB,
-    criado_em       TIMESTAMPTZ DEFAULT now()
+    id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id_externo          TEXT UNIQUE,
+    proposicao_id       UUID REFERENCES proposicao(id) ON DELETE SET NULL,
+    data_hora           TIMESTAMPTZ NOT NULL,
+    descricao           TEXT,
+    aprovada            BOOLEAN,
+    embedding_ementa    vector(768),
+    dados_api           JSONB,
+    criado_em           TIMESTAMPTZ DEFAULT now()
 );
 
 -- Tipo ENUM para resultado do voto
@@ -78,6 +78,7 @@ CREATE TABLE score_coerencia (
     similaridade_coseno FLOAT,
     modelo_usado        TEXT,
     justificativa       TEXT,
+    status_coerencia    TEXT CHECK (status_coerencia IN ('Coerente', 'Parcialmente Alinhado', 'Tema Divergente')),
     calculado_em        TIMESTAMPTZ DEFAULT now()
 );
 
@@ -88,3 +89,6 @@ CREATE INDEX idx_voto_votacao         ON voto(votacao_id);
 CREATE INDEX idx_score_parlamentar    ON score_coerencia(parlamentar_id);
 CREATE INDEX idx_parlamentar_partido  ON parlamentar(sigla_partido);
 CREATE INDEX idx_parlamentar_uf       ON parlamentar(sigla_uf);
+CREATE INDEX idx_score_status         ON score_coerencia(status_coerencia);
+CREATE INDEX idx_discurso_embedding   ON discurso USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+CREATE INDEX idx_votacao_embedding    ON votacao USING ivfflat (embedding_ementa vector_cosine_ops) WITH (lists = 100);
