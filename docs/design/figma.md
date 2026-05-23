@@ -25,3 +25,10 @@ Este documento centraliza o acesso e as definições visuais estabelecidas no pr
 
 ---
 *Última atualização baseada no progresso da Sprint 04.*
+
+## 👥 Autores
+
+| Nome | Matrícula | GitHub |
+|------|------|------|
+| GABRIEL VELHO DE SOUZA | 242015218 | Velho008 |
+| SAUHAN FERREIRA MELO | 242024923 | SUDOTMOX | 
