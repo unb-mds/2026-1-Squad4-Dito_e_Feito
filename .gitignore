@@ -1,0 +1,20 @@
+# Ambientes Virtuais de Python
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+
+# Cache de pacotes e ferramentas
+.npm-cache/
+node_modules/
+
+# Pastas de Build e Distribuição
+dist/
+proj_docs/site/
+site/
+
+# IDEs e configurações locais do desenvolvedor
+.vscode/python-envs.defaultEnvManager
+.DS_Store
+*.log

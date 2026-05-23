@@ -1,4 +1,4 @@
-# Dito e Feito  
+# ⚖️ Dito e Feito  
 
 ### Análise política com IA
 
@@ -54,3 +54,15 @@ E responde:
 - Chart.js / Recharts
 
 ---
+
+## Estrutura do Repositório
+
+O projeto está organizado seguindo uma estrutura limpa e padronizada que separa o código-fonte da aplicação da documentação gerada pela equipe:
+
+* **[backend/](backend/)**: Contém a API REST em Python (FastAPI), scripts de processamento e a modelagem do banco de dados relacional.
+* **[docs/](docs/)**: Centraliza todas as atas de reuniões, requisitos, estudos e guias que compõem a documentação oficial (MkDocs).
+* **[analytics/](analytics/)**: Código-fonte do painel de métricas de produtividade do squad.
+* **`index.html`**: Frontend principal da aplicação (Interface do Usuário).
+
+Para compreender detalhadamente a finalidade de cada diretório e arquivo do projeto, acesse o guia completo de **[Estrutura de Pastas (ESTRUTURA.md)](ESTRUTURA.md)** na raiz do repositório.
+
