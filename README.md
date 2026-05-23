@@ -1,4 +1,4 @@
-# Dito e Feito  
+# ⚖️ Dito e Feito  
 
 ### Análise política com IA
 
@@ -55,7 +55,7 @@ E responde:
 
 ---
 
-## 📁 Estrutura do Repositório
+## Estrutura do Repositório
 
 O projeto está organizado seguindo uma estrutura limpa e padronizada que separa o código-fonte da aplicação da documentação gerada pela equipe:
 
