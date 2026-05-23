@@ -65,3 +65,4 @@ O projeto está organizado seguindo uma estrutura limpa e padronizada que separa
 * **`index.html`**: Frontend principal da aplicação (Interface do Usuário).
 
 Para compreender detalhadamente a finalidade de cada diretório e arquivo do projeto, acesse o guia completo de **[Estrutura de Pastas (ESTRUTURA.md)](ESTRUTURA.md)** na raiz do repositório.
+
