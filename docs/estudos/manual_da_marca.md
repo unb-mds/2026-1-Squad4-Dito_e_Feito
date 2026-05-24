@@ -26,13 +26,13 @@ A paleta de cores foi pensada para transmitir **seriedade, confiança e eficiên
 
 A tipografia foi escolhida para priorizar **legibilidade, clareza e profissionalismo**, sem perder modernidade.
 
-## 🧭 Hierarquia tipográfica
+    ## 🧭 Hierarquia tipográfica
 
-- **Títulos principais (H1):** IBM Plex Sans Bold  
-- **Subtítulos (H2 / H3):** IBM Plex Sans Medium  
-- **Texto geral:** Inter Regular  
-- **Botões e ações:** Inter SemiBold  
-- **Labels pequenos:** Inter Medium / Regular  
+    - **Títulos principais (H1):** IBM Plex Sans Bold  
+    - **Subtítulos (H2 / H3):** IBM Plex Sans Medium  
+    - **Texto geral:** Inter Regular  
+    - **Botões e ações:** Inter SemiBold  
+    - **Labels pequenos:** Inter Medium / Regular  
 
 ---
 
