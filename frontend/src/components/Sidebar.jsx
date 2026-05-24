@@ -4,44 +4,43 @@ import { LayoutDashboard, BarChart3, Info, Users, FileText } from 'lucide-react'
 export function Sidebar() {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
-  
-  const baseClass = "flex items-center gap-3 px-3 py-3 rounded-lg transition-colors font-semibold text-sm";
-  const activeClass = "bg-[#0F766E] text-white shadow-md";
-  const inactiveClass = "text-texto-secundario hover:text-white hover:bg-slate-800/60 transition-colors";
+
+  const getLinkClass = (path) => 
+    `flex items-center gap-2.5 p-[10px_12px] rounded-lg text-[14px] font-medium cursor-pointer transition-all select-none mb-0.5 ${isActive(path) ? 'bg-teal text-white' : 'text-text2 hover:text-text-main hover:bg-surface2'}`;
 
   return (
-    <aside className="w-64 bg-surface border-r border-slate-800 flex flex-col h-full">
-      <div className="p-6 mb-4">
-
-        <h1 className="text-2xl font-bold font-display text-white">
-          Dito e Feito
-        </h1>
-
-        <p className="text-xs text-texto-secundario mt-1">
-          Análise Política com IA
-        </p>
-
-         <div className="mt-4 h-px bg-slate-700/60" />
-
+    <aside className="w-[260px] shrink-0 bg-surface border-r border-border flex flex-col h-screen">
+      <div className="p-[20px_20px_16px] border-b border-border">
+        <div className="text-[18px] font-bold text-text-main tracking-[-0.3px]">Dito e Feito</div>
+        <div className="text-[12px] text-text2 mt-0.5">Análise Política com IA</div>
       </div>
-
-      <nav className="flex-1 px-4 space-y-2">
-        <Link to="/" className={`${baseClass} ${isActive('/') ? activeClass : inactiveClass}`}>
-          <LayoutDashboard size={20} /> Visão Geral
+      
+      <nav className="p-[12px_10px] flex-1">
+        <Link to="/" className={getLinkClass('/')}>
+          <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Visão Geral
         </Link>
-        <Link to="/politicos" className={`${baseClass} ${isActive('/politicos') ? activeClass : inactiveClass}`}>
-          <Users size={20} /> Políticos
+        <Link to="/politicos" className={getLinkClass('/politicos')}>
+          <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Políticos
         </Link>
-        <Link to="/comparacao" className={`${baseClass} ${isActive('/comparacao') ? activeClass : inactiveClass}`}>
-          <BarChart3 size={20} /> Comparação (VS)
+        <Link to="/comparacao" className={getLinkClass('/comparacao')}>
+          <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>
+          Comparação (VS)
         </Link>
-        <Link to="/relatorios" className={`${baseClass} ${isActive('/relatorios') ? activeClass : inactiveClass}`}>
-          <FileText size={20} /> Relatórios
+        <Link to="/relatorios" className={getLinkClass('/relatorios')}>
+          <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Relatórios
         </Link>
-        <Link to="/sobre" className={`${baseClass} ${isActive('/sobre') ? activeClass : inactiveClass}`}>
-          <Info size={20} /> Sobre
+        <Link to="/sobre" className={getLinkClass('/sobre')}>
+          <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Sobre
         </Link>
       </nav>
+      
+      <div className="p-[16px_20px] border-t border-border text-[11px] color-text3">
+        Squad 4 · UnB · FGA · 2026
+      </div>
     </aside>
   );
 }

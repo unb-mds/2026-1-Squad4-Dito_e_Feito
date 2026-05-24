@@ -1,22 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-fundo: #0F172A;
-  --color-surface: #1E293B;
-  --color-petroleo: #0F766E;
-  --color-sucesso: #10B981;
-  --color-alerta: #EF4444;
-  --color-texto: #F8FAFC;
-  --color-texto-sec: #94A3B8;
-  --color-borda: #334155;
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-surface2: #1c2128;
+  --color-border: #30363d;
+  --color-border2: #21262d;
+  --color-teal: #14b8a6;
+  --color-teal-bg: rgba(20,184,166,0.12);
+  --color-teal-border: rgba(20,184,166,0.25);
+  --color-red: #ef4444;
+  --color-red-bg: rgba(239,68,68,0.12);
+  --color-green: #22c55e;
+  --color-green-bg: rgba(34,197,94,0.12);
+  --color-text-main: #e6edf3;
+  --color-text2: #8b949e;
+  --color-text3: #484f58;
   
-  --font-display: "DM Serif Display", serif;
-  --font-body: "DM Sans", sans-serif;
-  --font-mono: "DM Mono", monospace;
+  --font-body: 'Inter', system-ui, sans-serif;
 }
 
 @layer base {
   body {
-    @apply bg-fundo text-texto;
+    @apply bg-bg text-text-main font-body;
   }
 }
+
+.main-scroll::-webkit-scrollbar { width: 5px; }
+.main-scroll::-webkit-scrollbar-track { background: transparent; }
+.main-scroll::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }

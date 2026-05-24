@@ -1,109 +1,60 @@
 export function Sobre() {
   const equipe = [
-    { nome: "Gustavo Antonio Rodrigues e Silva", 
-      email: "gus.ant.rod.10@gmail.com", 
-      role: "Monitoramento de Coerência",
-      github: "https://github.com/gus-ant",
-      foto: "https://github.com/gus-ant.png" },
-
-    { nome: "Sauhan Ferreira Melo", 
-      email: "sauhanmello20@gmail.com", 
-      role: "Monitoramento de Notícias",
-      github: "https://github.com/SUDOTMOX",
-      foto: "https://github.com/SUDOTMOX.png" },
-
-    { nome: "Juan Costa Indiano", 
-      email: "juan75indiano@gmail.com", 
-      role: "Engenharia de Software",
-      github: "https://github.com/IndianoDev",
-      foto: "https://github.com/IndianoDev.png" },
-
-    { nome: "Gabriel Velho de Souza", 
-      email: "gabrielvelho08@gmail.com", 
-      role: "Engenharia de Software",
-      github: "https://github.com/Velho008",
-      foto: "https://github.com/Velho008.png" },
-
-    { nome: "Thomaz Marra Martins", 
-      email: "N/A", 
-      role: "N/A",
-      github: "",
-      foto: "" },
+    { nome: "Gustavo Antonio Rodrigues e Silva", email: "gus.ant.rod.10@gmail.com" },
+    { nome: "Lucas Abdalla Nery", email: "nerylucas07@gmail.com" },
+    { nome: "Sauhan Ferreira Melo", email: "sauhanmello20@gmail.com" },
+    { nome: "Juan Costa Indiano", email: "juan75indiano@gmail.com" },
+    { nome: "Gabriel Velho de Souza", email: "gabrielvelho08@gmail.com" },
+    { nome: "Thomaz Marra Martins", email: "" },
   ];
 
   return (
-    <main className="p-8 max-w-4xl mx-auto w-full">
-      <h1 className="text-3xl font-display font-bold text-texto-principal mb-6">
-        Sobre o Projeto
-      </h1>
-      
-      <section className="bg-surface p-8 rounded-lg border border-slate-800 shadow-sm mb-8">
-        <h2 className="text-xl font-display font-bold mb-4 text-brand-petroleo">
-          Dito e Feito: Análise Política com IA
-        </h2>
-        <p className="text-texto-secundario leading-relaxed mb-4">
-          O Dito e Feito é uma plataforma de inteligência de dados focada em transparência governamental. 
-          Utilizamos técnicas de Processamento de Linguagem Natural (NLP), especificamente modelos baseados em Transformers (como o BERTimbau), 
-          para processar discursos e projetos de lei.
-        </p>
-        <p className="text-texto-secundario leading-relaxed">
-          Nosso algoritmo de embeddings semânticos compara o conteúdo falado pelos parlamentares com seus votos nominais no plenário, 
-          gerando um <strong>Score de Coerência</strong> auditável e transparente.
-        </p>
-      </section>
+    <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
+      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+        <div className="bg-surface border border-border rounded-xl p-6 mb-4">
+          <div className="text-[22px] font-bold text-text-main mb-3">Sobre o <strong className="text-teal">Dito e Feito</strong></div>
+          <div className="text-[14px] text-text2 leading-[1.7]">O <strong className="text-teal">Dito e Feito</strong> é uma plataforma de análise política desenvolvida para monitorar a coerência entre o discurso público de parlamentares brasileiros e seus votos reais no Congresso Nacional, utilizando técnicas avançadas de Inteligência Artificial e Processamento de Linguagem Natural (NLP) com embeddings semânticos.</div>
+        </div>
 
-      <section>
-        <div className="mb-6">
-          <div className="flex items-center gap-3">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/681/681494.png"
-              className="w-8 h-8"
-              style={{
-                filter: "invert(40%) sepia(80%) saturate(500%) hue-rotate(160deg)"
-              }}
-            />
-
-            <h2 className="text-2xl font-display font-bold text-texto-principal">
-              Equipe de Desenvolvimento - Squad 4
-            </h2>
+        <div className="mb-4">
+          <div className="text-[18px] font-bold text-text-main mb-3.5">Metodologia</div>
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { title: 'Coleta de Dados', desc: 'Utilizamos as APIs oficiais da Câmara e do Senado.' },
+              { title: 'Análise de NLP', desc: 'Modelos de embeddings processam os discursos.' },
+              { title: 'Comparação Automatizada', desc: 'Algoritmos comparam discursos com os votos.' },
+              { title: 'Score de Coerência', desc: 'Calculamos um índice percentual de coerência.' }
+            ].map((m, i) => (
+              <div key={i} className="flex gap-3.5 p-4 bg-surface border border-border rounded-[10px]">
+                <div className="w-10 h-10 rounded-lg bg-teal-bg border border-teal-border flex items-center justify-center shrink-0 text-teal text-[18px]">⚙️</div>
+                <div>
+                  <div className="text-[14px] font-bold text-text-main mb-1.5">{m.title}</div>
+                  <div className="text-[13px] text-text2 leading-[1.5]">{m.desc}</div>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <p className="text-sm text-texto-secundario mt-2 max-w-2xl">
-            Projeto desenvolvido na <strong>Universidade de Brasilia (UnB)</strong>, vinculado à <strong>Faculdade do Gama (FCTE)</strong>, por alunos de Engenharia de software
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {equipe.map((membro, index) => (
-            <a
-              key={index}
-              href={membro.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex gap-4 bg-surface p-5 rounded-lg border border-slate-800 hover:border-brand-petroleo transition-colors"
-            >
-            <img
-              src={membro.foto}
-              alt={membro.nome}
-              className="w-20 h-20 rounded-full object-cover border border-slate-700 flex-shrink-0"
-            />
-
-            <div className="flex flex-col justify-center">
-              <h3 className="font-bold text-texto-principal">
-                {membro.nome}
-              </h3>
-
-              <p className="text-sm text-brand-petroleo mt-1">
-                {membro.role}
-              </p>
-              <p className="text-xs text-texto-secundario mt-2">
-                {membro.email}
-              </p>
-            </div>
-            </a>
-          ))}
+        <div className="bg-surface border border-border rounded-xl p-6 mb-4">
+          <div className="flex items-center gap-2.5 mb-2">
+            <svg width="20" height="20" className="text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div className="text-[18px] font-bold text-text-main">Equipe - Squad 4</div>
+          </div>
+          <div className="text-[13px] text-text2 mb-4">Projeto desenvolvido na <strong className="text-text-main">Universidade de Brasília (UnB)</strong>, vinculado à <strong className="text-text-main">Faculdade do Gama (FGA)</strong>, por alunos de Engenharia de Software.</div>
+          <div className="grid grid-cols-2 gap-2.5">
+            {equipe.map((m, i) => (
+              <div key={i} className="p-[14px_16px] bg-surface2 border border-border2 rounded-lg">
+                <div className="text-[14px] font-bold text-text-main mb-1">{m.nome}</div>
+                <div className="flex items-center gap-1.5 text-[12px] text-text2">
+                  {m.email && <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>}
+                  {m.email}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }

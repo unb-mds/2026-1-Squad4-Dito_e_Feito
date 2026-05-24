@@ -1,88 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { politicosMock } from './VisaoGeral';
 import { GraficoRadar } from '../components/GraficoRadar';
 
 export function Comparacao() {
+  const [slotA, setSlotA] = useState(null);
+  const [slotB, setSlotB] = useState(null);
+  const [modalOpen, setModalOpen] = useState(null); // 'A' or 'B'
+
+  const availablePol = politicosMock.filter(p => modalOpen === 'A' ? p.id !== slotB?.id : p.id !== slotA?.id);
+
+  const selectPolitico = (p) => {
+    if (modalOpen === 'A') setSlotA(p);
+    else setSlotB(p);
+    setModalOpen(null);
+  };
+
+  const renderSlot = (slot, setSlot, slotName) => {
+    if (!slot) {
+      return (
+        <div onClick={() => setModalOpen(slotName)} className="bg-surface border-2 border-dashed border-border rounded-xl p-[40px_20px] flex flex-col items-center gap-2.5 cursor-pointer hover:border-teal transition-colors min-h-[180px] justify-center">
+          <div className="text-[28px] text-text3">+</div>
+          <div className="text-[13px] text-text2 font-medium">Selecionar Político</div>
+        </div>
+      );
+    }
+    return (
+      <div className="bg-surface border-2 border-solid border-border rounded-xl p-[40px_20px] flex flex-col items-center gap-2.5 min-h-[180px] justify-center relative">
+        <button onClick={() => setSlot(null)} className="absolute top-2.5 right-2.5 w-6 h-6 bg-red rounded-full flex items-center justify-center text-white text-[14px] font-bold">✕</button>
+        <img src={slot.foto || `https://ui-avatars.com/api/?name=${slot.nome}&background=1c2128&color=14b8a6`} alt={slot.nome} className="w-12 h-12 rounded-full border border-border object-cover" />
+        <div className="text-[18px] font-bold text-text-main text-center">{slot.nome}</div>
+        <div className="text-[13px] text-teal">{slot.partido} · {slot.uf}</div>
+      </div>
+    );
+  };
+
   return (
-    <div className="py-9 px-10 max-w-[1100px] w-full mx-auto animate-[fadeIn_0.2s_ease]">
-      <div className="mb-7">
-        <h1 className="font-display text-[32px] text-texto leading-[1.2]">Comparação</h1>
-        <p className="text-[14px] text-texto-sec mt-1.5">Análise comparativa entre dois parlamentares via IA</p>
+    <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease] relative">
+      <div className="p-[16px_32px] border-b border-border shrink-0">
+        <div className="text-[20px] font-bold text-text-main">Comparação (VS)</div>
+        <div className="text-[13px] text-text2 mt-1">Selecione dois parlamentares para comparar seus dados de coerência.</div>
       </div>
 
-      <div className="grid grid-cols-[1fr_auto_1fr] gap-5 items-start mb-5">
-        {/* Parlamentar A */}
-        <div className="bg-surface border border-borda rounded-custom shadow-custom p-6">
-          <div className="text-[11px] font-mono text-petroleo-light uppercase tracking-[0.1em] mb-3.5">Parlamentar A</div>
-          <div className="font-display text-[22px] text-texto mb-1">Alessandro Vieira</div>
-          <div className="text-[12px] text-texto-sec font-mono mb-5">PSDB · SE · Senador</div>
-          
-          <div className="flex justify-between items-center py-2.5 border-b border-borda-light">
-            <span className="text-[13px] text-texto-sec">Coerência geral</span>
-            <span className="text-[14px] font-semibold font-mono text-sucesso">94%</span>
-          </div>
-          <div className="flex justify-between items-center py-2.5 border-b border-borda-light">
-            <span className="text-[13px] text-texto-sec">Votos alinhados</span>
-            <span className="text-[14px] font-semibold font-mono text-texto">312</span>
-          </div>
-          <div className="flex justify-between items-center py-2.5 border-b border-borda-light">
-            <span className="text-[13px] text-texto-sec">Incoerências</span>
-            <span className="text-[14px] font-semibold font-mono text-sucesso">19</span>
-          </div>
-          <div className="flex justify-between items-center py-2.5 border-b border-borda-light">
-            <span className="text-[13px] text-texto-sec">Presença</span>
-            <span className="text-[14px] font-semibold font-mono text-texto">98%</span>
-          </div>
-          <div className="flex justify-between items-center py-2.5">
-            <span className="text-[13px] text-texto-sec">Votos partido</span>
-            <span className="text-[14px] font-semibold font-mono text-sucesso">91%</span>
-          </div>
+      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          {renderSlot(slotA, setSlotA, 'A')}
+          {renderSlot(slotB, setSlotB, 'B')}
         </div>
 
-        {/* VS */}
-        <div className="flex items-center justify-center font-display text-[28px] text-texto-ter pt-[60px]">
-          VS
-        </div>
-
-        {/* Parlamentar B */}
-        <div className="bg-surface border border-borda rounded-custom shadow-custom p-6">
-          <div className="text-[11px] font-mono text-petroleo-light uppercase tracking-[0.1em] mb-3.5">Parlamentar B</div>
-          <div className="font-display text-[22px] text-texto mb-1">Fabiana Davila</div>
-          <div className="text-[12px] text-texto-sec font-mono mb-5">MDB · PE · Deputada</div>
-          
-          <div className="flex justify-between items-center py-2.5 border-b border-borda-light">
-            <span className="text-[13px] text-texto-sec">Coerência geral</span>
-            <span className="text-[14px] font-semibold font-mono text-alerta">62%</span>
+        {slotA && slotB && (
+          <div>
+            <div className="bg-surface border border-border rounded-xl mb-4">
+              <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Comparação por Tema</div></div>
+              <div className="p-5 h-[320px] w-full"><GraficoRadar /></div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {[slotA, slotB].map((s, i) => (
+                <div key={i} className="bg-surface border border-border rounded-xl p-5">
+                  <div className="text-[16px] font-bold text-text-main mb-4">Alinhamento com {s.partido}</div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-[13px] text-text2">Score</span>
+                    <span className="text-[16px] font-bold text-teal">{s.coerencia}%</span>
+                  </div>
+                  <div className="h-[5px] bg-border rounded w-full overflow-hidden">
+                    <div className="h-full bg-green rounded" style={{ width: `${s.coerencia}%` }}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="flex justify-between items-center py-2.5 border-b border-borda-light">
-            <span className="text-[13px] text-texto-sec">Votos alinhados</span>
-            <span className="text-[14px] font-semibold font-mono text-texto">198</span>
-          </div>
-          <div className="flex justify-between items-center py-2.5 border-b border-borda-light">
-            <span className="text-[13px] text-texto-sec">Incoerências</span>
-            <span className="text-[14px] font-semibold font-mono text-alerta">75</span>
-          </div>
-          <div className="flex justify-between items-center py-2.5 border-b border-borda-light">
-            <span className="text-[13px] text-texto-sec">Presença</span>
-            <span className="text-[14px] font-semibold font-mono text-texto">74%</span>
-          </div>
-          <div className="flex justify-between items-center py-2.5">
-            <span className="text-[13px] text-texto-sec">Votos partido</span>
-            <span className="text-[14px] font-semibold font-mono text-alerta">58%</span>
-          </div>
-        </div>
+        )}
       </div>
 
-      <div className="bg-surface border border-borda rounded-custom shadow-custom mt-5">
-        <div className="flex items-center justify-between p-[18px_24px] border-b border-borda">
-          <div className="text-[14px] font-semibold text-texto flex items-center gap-2">
-            <svg className="text-petroleo-light" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            Radar Comparativo — IA
+      {modalOpen && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center" onClick={() => setModalOpen(null)}>
+          <div className="bg-surface border border-border rounded-[14px] w-[440px] max-h-[70vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <div className="p-[16px_20px] border-b border-border flex justify-between items-center">
+              <div className="text-[16px] font-bold text-text-main">Selecionar Político</div>
+              <button onClick={() => setModalOpen(null)} className="text-text2 hover:text-white text-[18px]">✕</button>
+            </div>
+            <div>
+              {availablePol.map((p, i) => (
+                <div key={i} onClick={() => selectPolitico(p)} className="flex items-center gap-3 p-[12px_20px] border-b border-border2 hover:bg-surface2 cursor-pointer last:border-0">
+                  <img src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} className="w-8 h-8 rounded-full" />
+                  <div>
+                    <div className="text-[14px] font-semibold text-text-main">{p.nome}</div>
+                    <div className="text-[12px] text-teal">{p.partido} · {p.uf}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="p-[20px_0] h-[360px] flex items-center justify-center relative w-full">
-          <GraficoRadar />
-        </div>
-      </div>
+      )}
     </div>
   );
 }

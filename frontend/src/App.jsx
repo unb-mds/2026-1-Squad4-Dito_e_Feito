@@ -7,12 +7,11 @@ import { Comparacao } from './pages/Comparacao';
 import { Relatorios } from './pages/Relatorios';
 import { Sobre } from './pages/Sobre';
 
-
 export default function App() {
   return (
-    <div className="flex h-screen bg-fundo text-texto overflow-hidden font-body selection:bg-petroleo/30">
+    <div className="flex h-screen bg-bg text-text-main overflow-hidden font-body">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto main-scroll">
+      <main className="flex-1 overflow-y-auto main-scroll flex flex-col">
         <Routes>
           <Route path="/" element={<VisaoGeral />} />
           <Route path="/politicos" element={<Politicos />} />

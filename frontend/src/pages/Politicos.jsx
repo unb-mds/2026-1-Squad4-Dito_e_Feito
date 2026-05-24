@@ -1,70 +1,61 @@
 import React, { useState } from 'react';
-
-const politicosData = [
-  {nome:'Alessandro Vieira',partido:'PSDB',uf:'SE',tipo:'Senador',coerencia:94},
-  {nome:'Beatriz Farias',partido:'PT',uf:'BA',tipo:'Deputada',coerencia:88},
-  {nome:'Carlos Portinho',partido:'PL',uf:'RJ',tipo:'Senador',coerencia:85},
-  {nome:'Daniela Carneiro',partido:'UNIÃO',uf:'RJ',tipo:'Deputada',coerencia:79},
-  {nome:'Efraim Filho',partido:'UNIÃO',uf:'PB',tipo:'Senador',coerencia:76},
-  {nome:'Gabriel Nunes',partido:'PSD',uf:'MG',tipo:'Deputado',coerencia:73},
-  {nome:'Helena Borges',partido:'MDB',uf:'SP',tipo:'Deputada',coerencia:71},
-  {nome:'Igor Queiroz',partido:'PP',uf:'CE',tipo:'Deputado',coerencia:69},
-  {nome:'Juliana Castro',partido:'PSOL',uf:'RJ',tipo:'Deputada',coerencia:67},
-  {nome:'Fabiana Davila',partido:'MDB',uf:'PE',tipo:'Deputada',coerencia:62},
-];
+import { politicosMock } from './VisaoGeral';
 
 export function Politicos() {
+  const [busca, setBusca] = useState('');
   const [sortAsc, setSortAsc] = useState(false);
-  
-  const getInitials = (name) => name.split(' ').slice(0,2).map(n=>n[0]).join('');
-  
-  const sortedData = [...politicosData].sort((a, b) => 
-    sortAsc ? a.coerencia - b.coerencia : b.coerencia - a.coerencia
+
+  let filtered = politicosMock.filter(p => 
+    p.nome.toLowerCase().includes(busca.toLowerCase()) || 
+    p.partido.toLowerCase().includes(busca.toLowerCase())
   );
 
+  filtered = filtered.sort((a, b) => sortAsc ? a.coerencia - b.coerencia : b.coerencia - a.coerencia);
+
   return (
-    <div className="py-9 px-10 max-w-[1100px] w-full mx-auto animate-[fadeIn_0.2s_ease]">
-      <div className="mb-7">
-        <h1 className="font-display text-[32px] text-texto leading-[1.2]">Políticos</h1>
-        <p className="text-[14px] text-texto-sec mt-1.5">Listagem completa de parlamentares com índice de coerência</p>
+    <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
+      <div className="p-[16px_32px] border-b border-border shrink-0">
+        <div className="relative max-w-[600px] mx-auto">
+          <svg className="absolute left-[15px] top-1/2 -translate-y-1/2 text-text3 pointer-events-none" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input 
+            value={busca}
+            onChange={(e) => setBusca(e.target.value)}
+            className="w-full bg-surface2 border border-border rounded-full p-[10px_18px_10px_42px] text-[14px] text-text-main outline-none focus:border-teal transition-colors" 
+            type="text" 
+            placeholder="Buscar político por nome ou partido..." 
+          />
+        </div>
       </div>
 
-      <div className="bg-surface border border-borda rounded-custom shadow-custom">
-        <div className="flex items-center justify-between p-[18px_24px] border-b border-borda">
-          <div className="text-[14px] font-semibold text-texto flex items-center gap-2">
-            <svg className="text-petroleo-light" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            Listagem Geral de Parlamentares
+      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+        <div className="bg-surface border border-border rounded-xl">
+          <div className="flex justify-between items-center p-[16px_20px] border-b border-border2">
+            <div className="text-[16px] font-bold text-text-main">Listagem Geral de Parlamentares</div>
+            <button onClick={() => setSortAsc(!sortAsc)} className="flex items-center gap-1.5 bg-teal text-white rounded-lg p-[8px_16px] text-[13px] font-semibold hover:opacity-85 transition-opacity">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></svg>
+              Mais Coerentes
+            </button>
           </div>
-          <button 
-            onClick={() => setSortAsc(!sortAsc)}
-            className="flex items-center gap-1.5 bg-petroleo-dim text-petroleo-light border border-petroleo/25 rounded-custom-sm p-[7px_14px] text-[12px] font-semibold font-body cursor-pointer hover:bg-petroleo/25 transition-colors"
-          >
-            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></svg>
-            {sortAsc ? 'Menos Coerentes' : 'Mais Coerentes'}
-          </button>
-        </div>
-
-        <div className="flex flex-col">
-          {sortedData.map((p, index) => (
-            <div key={index} className="flex items-center gap-4 p-[14px_24px] border-b border-borda-light last:border-0 hover:bg-surface-hover transition-colors cursor-pointer">
-              <div className="w-7 text-center text-[12px] font-mono text-texto-ter shrink-0">{index + 1}</div>
-              <div className="w-[42px] h-[42px] rounded-full bg-fundo border border-borda flex items-center justify-center text-[13px] font-semibold text-texto-sec shrink-0 font-mono">
-                {getInitials(p.nome)}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-[14px] font-medium text-texto whitespace-nowrap overflow-hidden text-ellipsis">{p.nome}</div>
-                <div className="text-[11px] text-texto-sec mt-0.5 font-mono">{p.partido} · {p.uf} · {p.tipo}</div>
-              </div>
-              <div className="flex flex-col items-end gap-1.5 w-[120px] shrink-0">
-                <span className={`text-[15px] font-semibold font-mono ${p.coerencia >= 75 ? 'text-sucesso' : 'text-alerta'}`}>
-                  {p.coerencia}%
-                </span>
-                <div className="h-1 w-full bg-borda rounded-sm overflow-hidden">
-                  <div className={`h-full rounded-sm transition-all duration-600 ease-in-out ${p.coerencia >= 75 ? 'bg-sucesso' : 'bg-alerta'}`} style={{ width: `${p.coerencia}%` }}></div>
+          <div>
+            {filtered.map((p, i) => (
+              <div key={i} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+                <img src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} alt={p.nome} className="w-10 h-10 rounded-full border border-border shrink-0 object-cover" />
+                <div className="flex-1 min-w-0">
+                  <div className="text-[14px] font-semibold text-text-main">{p.nome}</div>
+                  <div className="text-[12px] text-text2 mt-0.5">{p.partido} · {p.uf}</div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className={`${p.coerencia >= 70 ? 'text-green' : 'text-red'}`} width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><polyline points={p.coerencia >= 70 ? '22 7 13.5 15.5 8.5 10.5 2 17' : '22 17 13.5 8.5 8.5 13.5 2 7'}/><polyline points={p.coerencia >= 70 ? '16 7 22 7 22 13' : '16 17 22 17 22 11'}/></svg>
+                  <div className={`text-[22px] font-bold w-[62px] text-right ${p.coerencia >= 70 ? 'text-green' : 'text-red'}`}>{p.coerencia}%</div>
+                  <div className="w-[90px]">
+                    <div className="h-[5px] bg-border rounded w-full overflow-hidden">
+                      <div className={`h-full rounded ${p.coerencia >= 70 ? 'bg-green' : 'bg-red'}`} style={{ width: `${p.coerencia}%` }}></div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
