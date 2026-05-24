@@ -1,10 +1,22 @@
 @import "tailwindcss";
 
-/* Regras base garantidas */
-html, body, #root {
-  background-color: #0F172A !important;
-  color: #F8FAFC !important;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
+@theme {
+  --color-fundo: #0F172A;
+  --color-surface: #1E293B;
+  --color-petroleo: #0F766E;
+  --color-sucesso: #10B981;
+  --color-alerta: #EF4444;
+  --color-texto: #F8FAFC;
+  --color-texto-sec: #94A3B8;
+  --color-borda: #334155;
+  
+  --font-display: "DM Serif Display", serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-fundo text-texto;
+  }
 }

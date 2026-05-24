@@ -1,98 +1,72 @@
-import { useState, useEffect } from 'react';
-import { ArrowUpDown, User, TrendingUp, TrendingDown } from 'lucide-react';
-import { getDeputados, getSenadores } from '../services/api';
+import React, { useState } from 'react';
+
+const politicosData = [
+  {nome:'Alessandro Vieira',partido:'PSDB',uf:'SE',tipo:'Senador',coerencia:94},
+  {nome:'Beatriz Farias',partido:'PT',uf:'BA',tipo:'Deputada',coerencia:88},
+  {nome:'Carlos Portinho',partido:'PL',uf:'RJ',tipo:'Senador',coerencia:85},
+  {nome:'Daniela Carneiro',partido:'UNIÃO',uf:'RJ',tipo:'Deputada',coerencia:79},
+  {nome:'Efraim Filho',partido:'UNIÃO',uf:'PB',tipo:'Senador',coerencia:76},
+  {nome:'Gabriel Nunes',partido:'PSD',uf:'MG',tipo:'Deputado',coerencia:73},
+  {nome:'Helena Borges',partido:'MDB',uf:'SP',tipo:'Deputada',coerencia:71},
+  {nome:'Igor Queiroz',partido:'PP',uf:'CE',tipo:'Deputado',coerencia:69},
+  {nome:'Juliana Castro',partido:'PSOL',uf:'RJ',tipo:'Deputada',coerencia:67},
+  {nome:'Fabiana Davila',partido:'MDB',uf:'PE',tipo:'Deputada',coerencia:62},
+];
 
 export function Politicos() {
-  const [politicos, setPoliticos] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const carregarDados = async () => {
-      try {
-        setLoading(true);
-        const [respDep, respSen] = await Promise.all([getDeputados(), getSenadores()]);
-        
-        let lista = [];
-        if (respDep?.status === 'ok') lista.push(...respDep.dados.map(p => ({...p, tipo: 'Deputado'})));
-        if (respSen?.status === 'ok') lista.push(...respSen.dados.map(p => ({...p, tipo: 'Senador'})));
-        
-        // Mockando um score de coerência aleatório para o visual bater com a imagem
-        // (No futuro, substitua isso pelo dado real da sua IA)
-        const listaComScore = lista.map(p => ({
-          ...p,
-          coerencia: Math.floor(Math.random() * (95 - 60 + 1)) + 60
-        }));
-
-        // Ordenar do maior para o menor por padrão
-        listaComScore.sort((a, b) => b.coerencia - a.coerencia);
-        setPoliticos(listaComScore);
-      } catch (err) {
-        console.error("Erro na API:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    carregarDados();
-  }, []);
+  const [sortAsc, setSortAsc] = useState(false);
+  
+  const getInitials = (name) => name.split(' ').slice(0,2).map(n=>n[0]).join('');
+  
+  const sortedData = [...politicosData].sort((a, b) => 
+    sortAsc ? a.coerencia - b.coerencia : b.coerencia - a.coerencia
+  );
 
   return (
-    <main className="p-8 w-full max-w-5xl mx-auto">
-      <div className="bg-surface rounded-xl border border-slate-800 shadow-sm flex flex-col min-h-[600px]">
-        
-        {/* Cabeçalho da Lista */}
-        <div className="flex justify-between items-center border-b border-slate-800 p-6">
-          <h2 className="text-xl font-display font-bold text-texto-principal">Listagem Geral de Parlamentares</h2>
-          <button className="flex items-center gap-2 bg-brand-petroleo/20 hover:bg-brand-petroleo/30 text-brand-petroleo transition-colors px-4 py-2 rounded-md font-semibold text-sm">
-            <ArrowUpDown size={16} /> Mais Coerentes
+    <div className="py-9 px-10 max-w-[1100px] w-full mx-auto animate-[fadeIn_0.2s_ease]">
+      <div className="mb-7">
+        <h1 className="font-display text-[32px] text-texto leading-[1.2]">Políticos</h1>
+        <p className="text-[14px] text-texto-sec mt-1.5">Listagem completa de parlamentares com índice de coerência</p>
+      </div>
+
+      <div className="bg-surface border border-borda rounded-custom shadow-custom">
+        <div className="flex items-center justify-between p-[18px_24px] border-b border-borda">
+          <div className="text-[14px] font-semibold text-texto flex items-center gap-2">
+            <svg className="text-petroleo-light" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Listagem Geral de Parlamentares
+          </div>
+          <button 
+            onClick={() => setSortAsc(!sortAsc)}
+            className="flex items-center gap-1.5 bg-petroleo-dim text-petroleo-light border border-petroleo/25 rounded-custom-sm p-[7px_14px] text-[12px] font-semibold font-body cursor-pointer hover:bg-petroleo/25 transition-colors"
+          >
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></svg>
+            {sortAsc ? 'Menos Coerentes' : 'Mais Coerentes'}
           </button>
         </div>
 
-        {/* Lista de Políticos */}
-        <div className="flex flex-col p-2 overflow-y-auto">
-          {loading ? (
-            <div className="p-6 text-center text-texto-secundario">Carregando parlamentares...</div>
-          ) : (
-            politicos.map((politico, index) => (
-              <div key={index} className="flex items-center justify-between p-4 border border-transparent border-b-slate-800 last:border-b-transparent hover:bg-slate-800/30 transition-colors mx-2 rounded-lg">
-                <div className="flex items-center gap-4">
-                  {politico.foto ? (
-                    <img src={politico.foto} alt={politico.nome} className="w-12 h-12 rounded border border-slate-700 object-cover" />
-                  ) : (
-                    <div className="w-12 h-12 bg-slate-800 rounded flex items-center justify-center text-slate-400 border border-slate-700">
-                      <User size={24} />
-                    </div>
-                  )}
-                  <div>
-                    <h4 className="font-bold text-texto-principal text-lg">{politico.nome}</h4>
-                    <p className="text-xs text-texto-secundario uppercase tracking-wide">{politico.partido} &bull; {politico.uf}</p>
-                  </div>
-                </div>
-                
-                <div className="flex flex-col items-end w-32">
-                  <div className="flex items-center gap-3 mb-1">
-                    {/* Seta verde ou vermelha baseada no score */}
-                    {politico.coerencia >= 75 ? (
-                      <TrendingUp size={16} className="text-brand-sucesso" />
-                    ) : (
-                      <TrendingDown size={16} className="text-alerta" />
-                    )}
-                    <span className={`text-xl font-bold ${politico.coerencia >= 75 ? 'text-brand-sucesso' : 'text-alerta'}`}>
-                      {politico.coerencia}%
-                    </span>
-                  </div>
-                  <div className="w-full h-1.5 bg-slate-800 rounded-full">
-                    <div 
-                      className={`h-full rounded-full ${politico.coerencia >= 75 ? 'bg-brand-sucesso' : 'bg-alerta'}`} 
-                      style={{ width: `${politico.coerencia}%` }}
-                    ></div>
-                  </div>
+        <div className="flex flex-col">
+          {sortedData.map((p, index) => (
+            <div key={index} className="flex items-center gap-4 p-[14px_24px] border-b border-borda-light last:border-0 hover:bg-surface-hover transition-colors cursor-pointer">
+              <div className="w-7 text-center text-[12px] font-mono text-texto-ter shrink-0">{index + 1}</div>
+              <div className="w-[42px] h-[42px] rounded-full bg-fundo border border-borda flex items-center justify-center text-[13px] font-semibold text-texto-sec shrink-0 font-mono">
+                {getInitials(p.nome)}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[14px] font-medium text-texto whitespace-nowrap overflow-hidden text-ellipsis">{p.nome}</div>
+                <div className="text-[11px] text-texto-sec mt-0.5 font-mono">{p.partido} · {p.uf} · {p.tipo}</div>
+              </div>
+              <div className="flex flex-col items-end gap-1.5 w-[120px] shrink-0">
+                <span className={`text-[15px] font-semibold font-mono ${p.coerencia >= 75 ? 'text-sucesso' : 'text-alerta'}`}>
+                  {p.coerencia}%
+                </span>
+                <div className="h-1 w-full bg-borda rounded-sm overflow-hidden">
+                  <div className={`h-full rounded-sm transition-all duration-600 ease-in-out ${p.coerencia >= 75 ? 'bg-sucesso' : 'bg-alerta'}`} style={{ width: `${p.coerencia}%` }}></div>
                 </div>
               </div>
-            ))
-          )}
+            </div>
+          ))}
         </div>
-
       </div>
-    </main>
+    </div>
   );
 }
