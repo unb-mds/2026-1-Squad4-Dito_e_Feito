@@ -53,9 +53,25 @@ export function Sobre() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-display font-bold text-texto-principal mb-6">
-          Equipe de Desenvolvimento
-        </h2>
+        <div className="mb-6">
+          <div className="flex items-center gap-3">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/681/681494.png"
+              className="w-8 h-8"
+              style={{
+                filter: "invert(40%) sepia(80%) saturate(500%) hue-rotate(160deg)"
+              }}
+            />
+
+            <h2 className="text-2xl font-display font-bold text-texto-principal">
+              Equipe de Desenvolvimento - Squad 4
+            </h2>
+          </div>
+
+          <p className="text-sm text-texto-secundario mt-2 max-w-2xl">
+            Projeto desenvolvido na <strong>Universidade de Brasilia (UnB)</strong>, vinculado à <strong>Faculdade do Gama (FCTE)</strong>, por alunos de Engenharia de software
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {equipe.map((membro, index) => (
@@ -64,24 +80,26 @@ export function Sobre() {
               href={membro.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-surface p-5 rounded-lg border border-slate-800 hover:border-brand-petroleo transition-colors"
+              className="flex gap-4 bg-surface p-5 rounded-lg border border-slate-800 hover:border-brand-petroleo transition-colors"
             >
-            <div className = "flex items-center gap-4">
-              <img
-                src={membro.foto}
-                alt={membro.nome}
-                className="w-12 h-12 rounded-full object-cover border border-slate-700"
-              />
-            </div>
+            <img
+              src={membro.foto}
+              alt={membro.nome}
+              className="w-20 h-20 rounded-full object-cover border border-slate-700 flex-shrink-0"
+            />
+
+            <div className="flex flex-col justify-center">
               <h3 className="font-bold text-texto-principal">
                 {membro.nome}
               </h3>
+
               <p className="text-sm text-brand-petroleo mt-1">
                 {membro.role}
               </p>
               <p className="text-xs text-texto-secundario mt-2">
                 {membro.email}
               </p>
+            </div>
             </a>
           ))}
         </div>
