@@ -3,26 +3,32 @@ export function Sobre() {
     { nome: "Gustavo Antonio Rodrigues e Silva", 
       email: "gus.ant.rod.10@gmail.com", 
       role: "Monitoramento de Coerência",
-      github: "https://github.com/gus-ant" },
+      github: "https://github.com/gus-ant",
+      foto: "https://github.com/gus-ant.png" },
 
     { nome: "Sauhan Ferreira Melo", 
       email: "sauhanmello20@gmail.com", 
       role: "Monitoramento de Notícias",
-      github: "https://github.com/SUDOTMOX" },
+      github: "https://github.com/SUDOTMOX",
+      foto: "https://github.com/SUDOTMOX.png" },
 
     { nome: "Juan Costa Indiano", 
       email: "juan75indiano@gmail.com", 
       role: "Engenharia de Software",
-      github: "https://github.com/IndianoDev" },
+      github: "https://github.com/IndianoDev",
+      foto: "https://github.com/IndianoDev.png" },
 
     { nome: "Gabriel Velho de Souza", 
       email: "gabrielvelho08@gmail.com", 
       role: "Engenharia de Software",
-      github: "https://github.com/Velho008" },
+      github: "https://github.com/Velho008",
+      foto: "https://github.com/Velho008.png" },
 
     { nome: "Thomaz Marra Martins", 
       email: "N/A", 
-      role: "N/A"}
+      role: "N/A",
+      github: "",
+      foto: "" },
   ];
 
   return (
@@ -60,6 +66,13 @@ export function Sobre() {
               rel="noopener noreferrer"
               className="block bg-surface p-5 rounded-lg border border-slate-800 hover:border-brand-petroleo transition-colors"
             >
+            <div className = "flex items-center gap-4">
+              <img
+                src={membro.foto}
+                alt={membro.nome}
+                className="w-12 h-12 rounded-full object-cover border border-slate-700"
+              />
+            </div>
               <h3 className="font-bold text-texto-principal">
                 {membro.nome}
               </h3>
