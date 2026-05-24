@@ -6,17 +6,25 @@ export function Sidebar() {
   const isActive = (path) => location.pathname === path;
   
   const baseClass = "flex items-center gap-3 px-3 py-3 rounded-lg transition-colors font-semibold text-sm";
-  const activeClass = "bg-brand-petroleo text-white shadow-md";
-  const inactiveClass = "text-texto-secundario hover:text-texto-principal hover:bg-slate-800/50";
+  const activeClass = "bg-[#0F766E] text-white shadow-md";
+  const inactiveClass = "text-texto-secundario hover:text-white hover:bg-slate-800/60 transition-colors";
 
   return (
     <aside className="w-64 bg-surface border-r border-slate-800 flex flex-col h-full">
       <div className="p-6 mb-4">
-        <h1 className="text-2xl font-bold font-display text-white">Dito e Feito</h1>
-        <p className="text-xs text-texto-secundario mt-1">Análise Política com IA</p>
 
-         <div className="mt-4 border-b border-slate-700" />
+        <h1 className="text-2xl font-bold font-display text-white">
+          Dito e Feito
+        </h1>
+
+        <p className="text-xs text-texto-secundario mt-1">
+          Análise Política com IA
+        </p>
+
+         <div className="mt-4 h-px bg-slate-700/60" />
+
       </div>
+
       <nav className="flex-1 px-4 space-y-2">
         <Link to="/" className={`${baseClass} ${isActive('/') ? activeClass : inactiveClass}`}>
           <LayoutDashboard size={20} /> Visão Geral
