@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Regras base garantidas */
+html, body, #root {
+  background-color: #0F172A !important;
+  color: #F8FAFC !important;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
