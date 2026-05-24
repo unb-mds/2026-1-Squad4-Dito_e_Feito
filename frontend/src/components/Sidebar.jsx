@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, GitCompare, Info, Users, FileText } from 'lucide-react';
+import { LayoutDashboard, BarChart3, Info, Users, FileText } from 'lucide-react';
 
 export function Sidebar() {
   const location = useLocation();
@@ -14,6 +14,8 @@ export function Sidebar() {
       <div className="p-6 mb-4">
         <h1 className="text-2xl font-bold font-display text-white">Dito e Feito</h1>
         <p className="text-xs text-texto-secundario mt-1">Análise Política com IA</p>
+
+         <div className="mt-4 border-b border-slate-700" />
       </div>
       <nav className="flex-1 px-4 space-y-2">
         <Link to="/" className={`${baseClass} ${isActive('/') ? activeClass : inactiveClass}`}>
@@ -23,7 +25,7 @@ export function Sidebar() {
           <Users size={20} /> Políticos
         </Link>
         <Link to="/comparacao" className={`${baseClass} ${isActive('/comparacao') ? activeClass : inactiveClass}`}>
-          <GitCompare size={20} /> Comparação (VS)
+          <BarChart3 size={20} /> Comparação (VS)
         </Link>
         <Link to="/relatorios" className={`${baseClass} ${isActive('/relatorios') ? activeClass : inactiveClass}`}>
           <FileText size={20} /> Relatórios
