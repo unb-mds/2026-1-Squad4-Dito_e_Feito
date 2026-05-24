@@ -1,31 +1,34 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0d1117;
-  --color-surface: #161b22;
-  --color-surface2: #1c2128;
-  --color-border: #30363d;
-  --color-border2: #21262d;
-  --color-teal: #14b8a6;
-  --color-teal-bg: rgba(20,184,166,0.12);
-  --color-teal-border: rgba(20,184,166,0.25);
-  --color-red: #ef4444;
-  --color-red-bg: rgba(239,68,68,0.12);
-  --color-green: #22c55e;
-  --color-green-bg: rgba(34,197,94,0.12);
-  --color-text-main: #e6edf3;
-  --color-text2: #8b949e;
-  --color-text3: #484f58;
-  
-  --font-body: 'Inter', system-ui, sans-serif;
-}
+  /* Fundo principal */
+  --color-bg: #0F172A;
 
-@layer base {
-  body {
-    @apply bg-bg text-text-main font-body;
-  }
-}
+  /* Superfícies */
+  --color-surface: #1E293B;
 
-.main-scroll::-webkit-scrollbar { width: 5px; }
-.main-scroll::-webkit-scrollbar-track { background: transparent; }
-.main-scroll::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+  /* Bordas */
+  --color-border: #334155;
+  --color-border2: #263244;
+
+  /* Texto */
+  --color-text-main: #F8FAFC;
+  --color-text2: #94A3B8;
+  --color-text3: #64748B;
+
+  /* Destaque principal (teal/petroleo) */
+  --color-teal: #0F766E;
+  --color-teal-bg: rgba(15, 118, 110, 0.12);
+  --color-teal-border: rgba(15, 118, 110, 0.25);
+
+  /* Status */
+  --color-green: #166534;
+  --color-green-bg: rgba(22, 101, 52, 0.12);
+
+  --color-red: #831843;
+  --color-red-bg: rgba(131, 24, 67, 0.12);
+
+  /* Fonte */
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "IBM Plex Sans", system-ui, sans-serif;
+}
