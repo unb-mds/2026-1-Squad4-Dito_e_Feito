@@ -2,91 +2,60 @@ import React from 'react';
 
 export function Sobre() {
   const equipe = [
-    { 
-      nome: "Gustavo Antonio Rodrigues e Silva", 
-      email: "gus.ant.rod.10@gmail.com", 
-      role: "Monitoramento de Coerência",
-      github: "https://github.com/gus-ant",
-      foto: "https://github.com/gus-ant.png" 
-    },
-    { 
-      nome: "Sauhan Ferreira Melo", 
-      email: "sauhanmello20@gmail.com", 
-      role: "Monitoramento de Notícias",
-      github: "https://github.com/SUDOTMOX",
-      foto: "https://github.com/SUDOTMOX.png" 
-    },
-    { 
-      nome: "Juan Costa Indiano", 
-      email: "juan75indiano@gmail.com", 
-      role: "Engenharia de Software",
-      github: "https://github.com/IndianoDev",
-      foto: "https://github.com/IndianoDev.png" 
-    },
-    { 
-      nome: "Gabriel Velho de Souza", 
-      email: "gabrielvelho08@gmail.com", 
-      role: "Engenharia de Software",
-      github: "https://github.com/Velho008",
-      foto: "https://github.com/Velho008.png" 
-    },
-    { 
-      nome: "Thomaz Marra Martins", 
-      email: "N/A", 
-      role: "N/A",
-      github: "",
-      foto: "" 
-    },
+    { nome: "Gustavo Antonio Rodrigues e Silva", email: "gus.ant.rod.10@gmail.com" },
+    { nome: "Lucas Abdalla Nery", email: "nerylucas07@gmail.com" },
+    { nome: "Sauhan Ferreira Melo", email: "sauhanmello20@gmail.com" },
+    { nome: "Juan Costa Indiano", email: "juan75indiano@gmail.com" },
+    { nome: "Gabriel Velho de Souza", email: "gabrielvelho08@gmail.com" },
+    { nome: "Thomaz Marra Martins", email: "" },
   ];
 
-  const getInitials = (name) => name.split(' ').slice(0, 2).map(n => n[0]).join('');
-
   return (
-    <div className="py-9 px-10 max-w-[1100px] w-full mx-auto animate-[fadeIn_0.2s_ease]">
-      
-      <div className="py-10 border-b border-borda mb-8">
-        <div className="font-display text-[48px] font-bold text-texto leading-[1.1] mb-4">
-          Dito e <em className="text-petroleo-light italic">Feito</em>
+    <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
+      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+        <div className="bg-surface border border-border rounded-xl p-6 mb-4">
+          <div className="text-[22px] font-bold text-text-main mb-3">Sobre o <strong className="text-teal">Dito e Feito</strong></div>
+          <div className="text-[14px] text-text2 leading-[1.7]">O <strong className="text-teal">Dito e Feito</strong> é uma plataforma de análise política desenvolvida para monitorar a coerência entre o discurso público de parlamentares brasileiros e seus votos reais no Congresso Nacional, utilizando técnicas avançadas de Inteligência Artificial e Processamento de Linguagem Natural (NLP) com embeddings semânticos.</div>
         </div>
-        <div className="text-[16px] text-texto-sec leading-[1.8] max-w-[800px] space-y-4">
-          <p>
-            O Dito e Feito é uma plataforma de inteligência de dados focada em transparência governamental. 
-            Utilizamos técnicas de Processamento de Linguagem Natural (NLP), especificamente modelos baseados em Transformers (como o <strong>BERTimbau</strong>), 
-            para processar discursos e projetos de lei.
-          </p>
-        </div>
-      </div>
 
-      <div className="text-[13px] font-semibold text-texto-sec uppercase tracking-[0.08em] font-mono mb-3.5 mt-5">
-        Equipe de Desenvolvimento — Squad 4
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {equipe.map((membro, index) => {
-          const CardWrapper = membro.github ? 'a' : 'div';
-          return (
-            <CardWrapper
-              key={index}
-              href={membro.github || undefined}
-              target={membro.github ? "_blank" : undefined}
-              rel={membro.github ? "noopener noreferrer" : undefined}
-              className={`block bg-surface border border-borda rounded-custom shadow-custom p-5 transition-colors ${membro.github ? 'hover:border-petroleo hover:bg-surface-hover cursor-pointer' : ''}`}
-            >
-              <div className="flex items-center gap-4">
-                {membro.foto ? (
-                  <img src={membro.foto} alt={membro.nome} className="w-[50px] h-[50px] rounded-full object-cover border border-borda shrink-0" />
-                ) : (
-                  <div className="w-[50px] h-[50px] rounded-full shrink-0 bg-petroleo-dim border border-petroleo/30 flex items-center justify-center text-[15px] font-semibold text-petroleo-light font-mono">
-                    {getInitials(membro.nome)}
-                  </div>
-                )}
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-[14px] text-texto truncate">{membro.nome}</h3>
-                  <p className="text-[12px] font-mono text-petroleo-light mt-0.5 truncate">{membro.role}</p>
+        <div className="mb-4">
+          <div className="text-[18px] font-bold text-text-main mb-3.5">Metodologia</div>
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { title: 'Coleta de Dados', desc: 'Utilizamos as APIs oficiais da Câmara e do Senado.' },
+              { title: 'Análise de NLP', desc: 'Modelos de embeddings processam os discursos.' },
+              { title: 'Comparação Automatizada', desc: 'Algoritmos comparam discursos com os votos.' },
+              { title: 'Score de Coerência', desc: 'Calculamos um índice percentual de coerência.' }
+            ].map((m, i) => (
+              <div key={i} className="flex gap-3.5 p-4 bg-surface border border-border rounded-[10px]">
+                <div className="w-10 h-10 rounded-lg bg-teal-bg border border-teal-border flex items-center justify-center shrink-0 text-teal text-[18px]">⚙️</div>
+                <div>
+                  <div className="text-[14px] font-bold text-text-main mb-1.5">{m.title}</div>
+                  <div className="text-[13px] text-text2 leading-[1.5]">{m.desc}</div>
                 </div>
               </div>
-            </CardWrapper>
-          );
-        })}
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-surface border border-border rounded-xl p-6 mb-4">
+          <div className="flex items-center gap-2.5 mb-2">
+            <svg width="20" height="20" className="text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div className="text-[18px] font-bold text-text-main">Equipe - Squad 4</div>
+          </div>
+          <div className="text-[13px] text-text2 mb-4">Projeto desenvolvido na <strong className="text-text-main">Universidade de Brasília (UnB)</strong>, vinculado à <strong className="text-text-main">Faculdade do Gama (FGA)</strong>, por alunos de Engenharia de Software.</div>
+          <div className="grid grid-cols-2 gap-2.5">
+            {equipe.map((m, i) => (
+              <div key={i} className="p-[14px_16px] bg-surface2 border border-border2 rounded-lg">
+                <div className="text-[14px] font-bold text-text-main mb-1">{m.nome}</div>
+                <div className="flex items-center gap-1.5 text-[12px] text-text2">
+                  {m.email && <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>}
+                  {m.email}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

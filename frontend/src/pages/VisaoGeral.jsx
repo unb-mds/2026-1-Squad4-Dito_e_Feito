@@ -1,130 +1,125 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GraficoTendencias } from '../components/GraficoTendencias';
 import { GraficoPartidos } from '../components/GraficoPartidos';
 import { GraficoBarras } from '../components/GraficoBarras';
 
-const politicosData = [
-  {nome:'Alessandro Vieira',partido:'PSDB',uf:'SE',tipo:'Senador',coerencia:94},
-  {nome:'Beatriz Farias',partido:'PT',uf:'BA',tipo:'Deputada',coerencia:88},
-  {nome:'Carlos Portinho',partido:'PL',uf:'RJ',tipo:'Senador',coerencia:85},
-  {nome:'Daniela Carneiro',partido:'UNIÃO',uf:'RJ',tipo:'Deputada',coerencia:79},
-  {nome:'Efraim Filho',partido:'UNIÃO',uf:'PB',tipo:'Senador',coerencia:76},
-  {nome:'Gabriel Nunes',partido:'PSD',uf:'MG',tipo:'Deputado',coerencia:73},
+export const politicosMock = [
+  {id:1,nome:'Maria Silva Santos',partido:'PT',uf:'SP',tipo:'Deputada',coerencia:87, foto: ''},
+  {id:2,nome:'João Pedro Oliveira',partido:'PL',uf:'RJ',tipo:'Deputado',coerencia:84, foto: ''},
+  {id:3,nome:'Ana Costa Mendes',partido:'UNIÃO',uf:'MG',tipo:'Deputada',coerencia:79, foto: ''},
+  {id:4,nome:'Carlos Alberto Lima',partido:'PP',uf:'BA',tipo:'Senador',coerencia:76, foto: ''},
+  {id:5,nome:'Fernanda Rocha',partido:'MDB',uf:'SP',tipo:'Deputada',coerencia:72, foto: ''},
+  {id:6,nome:'Roberto Alves',partido:'PSD',uf:'RS',tipo:'Senador',coerencia:69, foto: ''},
+];
+
+const alertas = [
+  {nome:'João Pedro Oliveira',partido:'PL',tema:'Divergência em Educação',data:'10 Dez 2025', grave: false},
+  {nome:'Ana Costa Mendes',partido:'UNIÃO',tema:'Divergência em Meio Ambiente',data:'8 Dez 2025', grave: false},
+  {nome:'Carlos Alberto Lima',partido:'PP',tema:'Divergência em Saúde',data:'5 Dez 2025', grave: true},
 ];
 
 export function VisaoGeral() {
-  const getInitials = (name) => name.split(' ').slice(0,2).map(n=>n[0]).join('');
+  const navigate = useNavigate();
+  const top4 = [...politicosMock].sort((a,b) => b.coerencia - a.coerencia).slice(0, 4);
 
   return (
-    <div className="py-9 px-10 max-w-[1100px] w-full mx-auto animate-[fadeIn_0.2s_ease]">
-      {/* Header */}
-      <div className="mb-7">
-        <h1 className="font-display text-[32px] text-texto leading-[1.2]">Visão Geral</h1>
-        <p className="text-[14px] text-texto-sec mt-1.5">Panorama da coerência parlamentar — maio 2026</p>
-      </div>
-
-      {/* KPI Cards */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="bg-surface border border-borda rounded-custom shadow-custom p-[22px_24px]">
-          <div className="text-[12px] text-texto-sec font-medium uppercase tracking-[0.06em] mb-2.5">Votos Analisados</div>
-          <div className="font-display text-[38px] text-texto leading-none mb-3">2.847</div>
-          <span className="inline-flex items-center gap-[5px] text-[11px] font-semibold px-2.5 py-1 rounded-full font-mono bg-sucesso-dim text-sucesso">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-            +124 este mês
-          </span>
-        </div>
-        
-        <div className="bg-surface border border-borda rounded-custom shadow-custom p-[22px_24px]">
-          <div className="text-[12px] text-texto-sec font-medium uppercase tracking-[0.06em] mb-2.5">Coerência Global</div>
-          <div className="font-display text-[38px] text-texto leading-none mb-3">73,2%</div>
-          <span className="inline-flex items-center gap-[5px] text-[11px] font-semibold px-2.5 py-1 rounded-full font-mono bg-alerta-dim text-alerta">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
-            −1,4% vs anterior
-          </span>
-        </div>
-
-        <div className="bg-surface border border-borda rounded-custom shadow-custom p-[22px_24px]">
-          <div className="text-[12px] text-texto-sec font-medium uppercase tracking-[0.06em] mb-2.5">Incoerências</div>
-          <div className="font-display text-[38px] text-texto leading-none mb-3">142</div>
-          <span className="inline-flex items-center gap-[5px] text-[11px] font-semibold px-2.5 py-1 rounded-full font-mono bg-amarelo-dim text-amarelo">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-            +18 este mês
-          </span>
+    <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
+      <div className="p-[16px_32px] border-b border-border shrink-0">
+        <div className="relative max-w-[600px] mx-auto">
+          <svg className="absolute left-[15px] top-1/2 -translate-y-1/2 text-text3 pointer-events-none" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input className="w-full bg-surface2 border border-border rounded-full p-[10px_18px_10px_42px] text-[14px] text-text-main outline-none focus:border-teal transition-colors" type="text" placeholder="Buscar político por nome..." />
         </div>
       </div>
 
-      {/* Gráficos Linha 1 */}
-      <div className="grid grid-cols-[2fr_1fr] gap-4 mt-5">
-        <div className="bg-surface border border-borda rounded-custom shadow-custom flex flex-col">
-          <div className="flex items-center justify-between p-[18px_24px] border-b border-borda">
-            <div className="text-[14px] font-semibold text-texto flex items-center gap-2">
-              <svg className="text-petroleo-light" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              Tendências de Coerência
+      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+        <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Votos Analisados</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">2.847</div>
+            <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-green-bg text-green">↑ 12%</span>
+          </div>
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Coerência Global</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">73.2%</div>
+            <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-red-bg text-red">↓ 3%</span>
+          </div>
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5 flex justify-between items-center">
+              Incoerências Detectadas
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             </div>
-            <span className="inline-flex items-center gap-[5px] text-[10px] font-semibold px-2.5 py-1 rounded-full font-mono bg-surface-hover text-texto-sec">12 meses</span>
-          </div>
-          <div className="p-6 h-[260px] relative w-full">
-            <GraficoTendencias />
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">142</div>
           </div>
         </div>
 
-        <div className="bg-surface border border-borda rounded-custom shadow-custom flex flex-col">
-          <div className="flex items-center justify-between p-[18px_24px] border-b border-borda">
-            <div className="text-[14px] font-semibold text-texto flex items-center gap-2">
-              <svg className="text-petroleo-light" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
-              Distribuição
+        <div className="grid grid-cols-[1.8fr_1fr] gap-4 mb-4">
+          <div className="bg-surface border border-border rounded-xl flex flex-col">
+            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Tendências de Coerência</div></div>
+            <div className="p-5 h-[260px] w-full"><GraficoTendencias /></div>
+          </div>
+          <div className="bg-surface border border-border rounded-xl flex flex-col">
+            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Comparação por Partido</div></div>
+            <div className="p-5 h-[260px] w-full flex items-center justify-center"><GraficoPartidos /></div>
+          </div>
+        </div>
+
+        <div className="bg-surface border border-border rounded-xl mb-4 flex flex-col">
+          <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Coerência Média por Partido</div></div>
+          <div className="p-5 h-[240px] w-full"><GraficoBarras /></div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-surface border border-border rounded-xl">
+            <div className="flex justify-between items-center p-[16px_20px] border-b border-border2">
+              <div className="text-[16px] font-bold text-text-main flex items-center gap-2">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                Alertas de Divergência
+              </div>
+              <span className="text-[11px] font-semibold text-red bg-red-bg border border-red/25 px-2 py-1 rounded-md">3 casos graves</span>
             </div>
-          </div>
-          <div className="p-6 h-[260px] flex items-center justify-center gap-5 relative w-full">
-             <GraficoPartidos />
-          </div>
-        </div>
-      </div>
-
-      {/* Gráficos Linha 2 */}
-      <div className="bg-surface border border-borda rounded-custom shadow-custom mt-5 flex flex-col">
-        <div className="flex items-center justify-between p-[18px_24px] border-b border-borda">
-          <div className="text-[14px] font-semibold text-texto flex items-center gap-2">
-            <svg className="text-petroleo-light" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="8" width="6" height="13" rx="1"/><rect x="16" y="5" width="6" height="16" rx="1"/></svg>
-            Coerência por Partido
-          </div>
-        </div>
-        <div className="p-6 h-[240px] relative w-full">
-           <GraficoBarras />
-        </div>
-      </div>
-
-      {/* Parlamentares em Destaque */}
-      <div className="bg-surface border border-borda rounded-custom shadow-custom mt-5">
-        <div className="flex items-center justify-between p-[18px_24px] border-b border-borda">
-          <div className="text-[14px] font-semibold text-texto flex items-center gap-2">
-            <svg className="text-petroleo-light" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            Parlamentares em Destaque
-          </div>
-          <span className="inline-flex items-center gap-[5px] text-[10px] font-semibold px-2.5 py-1 rounded-full font-mono bg-surface-hover text-texto-sec">Top 6 coerência</span>
-        </div>
-        
-        <div className="flex flex-col">
-          {politicosData.map((p, index) => (
-            <div key={index} className="flex items-center gap-4 p-[14px_24px] border-b border-borda-light last:border-0 hover:bg-surface-hover transition-colors cursor-pointer">
-              <div className="w-7 text-center text-[12px] font-mono text-texto-ter shrink-0">{index + 1}</div>
-              <div className="w-[42px] h-[42px] rounded-full bg-fundo border border-borda flex items-center justify-center text-[13px] font-semibold text-texto-sec shrink-0 font-mono">
-                {getInitials(p.nome)}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-[14px] font-medium text-texto whitespace-nowrap overflow-hidden text-ellipsis">{p.nome}</div>
-                <div className="text-[11px] text-texto-sec mt-0.5 font-mono">{p.partido} · {p.uf} · {p.tipo}</div>
-              </div>
-              <div className="flex flex-col items-end gap-1.5 w-[120px] shrink-0">
-                <span className={`text-[15px] font-semibold font-mono ${p.coerencia >= 75 ? 'text-sucesso' : 'text-alerta'}`}>
-                  {p.coerencia}%
-                </span>
-                <div className="h-1 w-full bg-borda rounded-sm overflow-hidden">
-                  <div className={`h-full rounded-sm transition-all duration-600 ease-in-out ${p.coerencia >= 75 ? 'bg-sucesso' : 'bg-alerta'}`} style={{ width: `${p.coerencia}%` }}></div>
+            <div>
+              {alertas.map((a, i) => (
+                <div key={i} className="flex justify-between items-center p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+                  <div className={`border-l-3 pl-3 ${a.grave ? 'border-teal' : 'border-red'}`}>
+                    <div className="text-[14px] font-semibold text-text-main flex items-center gap-2 mb-1">{a.nome} <span className="text-[11px] text-teal bg-teal-bg px-1.5 py-0.5 rounded">{a.partido}</span></div>
+                    <div className="text-[12px] text-text2 flex items-center gap-1.5">
+                      <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+                      {a.tema} · {a.data}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div className="bg-surface border border-border rounded-xl">
+            <div className="flex justify-between items-center p-[16px_20px] border-b border-border2">
+              <div className="text-[16px] font-bold text-text-main">Ranking de Políticos</div>
+              <span onClick={() => navigate('/politicos')} className="text-[13px] font-medium text-teal cursor-pointer hover:underline">Ver Todos</span>
+            </div>
+            <div>
+              {top4.map((p, i) => (
+                <div key={i} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+                  <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
+                  <img src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} alt={p.nome} className="w-9 h-9 rounded-full border border-border shrink-0 object-cover" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[14px] font-semibold text-text-main truncate">{p.nome}</div>
+                    <div className="text-[12px] text-teal mt-0.5">{p.partido} - {p.uf}</div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1.5 min-w-[110px]">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[11px] text-text2">Coerência</span>
+                      <span className="text-[14px] font-bold text-text-main">{p.coerencia}%</span>
+                    </div>
+                    <div className="h-[5px] bg-border rounded w-full overflow-hidden">
+                      <div className={`h-full rounded transition-all duration-600 ${p.coerencia >= 70 ? 'bg-green' : 'bg-red'}`} style={{ width: `${p.coerencia}%` }}></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
