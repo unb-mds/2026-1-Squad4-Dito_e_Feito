@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function Sobre() {
   const equipe = [
     { nome: "Gustavo Antonio Rodrigues e Silva", email: "gus.ant.rod.10@gmail.com" },

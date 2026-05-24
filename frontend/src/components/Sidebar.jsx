@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { LayoutDashboard, BarChart3, Info, Users, FileText } from 'lucide-react';
 
 export function Sidebar() {
   const location = useLocation();
