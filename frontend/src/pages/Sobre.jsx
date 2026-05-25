@@ -1,3 +1,4 @@
+import { Brain } from "lucide-react"
 export function Sobre() {
   const equipe = [
     {
@@ -49,34 +50,80 @@ export function Sobre() {
         </div>
 
         {/* METODOLOGIA */}
-        <div className="mb-4">
-          <div className="text-[18px] font-bold text-text-main mb-3.5">
+        <div className="bg-surface border border-border rounded-xl p-6 mb-4">
+
+          <div className="text-[18px] font-bold text-text-main mb-4">
             Metodologia
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+
             {[
-              { title: "Coleta de Dados", desc: "Utilizamos as APIs oficiais da Câmara e do Senado." },
-              { title: "Análise de NLP", desc: "Modelos de embeddings processam os discursos." },
-              { title: "Comparação Automatizada", desc: "Algoritmos comparam discursos com os votos." },
-              { title: "Score de Coerência", desc: "Calculamos um índice percentual de coerência." }
+              {
+                title: "Coleta de Dados",
+                desc: "Utilizamos as APIs oficiais da Câmara e do Senado.",
+                icon: (
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <ellipse cx="12" cy="5" rx="7" ry="3"/>
+                    <path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5"/>
+                    <path d="M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>
+                  </svg>
+                )
+              },
+
+              {
+                title: "Análise de NLP",
+                desc: "Modelos de embeddings processam os discursos.",
+                icon: <Brain size={18} />
+              },
+
+              {
+                title: "Comparação Automatizada",
+                desc: "Algoritmos comparam discursos com os votos.",
+                icon: (
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/>
+                  </svg>
+                )
+              },
+
+              {
+                title: "Score de Coerência",
+                desc: "Calculamos um índice percentual de coerência.",
+                icon: (
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+                    <circle cx="12" cy="12" r="8"/>
+                    <circle cx="12" cy="12" r="4.5"/>
+                    <circle cx="12" cy="12" r="1.5"/>
+                  </svg>
+                )
+              }
+
             ].map((m, i) => (
-              <div key={i} className="flex gap-3.5 p-4 bg-surface border border-border rounded-[10px]">
-                <div className="w-10 h-10 rounded-lg bg-teal-bg border border-teal-border flex items-center justify-center shrink-0 text-teal text-[18px]">
-                  ⚙️
+              <div
+                key={i}
+                className="flex gap-3.5 p-4 bg-bg border border-border rounded-[10px]"
+              >
+
+                <div className="w-10 h-10 rounded-lg bg-teal-bg border border-teal-border flex items-center justify-center shrink-0 text-teal">
+                  {m.icon}
                 </div>
 
                 <div>
                   <div className="text-[14px] font-bold text-text-main mb-1.5">
                     {m.title}
                   </div>
+
                   <div className="text-[13px] text-text2 leading-[1.5]">
                     {m.desc}
                   </div>
                 </div>
+
               </div>
             ))}
+
           </div>
+
         </div>
 
         {/* FONTES DE DADOS */}
