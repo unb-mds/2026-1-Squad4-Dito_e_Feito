@@ -11,8 +11,13 @@ export function Sidebar() {
   return (
     <aside className="w-[260px] shrink-0 bg-surface border-r border-border flex flex-col h-screen">
       <div className="p-[20px_20px_16px] border-b border-border">
-        <div className="text-[18px] font-bold text-text-main tracking-[-0.3px]">Dito e Feito</div>
-        <div className="text-[12px] text-text2 mt-0.5">Análise Política com IA</div>
+        <div className="text-[18px] font-bold text-text-main tracking-[-0.3px]">
+          Dito e Feito
+        </div>
+        
+        <div className="text-[12px] text-text2 mt-0.5">
+          Análise Política com IA
+        </div>
       </div>
       
       <nav className="p-[12px_10px] flex-1">
@@ -25,7 +30,12 @@ export function Sidebar() {
           Políticos
         </Link>
         <Link to="/comparacao" className={getLinkClass('/comparacao')}>
-          <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>
+          <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <line x1="4" y1="20" x2="4" y2="10"/>
+            <line x1="10" y1="20" x2="10" y2="4"/>
+            <line x1="16" y1="20" x2="16" y2="14"/>
+            <line x1="22" y1="20" x2="22" y2="8"/>
+          </svg>
           Comparação (VS)
         </Link>
         <Link to="/relatorios" className={getLinkClass('/relatorios')}>
@@ -33,7 +43,11 @@ export function Sidebar() {
           Relatórios
         </Link>
         <Link to="/sobre" className={getLinkClass('/sobre')}>
-          <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 16v-5"/>
+            <circle cx="12" cy="7" r=".5"/>
+          </svg>
           Sobre
         </Link>
       </nav>
