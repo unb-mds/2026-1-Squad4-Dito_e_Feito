@@ -28,13 +28,6 @@ export function Sobre() {
       github: "https://github.com/Velho008",
       foto: "https://github.com/Velho008.png"
     },
-    {
-      nome: "Thomaz Marra Martins",
-      email: "N/A",
-      role: "N/A",
-      github: "",
-      foto: ""
-    },
   ];
 
   return (
