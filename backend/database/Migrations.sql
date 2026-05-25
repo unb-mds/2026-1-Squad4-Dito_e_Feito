@@ -72,3 +72,47 @@ FROM parlamentar p
 LEFT JOIN score_coerencia sc ON sc.parlamentar_id = p.id
 GROUP BY p.sigla_partido, p.sigla_uf, p.tipo
 ORDER BY p.sigla_partido, p.sigla_uf;
+
+-- ───────────────────────────────────────────
+-- MIGRATION 003 - Suporte à integração backend
+-- Data: 2026-05
+-- ───────────────────────────────────────────
+
+-- Adiciona coluna tipo_parlamentar usada pelo backend (api.py e scan_senators.py)
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM information_schema.columns
+        WHERE table_name = 'parlamentar'
+          AND column_name = 'tipo_parlamentar'
+    ) THEN
+        ALTER TABLE parlamentar
+            ADD COLUMN tipo_parlamentar VARCHAR(20) NOT NULL DEFAULT 'deputado'
+            CHECK (tipo_parlamentar IN ('senador', 'deputado'));
+    END IF;
+END;
+$$;
+
+-- Índice para filtros por tipo de parlamentar
+CREATE INDEX IF NOT EXISTS idx_parlamentar_tipo 
+ON parlamentar(tipo_parlamentar);
+
+-- Garante constraint UNIQUE no id_externo para upserts do backend
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM information_schema.table_constraints tc
+        JOIN information_schema.constraint_column_usage ccu 
+            ON tc.constraint_name = ccu.constraint_name
+        WHERE tc.table_name = 'parlamentar'
+          AND ccu.column_name = 'id_externo'
+          AND tc.constraint_type = 'UNIQUE'
+    ) THEN
+        ALTER TABLE parlamentar 
+        ADD CONSTRAINT parlamentar_id_externo_unique UNIQUE (id_externo);
+    END IF;
+END;
+$$;
+ORDER BY p.sigla_partido, p.sigla_uf;
