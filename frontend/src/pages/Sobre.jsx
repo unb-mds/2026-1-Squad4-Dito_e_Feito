@@ -80,8 +80,9 @@ export function Sobre() {
         </div>
 
         {/* FONTES DE DADOS */}
-        <div className="mb-4">
-          <div className="text-[18px] font-bold text-text-main mb-3.5">
+        <div className="bg-surface border border-border rounded-xl p-6 mb-4">
+
+          <div className="text-[18px] font-bold text-text-main mb-4">
             Fontes de Dados
           </div>
 
@@ -102,8 +103,9 @@ export function Sobre() {
                 href={api.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex gap-3.5 p-4 bg-surface border border-border rounded-[10px] hover:border-teal transition-colors"
+                className="flex gap-3.5 p-4 bg-bg border border-border rounded-[10px] hover:border-teal transition-colors"
               >
+
                 {/* ESCUDO */}
                 <div className="w-10 h-10 rounded-lg bg-teal-bg border border-teal-border flex items-center justify-center shrink-0 text-teal">
                   <svg
@@ -118,7 +120,7 @@ export function Sobre() {
                   </svg>
                 </div>
 
-                <div>
+                <div className="min-w-0">
                   <div className="text-[14px] font-bold text-text-main mb-1">
                     {api.nome}
                   </div>
@@ -127,26 +129,33 @@ export function Sobre() {
                     {api.link}
                   </div>
                 </div>
+
               </a>
             ))}
+
           </div>
 
-          {/* AVISO / SETINHA */}
-          <div className="mt-4 flex items-center justify-center gap-2 text-[13px] text-teal font-medium">
+          {/* AVISO */}
+          <div className="mt-5 flex items-center justify-center gap-2 text-[13px] text-teal font-medium">
+
+            {/* seta subindo estilo gráfico */}
             <svg
-              width="16"
-              height="16"
+              width="18"
+              height="18"
               fill="none"
-              viewBox="0 0 20 20"
+              viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth="2.3"
+              strokeWidth="2"
             >
-              <path d="M12 19V5"/>
-              <path d="M5 12l7-7 7 7"/>
+              <path d="M4 16L10 10L14 14L20 8"/>
+              <path d="M20 8H14"/>
+              <path d="M20 8V14"/>
             </svg>
 
-            <strong>Atualizações</strong>realizadas a cada 6 horas via API REST
+            <strong>Fontes de Dados Atualizadas:</strong>Atualizações feitas a cada 6 horas via API REST
+
           </div>
+
         </div>
 
         {/* SQUAD */}
