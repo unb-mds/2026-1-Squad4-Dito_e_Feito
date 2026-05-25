@@ -5,12 +5,60 @@ import { GraficoPartidos } from '../components/GraficoPartidos';
 import { GraficoBarras } from '../components/GraficoBarras';
 
 export const politicosMock = [
-  {id:1,nome:'Maria Silva Santos',partido:'PT',uf:'SP',tipo:'Deputada',coerencia:87, foto: ''},
-  {id:2,nome:'João Pedro Oliveira',partido:'PL',uf:'RJ',tipo:'Deputado',coerencia:84, foto: ''},
-  {id:3,nome:'Ana Costa Mendes',partido:'UNIÃO',uf:'MG',tipo:'Deputada',coerencia:79, foto: ''},
-  {id:4,nome:'Carlos Alberto Lima',partido:'PP',uf:'BA',tipo:'Senador',coerencia:76, foto: ''},
-  {id:5,nome:'Fernanda Rocha',partido:'MDB',uf:'SP',tipo:'Deputada',coerencia:72, foto: ''},
-  {id:6,nome:'Roberto Alves',partido:'PSD',uf:'RS',tipo:'Senador',coerencia:69, foto: ''},
+  {
+    id: 1,
+    nome: 'Maria Silva Santos',
+    partido: 'PT',
+    uf: 'SP',
+    tipo: 'Deputada',
+    coerencia: 87,
+    foto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80',
+  },
+  {
+    id: 2,
+    nome: 'João Pedro Oliveira',
+    partido: 'PL',
+    uf: 'RJ',
+    tipo: 'Deputado',
+    coerencia: 84,
+    foto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80',
+  },
+  {
+    id: 3,
+    nome: 'Ana Costa Mendes',
+    partido: 'UNIÃO',
+    uf: 'MG',
+    tipo: 'Deputada',
+    coerencia: 79,
+    foto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&q=80',
+  },
+  {
+    id: 4,
+    nome: 'Carlos Alberto Lima',
+    partido: 'PP',
+    uf: 'BA',
+    tipo: 'Senador',
+    coerencia: 76,
+    foto: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&q=80',
+  },
+  {
+    id: 5,
+    nome: 'Fernanda Rocha',
+    partido: 'MDB',
+    uf: 'SP',
+    tipo: 'Deputada',
+    coerencia: 72,
+    foto: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=300&q=80',
+  },
+  {
+    id: 6,
+    nome: 'Roberto Alves',
+    partido: 'PSD',
+    uf: 'RS',
+    tipo: 'Senador',
+    coerencia: 69,
+    foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80',
+  },
 ];
 
 const alertas = [
