@@ -7,20 +7,22 @@ import { Comparacao } from './pages/Comparacao';
 import { Relatorios } from './pages/Relatorios';
 import { Sobre } from './pages/Sobre';
 import { Footer } from './components/Footer';
+import { Perfil } from './pages/Perfil';
 
 export default function App() {
   return (
     <div className="flex h-screen bg-bg text-text-main overflow-hidden font-body">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto main-scroll flex flex-col">
+      <main className="flex-1 overflow-y-auto main-scroll flex flex-col relative">
         <Routes>
           <Route path="/" element={<VisaoGeral />} />
           <Route path="/politicos" element={<Politicos />} />
+          <Route path="/politicos/:id" element={<Perfil />} />
           <Route path="/comparacao" element={<Comparacao />} />
           <Route path="/relatorios" element={<Relatorios />} />
           <Route path="/sobre" element={<Sobre />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </main>
     </div>
   );
