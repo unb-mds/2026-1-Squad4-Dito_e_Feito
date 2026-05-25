@@ -78,6 +78,7 @@ nav:
   - Tecnologias:
       - Stack do Projeto: tecnologias/stack.md
       - Guia de Conexão ao Banco: tecnologias/conexao_banco.md
+      - Fluxo de Dados (Pipeline ao Dashboard): fluxo_pipeline_dashboard.md
 
   - Estudos:
       - Índice de Estudos: estudos/index.md

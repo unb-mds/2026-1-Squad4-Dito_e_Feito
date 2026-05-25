@@ -1,0 +1,76 @@
+<USER_REQUEST>
+Atue como um Engenheiro de Software Sênior especializado em Python. Refatore o arquivo `scan_senators.py` aplicando exatamente as 5 correções cirúrgicas descritas abaixo. 
+
+Atenção: Mantenha toda a estrutura restante do código, funções secundárias e importações completamente intactas. Não remova comentários essenciais.
+
+1. Atualização dos Thresholds Globais
+No topo do arquivo, altere as constantes de configuração globais para os seguintes valores:
+```python
+THRESHOLD_AFINIDADE = 0.5      # Afinidade moderada/alta passa a validar
+MIN_MATCHES         = 1        # Necessário pelo menos 1 par alinhado para validar o senador
+JACCARD_GATE        = 0.0      # Desativa o corte seco do Jaccard local
+
+    Inversão de Prioridade dos Modelos do OpenRouter
+    Altere a lista OPENROUTER_MODELS para priorizar o modelo de 70b (mais robusto para análise semântica), deixando o de 8b como fallback secundário:
+
+Python
+
+OPENROUTER_MODELS = [
+    "meta-llama/llama-3.3-70b-instruct",      # Primário
+    "meta-llama/llama-3.1-8b-instruct",       # Secundário
+]
+
+    Correção de Sintaxe na Função analisar_afinidade_openrouter
+    Dentro da função analisar_afinidade_openrouter, localize a linha de log de sucesso que contém o argumento inválido fill=True e corrija o parâmetro para flush=True:
+
+    De: print(f"[DEBUG OPENROUTER] Sucesso via modelo: {model_name}", fill=True)
+
+    Para: print(f"[DEBUG OPENROUTER] Sucesso via modelo: {model_name}", flush=True)
+
+    Correção de Escopo de Variável em buscar_discursos_senador
+    Dentro do bloco except Exception as e: da função buscar_discursos_senador, altere a variável incorreta id_senador (ou qualquer variante de escopo que esteja errada) para id_parlamentar (ou o nome exato do argumento de ID que a função recebe), corrigindo o erro de NameError:
+
+    De: log(f"Erro scraping discursos (id={id_senador}): {e}", "ERR")
+
+    Para: log(f"Erro scraping discursos (id={id_parlamentar}): {e}", "ERR") (Substitua pel
+<truncated 766 bytes>
+c, v["ementa"])
+        
+        # Confia no critério semântico macro da LLM e não descarta pelo Jaccard zerado
+        pares_candidatos.append({
+            "idx": len(pares_candidatos),  # reindexação contínua
+            "ementa": v["ementa"],
+            "discurso": melhor_disc,
+            "jaccard": round(score_jac, 4),
+            "voto_original_idx": idx,  # preserva idx original para lookup de votos
+        })
+
+    log(
+        f"  [Pre-Filter L2] {nome} – {len(pares_candidatos)} pares preparados para ordenação.",
+        "INFO",
+    )
+
+    if not pares_candidatos:
+        log(f"  ⤼ {nome} – 0 pares gerados. Descartado.", "SKIP")
+        return None
+
+    # Ordena pelos melhores Jaccard e limita a MAX_PARES_LLM para economizar tokens
+    pares_candidatos.sort(key=lambda x: x["jaccard"], reverse=True)
+    pares_amostra = pares_candidatos[:MAX_PARES_LLM]
+
+Retorne o arquivo completo refatorado com essas modificações pontuais.
+
+
+---
+
+### O que mudou e por que ficou melhor?
+
+* **Bloqueio de Delírio (Halucinação):** Usar delimitadores de código markdown (` ```python `) e deixar explícito que o resto da estrutura deve ficar *"completamente intacta"* impede que o agente reescreva ou simplifique outras funções cruciais do seu script do backend.
+* **Ajuste do Item 4:** No seu prompt original, o "De:" e o "Para:" do item 4 diziam exatamente a mesma coisa (`id_senador`). Eu alterei para deixar claro que ele deve trocar a variável inexistente pelo argumento real que a função recebe na assinatura (provavelmente `id_parlamentar` ou algo similar).
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-05-24T14:30:16-03:00.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from Gemini 3.5 Flash (Medium) to Gemini 3.1 Pro (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>

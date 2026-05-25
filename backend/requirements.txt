@@ -2,5 +2,5 @@ flask
 flask-cors
 requests
 beautifulsoup4
-transformers
-torch
+python-dotenv
+psycopg2-binary
