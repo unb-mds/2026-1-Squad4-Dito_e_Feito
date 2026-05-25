@@ -39,8 +39,15 @@ export function Politicos() {
           <div>
             {filtered.map((p, i) => (
               <div key={i} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
-                <img src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} alt={p.nome} className="w-10 h-10 rounded-full border border-border shrink-0 object-cover" />
-                <div className="flex-1 min-w-0">
+                <img
+                  src={p.foto}
+                  alt={p.nome}
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      'https://placehold.co/80x80/1c2128/14b8a6?text=?';
+                  }}
+                  className="w-16 h-16 rounded-full border border-border shrink-0 object-cover"
+                />                <div className="flex-1 min-w-0">
                   <div className="text-[14px] font-semibold text-text-main">{p.nome}</div>
                   <div className="text-[12px] text-text2 mt-0.5">{p.partido} · {p.uf}</div>
                 </div>
