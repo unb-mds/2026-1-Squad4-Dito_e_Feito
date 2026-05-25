@@ -115,3 +115,4 @@ BEGIN
     END IF;
 END;
 $$;
+ORDER BY p.sigla_partido, p.sigla_uf;
