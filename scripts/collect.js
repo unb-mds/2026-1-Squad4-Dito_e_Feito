@@ -13,24 +13,29 @@ const headers = {
 function normalizeAuthorName(name) {
   if (!name) return "Desconhecido";
   
-  const aliasMap = {
-    // Unificação de Juan Costa
-    "juan75indiano@gmail.com": "Juan Costa",
-    "indianodev": "Juan Costa",
-    "juan costa": "Juan Costa",
-    "juan": "Juan Costa",
-    
-    // Unificação de Gustavo
-    "gus-ant": "Gustavo Rodrigues",
-    "gustavo": "Gustavo Rodrigues",
-    
-    // Unificação de Gabriel Velho
-    "velho008": "Gabriel Velho de Souza",
-    "sudotmox": "Gabriel Velho de Souza",
-  };
-
   const key = name.toLowerCase().trim();
-  return aliasMap[key] || name;
+
+  // 1. Unificação de Sauhan (SUDOTMOX)
+  if (key.includes("sudotmox") || key.includes("sauhan")) {
+    return "Sauhan";
+  }
+
+  // 2. Unificação de Juan Costa
+  if (key.includes("juan") || key.includes("indiano")) {
+    return "Juan Costa";
+  }
+
+  // 3. Unificação de Gustavo Rodrigues
+  if (key.includes("gustavo") || key.includes("gus-ant") || key === "gus") {
+    return "Gustavo Rodrigues";
+  }
+
+  // 4. Unificação de Gabriel Velho de Souza
+  if (key.includes("velho") || key.includes("gabriel")) {
+    return "Gabriel Velho de Souza";
+  }
+
+  return name;
 }
 
 async function getCommits() {
