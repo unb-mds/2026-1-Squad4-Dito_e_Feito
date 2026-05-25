@@ -79,6 +79,76 @@ export function Sobre() {
           </div>
         </div>
 
+        {/* FONTES DE DADOS */}
+        <div className="mb-4">
+          <div className="text-[18px] font-bold text-text-main mb-3.5">
+            Fontes de Dados
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+            {[
+              {
+                nome: "API da Câmara dos Deputados",
+                link: "https://dadosabertos.camara.leg.br/"
+              },
+              {
+                nome: "API do Senado Federal",
+                link: "https://legis.senado.leg.br/dadosabertos/"
+              }
+            ].map((api, i) => (
+              <a
+                key={i}
+                href={api.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-3.5 p-4 bg-surface border border-border rounded-[10px] hover:border-teal transition-colors"
+              >
+                {/* ESCUDO */}
+                <div className="w-10 h-10 rounded-lg bg-teal-bg border border-teal-border flex items-center justify-center shrink-0 text-teal">
+                  <svg
+                    width="18"
+                    height="18"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/>
+                  </svg>
+                </div>
+
+                <div>
+                  <div className="text-[14px] font-bold text-text-main mb-1">
+                    {api.nome}
+                  </div>
+
+                  <div className="text-[13px] text-teal break-all">
+                    {api.link}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* AVISO / SETINHA */}
+          <div className="mt-4 flex items-center justify-center gap-2 text-[13px] text-teal font-medium">
+            <svg
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 20 20"
+              stroke="currentColor"
+              strokeWidth="2.3"
+            >
+              <path d="M12 19V5"/>
+              <path d="M5 12l7-7 7 7"/>
+            </svg>
+
+            <strong>Atualizações</strong>realizadas a cada 6 horas via API REST
+          </div>
+        </div>
+
         {/* SQUAD */}
         <div className="bg-surface border border-border rounded-xl p-6 mb-4">
 
