@@ -1,70 +1,105 @@
-# ⚖️ Dito e Feito  
+# Dito e Feito
 
-### Análise política com IA
+Auditoria e Monitoramento de Coerência Parlamentar por Inteligência Artificial
 
-O **Dito e Feito** é um sistema de análise de coerência política que compara discursos de parlamentares com seus votos reais em plenário. O objetivo do projeto é promover transparência e apoiar a análise de comportamento legislativo por meio de dados e inteligência artificial.
-
-# Dashboard de métricas
-
-Link Dashboard de métricas de produtividade: https://unb-mds.github.io/2026-1-Squad4-Dito_e_Feito/analytics/
-
----
-
-## Visão Geral
-
-Em democracias modernas, discursos políticos e votações são públicos, mas dispersos e difíceis de analisar. Este projeto busca resolver esse problema ao cruzar essas informações e gerar indicadores de coerência.
-
-O sistema analisa:
-
-- Discursos (ementas, justificativas e pronunciamentos)
-- Votações legislativas (favorável, contrário, abstenção)
-
-E responde:
-
-> O parlamentar vota de acordo com o que defende?
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![OpenRouter](https://img.shields.io/badge/OpenRouter-7C3AED?style=for-the-badge)](https://openrouter.ai/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
 
 ---
 
-## Funcionalidades
+## Visão Geral e Arquitetura
 
-- 📊 Dashboard interativo com indicadores de coerência
-- 📈 Análise de tendência ao longo do tempo
-- 🏅 Ranking de parlamentares por coerência
-- 🔍 Filtros por partido, estado e período
-- 🤖 Análise semântica de textos (NLP)
-- ⚖️ Comparação entre discurso e comportamento legislativo
+O Dito e Feito é uma plataforma de auditoria cívica voltada ao monitoramento da coerência política no legislativo brasileiro. O sistema cruza os discursos oficiais dos parlamentares (pronunciados em tribuna) com seus votos reais registrados em sessões nominais no plenário. Utilizando algoritmos de Processamento de Linguagem Natural (PLN) e Modelos de Linguagem de Grande Porte (LLMs), a ferramenta identifica se a postura verbal de um parlamentar é condizente com seu comportamento legislativo prático.
 
----
+O ecossistema divide-se em dois módulos com responsabilidades e escopos distintos:
 
-## Tecnologias Utilizadas
+### Backend (Varredura e API)
+O núcleo do processamento é responsável por:
+- Consumir dados estruturados das APIs abertas da Câmara dos Deputados e do Senado Federal.
+- Realizar a extração automatizada (web scraping) do conteúdo literal dos pronunciamentos.
+- Executar a triagem rápida de similaridade sintática local (via índice Jaccard ou embeddings densos do BERTimbau).
+- Submeter os dados filtrados para avaliação cognitiva de afinidade e geração de justificativas textuais por modelos de linguagem avançados (Llama-3 via APIs Groq e OpenRouter).
+- Disponibilizar os dados por meio de endpoints REST utilizando o framework Flask e persistir os resultados em um banco de dados PostgreSQL hospedado no Supabase.
 
-### Backend
-- Python
-- FastAPI
-
-### IA / NLP
-- Hugging Face Transformers
-- Sentence Transformers
-
-### Banco de Dados
-- PostgreSQL
-
-### Frontend
-- React
-- Vite
-- Tailwind v4
-- React Router
+### Frontend (Dashboard Interativo)
+Uma Single Page Application construída com React 19, Vite e TailwindCSS v4, focada em democratizar o acesso à informação política para o cidadão. Ela oferece:
+- Visualização de métricas e KPIs consolidados (como média global de coerência e total de incoerências mapeadas).
+- Gráficos comparativos detalhados (via Recharts) por partidos políticos e parlamentares.
+- Raio-X individual do político, exibindo o histórico cronológico de votos, transcrição resumida do discurso relacionado e justificativa de coerência gerada por IA.
 
 ---
 
-## Estrutura do Repositório
+## Guia de Instalação e Execução
 
-O projeto está organizado seguindo uma estrutura limpa e padronizada que separa o código-fonte da aplicação da documentação gerada pela equipe:
+Siga os passos abaixo para configurar e executar os ambientes de desenvolvimento do projeto localmente.
 
-* **[backend/](backend/)**: Contém a API REST em Python (FastAPI), scripts de processamento e a modelagem do banco de dados relacional.
-* **[docs/](docs/)**: Centraliza todas as atas de reuniões, requisitos, estudos e guias que compõem a documentação oficial (MkDocs).
-* **[analytics/](analytics/)**: Código-fonte do painel de métricas de produtividade do squad.
-* **`index.html`**: Frontend principal da aplicação (Interface do Usuário).
+### Pré-requisitos
+- Python 3.10 ou superior
+- Node.js 18 ou superior
+- Instâncias do PostgreSQL (Supabase), Groq API e OpenRouter API configuradas
 
-Para compreender detalhadamente a finalidade de cada diretório e arquivo do projeto, acesse o guia completo de **[Estrutura de Pastas (ESTRUTURA.md)](ESTRUTURA.md)** na raiz do repositório.
+### 1. Clonar o Repositório
+```bash
+git clone https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito
+cd 2026-1-Squad4-Dito_e_Feito
+```
 
+### 2. Configurar o Backend
+Acesse a pasta do backend, configure o ambiente virtual e instale as dependências:
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # No Windows use: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Crie um arquivo `.env` na raiz do diretório `backend` baseado no modelo disponível em `.env.example`:
+```env
+DATABASE_URL=postgresql://usuario:senha@host:porta/banco
+GROQ_API_KEY=sua_chave_groq_aqui
+OPENROUTER_API_KEY=sua_chave_openrouter_aqui
+```
+
+#### Executando a API do Backend:
+```bash
+python api.py
+```
+O servidor da API iniciará por padrão na porta `5001`.
+
+#### Executando a Varredura (Scanner CLI):
+Para executar o processamento automatizado de dados em lote:
+```bash
+python scan_senators.py
+```
+
+---
+
+### 3. Configurar o Frontend
+Acesse a pasta do frontend e instale as dependências com o gerenciador de pacotes npm:
+```bash
+cd ../frontend
+npm install
+```
+
+#### Executando o Frontend em Modo de Desenvolvimento:
+```bash
+npm run dev
+```
+A aplicação web estará disponível por padrão no endereço `http://localhost:5173`.
+
+---
+
+## Core Team
+
+Desenvolvedores responsáveis pela criação e manutenção do projeto:
+
+| Foto de Perfil | Nome do Integrante | Link do GitHub |
+|:---:|:---:|:---:|
+| <img src="https://github.com/Velho008.png?size=100" width="80" height="80" style="border-radius: 50%;" alt="Gabriel Velho"/> | **Gabriel Velho de Souza** | [![GitHub](https://img.shields.io/badge/GitHub-Perfil-181717?style=flat-square&logo=github)](https://github.com/Velho008) |
+| <img src="https://github.com/gus-ant.png?size=100" width="80" height="80" style="border-radius: 50%;" alt="Gustavo Antonio"/> | **Gustavo Antonio** | [![GitHub](https://img.shields.io/badge/GitHub-Perfil-181717?style=flat-square&logo=github)](https://github.com/gus-ant) |
+| <img src="https://github.com/IndianoDev.png?size=100" width="80" height="80" style="border-radius: 50%;" alt="Juan Costa"/> | **Juan Costa** | [![GitHub](https://img.shields.io/badge/GitHub-Perfil-181717?style=flat-square&logo=github)](https://github.com/IndianoDev) |
+| <img src="https://github.com/SUDOTMOX.png?size=100" width="80" height="80" style="border-radius: 50%;" alt="Sauhan Ferreira"/> | **Sauhan Ferreira** | [![GitHub](https://img.shields.io/badge/GitHub-Perfil-181717?style=flat-square&logo=github)](https://github.com/SUDOTMOX) |

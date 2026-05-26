@@ -73,12 +73,14 @@ nav:
       - Levantamento Inicial: requisitos/levantamento_inicial.md
       - Requisitos Gerais Oficiais: requisitos/requisitos.md
 
-  - Design:
-      - Protótipo Figma: design/figma.md
+  - Frontend:
+      - Visão Geral: frontend/index.md
+      - Protótipo Figma: frontend/figma.md
 
   - Tecnologias:
       - Stack do Projeto: tecnologias/stack.md
       - Guia de Conexão ao Banco: tecnologias/conexao_banco.md
+      - Funcionamento do Backend: backend.md
       - Fluxo de Dados (Pipeline ao Dashboard): fluxo_pipeline_dashboard.md
 
   - Estudos:

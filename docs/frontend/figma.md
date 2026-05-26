@@ -4,13 +4,13 @@ Este documento centraliza o acesso e as definições visuais estabelecidas no pr
 
 ---
 
-## 🔗 Link de Acesso
+## Link de Acesso
 
-[![Abrir no Figma](https://img.shields.io/badge/Figma-Visualizar-blue?logo=figma)](https://www.figma.com/design/4b7fzC2mo6zj7WgLRO8qRf/dito-e-feito?node-id=1-2&t=lpGhcoJ7i2ZZEySV-1)(finalizado✅ )
+[![Abrir no Figma](https://img.shields.io/badge/Figma-Visualizar-blue?logo=figma)](https://www.figma.com/design/4b7fzC2mo6zj7WgLRO8qRf/dito-e-feito?node-id=1-2&t=lpGhcoJ7i2ZZEySV-1)
 
 ---
 
-## 🎨 Elementos Definidos
+## Elementos Definidos
 
 ### Tipografia e Estilo
 - **Fontes:** Foram estabelecidas as famílias tipográficas para garantir legibilidade e consistência.
@@ -26,9 +26,9 @@ Este documento centraliza o acesso e as definições visuais estabelecidas no pr
 ---
 *Última atualização baseada no progresso da Sprint 04.*
 
-## 👥 Autores
+## Autores
 
 | Nome | Matrícula | GitHub |
 |------|------|------|
 | GABRIEL VELHO DE SOUZA | 242015218 | Velho008 |
-| SAUHAN FERREIRA MELO | 242024923 | SUDOTMOX | 
+| SAUHAN FERREIRA MELO | 242024923 | SUDOTMOX |
