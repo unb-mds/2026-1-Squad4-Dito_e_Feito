@@ -18,5 +18,7 @@ site/
 .vscode/python-envs.defaultEnvManager
 .DS_Store
 *.log
+backend/.env
+.env
 
 backend/.env
