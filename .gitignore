@@ -4,6 +4,8 @@ venv/
 ENV/
 __pycache__/
 *.pyc
+backend/.env
+.env
 
 # Cache de pacotes e ferramentas
 .npm-cache/
@@ -18,7 +20,6 @@ site/
 .vscode/python-envs.defaultEnvManager
 .DS_Store
 *.log
-backend/.env
-.env
 
-backend/.env
+# configurações do workspace do programador
+.vscode

@@ -1,62 +1,57 @@
-import { FileText, Download } from 'lucide-react';
+import React from 'react';
+
+const relatorios = [
+  { titulo: 'Relatório de Coerência Global - Q4 2025', data: '15 Dez 2025', formato: 'PDF', tamanho: '2.3 MB' },
+  { titulo: 'Análise de Divergências por Partido', data: '10 Dez 2025', formato: 'CSV', tamanho: '845 KB' },
+  { titulo: 'Ranking de Políticos - Novembro', data: '30 Nov 2025', formato: 'PDF', tamanho: '1.9 MB' },
+];
 
 export function Relatorios() {
-  const listaRelatorios = [
-    {
-      titulo: "Relatório de Coerência Global - Q4 2025",
-      data: "15 Dez 2025",
-      formato: "PDF",
-      tamanho: "2.3 MB"
-    },
-    {
-      titulo: "Análise de Divergências por Partido",
-      data: "10 Dez 2025",
-      formato: "CSV",
-      tamanho: "845 KB"
-    },
-    {
-      titulo: "Ranking de Políticos - Novembro",
-      data: "30 Nov 2025",
-      formato: "PDF",
-      tamanho: "1.9 MB"
-    }
-  ];
-
   return (
-    <main className="p-8 w-full max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-3xl font-display font-bold text-texto-principal">Central de Relatórios</h1>
-        <p className="text-texto-secundario mt-2">Acesse e baixe os relatórios consolidados de análise política gerados pela nossa inteligência artificial.</p>
+    <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
+      <div className="p-[16px_32px] border-b border-border shrink-0">
+        <div className="text-[20px] font-bold text-text-main">Relatórios</div>
       </div>
-
-      <div className="flex flex-col gap-4">
-        {listaRelatorios.map((relatorio, index) => (
-          <div key={index} className="bg-surface p-5 rounded-xl border border-slate-800 flex items-center justify-between hover:border-slate-600 transition-colors">
-            
-            <div className="flex items-center gap-5">
-              <div className="w-12 h-12 bg-slate-800/80 rounded-lg flex items-center justify-center text-brand-petroleo border border-slate-700">
-                <FileText size={24} />
-              </div>
-              <div>
-                <h3 className="font-bold text-texto-principal text-lg">{relatorio.titulo}</h3>
-                <div className="flex items-center gap-3 text-sm text-texto-secundario mt-1">
-                  <span>{relatorio.data}</span>
-                  <span>&bull;</span>
-                  <span className="font-mono uppercase">{relatorio.formato}</span>
-                  <span>&bull;</span>
-                  <span>{relatorio.tamanho}</span>
-                </div>
-              </div>
-            </div>
-
-            <button className="flex items-center gap-2 bg-brand-petroleo hover:bg-[#0d635c] text-white px-5 py-2.5 rounded-lg font-semibold transition-colors">
-              <Download size={18} />
-              Download
-            </button>
-            
+      
+      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+        <div className="bg-surface border border-border rounded-xl">
+          <div className="p-[16px_20px] border-b border-border2">
+            <div className="text-[16px] font-bold text-text-main">Central de Relatórios</div>
           </div>
-        ))}
+          <div>
+            {relatorios.map((r, i) => (
+              <div key={i} className="flex items-center gap-4 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+                <div className="w-11 h-11 rounded-lg bg-teal-bg border border-teal-border flex items-center justify-center shrink-0 text-teal">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[14px] font-semibold text-text-main mb-1 truncate">{r.titulo}</div>
+                  <div className="text-[12px] text-text2 flex items-center gap-1.5">
+                    {r.data}
+                    <div className="w-1 h-1 rounded-full bg-text3"></div>
+                    {r.formato}
+                    <div className="w-1 h-1 rounded-full bg-text3"></div>
+                    {r.tamanho}
+                  </div>
+                </div>
+                <button className="flex items-center gap-1.5 bg-teal text-white border-none rounded-lg p-[8px_16px] text-[13px] font-semibold cursor-pointer hover:opacity-85 transition-opacity shrink-0">
+                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }

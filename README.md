@@ -51,7 +51,9 @@ E responde:
 
 ### Frontend
 - React
-- Chart.js / Recharts
+- Vite
+- Tailwind v4
+- React Router
 
 ---
 
