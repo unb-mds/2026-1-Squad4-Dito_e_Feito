@@ -9,6 +9,35 @@ const headers = {
   Authorization: `token ${token}`,
 };
 
+// Dicionário de normalização de nomes de autores (Aliases) para unificar no painel
+function normalizeAuthorName(name) {
+  if (!name) return "Desconhecido";
+  
+  const key = name.toLowerCase().trim();
+
+  // 1. Unificação de Sauhan (SUDOTMOX)
+  if (key.includes("sudotmox") || key.includes("sauhan")) {
+    return "Sauhan";
+  }
+
+  // 2. Unificação de Juan Costa
+  if (key.includes("juan") || key.includes("indiano")) {
+    return "Juan Costa";
+  }
+
+  // 3. Unificação de Gustavo Rodrigues
+  if (key.includes("gustavo") || key.includes("gus-ant") || key === "gus") {
+    return "Gustavo Rodrigues";
+  }
+
+  // 4. Unificação de Gabriel Velho de Souza
+  if (key.includes("velho") || key.includes("gabriel")) {
+    return "Gabriel Velho de Souza";
+  }
+
+  return name;
+}
+
 async function getCommits() {
   const url = `https://api.github.com/repos/${repo}/commits?sha=${branch}&per_page=100`;
   const res = await axios.get(url, { headers });
@@ -87,7 +116,8 @@ async function main() {
 
     // Processar status avançados (adições, deleções)
     stats.forEach(contributor => {
-      const login = contributor.author ? contributor.author.login : 'Desconhecido';
+      const rawLogin = contributor.author ? contributor.author.login : 'Desconhecido';
+      const login = normalizeAuthorName(rawLogin);
       let additions = 0;
       let deletions = 0;
       
@@ -100,11 +130,17 @@ async function main() {
         }
       });
       
-      detailedContributors[login] = {
-        commits: contributor.total,
-        additions,
-        deletions
-      };
+      if (detailedContributors[login]) {
+        detailedContributors[login].commits += contributor.total;
+        detailedContributors[login].additions += additions;
+        detailedContributors[login].deletions += deletions;
+      } else {
+        detailedContributors[login] = {
+          commits: contributor.total,
+          additions,
+          deletions
+        };
+      }
     });
 
     const commitsByHour = Array.from({ length: 24 }, (_, i) => ({ hour: i, commits: 0 }));
@@ -125,7 +161,8 @@ async function main() {
       .map(([week, count]) => ({ week, count }));
 
     commits.forEach(c => {
-      const name = c.commit.author.name;
+      const rawName = c.commit.author.name;
+      const name = normalizeAuthorName(rawName);
       commitsPerAuthor[name] = (commitsPerAuthor[name] || 0) + 1;
 
       const date = new Date(c.commit.author.date);
@@ -139,7 +176,7 @@ async function main() {
     const recentCommits = commits.slice(0, 20).map(c => ({
       sha: c.sha,
       message: c.commit.message,
-      author: c.commit.author.name,
+      author: normalizeAuthorName(c.commit.author.name),
       date: c.commit.author.date,
       verified: c.commit.verification?.verified || false
     }));
