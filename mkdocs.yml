@@ -77,10 +77,12 @@ nav:
       - Visão Geral: frontend/index.md
       - Protótipo Figma: frontend/figma.md
 
+  - Backend:
+      - Visão Geral: backend/backend.md
+
   - Tecnologias:
       - Stack do Projeto: tecnologias/stack.md
       - Guia de Conexão ao Banco: tecnologias/conexao_banco.md
-      - Funcionamento do Backend: backend.md
       - Fluxo de Dados (Pipeline ao Dashboard): fluxo_pipeline_dashboard.md
 
   - Estudos:
