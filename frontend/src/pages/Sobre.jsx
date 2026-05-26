@@ -4,7 +4,7 @@ export function Sobre() {
     {
       nome: "Gustavo Antonio Rodrigues e Silva",
       email: "gus.ant.rod.10@gmail.com",
-      role: "Monitoramento de Coerência",
+      role: "Project Owner, Desenvolvedor de IA e backend completo",
       github: "https://github.com/gus-ant",
       foto: "https://github.com/gus-ant.png"
     },
@@ -18,7 +18,7 @@ export function Sobre() {
     {
       nome: "Juan Costa Indiano",
       email: "juan75indiano@gmail.com",
-      role: "Engenharia de Dados",
+      role: "Scrum Master e Engenheiro de Dados",
       github: "https://github.com/IndianoDev",
       foto: "https://github.com/IndianoDev.png"
     },
