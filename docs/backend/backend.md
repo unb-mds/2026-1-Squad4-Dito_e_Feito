@@ -122,5 +122,4 @@ Script focado em processamento local e privado. Ele carrega a rede neural de rep
 
 | Nome | Matrícula | GitHub |
 |------|------|------|
-| GABRIEL VELHO DE SOUZA | 242015218 | Velho008 |
-| SAUHAN FERREIRA MELO | 242024923 | SUDOTMOX |
+| GUSTAVO ANTONIO RODRIGUES E SILVA | 242015380 | gus-ant |
