@@ -79,6 +79,7 @@ nav:
 
   - Backend:
       - Visão Geral: backend/backend.md
+      - Banco de Dados: backend/banco_de_dados.md
 
   - Tecnologias:
       - Stack do Projeto: tecnologias/stack.md
