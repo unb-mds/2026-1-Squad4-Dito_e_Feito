@@ -20,3 +20,5 @@ site/
 *.log
 backend/.env
 .env
+
+backend/.env

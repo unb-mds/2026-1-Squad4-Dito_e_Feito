@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dito e Feito – Dashboard de Coerência Parlamentar</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <style>
+    /* ─── Reset & tokens ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0c0e16;
+      --surface:   #13151f;
+      --card:      #181b28;
+      --border:    #252836;
+      --accent:    #7c6fef;
+      --accent2:   #30c9c0;
+      --accent3:   #f59e42;
+      --danger:    #f06071;
+      --success:   #3dd68c;
+      --text:      #dde3f0;
+      --muted:     #8892aa;
+      --panel-w:   420px;
+      --header-h:  64px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ─── Header ─── */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      height: var(--header-h);
+      background: rgba(12,14,22,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+    }
+    .logo { display: flex; align-items: center; gap: .75rem; }
+    .logo-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .logo h1 { font-size: 1.05rem; font-weight: 700; letter-spacing: -.01em; }
+    .logo span { font-size: .72rem; color: var(--muted); }
+    .header-right { display: flex; align-items: center; gap: .75rem; }
+    #fonte-pill {
+      font-size: .7rem; padding: .25rem .7rem;
+      border-radius: 999px; border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    #fonte-pill.ok { border-color: var(--success); color: var(--success); }
+    #fonte-pill.err { border-color: var(--danger); color: var(--danger); }
+    #refresh-btn {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); padding: .35rem .8rem; border-radius: 6px;
+      font-size: .78rem; cursor: pointer; transition: border-color .2s;
+    }
+    #refresh-btn:hover { border-color: var(--accent); }
+
+    /* ─── Main layout ─── */
+    .main {
+      transition: margin-right .3s ease;
+      padding: 1.75rem 2rem 3rem;
+      max-width: 1400px; margin: 0 auto;
+    }
+
+    /* ─── Section titles ─── */
+    .section-title {
+      font-size: .68rem; font-weight: 700;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: .08em; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .section-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── Summary cards ─── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.2rem 1.4rem;
+      position: relative; overflow: hidden;
+      transition: border-color .2s, transform .15s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0; transition: opacity .2s;
+    }
+    .card:hover::before { opacity: 1; }
+    .card label { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .card .val {
+      font-size: 2.1rem; font-weight: 800; margin-top: .3rem;
+      background: linear-gradient(135deg, #fff, var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .card .sub { font-size: .73rem; color: var(--muted); margin-top: .25rem; }
+
+    /* ─── Charts row ─── */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    @media (max-width: 900px) { .charts-row { grid-template-columns: 1fr; } }
+    .chart-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .chart-box h2 {
+      font-size: .7rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .07em;
+      margin-bottom: 1rem;
+    }
+    .chart-box .chart-legend {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: .35rem;
+      font-size: .7rem; color: var(--muted);
+    }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ─── Senator table ─── */
+    .table-wrap {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; margin-bottom: 2rem;
+    }
+    .table-controls {
+      padding: .9rem 1.2rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .table-controls h2 { font-size: .7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+    #filter-input {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); border-radius: 6px;
+      padding: .35rem .8rem; font-size: .8rem; outline: none;
+      transition: border-color .2s; width: 200px;
+    }
+    #filter-input:focus { border-color: var(--accent); }
+    #party-filter {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); border-radius: 6px;
+      padding: .35rem .7rem; font-size: .78rem; outline: none; cursor: pointer;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    thead th {
+      background: var(--surface);
+      padding: .65rem 1rem; text-align: left;
+      color: var(--muted); font-weight: 600;
+      text-transform: uppercase; font-size: .67rem;
+      letter-spacing: .06em; border-bottom: 1px solid var(--border);
+      cursor: pointer; user-select: none;
+    }
+    thead th:hover { color: var(--text); }
+    thead th .sort-icon { opacity: .4; margin-left: .25rem; }
+    thead th.sorted .sort-icon { opacity: 1; color: var(--accent); }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      cursor: pointer; transition: background .12s;
+    }
+    tbody tr:hover { background: var(--surface); }
+    tbody tr.active { background: rgba(124,111,239,.08); border-left: 3px solid var(--accent); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: .7rem 1rem; vertical-align: middle; }
+    .td-rank { color: var(--muted); font-size: .75rem; width: 40px; }
+    .td-name strong { display: block; font-size: .85rem; }
+    .td-name small { color: var(--muted); font-size: .72rem; }
+    .td-party .party-tag {
+      display: inline-block; padding: .15rem .55rem;
+      border-radius: 4px; font-size: .72rem; font-weight: 700;
+      border: 1px solid; opacity: .9;
+    }
+    .score-cell { min-width: 120px; }
+    .score-num { font-weight: 700; font-size: .9rem; margin-bottom: 4px; }
+    .score-bar-bg { height: 4px; border-radius: 2px; background: var(--border); }
+    .score-bar-fill { height: 100%; border-radius: 2px; transition: width .4s; }
+    .badge {
+      display: inline-block; padding: .15rem .55rem;
+      border-radius: 4px; font-size: .7rem; font-weight: 700;
+    }
+    .badge-alto  { background: rgba(61,214,140,.15); color: #3dd68c; border: 1px solid rgba(61,214,140,.3); }
+    .badge-med   { background: rgba(245,158,66,.15);  color: #f59e42; border: 1px solid rgba(245,158,66,.3); }
+    .badge-baixo { background: rgba(240,96,113,.15);  color: #f06071; border: 1px solid rgba(240,96,113,.3); }
+
+    /* ─── Empty / Loading ─── */
+    .empty-state {
+      text-align: center; padding: 4rem 2rem; color: var(--muted);
+    }
+    .empty-state .icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .empty-state p { font-size: .85rem; }
+    .empty-state code {
+      display: inline-block; margin-top: .5rem;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: .3rem .7rem; border-radius: 6px;
+      font-family: monospace; font-size: .78rem; color: var(--accent2);
+    }
+
+    /* ─── Side panel ─── */
+    #panel-overlay {
+      position: fixed; inset: 0; z-index: 80;
+      background: rgba(0,0,0,.5);
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    #panel-overlay.open { opacity: 1; pointer-events: auto; }
+    #side-panel {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 90;
+      width: var(--panel-w);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      transform: translateX(100%);
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+      overflow-y: auto; display: flex; flex-direction: column;
+    }
+    #side-panel.open { transform: translateX(0); }
+
+    .panel-header {
+      position: sticky; top: 0;
+      background: var(--surface); z-index: 1;
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 1.3rem;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem;
+    }
+    .panel-header .parl-info { flex: 1; }
+    .panel-header .parl-name { font-size: 1.05rem; font-weight: 700; }
+    .panel-header .parl-meta {
+      display: flex; gap: .5rem; margin-top: .3rem; flex-wrap: wrap;
+    }
+    .meta-tag {
+      font-size: .7rem; padding: .15rem .5rem;
+      border-radius: 4px; border: 1px solid var(--border); color: var(--muted);
+    }
+    #panel-close {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--muted); width: 30px; height: 30px;
+      border-radius: 6px; cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s, color .2s; flex-shrink: 0;
+    }
+    #panel-close:hover { border-color: var(--danger); color: var(--danger); }
+
+    .panel-body { padding: 1.25rem; flex: 1; }
+
+    /* Score gauge */
+    .gauge-wrap {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.2rem;
+      margin-bottom: 1rem; text-align: center;
+    }
+    .gauge-score {
+      font-size: 3rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .gauge-label { font-size: .72rem; color: var(--muted); margin-top: .2rem; }
+    .gauge-bar-wrap {
+      height: 8px; background: var(--border); border-radius: 4px;
+      margin: .75rem 0 .3rem; overflow: hidden;
+    }
+    .gauge-bar {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+    }
+    .gauge-meta { display: flex; justify-content: space-between; font-size: .7rem; color: var(--muted); }
+
+    /* Donut chart in panel */
+    .panel-chart-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .panel-chart-box h3 {
+      font-size: .68rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .06em; margin-bottom: .85rem;
+    }
+    .donut-wrap { max-width: 200px; margin: 0 auto; }
+    .donut-legend { margin-top: .9rem; display: flex; flex-direction: column; gap: .45rem; }
+    .donut-legend-item {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: .76rem;
+    }
+    .donut-legend-left { display: flex; align-items: center; gap: .45rem; }
+    .donut-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .donut-count { color: var(--muted); font-size: .73rem; }
+
+    /* Alignment ratio bar */
+    .align-bar-wrap { margin-bottom: 1rem; }
+    .align-bar-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.1rem;
+    }
+    .align-bar-box h3 {
+      font-size: .68rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .06em; margin-bottom: .85rem;
+    }
+    .align-stat { display: flex; align-items: center; gap: .75rem; margin-bottom: .6rem; }
+    .align-stat-label { font-size: .76rem; min-width: 90px; }
+    .align-stat-bar-bg { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .align-stat-bar { height: 100%; border-radius: 3px; }
+    .align-stat-val { font-size: .73rem; color: var(--muted); min-width: 30px; text-align: right; }
+
+    /* Live analysis section */
+    .panel-live {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.1rem; margin-bottom: 1rem;
+    }
+    .panel-live h3 {
+      font-size: .68rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .06em; margin-bottom: .85rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .live-badge {
+      display: inline-block; padding: .1rem .45rem;
+      border-radius: 999px; font-size: .6rem; font-weight: 700;
+      background: rgba(61,214,140,.15); color: var(--success);
+      border: 1px solid rgba(61,214,140,.3);
+    }
+    #live-btn {
+      width: 100%; padding: .55rem;
+      background: linear-gradient(90deg, var(--accent), #5956d6);
+      border: none; border-radius: 7px; color: #fff;
+      font-size: .8rem; font-weight: 600; cursor: pointer;
+      transition: opacity .2s;
+    }
+    #live-btn:hover { opacity: .85; }
+    #live-btn:disabled { opacity: .5; cursor: not-allowed; }
+    #live-results { margin-top: .9rem; display: flex; flex-direction: column; gap: .6rem; }
+    .vote-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: .75rem; font-size: .78rem;
+    }
+    .vote-card .vc-header {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem;
+      margin-bottom: .4rem;
+    }
+    .vc-ementa { color: var(--text); line-height: 1.4; flex: 1; font-size: .77rem; }
+    .vc-badge {
+      flex-shrink: 0; padding: .1rem .45rem;
+      border-radius: 4px; font-size: .67rem; font-weight: 700;
+    }
+    .vc-Coerente                { background: rgba(61,214,140,.15); color: #3dd68c; }
+    .vc-Parcialmente           { background: rgba(245,158,66,.15);  color: #f59e42; }
+    .vc-Divergente             { background: rgba(240,96,113,.15);  color: #f06071; }
+    .vc-Nao                    { background: rgba(136,146,170,.1);  color: var(--muted); }
+    .vc-meta { color: var(--muted); font-size: .7rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+    .vc-afinidade { font-weight: 700; color: var(--accent2); }
+    .vc-justificativa { color: var(--muted); margin-top: .3rem; font-size: .72rem; font-style: italic; line-height: 1.4; }
+    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: .4rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Estilos das Sugestões de Pesquisa (Raio-X) */
+    .raiox-item:hover {
+      background: var(--card) !important;
+    }
+
+    /* Estilos das Abas (Tabs) */
+    .tab-btn.active {
+      color: var(--accent) !important;
+      border-bottom-color: var(--accent) !important;
+    }
+
+    /* Accordion Styles */
+    .accordion-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+    .accordion-item:hover {
+      border-color: #373a4d;
+    }
+    .accordion-header {
+      padding: .85rem 1rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      user-select: none;
+      background: var(--card);
+    }
+    .accordion-header-row1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: .5rem;
+    }
+    .accordion-ementa {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color .2s;
+    }
+    .accordion-item.open .accordion-ementa {
+      -webkit-line-clamp: unset;
+      display: block;
+    }
+    .accordion-header-row2 {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .7rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+    .accordion-trigger-icon {
+      font-size: .65rem;
+      color: var(--muted);
+      transition: transform .2s;
+    }
+    .accordion-item.open .accordion-trigger-icon {
+      transform: rotate(180deg);
+    }
+    .accordion-body {
+      display: none;
+      padding: 0 1rem 1rem;
+      border-top: 1px solid var(--border);
+      background: rgba(12, 14, 22, 0.4);
+    }
+    .accordion-item.open .accordion-body {
+      display: block;
+    }
+    
+    /* NLP Evidence and Insight styling */
+    .nlp-evidence-box {
+      margin-top: .85rem;
+      background: rgba(124, 111, 239, 0.05);
+      border-left: 3px solid var(--accent);
+      padding: .75rem .85rem;
+      border-radius: 0 6px 6px 0;
+    }
+    .nlp-evidence-title {
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: .35rem;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+    .nlp-evidence-text {
+      font-size: .74rem;
+      color: var(--text);
+      line-height: 1.5;
+      font-style: italic;
+    }
+    
+    .ia-insight-box {
+      margin-top: .75rem;
+      background: rgba(48, 201, 192, 0.05);
+      border-left: 3px solid var(--accent2);
+      padding: .75rem .85rem;
+      border-radius: 0 6px 6px 0;
+    }
+    .ia-insight-title {
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: .35rem;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+    .ia-insight-text {
+      font-size: .74rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    
+    .correlation-metric {
+      margin-top: .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .7rem;
+      color: var(--muted);
+    }
+    .correlation-bar-bg {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 0 .75rem;
+      overflow: hidden;
+    }
+    .correlation-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+    }
+
+    /* Footer */
+    footer { text-align: center; padding: 1.5rem; color: var(--muted); font-size: .72rem; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+<!-- ─── Header ─── -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">🏛</div>
+    <div>
+      <h1>Dito e Feito</h1>
+      <span>Dashboard de Coerência Parlamentar</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <span id="fonte-pill">carregando…</span>
+    <button id="refresh-btn" onclick="init()">↻ Atualizar</button>
+  </div>
+</header>
+
+<!-- ─── Main ─── -->
+<div class="main" id="main-content">
+
+  <!-- Cards -->
+  <p class="section-title">Visão Geral</p>
+  <div class="cards-grid" id="cards-grid">
+    <div class="card"><label>Status</label><div class="val" style="font-size:1rem;margin-top:.5rem">Carregando…</div></div>
+  </div>
+
+  <!-- Raio-X Quick Search Box -->
+  <p class="section-title">Visão Analítica</p>
+  <div class="search-section" style="margin-bottom: 2rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: .75rem; position: relative;">
+    <h2 style="font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; display: flex; align-items: center; gap: .5rem; margin-bottom: .25rem;">
+      🔍 Raio-X de Coerência Parlamentar
+    </h2>
+    <p style="font-size: .8rem; color: var(--muted);">
+      Selecione um senador para ver a transparência detalhada de seus discursos, votos e afinidades semânticas calculadas.
+    </p>
+    <div style="position: relative; display: flex; gap: .75rem; max-width: 500px; margin-top: .25rem;">
+      <input id="raiox-search-input" type="text" placeholder="Digite o nome de um senador..." 
+             style="background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: .6rem 1rem; font-size: .85rem; outline: none; transition: border-color .2s; flex: 1;"
+             oninput="buscarRaiox()" onfocus="buscarRaiox()" />
+      <div id="raiox-suggestions" 
+           style="position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px; z-index: 60; max-height: 250px; overflow-y: auto; display: none; box-shadow: 0 8px 24px rgba(0,0,0,.5);">
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <p class="section-title">Análise Comparativa</p>
+  <div class="charts-row" id="charts-row" style="display:none">
+    <div class="chart-box">
+      <h2>📊 Coerência Média por Partido</h2>
+      <canvas id="chartPartidos" height="200"></canvas>
+      <div class="chart-legend" id="legend-partidos"></div>
+    </div>
+    <div class="chart-box">
+      <h2>🧭 Distribuição de Scores (todos os senadores)</h2>
+      <canvas id="chartScatter" height="200"></canvas>
+      <p style="font-size:.7rem;color:var(--muted);margin-top:.6rem;text-align:center">
+        Cada ponto é um senador. Clique na tabela para detalhar.
+      </p>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <p class="section-title">Senadores Analisados</p>
+  <div class="table-wrap">
+    <div class="table-controls">
+      <h2>Lista Completa</h2>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <input id="filter-input" type="text" placeholder="Buscar por nome…" oninput="filtrarTabela()" />
+        <select id="party-filter" onchange="filtrarTabela()">
+          <option value="">Todos os partidos</option>
+        </select>
+      </div>
+    </div>
+    <div id="table-container">
+      <div class="empty-state"><div class="icon">⏳</div><p>Carregando dados…</p></div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- ─── Overlay + Side Panel ─── -->
+<div id="panel-overlay" onclick="fecharPanel()"></div>
+
+<div id="side-panel">
+  <div class="panel-header">
+    <div class="parl-info">
+      <div class="parl-name" id="panel-nome">—</div>
+      <div class="parl-meta" id="panel-meta"></div>
+    </div>
+    <button id="panel-close" onclick="fecharPanel()" title="Fechar">✕</button>
+  </div>
+
+  <div class="panel-body">
+
+    <!-- Score gauge -->
+    <div class="gauge-wrap">
+      <div class="gauge-score" id="panel-score">—</div>
+      <div class="gauge-label">Score de Coerência</div>
+      <div class="gauge-bar-wrap"><div class="gauge-bar" id="gauge-fill" style="width:0%"></div></div>
+      <div class="gauge-meta">
+        <span>0%</span>
+        <span id="panel-alinhados">—</span>
+        <span>100%</span>
+      </div>
+    </div>
+
+    <!-- Donut de distribuição de status -->
+    <div class="panel-chart-box">
+      <h3>📂 Distribuição das Análises</h3>
+      <div class="donut-wrap"><canvas id="donutChart" height="180"></canvas></div>
+      <div class="donut-legend" id="donut-legend"></div>
+    </div>
+
+    <!-- Barras de alinhamento -->
+    <div class="align-bar-wrap">
+      <div class="align-bar-box">
+        <h3>📐 Proporção de Pares</h3>
+        <div id="align-bars"></div>
+      </div>
+    </div>
+
+    <!-- Tabs de Votações/Detalhamento -->
+    <div class="panel-tabs-container" style="margin-top: 1.5rem;">
+      <div class="tabs-header" style="display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1rem;">
+        <button id="tab-historico-btn" class="tab-btn active" onclick="mudarTab('historico')" 
+                style="flex: 1; background: none; border: none; padding: .65rem; color: var(--muted); border-bottom: 2px solid transparent; font-size: .8rem; font-weight: 600; cursor: pointer; transition: all .2s; outline: none;">
+          📚 Varredura
+        </button>
+        <button id="tab-aovivo-btn" class="tab-btn" onclick="mudarTab('aovivo')" 
+                style="flex: 1; background: none; border: none; padding: .65rem; color: var(--muted); border-bottom: 2px solid transparent; font-size: .8rem; font-weight: 600; cursor: pointer; transition: all .2s; outline: none;">
+          ⚡ Ao Vivo (Tempo Real)
+        </button>
+      </div>
+      
+      <!-- Conteúdo da aba Histórico -->
+      <div id="tab-historico-content" class="tab-content">
+        <div id="historico-results" style="display: flex; flex-direction: column; gap: .65rem;"></div>
+        <button id="historico-ver-mais-btn" onclick="verMaisHistorico()" 
+                style="width: 100%; margin-top: .75rem; background: var(--card); border: 1px solid var(--border); color: var(--muted); padding: .55rem; border-radius: 6px; font-size: .78rem; cursor: pointer; transition: border-color .2s, color .2s; display: none; font-weight: 600; outline: none;">
+          Ver Mais Votações
+        </button>
+      </div>
+      
+      <!-- Conteúdo da aba Ao Vivo -->
+      <div id="tab-aovivo-content" class="tab-content" style="display: none;">
+        <div class="panel-live" style="background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem; margin-bottom: 1rem;">
+          <h3 style="font-size: .68rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .85rem; display: flex; align-items: center; gap: .5rem;">
+            Análise ao Vivo <span class="live-badge" id="live-source-badge">backend</span>
+          </h3>
+          <p style="font-size:.73rem;color:var(--muted);margin-bottom:.75rem">
+            Busca os discursos e votos mais recentes deste senador em tempo real via API.
+          </p>
+          <button id="live-btn" onclick="analisarAoVivo()">Analisar ao Vivo</button>
+        </div>
+        <div id="live-results" style="display: flex; flex-direction: column; gap: .65rem;"></div>
+        <button id="aovivo-ver-mais-btn" onclick="verMaisAoVivo()" 
+                style="width: 100%; margin-top: .75rem; background: var(--card); border: 1px solid var(--border); color: var(--muted); padding: .55rem; border-radius: 6px; font-size: .78rem; cursor: pointer; transition: border-color .2s, color .2s; display: none; font-weight: 600; outline: none;">
+          Ver Mais Votações
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>Dito e Feito · MDS/UnB 2026 · Dados: Senado Federal &amp; Câmara dos Deputados</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   Estado global
+═══════════════════════════════════════════════════════════ */
+const API = "http://localhost:5001";
+const JSON_PATH = "./dashboard_metrics.json";
+
+let DADOS       = null;
+let senadores   = [];
+let filtrados   = [];
+let sortCol     = "score_coerencia";
+let sortAsc     = false;
+let senadorAtivo = null;
+let donutInstance = null;
+
+// Variáveis para paginação e controle dos detalhes
+let currentHistoricoPage = 1;
+const ITEMS_PER_PAGE     = 5;
+let currentAoVivoPage    = 1;
+let liveResultsData      = [];
+
+const PARTY_COLORS = {
+  PL:"#ef4444", PT:"#dc2626", MDB:"#f59e0b",
+  PP:"#3b82f6", PSD:"#6366f1", UNIÃO:"#10b981",
+  UNIAO:"#10b981", PSDB:"#fb923c", PDT:"#a78bfa",
+  PV:"#4ade80", SOLIDARIEDADE:"#f472b6", PODE:"#38bdf8",
+  REPUBLICANOS:"#fb923c", PATRIOTA:"#4ade80",
+};
+const STATUS_COLORS = {
+  "Coerente": "#3dd68c",
+  "Parcialmente Alinhado": "#f59e42",
+  "Divergente": "#f06071",
+  "Não Relacionado": "#8892aa",
+};
+
+/* ═══════════════════════════════════════════════════════════
+   Carregamento de dados
+═══════════════════════════════════════════════════════════ */
+async function carregarDados() {
+  // Tenta API
+  try {
+    const r = await fetch(`${API}/api/dashboard-metrics`, { signal: AbortSignal.timeout(4000) });
+    if (r.ok) {
+      const d = await r.json();
+      if (d.status !== "sem_dados" && d.senadores?.length) {
+        d._fonte = "API (backend)";
+        return d;
+      }
+    }
+  } catch (_) {}
+
+  // Fallback JSON local
+  try {
+    const r = await fetch(JSON_PATH + "?t=" + Date.now());
+    if (r.ok) {
+      const d = await r.json();
+      d._fonte = "JSON local";
+      return d;
+    }
+  } catch (_) {}
+  return null;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Init
+═══════════════════════════════════════════════════════════ */
+async function init() {
+  document.getElementById("fonte-pill").textContent = "carregando…";
+  document.getElementById("fonte-pill").className = "";
+  document.getElementById("cards-grid").innerHTML =
+    '<div class="card"><label>Status</label><div class="val" style="font-size:1rem;margin-top:.5rem">Carregando…</div></div>';
+
+  const data = await carregarDados();
+
+  if (!data || !data.senadores?.length) {
+    renderVazio();
+    return;
+  }
+
+  DADOS = data;
+  senadores = data.senadores || [];
+  filtrados = [...senadores];
+
+  const pill = document.getElementById("fonte-pill");
+  pill.textContent = "✓ " + (data._fonte || "desconhecido");
+  pill.className = "ok";
+
+  renderCards(data);
+  renderCharts(data);
+  renderFiltros();
+  renderTabela();
+
+  // ── Deep linking para visão detalhada (Raio-X) ──
+  const urlParams = new URLSearchParams(window.location.search);
+  const senadorId = urlParams.get('id');
+  if (senadorId) {
+    const s = senadores.find(x => String(x.id) === senadorId);
+    if (s) {
+      abrirPanel(JSON.stringify(s));
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Vazio
+═══════════════════════════════════════════════════════════ */
+function renderVazio() {
+  const pill = document.getElementById("fonte-pill");
+  pill.textContent = "✗ sem dados";
+  pill.className = "err";
+  document.getElementById("cards-grid").innerHTML = "";
+  document.getElementById("charts-row").style.display = "none";
+  document.getElementById("table-container").innerHTML = `
+    <div class="empty-state">
+      <div class="icon">🔍</div>
+      <p>Nenhum dado encontrado. Execute a varredura primeiro:</p>
+      <code>python backend/scan_senators.py --limit-per-party 1 --no-db</code>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Cards de resumo
+═══════════════════════════════════════════════════════════ */
+function renderCards(data) {
+  const top = data.partido_mais_coerente || {};
+  const gerado = data.gerado_em ? new Date(data.gerado_em).toLocaleString("pt-BR") : "—";
+
+  // Distribuição de níveis
+  const alto  = senadores.filter(s => s.score_coerencia >= 60).length;
+  const medio = senadores.filter(s => s.score_coerencia >= 40 && s.score_coerencia < 60).length;
+  const baixo = senadores.filter(s => s.score_coerencia <  40).length;
+
+  document.getElementById("cards-grid").innerHTML = `
+    <div class="card">
+      <label>Total Analisados</label>
+      <div class="val">${data.total_analisados ?? 0}</div>
+      <div class="sub">senadores validados no banco</div>
+    </div>
+    <div class="card">
+      <label>Média Global de Coerência</label>
+      <div class="val">${(data.media_global_coerencia ?? 0).toFixed(1)}<small style="font-size:1.1rem">%</small></div>
+      <div class="sub">score médio de todos os senadores</div>
+    </div>
+    <div class="card">
+      <label>Partido Mais Coerente</label>
+      <div class="val" style="font-size:1.6rem">${top.partido ?? "—"}</div>
+      <div class="sub">${(top.media_coerencia ?? 0).toFixed(1)}% · ${top.total_senadores ?? 0} senadores</div>
+    </div>
+    <div class="card">
+      <label>Nível Alto (≥60%)</label>
+      <div class="val" style="background:linear-gradient(135deg,#3dd68c,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${alto}</div>
+      <div class="sub">senadores mais coerentes</div>
+    </div>
+    <div class="card">
+      <label>Nível Médio (40–59%)</label>
+      <div class="val" style="background:linear-gradient(135deg,#f59e42,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${medio}</div>
+      <div class="sub">coerência parcial</div>
+    </div>
+    <div class="card">
+      <label>Última Varredura</label>
+      <div class="val" style="font-size:.95rem;margin-top:.5rem">${gerado}</div>
+      <div class="sub">data/hora UTC</div>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Gráficos
+═══════════════════════════════════════════════════════════ */
+let chartPartidosInst = null;
+let chartScatterInst  = null;
+
+function renderCharts(data) {
+  document.getElementById("charts-row").style.display = "grid";
+  const partidos = (data.metricas_por_partido || []).sort((a, b) => b.media_coerencia - a.media_coerencia);
+
+  // Destroi instâncias antigas
+  if (chartPartidosInst) chartPartidosInst.destroy();
+  if (chartScatterInst)  chartScatterInst.destroy();
+
+  // ── Gráfico de barras: partidos ──
+  const bgColors = partidos.map(p => PARTY_COLORS[p.partido] || "#7c6fef");
+  chartPartidosInst = new Chart(document.getElementById("chartPartidos"), {
+    type: "bar",
+    data: {
+      labels: partidos.map(p => `${p.partido} (${p.total_senadores})`),
+      datasets: [{
+        label: "Coerência Média (%)",
+        data: partidos.map(p => p.media_coerencia),
+        backgroundColor: bgColors.map(c => c + "bb"),
+        borderColor: bgColors,
+        borderWidth: 1.5,
+        borderRadius: 6,
+        borderSkipped: false,
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.parsed.y.toFixed(1)}% de coerência média`,
+            afterLabel: (ctx) => {
+              const p = partidos[ctx.dataIndex];
+              return ` ${p.total_senadores} senador(es) analisado(s)`;
+            }
+          }
+        },
+      },
+      scales: {
+        y: {
+          min: 0, max: 100,
+          ticks: { color: "#8892aa", callback: v => v + "%" },
+          grid: { color: "#252836" },
+          title: { display: true, text: "Score de Coerência (%)", color: "#8892aa", font: { size: 11 } }
+        },
+        x: { ticks: { color: "#8892aa" }, grid: { display: false } },
+      },
+    },
+  });
+
+  // Legenda manual
+  document.getElementById("legend-partidos").innerHTML = partidos.map(p =>
+    `<div class="legend-item">
+      <div class="legend-dot" style="background:${PARTY_COLORS[p.partido] || "#7c6fef"}"></div>
+      <span>${p.partido}</span>
+    </div>`
+  ).join("");
+
+  // ── Scatter: distribuição dos senadores ──
+  const scatterData = senadores.map((s, i) => ({
+    x: i + 1,
+    y: s.score_coerencia,
+    label: s.nome,
+    partido: s.partido,
+  }));
+
+  chartScatterInst = new Chart(document.getElementById("chartScatter"), {
+    type: "scatter",
+    data: {
+      datasets: [{
+        label: "Senadores",
+        data: scatterData,
+        backgroundColor: scatterData.map(d => (PARTY_COLORS[d.partido] || "#7c6fef") + "cc"),
+        pointRadius: 6,
+        pointHoverRadius: 9,
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const d = ctx.raw;
+              return [` ${d.label}`, ` ${d.partido} · ${d.y.toFixed(1)}%`];
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0, max: 100,
+          ticks: { color: "#8892aa", callback: v => v + "%" },
+          grid: { color: "#252836" },
+          title: { display: true, text: "Score (%)", color: "#8892aa", font: { size: 11 } }
+        },
+        x: {
+          ticks: { color: "#8892aa", display: false },
+          grid: { display: false },
+          title: { display: true, text: "Senadores (em ordem)", color: "#8892aa", font: { size: 11 } }
+        },
+      },
+    },
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Filtros e tabela
+═══════════════════════════════════════════════════════════ */
+function renderFiltros() {
+  const partidos = [...new Set(senadores.map(s => s.partido))].sort();
+  const sel = document.getElementById("party-filter");
+  sel.innerHTML = '<option value="">Todos os partidos</option>';
+  partidos.forEach(p => {
+    const opt = document.createElement("option");
+    opt.value = p; opt.textContent = p;
+    sel.appendChild(opt);
+  });
+}
+
+function filtrarTabela() {
+  const q = document.getElementById("filter-input").value.toLowerCase();
+  const p = document.getElementById("party-filter").value;
+  filtrados = senadores.filter(s =>
+    (!q || s.nome.toLowerCase().includes(q)) &&
+    (!p || s.partido === p)
+  );
+  renderTabela();
+}
+
+function sortarPor(col) {
+  if (sortCol === col) sortAsc = !sortAsc;
+  else { sortCol = col; sortAsc = false; }
+  renderTabela();
+}
+
+function renderTabela() {
+  // Ordena
+  const sorted = [...filtrados].sort((a, b) => {
+    const va = a[sortCol], vb = b[sortCol];
+    if (typeof va === "string") return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+    return sortAsc ? va - vb : vb - va;
+  });
+
+  if (!sorted.length) {
+    document.getElementById("table-container").innerHTML =
+      '<div class="empty-state"><div class="icon">🔍</div><p>Nenhum resultado encontrado.</p></div>';
+    return;
+  }
+
+  const ico = (col) => {
+    if (sortCol !== col) return '<span class="sort-icon">↕</span>';
+    return `<span class="sort-icon">${sortAsc ? "↑" : "↓"}</span>`;
+  };
+  const thClass = col => sortCol === col ? "sorted" : "";
+
+  const rows = sorted.map((s, i) => {
+    const cor = s.score_coerencia >= 60 ? "#3dd68c" : s.score_coerencia >= 40 ? "#f59e42" : "#f06071";
+    const nivel = s.score_coerencia >= 60
+      ? '<span class="badge badge-alto">Alto</span>'
+      : s.score_coerencia >= 40
+        ? '<span class="badge badge-med">Médio</span>'
+        : '<span class="badge badge-baixo">Baixo</span>';
+    const pColor = PARTY_COLORS[s.partido] || "#7c6fef";
+    const isActive = senadorAtivo && senadorAtivo.id === s.id ? "active" : "";
+
+    return `<tr class="${isActive}" onclick="abrirPanel(${JSON.stringify(JSON.stringify(s))})">
+      <td class="td-rank">${i + 1}</td>
+      <td class="td-name">
+        <strong>${s.nome}</strong>
+        <small>${s.uf}</small>
+      </td>
+      <td class="td-party">
+        <span class="party-tag" style="color:${pColor};border-color:${pColor}44;background:${pColor}15">${s.partido}</span>
+      </td>
+      <td class="score-cell">
+        <div class="score-num" style="color:${cor}">${s.score_coerencia.toFixed(1)}%</div>
+        <div class="score-bar-bg">
+          <div class="score-bar-fill" style="width:${s.score_coerencia}%;background:${cor}"></div>
+        </div>
+      </td>
+      <td>${nivel}</td>
+      <td style="color:var(--muted);font-size:.75rem">${s.pares_alinhados ?? "—"}/${s.total_pares ?? "—"} pares</td>
+    </tr>`;
+  }).join("");
+
+  document.getElementById("table-container").innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th class="${thClass("rank")}" onclick="sortarPor('rank')">#</th>
+          <th class="${thClass("nome")}" onclick="sortarPor('nome')">Senador ${ico("nome")}</th>
+          <th class="${thClass("partido")}" onclick="sortarPor('partido')">Partido ${ico("partido")}</th>
+          <th class="${thClass("score_coerencia")}" onclick="sortarPor('score_coerencia')">Score ${ico("score_coerencia")}</th>
+          <th>Nível</th>
+          <th class="${thClass("pares_alinhados")}" onclick="sortarPor('pares_alinhados')">Pares ${ico("pares_alinhados")}</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Pesquisa Rápida (Raio-X) e Tab / Accordion Helpers
+   
+   Isso permite que o usuário pesquise senadores para ver detalhes 
+   completos, e controla a navegação de abas e componentes colapsáveis
+═══════════════════════════════════════════════════════════ */
+function buscarRaiox() {
+  const input = document.getElementById("raiox-search-input");
+  const query = input.value.toLowerCase().trim();
+  const suggestions = document.getElementById("raiox-suggestions");
+  
+  if (!senadores.length) {
+    suggestions.style.display = "none";
+    return;
+  }
+  
+  const matches = senadores.filter(s => s.nome.toLowerCase().includes(query));
+  
+  if (matches.length === 0) {
+    suggestions.innerHTML = '<div style="padding: .75rem 1rem; color: var(--muted); font-size: .82rem;">Nenhum senador encontrado.</div>';
+    suggestions.style.display = "block";
+    return;
+  }
+  
+  suggestions.innerHTML = matches.map(s => {
+    const pColor = PARTY_COLORS[s.partido] || "#7c6fef";
+    const scoreColor = s.score_coerencia >= 60 ? "#3dd68c" : s.score_coerencia >= 40 ? "#f59e42" : "#f06071";
+    return `
+      <div class="raiox-item" onclick="selecionarRaiox(${JSON.stringify(JSON.stringify(s))})" 
+           style="padding: .75rem 1rem; cursor: pointer; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: .75rem; transition: background .12s;">
+        <div>
+          <strong style="font-size: .85rem; display: block; color: var(--text);">${s.nome}</strong>
+          <span style="font-size: .72rem; color: var(--muted);">${s.partido} · ${s.uf}</span>
+        </div>
+        <span style="font-size: .85rem; font-weight: 700; color: ${scoreColor};">${s.score_coerencia.toFixed(1)}%</span>
+      </div>`;
+  }).join("");
+  
+  suggestions.style.display = "block";
+}
+
+function selecionarRaiox(jsonStr) {
+  const s = JSON.parse(jsonStr);
+  document.getElementById("raiox-search-input").value = s.nome;
+  document.getElementById("raiox-suggestions").style.display = "none";
+  abrirPanel(jsonStr);
+}
+
+// Fechar sugestões ao clicar fora do componente
+document.addEventListener("click", (e) => {
+  const container = document.getElementById("raiox-search-input");
+  const suggestions = document.getElementById("raiox-suggestions");
+  if (container && suggestions && !container.contains(e.target) && !suggestions.contains(e.target)) {
+    suggestions.style.display = "none";
+  }
+});
+
+function mudarTab(tabName) {
+  document.getElementById("tab-historico-content").style.display = "none";
+  document.getElementById("tab-aovivo-content").style.display = "none";
+  
+  document.getElementById("tab-historico-btn").classList.remove("active");
+  document.getElementById("tab-aovivo-btn").classList.remove("active");
+  
+  if (tabName === 'historico') {
+    document.getElementById("tab-historico-content").style.display = "block";
+    document.getElementById("tab-historico-btn").classList.add("active");
+  } else if (tabName === 'aovivo') {
+    document.getElementById("tab-aovivo-content").style.display = "block";
+    document.getElementById("tab-aovivo-btn").classList.add("active");
+  }
+}
+
+function toggleAccordion(element) {
+  const item = element.parentElement;
+  item.classList.toggle("open");
+}
+
+function renderVotacoesList(dados, containerId, page, verMaisBtnId, isLive = false) {
+  const container = document.getElementById(containerId);
+  const verMaisBtn = document.getElementById(verMaisBtnId);
+  
+  if (!dados || dados.length === 0) {
+    container.innerHTML = `<div style="text-align:center;padding:1.5rem;color:var(--muted);font-size:.78rem;">Nenhuma votação registrada na varredura.</div>`;
+    verMaisBtn.style.display = "none";
+    return;
+  }
+  
+  const totalItems = dados.length;
+  const itemsToShow = page * ITEMS_PER_PAGE;
+  const pageData = dados.slice(0, itemsToShow);
+  
+  container.innerHTML = pageData.map((v, index) => {
+    const statusKey = v.status.split(" ")[0]; // Coerente / Parcialmente / Divergente / Não
+    let statusClass = "vc-Nao";
+    if (v.status === "Coerente") statusClass = "vc-Coerente";
+    else if (v.status === "Parcialmente Alinhado") statusClass = "vc-Parcialmente";
+    else if (v.status === "Divergente") statusClass = "vc-Divergente";
+    
+    const cor = STATUS_COLORS[v.status] || "#8892aa";
+    const afinidadePct = (v.afinidade * 100).toFixed(0);
+    const trechoDiscurso = v.discurso ? v.discurso : "Nenhum trecho de discurso disponível para visualização.";
+    const insightText = v.justificativa ? v.justificativa : "Sem justificativa detalhada disponível.";
+    
+    return `
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="accordion-header-row1">
+            <div class="accordion-ementa">${v.ementa}</div>
+            <span class="vc-badge ${statusClass}">${v.status}</span>
+          </div>
+          <div class="accordion-header-row2">
+            <span>📅 ${v.data}</span>
+            <span>🗳 Voto: <strong>${v.voto}</strong></span>
+            <span style="color: var(--accent2)">🎯 Afinidade: ${afinidadePct}%</span>
+            <span style="margin-left: auto;" class="accordion-trigger-icon">▼</span>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="nlp-evidence-box">
+            <div class="nlp-evidence-title">📣 Evidência de NLP (Trecho do Discurso)</div>
+            <div class="nlp-evidence-text">"${trechoDiscurso}"</div>
+          </div>
+          <div class="ia-insight-box">
+            <div class="ia-insight-title">🤖 Insight da IA (Justificativa)</div>
+            <div class="ia-insight-text">${insightText}</div>
+          </div>
+          <div class="correlation-metric">
+            <span>Afinidade Semântica</span>
+            <div class="correlation-bar-bg">
+              <div class="correlation-bar-fill" style="width: ${afinidadePct}%; background: ${cor}"></div>
+            </div>
+            <span style="color: ${cor}; font-weight: 700;">${afinidadePct}%</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  
+  if (itemsToShow < totalItems) {
+    verMaisBtn.style.display = "block";
+  } else {
+    verMaisBtn.style.display = "none";
+  }
+}
+
+function verMaisHistorico() {
+  currentHistoricoPage++;
+  if (senadorAtivo) {
+    renderVotacoesList(senadorAtivo.detalhes || [], "historico-results", currentHistoricoPage, "historico-ver-mais-btn");
+  }
+}
+
+function verMaisAoVivo() {
+  currentAoVivoPage++;
+  renderVotacoesList(liveResultsData, "live-results", currentAoVivoPage, "aovivo-ver-mais-btn", true);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Painel lateral
+═══════════════════════════════════════════════════════════ */
+function abrirPanel(jsonStr) {
+  const s = JSON.parse(jsonStr);
+  senadorAtivo = s;
+  renderTabela(); // re-render pra destacar a linha
+
+  // Reset paginação
+  currentHistoricoPage = 1;
+  currentAoVivoPage = 1;
+  liveResultsData = [];
+
+  // Header
+  document.getElementById("panel-nome").textContent = s.nome;
+  const pColor = PARTY_COLORS[s.partido] || "#7c6fef";
+  document.getElementById("panel-meta").innerHTML = `
+    <span class="meta-tag" style="color:${pColor};border-color:${pColor}44;background:${pColor}15">${s.partido}</span>
+    <span class="meta-tag">${s.uf}</span>
+    <span class="meta-tag">ID: ${s.id}</span>
+  `;
+
+  // Gauge
+  document.getElementById("panel-score").textContent = s.score_coerencia.toFixed(1) + "%";
+  setTimeout(() => {
+    document.getElementById("gauge-fill").style.width = s.score_coerencia + "%";
+  }, 50);
+  document.getElementById("panel-alinhados").textContent =
+    `${s.pares_alinhados ?? 0}/${s.total_pares ?? 0} pares alinhados`;
+
+  // Donut
+  const cs = s.contagem_status || {};
+  renderDonut(cs);
+
+  // Barras de alinhamento
+  renderAlignBars(s);
+
+  // Atualizar abas
+  document.getElementById("tab-historico-btn").textContent = `📚 Varredura (${s.detalhes?.length || 0})`;
+  mudarTab('historico');
+
+  // Renderizar o histórico na primeira aba
+  renderVotacoesList(s.detalhes || [], "historico-results", currentHistoricoPage, "historico-ver-mais-btn");
+
+  // Reset aba ao vivo
+  document.getElementById("live-results").innerHTML = "";
+  document.getElementById("live-btn").disabled = false;
+  document.getElementById("live-btn").textContent = "Analisar ao Vivo";
+  document.getElementById("aovivo-ver-mais-btn").style.display = "none";
+
+  // Abre
+  document.getElementById("panel-overlay").classList.add("open");
+  document.getElementById("side-panel").classList.add("open");
+}
+
+function fecharPanel() {
+  senadorAtivo = null;
+  document.getElementById("panel-overlay").classList.remove("open");
+  document.getElementById("side-panel").classList.remove("open");
+  renderTabela();
+}
+
+function renderDonut(cs) {
+  const labels = Object.keys(STATUS_COLORS);
+  const values = labels.map(l => cs[l] || 0);
+  const colors = labels.map(l => STATUS_COLORS[l]);
+  const total  = values.reduce((a, b) => a + b, 0);
+
+  if (donutInstance) donutInstance.destroy();
+  donutInstance = new Chart(document.getElementById("donutChart"), {
+    type: "doughnut",
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        backgroundColor: colors.map(c => c + "cc"),
+        borderColor: colors,
+        borderWidth: 1.5,
+        hoverOffset: 6,
+      }],
+    },
+    options: {
+      cutout: "68%",
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.label}: ${ctx.parsed} (${total ? ((ctx.parsed/total)*100).toFixed(0) : 0}%)`
+          }
+        }
+      },
+    },
+  });
+
+  document.getElementById("donut-legend").innerHTML = labels.map((l, i) => {
+    const pct = total ? ((values[i] / total) * 100).toFixed(0) : 0;
+    return `<div class="donut-legend-item">
+      <div class="donut-legend-left">
+        <div class="donut-dot" style="background:${colors[i]}"></div>
+        <span>${l}</span>
+      </div>
+      <span class="donut-count">${values[i]} (${pct}%)</span>
+    </div>`;
+  }).join("");
+}
+
+function renderAlignBars(s) {
+  const total = s.total_pares || 1;
+  const alinhados = s.pares_alinhados || 0;
+  const naoAlinhados = total - alinhados;
+  const pctAl = ((alinhados / total) * 100).toFixed(0);
+  const pctNa = ((naoAlinhados / total) * 100).toFixed(0);
+
+  document.getElementById("align-bars").innerHTML = `
+    <div class="align-stat">
+      <span class="align-stat-label" style="color:#3dd68c">✔ Alinhados</span>
+      <div class="align-stat-bar-bg">
+        <div class="align-stat-bar" style="width:${pctAl}%;background:#3dd68c"></div>
+      </div>
+      <span class="align-stat-val">${alinhados}</span>
+    </div>
+    <div class="align-stat">
+      <span class="align-stat-label" style="color:#f06071">✘ Não alinhados</span>
+      <div class="align-stat-bar-bg">
+        <div class="align-stat-bar" style="width:${pctNa}%;background:#f06071"></div>
+      </div>
+      <span class="align-stat-val">${naoAlinhados}</span>
+    </div>
+    <div class="align-stat">
+      <span class="align-stat-label" style="color:var(--muted)">📊 Total</span>
+      <div class="align-stat-bar-bg">
+        <div class="align-stat-bar" style="width:100%;background:var(--accent)"></div>
+      </div>
+      <span class="align-stat-val">${total}</span>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Análise ao vivo (chama backend2)
+═══════════════════════════════════════════════════════════ */
+async function analisarAoVivo() {
+  if (!senadorAtivo) return;
+  const btn = document.getElementById("live-btn");
+  const results = document.getElementById("live-results");
+  const verMaisBtn = document.getElementById("aovivo-ver-mais-btn");
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Buscando discursos e votos…';
+  results.innerHTML = "";
+  verMaisBtn.style.display = "none";
+  currentAoVivoPage = 1;
+  liveResultsData = [];
+
+  try {
+    const res = await fetch(`${API}/api/analisar`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: senadorAtivo.id }),
+      signal: AbortSignal.timeout(60000),
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    if (data.status !== "ok") {
+      results.innerHTML = `<div style="text-align:center;padding:1.5rem;color:var(--muted);font-size:.78rem;">${data.mensagem || "Sem dados."}</div>`;
+      btn.textContent = "Tentar novamente";
+      btn.disabled = false;
+      return;
+    }
+
+    btn.textContent = `✔ ${data.total_votos_analisados} votos · modelo: ${data.modelo_usado}`;
+    liveResultsData = data.dados || [];
+    
+    // Renderiza a lista de accordions
+    renderVotacoesList(liveResultsData, "live-results", currentAoVivoPage, "aovivo-ver-mais-btn", true);
+  } catch (e) {
+    results.innerHTML = `<div class="accordion-item" style="padding: 1rem; border-color: var(--danger); background: rgba(240,96,113,.05);">
+      <div style="color:var(--danger); font-size: .8rem; font-weight: 700; margin-bottom: .25rem;">Erro de Conexão</div>
+      <p style="font-size: .75rem; color: var(--muted); line-height: 1.4;">
+        Erro ao chamar o backend. Certifique-se de que o servidor Flask está rodando na porta 5001:<br>
+        <code style="font-size:.7rem;color:var(--accent2); background: var(--surface); padding: .2rem .4rem; border-radius: 4px; display: inline-block; margin-top: .4rem;">python backend/api.py</code>
+      </p>
+    </div>`;
+    btn.textContent = "Tentar novamente";
+    btn.disabled = false;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Start
+═══════════════════════════════════════════════════════════ */
+init();
+</script>
+</body>
+</html>
