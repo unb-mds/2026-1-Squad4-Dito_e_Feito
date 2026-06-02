@@ -16,7 +16,7 @@ Sistema para **análise de coerência entre discursos e votos de parlamentares**
 
 ## Requisitos Funcionais (RF)
 
-| ID | Título | Prioridade | Descrição |
+| ID | Título | Prioridade | Descrição / Finalidade de Interpretação |
 |----|--------|------------|-----------|
 | RF01 | Coleta de dados legislativos | 🔴 Alta | Importar discursos, ementas e justificativas via APIs (Câmara, Senado) ou scraping estruturado. |
 | RF02 | Coleta de registros de votação | 🔴 Alta | Capturar votos nominais por parlamentar, sessão e projeto de lei, associados ao texto debatido. |
@@ -26,12 +26,13 @@ Sistema para **análise de coerência entre discursos e votos de parlamentares**
 | RF06 | Filtro por estado | 🔴 Alta | Permitir filtrar políticos por estado na aba principal. |
 | RF07 | Aba visão geral com busca | 🔴 Alta | Ferramenta de busca e visão geral na tela principal. |
 | RF07.1 | Tema Dark | 🔴 Alta | Modo escuro (dark mode) obrigatório na interface. |
-| RF08 | Evolução do posicionamento no tempo | 🟠 Média | Linha do tempo com mudanças de posição detectadas. |
+| **RF08** | **Gráfico de Evolução Temporal do Parlamentar** | 🟠 Média | **Descrição:** Linha do tempo interativa (LineChart) mapeando a flutuação do score de coerência do senador/deputado ao longo dos meses da legislatura.<br>*Finalidade:* Permitir que o usuário identifique se a consistência do político é estável ou se ele oscila e muda de postura em períodos específicos (ex: proximidade de votações críticas). |
 | RF09 | Filtros e busca avançada | 🟠 Média | Filtrar por parlamentar, partido, tema, período, UF e tipo de votação. |
 | RF10 | Comparação entre parlamentares | 🟠 Média | Comparação lado a lado de scores de coerência entre dois ou mais parlamentares. |
 | RF11 | Painel de alertas de divergência | 🟠 Média | Destacar automaticamente casos de alta divergência entre discurso e voto. |
-| RF12 | Gráfico em relação à média e ao partido | 🟠 Média | Exibir posição do parlamentar frente à média geral e ao seu partido. |
+| **RF12** | **Gráfico de Desvio e Contexto Partidário** | 🟠 Média | **Descrição:** Gráfico de barras emparelhadas (BarChart) posicionando o score do parlamentar lado a lado com a média histórica do seu próprio partido e a média geral da casa.<br>*Finalidade:* Contextualizar o comportamento do político, revelando de forma imediata se ele segue a linha ideológica majoritária da sua legenda ou se atua como um dissidente/independente em relação à média. |
 | RF13 | Aba de comparação (VS) | 🟠 Média | Tela dedicada para selecionar 2 políticos e comparar estatísticas. |
+| **RF13.1** | **Gráfico de Representatividade e Coerência das Legendas** | 🟠 Média | **Descrição:** Gráfico de rosca/pizza (PieChart) na Visão Geral demonstrando a distribuição volumétrica de parlamentares por partido associado aos seus respectivos pesos de coerência.<br>*Finalidade:* Mapear o panorama de integridade dos blocos partidários, ajudando a interpretar quais partidos mantêm maior fidelidade ideológica em bancada. |
 | RF14 | Lista de todos os políticos | 🟠 Média | Grande lista com todos os políticos disponíveis em formato de cards. |
 | RF15 | Exportação de relatórios | 🟢 Baixa | Gerar relatórios em CSV/PDF por parlamentar, período ou tema. |
 | RF16 | Histórico de legislaturas | 🟢 Baixa | Suporte a múltiplas legislaturas para análise longitudinal. |
@@ -103,4 +104,4 @@ Sistema para **análise de coerência entre discursos e votos de parlamentares**
 9. RD02 — Versionamento e rastreabilidade  
 10. RNF01 — Desempenho de consultas  
 11. RNF02 — Reprodutibilidade do pipeline  
-12. RNF03 — Transparência metodológica  
+12. RNF03 — Transparência metodológica
