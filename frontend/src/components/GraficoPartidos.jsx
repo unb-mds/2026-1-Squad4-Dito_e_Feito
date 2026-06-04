@@ -1,7 +1,7 @@
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
-const defaultData = [
+const data = [
   { name: 'PT', value: 30, color: '#9b2335' },
   { name: 'PL', value: 25, color: '#14b8a6' },
   { name: 'UNIÃO', value: 20, color: '#166534' },
@@ -9,7 +9,7 @@ const defaultData = [
   { name: 'OUTROS', value: 10, color: '#b0bec5' },
 ];
 
-export function GraficoPartidos({ data = defaultData }) {
+export function GraficoPartidos() {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
       <ResponsiveContainer width="100%" height="70%">
