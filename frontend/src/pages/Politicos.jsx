@@ -1,18 +1,53 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { politicosMock } from './VisaoGeral';
+import { getDashboardMetrics } from '../services/api';
 
 export function Politicos() {
   const [busca, setBusca] = useState('');
   const [filtroPartido, setFiltroPartido] = useState('Todos');
   const [filtroUF, setFiltroUF] = useState('Todos');
   const [sortAsc, setSortAsc] = useState(false);
+  const [politicos, setPoliticos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState(null);
 
-  const partidosUnicos = ['Todos', ...new Set(politicosMock.map(p => p.partido))].sort();
-  const ufsUnicas = ['Todos', ...new Set(politicosMock.map(p => p.uf))].sort();
+  useEffect(() => {
+    const fetchPoliticos = async () => {
+      try {
+        setLoading(true);
+        const data = await getDashboardMetrics();
+        if (data && data.senadores) {
+          const mapped = data.senadores.map(s => ({
+            id: s.id,
+            nome: s.nome,
+            partido: s.partido,
+            uf: s.uf,
+            foto: s.foto,
+            coerencia: Math.round(s.score_coerencia || 0),
+            tipo: parseInt(s.id) < 10000 ? 'Senador' : 'Deputado'
+          }));
+          setPoliticos(mapped);
+        }
+      } catch (err) {
+        console.error("Erro ao carregar políticos:", err);
+        setErro("Não foi possível carregar os parlamentares do backend.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPoliticos();
+  }, []);
+
+  const partidosUnicos = useMemo(() => {
+    return ['Todos', ...new Set(politicos.map(p => p.partido))].sort();
+  }, [politicos]);
+
+  const ufsUnicas = useMemo(() => {
+    return ['Todos', ...new Set(politicos.map(p => p.uf))].sort();
+  }, [politicos]);
 
   const filtered = useMemo(() => {
-    let result = politicosMock.filter(p => {
+    let result = politicos.filter(p => {
       const matchBusca = p.nome.toLowerCase().includes(busca.toLowerCase()) || p.partido.toLowerCase().includes(busca.toLowerCase());
       const matchPartido = filtroPartido === 'Todos' || p.partido === filtroPartido;
       const matchUF = filtroUF === 'Todos' || p.uf === filtroUF;
@@ -20,7 +55,28 @@ export function Politicos() {
     });
 
     return result.sort((a, b) => sortAsc ? a.coerencia - b.coerencia : b.coerencia - a.coerencia);
-  }, [busca, filtroPartido, filtroUF, sortAsc]);
+  }, [busca, filtroPartido, filtroUF, sortAsc, politicos]);
+
+  if (loading) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center p-10 bg-bg animate-[fadeIn_0.2s_ease]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal mb-4"></div>
+        <div className="text-text2 text-[14px] font-semibold">Buscando parlamentares analisados...</div>
+      </div>
+    );
+  }
+
+  if (erro) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center p-10 bg-bg animate-[fadeIn_0.2s_ease]">
+        <div className="text-red text-[40px] mb-4">⚠️</div>
+        <div className="text-text-main text-[16px] font-bold mb-2">{erro}</div>
+        <div className="text-text2 text-[13px] text-center max-w-[400px] mb-6">
+          Certifique-se de que a API Flask (porta 5001) está rodando e acessível.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
@@ -87,7 +143,12 @@ export function Politicos() {
           </div>
           <div>
             {filtered.map((p, i) => (
-              <Link to={`/politicos/${p.id}`} key={i} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+              <Link 
+                to={`/politicos/${p.id}`} 
+                state={{ politico: p }} 
+                key={i} 
+                className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0"
+              >
                 <img
                   src={p.foto}
                   alt={p.nome}
@@ -101,7 +162,7 @@ export function Politicos() {
                     {p.nome}
                   </div>
                   <div className="text-[12px] text-text2 mt-0.5">
-                    {p.partido} · {p.uf}
+                    {p.partido} · {p.uf} · {p.tipo}
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -125,4 +186,4 @@ export function Politicos() {
       </div>
     </div>
   );
-}
+}

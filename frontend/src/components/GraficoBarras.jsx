@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
-const data = [
+const defaultData = [
   { name: 'PT', value: 78, color: '#9b2335' }, 
   { name: 'PL', value: 72, color: '#14b8a6' },
   { name: 'UNIÃO', value: 75, color: '#166534' }, 
@@ -12,7 +12,7 @@ const data = [
   { name: 'REP', value: 69, color: '#ef4444' },
 ];
 
-export function GraficoBarras() {
+export function GraficoBarras({ data = defaultData }) {
   return (
     <div className="w-full h-full">
       <ResponsiveContainer width="100%" height="100%">

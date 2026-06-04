@@ -1,11 +1,8 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Lembre-se de mudar aqui quando subir o Python para um servidor real
-  
-  // Timeout de 90 segundos (90000ms). O BERT pode ser lento sem GPU.
-  timeout: 90000, 
-  
+  baseURL: 'http://localhost:5001/api',
+  timeout: 90000,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
@@ -34,6 +31,11 @@ export const getDeputados = async () => {
 
 export const getSenadores = async () => {
   const response = await api.get('/senadores');
+  return response.data;
+};
+
+export const getDashboardMetrics = async () => {
+  const response = await api.get('/dashboard-metrics');
   return response.data;
 };
 
