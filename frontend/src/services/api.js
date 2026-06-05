@@ -59,3 +59,13 @@ export const getDashboardMetrics = async () => {
     return null;
   }
 };
+
+export const getPoliticoById = async (id) => {
+  try {
+    const response = await api.get(`/politico/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Erro ao obter político ${id}:`, error);
+    return null;
+  }
+};

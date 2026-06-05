@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import { ArrowLeft, Users, AlertTriangle, CheckCircle, FileQuestion } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, LineChart, Line, BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
-import { analisarParlamentar, getDashboardMetrics } from '../services/api';
+import { analisarParlamentar, getDashboardMetrics, getPoliticoById } from '../services/api';
 import { SkeletonPerfil } from '../components/Skeleton';
 
 export function PerfilPolitico() {
   const { id } = useParams();
   const { state } = useLocation(); 
-  const politico = state?.politico;
+  const [dadosPolitico, setDadosPolitico] = useState(state?.politico || null);
 
   const [analise, setAnalise] = useState(null);
   const [dadosPizza, setDadosPizza] = useState([]);
@@ -76,7 +76,6 @@ export function PerfilPolitico() {
     }));
 
     if (formatoHistorico.length < 2) {
-      // Fallback se não tiver votos em meses diferentes: lista votos individuais cronologicamente
       const fallbacks = sortedVotes.slice(-6).map((v, i) => {
         let label = `Voto ${i + 1}`;
         if (v.data && v.data !== 'N/A') {
@@ -99,7 +98,30 @@ export function PerfilPolitico() {
       try {
         setLoading(true);
         setErro(null);
-        const tipoParlamentar = politico?.tipo || 'deputado';
+
+        let currentPolitico = dadosPolitico;
+        // Se não temos dadosPolitico ou o ID mudou, busca da API
+        if (!currentPolitico || String(currentPolitico.id) !== String(id)) {
+          const res = await getPoliticoById(id);
+          if (res && res.status === 'ok') {
+            currentPolitico = {
+              id: res.dados.id,
+              nome: res.dados.nome,
+              partido: res.dados.partido,
+              uf: res.dados.uf,
+              foto: res.dados.foto,
+              tipo: res.dados.tipo,
+              coerencia: res.dados.coerencia || 0
+            };
+            setDadosPolitico(currentPolitico);
+          } else {
+            setErro("Não foi possível carregar as informações básicas deste político.");
+            setLoading(false);
+            return;
+          }
+        }
+
+        const tipoParlamentar = currentPolitico?.tipo?.toLowerCase() === 'senador' ? 'senador' : 'deputado';
         
         const [resposta, metricsData] = await Promise.allSettled([
           analisarParlamentar(id, tipoParlamentar),
@@ -112,6 +134,17 @@ export function PerfilPolitico() {
           setAnalise(resData);
           gerarDadosPizza(resData.dados);
           gerarHistorico(resData.dados);
+
+          // Atualiza a coerência média calculada
+          if (resData.dados && resData.dados.length > 0) {
+            let totalAfinidade = 0;
+            resData.dados.forEach(d => totalAfinidade += d.afinidade);
+            const mediaCalculada = Math.round((totalAfinidade / resData.dados.length) * 100);
+            setDadosPolitico(prev => ({
+              ...prev,
+              coerencia: mediaCalculada
+            }));
+          }
         } else if (resposta.status === 'fulfilled' && resposta.value.status === 'aviso') {
           setErro(resposta.value.mensagem);
         } else {
@@ -124,13 +157,14 @@ export function PerfilPolitico() {
             setMediaGlobal(mData.media_global_coerencia);
           }
           const partidoInfo = mData.metricas_por_partido?.find(
-            m => m.partido === politico?.partido
+            m => m.partido === currentPolitico?.partido
           );
           if (partidoInfo) {
             setMediaPartido(partidoInfo.media_coerencia);
           }
         }
       } catch (err) {
+        console.error(err);
         setErro("Falha ao processar os dados com o modelo de IA.");
       } finally {
         setLoading(false);
@@ -138,7 +172,7 @@ export function PerfilPolitico() {
     };
 
     processarAnalise();
-  }, [id, politico]);
+  }, [id]);
 
   const renderizarStatus = (status) => {
     if (status === "Coerente") return <span className="bg-brand-sucesso/20 text-brand-sucesso px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit"><CheckCircle size={12}/> Coerente</span>;
@@ -148,8 +182,8 @@ export function PerfilPolitico() {
   };
 
   const comparacaoData = [
-    { name: 'Político', value: politico ? politico.coerencia : 0, fill: '#14b8a6' },
-    { name: `Média ${politico?.partido || 'Partido'}`, value: Math.round(mediaPartido), fill: '#3b82f6' },
+    { name: 'Político', value: dadosPolitico ? dadosPolitico.coerencia : 0, fill: '#14b8a6' },
+    { name: `Média ${dadosPolitico?.partido || 'Partido'}`, value: Math.round(mediaPartido), fill: '#3b82f6' },
     { name: 'Média Global', value: Math.round(mediaGlobal), fill: '#6b7280' }
   ];
 
@@ -160,15 +194,15 @@ export function PerfilPolitico() {
       </Link>
 
       {/* Cabeçalho do Político */}
-      {politico && (
+      {dadosPolitico && (
         <div className="flex items-center gap-6 bg-surface p-6 rounded-lg border border-slate-800 mb-8 relative overflow-hidden">
           <span className="absolute top-4 right-4 text-[10px] uppercase font-bold tracking-wider text-brand-petroleo bg-brand-petroleo/10 px-2 py-1 rounded">
-            {politico.tipo}
+            {dadosPolitico.tipo}
           </span>
-          <img src={politico.foto} alt={politico.nome} className="w-24 h-24 rounded-full border-2 border-brand-petroleo object-cover" />
+          <img src={dadosPolitico.foto} alt={dadosPolitico.nome} className="w-24 h-24 rounded-full border-2 border-brand-petroleo object-cover" />
           <div>
-            <h1 className="text-3xl font-display font-bold text-texto-principal">{politico.nome}</h1>
-            <p className="text-texto-secundario mt-1 uppercase tracking-wider">{politico.partido} • {politico.uf}</p>
+            <h1 className="text-3xl font-display font-bold text-texto-principal">{dadosPolitico.nome}</h1>
+            <p className="text-texto-secundario mt-1 uppercase tracking-wider">{dadosPolitico.partido} • {dadosPolitico.uf}</p>
           </div>
         </div>
       )}

@@ -4,7 +4,7 @@ import { GraficoTendencias } from '../components/GraficoTendencias';
 import { GraficoPartidos } from '../components/GraficoPartidos';
 import { GraficoBarras } from '../components/GraficoBarras';
 import { politicosMock, alertas } from '../utils/mockData';
-import { getDashboardMetrics } from '../services/api';
+import { getDashboardMetrics, getSenadores, getDeputados } from '../services/api';
 
 export function VisaoGeral() {
   const navigate = useNavigate();
@@ -18,40 +18,108 @@ export function VisaoGeral() {
     partidoMaisCoerente: { partido: 'PSB', media_coerencia: 77.9 }
   });
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [allPoliticos, setAllPoliticos] = useState(politicosMock);
+
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
+        let analyzedMap = {};
+        let analyzedList = [];
+        let totalDivergentes = 0;
+        let totalAnalisados = '8';
+        let mediaGlobalCoerencia = '69.8%';
+        let partidoMaisCoerente = { partido: 'PSB', media_coerencia: 77.9 };
+        let top4List = top4Mock;
+
+        // 1. Carrega métricas consolidadas
         const data = await getDashboardMetrics();
         if (data) {
-          let totalDivergentes = 0;
+          totalAnalisados = data.total_analisados || 8;
+          mediaGlobalCoerencia = `${data.media_global_coerencia ? data.media_global_coerencia.toFixed(1) : '69.8'}%`;
+          partidoMaisCoerente = data.partido_mais_coerente || { partido: 'PSB', media_coerencia: 77.9 };
+
           if (data.senadores) {
             data.senadores.forEach(s => {
               if (s.contagem_status && s.contagem_status.Divergente) {
                 totalDivergentes += s.contagem_status.Divergente;
               }
+              analyzedMap[s.id] = Math.round(s.score_coerencia || 0);
+              analyzedList.push({
+                id: s.id,
+                nome: s.nome,
+                partido: s.partido,
+                uf: s.uf,
+                foto: s.foto || '',
+                coerencia: Math.round(s.score_coerencia || 0),
+                tipo: 'Senador',
+                analisado: true
+              });
             });
           }
-          
-          setMetrics({
-            totalAnalisados: data.total_analisados || 8,
-            mediaGlobalCoerencia: `${data.media_global_coerencia ? data.media_global_coerencia.toFixed(1) : '69.8'}%`,
-            incoerenciasDetectadas: totalDivergentes || 14,
-            partidoMaisCoerente: data.partido_mais_coerente || { partido: 'PSB', media_coerencia: 77.9 }
-          });
-
-          if (data.senadores && data.senadores.length > 0) {
-            const mapped = data.senadores.map(s => ({
-              id: s.id,
-              nome: s.nome,
-              partido: s.partido,
-              uf: s.uf,
-              foto: s.foto || '',
-              coerencia: Math.round(s.score_coerencia || 0),
-              tipo: 'Senador'
-            }));
-            const sorted = mapped.sort((a, b) => b.coerencia - a.coerencia).slice(0, 4);
-            setTop4(sorted);
+          if (analyzedList.length > 0) {
+            top4List = [...analyzedList].sort((a, b) => b.coerencia - a.coerencia).slice(0, 4);
           }
+        }
+
+        setMetrics({
+          totalAnalisados,
+          mediaGlobalCoerencia,
+          incoerenciasDetectadas: totalDivergentes || 14,
+          partidoMaisCoerente
+        });
+        setTop4(top4List);
+
+        // 2. Carrega todos os senadores e deputados para a busca (em paralelo)
+        const [senadoresRes, deputadosRes] = await Promise.allSettled([
+          getSenadores(),
+          getDeputados()
+        ]);
+
+        let combined = [...analyzedList];
+        let combinedKeys = new Set(analyzedList.map(p => String(p.id)));
+
+        if (senadoresRes.status === 'fulfilled' && senadoresRes.value?.status === 'ok') {
+          senadoresRes.value.dados.forEach(s => {
+            const idStr = String(s.id);
+            if (!combinedKeys.has(idStr)) {
+              combined.push({
+                id: s.id,
+                nome: s.nome,
+                partido: s.partido,
+                uf: s.uf,
+                foto: s.foto || '',
+                coerencia: null,
+                tipo: 'Senador',
+                analisado: false
+              });
+              combinedKeys.add(idStr);
+            }
+          });
+        }
+
+        if (deputadosRes.status === 'fulfilled' && deputadosRes.value?.status === 'ok') {
+          deputadosRes.value.dados.forEach(d => {
+            const idStr = String(d.id);
+            if (!combinedKeys.has(idStr)) {
+              combined.push({
+                id: d.id,
+                nome: d.nome,
+                partido: d.partido,
+                uf: d.uf,
+                foto: d.foto || '',
+                coerencia: null,
+                tipo: 'Deputado',
+                analisado: false
+              });
+              combinedKeys.add(idStr);
+            }
+          });
+        }
+
+        if (combined.length > 0) {
+          setAllPoliticos(combined);
         }
       } catch (err) {
         console.error("Erro ao obter métricas da API:", err);
@@ -60,12 +128,55 @@ export function VisaoGeral() {
     fetchMetrics();
   }, []);
 
+  useEffect(() => {
+    if (searchTerm.trim() === '') {
+      setSearchResults([]);
+      return;
+    }
+    const term = searchTerm.toLowerCase();
+    const filtered = allPoliticos.filter(p =>
+      p.nome.toLowerCase().includes(term) ||
+      p.partido.toLowerCase().includes(term)
+    );
+    setSearchResults(filtered);
+  }, [searchTerm, allPoliticos]);
+
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
       <div className="p-[16px_32px] border-b border-border shrink-0">
         <div className="relative max-w-[600px] mx-auto">
           <svg className="absolute left-[15px] top-1/2 -translate-y-1/2 text-text3 pointer-events-none" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input className="w-full bg-surface2 border border-border rounded-full p-[10px_18px_10px_42px] text-[14px] text-text-main outline-none focus:border-teal transition-colors" type="text" placeholder="Buscar político por nome..." />
+          <input 
+            className="w-full bg-surface2 border border-border rounded-full p-[10px_18px_10px_42px] text-[14px] text-text-main outline-none focus:border-teal transition-colors" 
+            type="text" 
+            placeholder="Buscar político por nome ou partido..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          {searchResults.length > 0 && (
+            <div className="absolute top-[48px] left-0 right-0 bg-surface border border-border rounded-xl shadow-2xl z-50 max-h-[300px] overflow-y-auto">
+              {searchResults.map((p) => (
+                <div 
+                  key={p.id}
+                  onClick={() => navigate(`/politicos/${p.id}`, { state: { politico: p } })}
+                  className="flex items-center gap-3 p-[12px_20px] border-b border-border2 hover:bg-surface2 cursor-pointer last:border-0"
+                >
+                  <img 
+                    src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} 
+                    onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`; }}
+                    className="w-8 h-8 rounded-full object-cover border border-border" 
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[14px] font-semibold text-text-main truncate">{p.nome}</div>
+                    <div className="text-[12px] text-teal">{p.partido} · {p.uf} · {p.tipo}</div>
+                  </div>
+                  <div className="text-[13px] font-bold text-teal">
+                    {p.analisado ? `${p.coerencia}%` : 'Não analisado'}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
