@@ -1,18 +1,48 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { politicosMock } from './VisaoGeral';
+import { politicosMock } from '../utils/mockData';
+import { getDashboardMetrics } from '../services/api';
 
 export function Politicos() {
   const [busca, setBusca] = useState('');
   const [filtroPartido, setFiltroPartido] = useState('Todos');
   const [filtroUF, setFiltroUF] = useState('Todos');
   const [sortAsc, setSortAsc] = useState(false);
+  const [politicosList, setPoliticosList] = useState(politicosMock);
 
-  const partidosUnicos = ['Todos', ...new Set(politicosMock.map(p => p.partido))].sort();
-  const ufsUnicas = ['Todos', ...new Set(politicosMock.map(p => p.uf))].sort();
+  useEffect(() => {
+    const loadRealPoliticos = async () => {
+      try {
+        const data = await getDashboardMetrics();
+        if (data && data.senadores && data.senadores.length > 0) {
+          const mapped = data.senadores.map(s => ({
+            id: s.id,
+            nome: s.nome,
+            partido: s.partido,
+            uf: s.uf,
+            foto: s.foto || '',
+            coerencia: Math.round(s.score_coerencia || 0),
+            tipo: 'Senador'
+          }));
+          setPoliticosList(mapped);
+        }
+      } catch (err) {
+        console.error("Erro ao carregar políticos da API, usando fallbacks mockados:", err);
+      }
+    };
+    loadRealPoliticos();
+  }, []);
+
+  const partidosUnicos = useMemo(() => {
+    return ['Todos', ...new Set(politicosList.map(p => p.partido))].sort();
+  }, [politicosList]);
+
+  const ufsUnicas = useMemo(() => {
+    return ['Todos', ...new Set(politicosList.map(p => p.uf))].sort();
+  }, [politicosList]);
 
   const filtered = useMemo(() => {
-    let result = politicosMock.filter(p => {
+    let result = politicosList.filter(p => {
       const matchBusca = p.nome.toLowerCase().includes(busca.toLowerCase()) || p.partido.toLowerCase().includes(busca.toLowerCase());
       const matchPartido = filtroPartido === 'Todos' || p.partido === filtroPartido;
       const matchUF = filtroUF === 'Todos' || p.uf === filtroUF;
@@ -20,7 +50,7 @@ export function Politicos() {
     });
 
     return result.sort((a, b) => sortAsc ? a.coerencia - b.coerencia : b.coerencia - a.coerencia);
-  }, [busca, filtroPartido, filtroUF, sortAsc]);
+  }, [busca, filtroPartido, filtroUF, sortAsc, politicosList]);
 
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
@@ -87,7 +117,7 @@ export function Politicos() {
           </div>
           <div>
             {filtered.map((p, i) => (
-              <Link to={`/politicos/${p.id}`} key={i} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+              <Link to={`/politicos/${p.id}`} state={{ politico: p }} key={i} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
                 <img
                   src={p.foto}
                   alt={p.nome}

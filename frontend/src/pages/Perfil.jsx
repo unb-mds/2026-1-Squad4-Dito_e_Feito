@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { politicosMock } from './VisaoGeral';
+import { politicosMock } from '../utils/mockData';
 
 export function Perfil() {
   const { id } = useParams();

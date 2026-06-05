@@ -480,6 +480,137 @@ def listar_senadores():
         return jsonify({"status": "erro", "mensagem": str(e)}), 500
 
 
+@app.route("/api/deputados", methods=["GET"])
+def listar_deputados():
+    """Lista deputados em exercício (proxy da API da Câmara)."""
+    try:
+        url = f"{BASE_CAMARA}/deputados"
+        params = {"itens": 1000}
+        headers = {"Accept": "application/json"}
+        res = requests.get(url, params=params, headers=headers, timeout=15)
+        res.raise_for_status()
+        lista = res.json().get("dados", [])
+        resultado = []
+        for d in lista:
+            resultado.append(
+                {
+                    "id": str(d["id"]),
+                    "nome": d["nome"],
+                    "partido": d.get("siglaPartido", ""),
+                    "uf": d.get("siglaUf", ""),
+                    "foto": d.get("urlFoto", ""),
+                }
+            )
+        return jsonify({"status": "ok", "dados": sorted(resultado, key=lambda x: x["nome"])})
+    except Exception as e:
+        return jsonify({"status": "erro", "mensagem": str(e)}), 500
+
+
+@app.route("/api/politico/<id_externo>", methods=["GET"])
+def obter_politico(id_externo):
+    """Retorna os detalhes básicos de um parlamentar pelo seu ID externo."""
+    # 1. Tentar encontrar no banco de dados
+    if DATABASE_URL:
+        try:
+            import psycopg2
+            conn = psycopg2.connect(DATABASE_URL)
+            cur = conn.cursor()
+            cur.execute(
+                """
+                SELECT id_externo, nome_civil, sigla_partido, sigla_uf, foto_url, tipo_parlamentar
+                FROM parlamentar
+                WHERE id_externo = %s
+                """,
+                (str(id_externo),)
+            )
+            row = cur.fetchone()
+            cur.close()
+            conn.close()
+            if row:
+                return jsonify({
+                    "status": "ok",
+                    "dados": {
+                        "id": row[0],
+                        "nome": row[1],
+                        "partido": row[2],
+                        "uf": row[3],
+                        "foto": row[4] or "",
+                        "tipo": row[5]
+                    }
+                })
+        except Exception as e:
+            print(f"[WARN] Erro ao buscar político no banco: {e}")
+
+    # 2. Tentar encontrar no JSON local
+    if os.path.exists(METRICS_JSON_PATH):
+        try:
+            with open(METRICS_JSON_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            for s in data.get("senadores", []):
+                if str(s["id"]) == str(id_externo):
+                    return jsonify({
+                        "status": "ok",
+                        "dados": {
+                            "id": s["id"],
+                            "nome": s["nome"],
+                            "partido": s["partido"],
+                            "uf": s["uf"],
+                            "foto": s["foto"] or "",
+                            "tipo": "Senador"
+                        }
+                    })
+        except Exception as e:
+            print(f"[WARN] Erro ao carregar JSON: {e}")
+
+    # 3. Se não achou nos dados analisados, procurar nas APIs oficiais (Senado e Câmara)
+    # Tenta Senado primeiro
+    try:
+        url = f"{BASE_SENADO}/senador/{id_externo}"
+        headers = {"Accept": "application/json"}
+        res = requests.get(url, headers=headers, timeout=10)
+        if res.ok:
+            data = res.json()
+            if "DetalheParlamentar" in data:
+                ident = data["DetalheParlamentar"]["Parlamentar"]["IdentificacaoParlamentar"]
+                return jsonify({
+                    "status": "ok",
+                    "dados": {
+                        "id": str(id_externo),
+                        "nome": ident["NomeParlamentar"],
+                        "partido": ident.get("SiglaPartidoParlamentar", ""),
+                        "uf": ident.get("UfParlamentar", ""),
+                        "foto": ident.get("UrlFotoParlamentar", ""),
+                        "tipo": "Senador"
+                    }
+                })
+    except Exception:
+        pass
+
+    # Tenta Câmara
+    try:
+        url = f"{BASE_CAMARA}/deputados/{id_externo}"
+        headers = {"Accept": "application/json"}
+        res = requests.get(url, headers=headers, timeout=10)
+        if res.ok:
+            data = res.json().get("dados", {})
+            if data:
+                return jsonify({
+                    "status": "ok",
+                    "dados": {
+                        "id": str(id_externo),
+                        "nome": data.get("nomeCivil") or data.get("ultimoStatus", {}).get("nome"),
+                        "partido": data.get("ultimoStatus", {}).get("siglaPartido", ""),
+                        "uf": data.get("ultimoStatus", {}).get("siglaUf", ""),
+                        "foto": data.get("ultimoStatus", {}).get("urlFoto", ""),
+                        "tipo": "Deputado"
+                    }
+                })
+    except Exception:
+        pass
+
+    return jsonify({"status": "erro", "mensagem": "Político não encontrado"}), 404
+
+
 @app.route("/api/analisar", methods=["POST"])
 def analisar_parlamentar():
     """

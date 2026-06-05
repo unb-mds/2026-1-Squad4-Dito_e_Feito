@@ -75,6 +75,37 @@ O arquivo `src/services/api.js` centraliza as chamadas de rede do sistema. O cli
 
 ---
 
+## Gráficos
+
+O frontend utiliza a biblioteca **Recharts** para transformar as análises complexas do modelo de NLP em representações visuais interativas e de fácil compreensão. A seguir, detalham-se os objetivos de informação, funções e objetivos de cada gráfico utilizado na interface:
+
+### 1. Distribuição de Alinhamento (Gráfico de Rosca / Donut Chart)
+*   **Localização:** Tela de Perfil Individual do Político (`PerfilPolitico.jsx`).
+*   **Função:** Agrupar e quantificar as análises das votações nominais mais recentes do parlamentar por classificação semântica.
+*   **Objetivos de Informação:** Apresentar a proporção exata de votos classificados como *Coerente* (verde), *Parcialmente Alinhado* (amarelo), *Divergente* (vermelho) ou *Não Relacionado* (cinza). Permite ao cidadão julgar instantaneamente a estabilidade ideológica e o alinhamento de fala vs. voto do político.
+
+### 2. Histórico de Coerência (Gráfico de Linha / Line Chart)
+*   **Localização:** Tela de Perfil do Político (`PerfilPolitico.jsx`) e tela de Visão Geral (`GraficoTendencias.jsx`).
+*   **Função:** Mapear a evolução do índice médio de coerência (score) do parlamentar ao longo dos meses ou de sessões cronológicas sucessivas.
+*   **Objetivos de Informação:** Revelar tendências temporais de comportamento. Permite analisar se o parlamentar está se tornando mais ou menos fiel aos seus discursos no decorrer de seu mandato (por exemplo, avaliando mudanças de postura na proximidade de períodos eleitorais).
+
+### 3. Comparação de Coerência (Gráfico de Barras / Bar Chart)
+*   **Localização:** Tela de Perfil do Político (`PerfilPolitico.jsx`) e Tela de Comparação (`Comparacao.jsx`).
+*   **Função:** Colocar em perspectiva comparativa o score de coerência do político selecionado contra a média do seu partido correspondente e a média global de toda a casa legislativa (Senado ou Câmara), ou comparar o score de dois parlamentares de forma direta.
+*   **Objetivos de Informação:** Contextualização institucional do parlamentar. Ajuda o eleitor a entender se o parlamentar é um "outlier" (mais ou menos coerente que a média) dentro de sua própria bancada partidária e do Congresso em geral.
+
+### 4. Coerência Média por Partido (Gráfico de Barras / Bar Chart)
+*   **Localização:** Tela de Visão Geral (`VisaoGeral.jsx` / `GraficoBarras.jsx`).
+*   **Função:** Rankear o score médio de coerência agregando todos os parlamentares pertencentes a cada sigla partidária.
+*   **Objetivos de Informação:** Avaliação de fidelidade partidária. Permite comparar a disciplina e consistência programática de diferentes partidos políticos brasileiros frente às pautas legislativas.
+
+### 5. Comparação por Partido (Gráfico de Rosca / Donut Chart)
+*   **Localização:** Tela de Visão Geral (`VisaoGeral.jsx` / `GraficoPartidos.jsx`).
+*   **Função:** Demonstrar o volume e a representatividade de parlamentares de cada partido político que foram auditados no banco de dados.
+*   **Objetivos de Informação:** Transparência amostral. Mostra a distribuição do volume total de dados analisados pelo Dito e Feito, permitindo verificar em quais partidos a cobertura de auditoria do sistema está mais concentrada.
+
+---
+
 ## Paleta de Cores e Tipografia (Design Tokens)
 
 O frontend implementa uma identidade baseada em modo escuro, utilizando os seguintes tokens de estilo definidos no arquivo CSS principal:
