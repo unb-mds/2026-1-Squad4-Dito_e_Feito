@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import { ArrowLeft, Users, AlertTriangle, CheckCircle, FileQuestion } from 'lucide-react';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from 'recharts';
-import { analisarParlamentar } from '../services/api';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, LineChart, Line, BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { analisarParlamentar, getDashboardMetrics } from '../services/api';
 import { SkeletonPerfil } from '../components/Skeleton';
 
 export function PerfilPolitico() {
@@ -11,9 +11,88 @@ export function PerfilPolitico() {
   const politico = state?.politico;
 
   const [analise, setAnalise] = useState(null);
-  const [dadosRadar, setDadosRadar] = useState([]);
+  const [dadosPizza, setDadosPizza] = useState([]);
+  const [dadosLinha, setDadosLinha] = useState([]);
+  const [mediaPartido, setMediaPartido] = useState(70);
+  const [mediaGlobal, setMediaGlobal] = useState(73.2);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(null);
+
+  const gerarDadosPizza = (dadosApi) => {
+    const contagem = {
+      'Coerente': 0,
+      'Parcialmente Alinhado': 0,
+      'Divergente': 0,
+      'Não Relacionado': 0
+    };
+    
+    dadosApi.forEach(item => {
+      const status = item.status || 'Não Relacionado';
+      if (status === 'Coerente') {
+        contagem['Coerente']++;
+      } else if (status === 'Divergente') {
+        contagem['Divergente']++;
+      } else if (status === 'Parcialmente Alinhado') {
+        contagem['Parcialmente Alinhado']++;
+      } else {
+        contagem['Não Relacionado']++;
+      }
+    });
+
+    const formatoPizza = [
+      { name: 'Coerente', value: contagem['Coerente'], color: '#10b981' },
+      { name: 'Parcialmente Alinhado', value: contagem['Parcialmente Alinhado'], color: '#f59e0b' },
+      { name: 'Divergente', value: contagem['Divergente'], color: '#ef4444' },
+      { name: 'Não Relacionado', value: contagem['Não Relacionado'], color: '#64748b' }
+    ].filter(d => d.value > 0);
+
+    setDadosPizza(formatoPizza);
+  };
+
+  const gerarHistorico = (dadosApi) => {
+    const sortedVotes = [...dadosApi].sort((a, b) => new Date(a.data) - new Date(b.data));
+    const mesesMap = {};
+    const mesesAbreviados = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    
+    sortedVotes.forEach(v => {
+      if (!v.data || v.data === 'N/A') return;
+      const dataObj = new Date(v.data);
+      if (isNaN(dataObj)) return;
+      const chave = `${dataObj.getFullYear()}-${String(dataObj.getMonth() + 1).padStart(2, '0')}`;
+      if (!mesesMap[chave]) {
+        mesesMap[chave] = { 
+          soma: 0, 
+          count: 0, 
+          nome: `${mesesAbreviados[dataObj.getMonth()]}/${String(dataObj.getFullYear()).slice(2)}` 
+        };
+      }
+      mesesMap[chave].soma += (v.afinidade * 100);
+      mesesMap[chave].count += 1;
+    });
+
+    const formatoHistorico = Object.keys(mesesMap).sort().map(chave => ({
+      mes: mesesMap[chave].nome,
+      coerencia: Math.round(mesesMap[chave].soma / mesesMap[chave].count)
+    }));
+
+    if (formatoHistorico.length < 2) {
+      // Fallback se não tiver votos em meses diferentes: lista votos individuais cronologicamente
+      const fallbacks = sortedVotes.slice(-6).map((v, i) => {
+        let label = `Voto ${i + 1}`;
+        if (v.data && v.data !== 'N/A') {
+          const pts = v.data.split('-');
+          if (pts.length === 3) label = `${pts[2]}/${pts[1]}`;
+        }
+        return {
+          mes: label,
+          coerencia: Math.round(v.afinidade * 100)
+        };
+      });
+      setDadosLinha(fallbacks);
+    } else {
+      setDadosLinha(formatoHistorico);
+    }
+  };
 
   useEffect(() => {
     const processarAnalise = async () => {
@@ -21,14 +100,35 @@ export function PerfilPolitico() {
         setLoading(true);
         setErro(null);
         const tipoParlamentar = politico?.tipo || 'deputado';
-        const resposta = await analisarParlamentar(id, tipoParlamentar); 
         
-        if (resposta.status === 'ok') {
-          setAnalise(resposta);
-          gerarDadosDoRadar(resposta.dados);
-        } else if (resposta.status === 'aviso') {
-          // Captura o aviso de falta de dados do backend
-          setErro(resposta.mensagem);
+        const [resposta, metricsData] = await Promise.allSettled([
+          analisarParlamentar(id, tipoParlamentar),
+          getDashboardMetrics()
+        ]);
+        
+        let resData = null;
+        if (resposta.status === 'fulfilled' && resposta.value.status === 'ok') {
+          resData = resposta.value;
+          setAnalise(resData);
+          gerarDadosPizza(resData.dados);
+          gerarHistorico(resData.dados);
+        } else if (resposta.status === 'fulfilled' && resposta.value.status === 'aviso') {
+          setErro(resposta.value.mensagem);
+        } else {
+          setErro("Falha ao processar os dados com o modelo de IA.");
+        }
+
+        if (metricsData.status === 'fulfilled' && metricsData.value) {
+          const mData = metricsData.value;
+          if (mData.media_global_coerencia) {
+            setMediaGlobal(mData.media_global_coerencia);
+          }
+          const partidoInfo = mData.metricas_por_partido?.find(
+            m => m.partido === politico?.partido
+          );
+          if (partidoInfo) {
+            setMediaPartido(partidoInfo.media_coerencia);
+          }
         }
       } catch (err) {
         setErro("Falha ao processar os dados com o modelo de IA.");
@@ -40,40 +140,18 @@ export function PerfilPolitico() {
     processarAnalise();
   }, [id, politico]);
 
-  const gerarDadosDoRadar = (dadosApi) => {
-    const classificarTema = (texto) => {
-      const t = texto.toLowerCase();
-      if (t.includes('saúde') || t.includes('sus') || t.includes('hospital')) return 'Saúde';
-      if (t.includes('educação') || t.includes('escola') || t.includes('ensino')) return 'Educação';
-      if (t.includes('economia') || t.includes('fiscal') || t.includes('imposto')) return 'Economia';
-      if (t.includes('segurança') || t.includes('polícia') || t.includes('crime')) return 'Segurança';
-      if (t.includes('ambiente') || t.includes('clima') || t.includes('desmatamento')) return 'Meio Ambi.';
-      return 'Outros';
-    };
-
-    const agrupado = {};
-    dadosApi.forEach(item => {
-      const tema = classificarTema(item.ementa);
-      if (!agrupado[tema]) agrupado[tema] = { soma: 0, count: 0 };
-      agrupado[tema].soma += (item.afinidade * 100);
-      agrupado[tema].count += 1;
-    });
-    
-    const formatoRadar = Object.keys(agrupado).map(tema => ({
-      tema: tema,
-      Coerencia: Math.round(agrupado[tema].soma / agrupado[tema].count)
-    }));
-
-    if (formatoRadar.length >= 3) {
-      setDadosRadar(formatoRadar);
-    }
-  };
-
   const renderizarStatus = (status) => {
     if (status === "Coerente") return <span className="bg-brand-sucesso/20 text-brand-sucesso px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit"><CheckCircle size={12}/> Coerente</span>;
     if (status === "Divergente") return <span className="bg-brand-alerta/20 text-brand-alerta px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit"><AlertTriangle size={12}/> Divergente</span>;
+    if (status === "Não Relacionado") return <span className="bg-slate-800 text-slate-400 px-2 py-1 rounded text-xs font-bold w-fit">Não Relacionado</span>;
     return <span className="bg-slate-700 text-texto-principal px-2 py-1 rounded text-xs font-bold w-fit">Parcialmente Alinhado</span>;
   };
+
+  const comparacaoData = [
+    { name: 'Político', value: politico ? politico.coerencia : 0, fill: '#14b8a6' },
+    { name: `Média ${politico?.partido || 'Partido'}`, value: Math.round(mediaPartido), fill: '#3b82f6' },
+    { name: 'Média Global', value: Math.round(mediaGlobal), fill: '#6b7280' }
+  ];
 
   return (
     <main className="p-8 w-full max-w-5xl mx-auto">
@@ -119,27 +197,89 @@ export function PerfilPolitico() {
       {/* Renderização do conteúdo se a IA retornar sucesso */}
       {!loading && !erro && analise && (
         <>
-          {dadosRadar.length > 0 && (
+          {dadosPizza.length > 0 && (
             <section className="bg-surface p-6 rounded-lg border border-slate-800 mb-8 flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
-                <h3 className="text-xl font-display font-bold text-texto-principal mb-2">Visão Geral Temática</h3>
+                <h3 className="text-xl font-display font-bold text-texto-principal mb-2">Distribuição de Alinhamento</h3>
                 <p className="text-texto-secundario text-sm">
-                  Distribuição da coerência do parlamentar baseada nos {analise.total_votos_analisados} votos mais recentes cruzados com a IA.
+                  Proporção de coerência dos votos do parlamentar baseada nos {analise.total_votos_analisados} votos mais recentes auditados pela IA.
                 </p>
               </div>
-              <div className="w-full md:w-1/2 h-[250px]">
+              <div className="w-full md:w-1/2 h-[220px]">
                 <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart cx="50%" cy="50%" outerRadius="70%" data={dadosRadar}>
-                    <PolarGrid stroke="#334155" />
-                    <PolarAngleAxis dataKey="tema" tick={{ fill: '#94A3B8', fontSize: 11 }} />
-                    <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                    <Radar name="Coerência" dataKey="Coerencia" stroke="#0F766E" fill="#0F766E" fillOpacity={0.6} />
-                    <Tooltip contentStyle={{ backgroundColor: '#1E293B', borderColor: '#334155', borderRadius: '8px' }} itemStyle={{ color: '#0F766E', fontWeight: 'bold' }} formatter={(value) => [`${value}%`, 'Coerência']}/>
-                  </RadarChart>
+                  <PieChart>
+                    <Pie
+                      data={dadosPizza}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={80}
+                      paddingAngle={4}
+                      dataKey="value"
+                    >
+                      {dadosPizza.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{ backgroundColor: '#1E293B', borderColor: '#334155', borderRadius: '8px', color: '#fff' }}
+                      itemStyle={{ fontWeight: 'bold' }}
+                    />
+                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ color: '#94A3B8', fontSize: '12px' }} />
+                  </PieChart>
                 </ResponsiveContainer>
               </div>
             </section>
           )}
+
+          {/* Gráficos adicionais: Histórico de Coerência e Comparação com Média do Partido */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            {/* Histórico */}
+            <div className="bg-surface border border-slate-800 rounded-xl flex flex-col p-5">
+              <h3 className="text-base font-bold text-texto-principal mb-4 flex items-center gap-2">
+                <svg width="18" height="18" className="text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Histórico de Coerência
+              </h3>
+              <div className="h-[240px] w-full">
+                {dadosLinha.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={dadosLinha} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                      <CartesianGrid strokeDasharray="0" stroke="#334155" vertical={false} />
+                      <XAxis dataKey="mes" stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
+                      <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} domain={[50, 100]} tickFormatter={(val) => `${val}%`} />
+                      <Tooltip contentStyle={{ backgroundColor: '#1E293B', borderColor: '#334155', borderRadius: '8px', color: '#fff' }} itemStyle={{ color: '#14b8a6', fontWeight: 'bold' }} />
+                      <Line type="monotone" dataKey="coerencia" name="Coerência" stroke="#14b8a6" strokeWidth={3} dot={{ r: 4, fill: '#14b8a6', strokeWidth: 2, stroke: '#1e293b' }} activeDot={{ r: 6 }} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="h-full flex items-center justify-center text-xs text-texto-secundario">Dados insuficientes para histórico</div>
+                )}
+              </div>
+            </div>
+
+            {/* Comparação */}
+            <div className="bg-surface border border-slate-800 rounded-xl flex flex-col p-5">
+              <h3 className="text-base font-bold text-texto-principal mb-4 flex items-center gap-2">
+                <svg width="18" height="18" className="text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="8" width="6" height="13" rx="1"/><rect x="16" y="5" width="6" height="16" rx="1"/></svg>
+                Comparação de Coerência
+              </h3>
+              <div className="h-[240px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={comparacaoData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="0" stroke="#334155" vertical={false} />
+                    <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
+                    <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} domain={[0, 100]} tickFormatter={(val) => `${val}%`} />
+                    <Tooltip cursor={{ fill: '#334155', opacity: 0.3 }} contentStyle={{ backgroundColor: '#1E293B', borderColor: '#334155', borderRadius: '8px', color: '#fff' }} />
+                    <Bar dataKey="value" name="Coerência" radius={[4, 4, 0, 0]}>
+                      {comparacaoData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
 
           <section>
             <div className="border-b border-slate-800 pb-4 mb-6">
