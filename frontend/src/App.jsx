@@ -7,7 +7,7 @@ import { Comparacao } from './pages/Comparacao';
 import { Relatorios } from './pages/Relatorios';
 import { Sobre } from './pages/Sobre';
 import { Footer } from './components/Footer';
-import { Perfil } from './pages/Perfil';
+import { PerfilPolitico } from './pages/PerfilPolitico';
 
 export default function App() {
   return (
@@ -17,7 +17,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<VisaoGeral />} />
           <Route path="/politicos" element={<Politicos />} />
-          <Route path="/politicos/:id" element={<Perfil />} />
+          <Route path="/politicos/:id" element={<PerfilPolitico />} />
           <Route path="/comparacao" element={<Comparacao />} />
           <Route path="/relatorios" element={<Relatorios />} />
           <Route path="/sobre" element={<Sobre />} />

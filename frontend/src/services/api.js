@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Lembre-se de mudar aqui quando subir o Python para um servidor real
+  baseURL: 'http://localhost:5001/api', // Servidor Flask roda na porta 5001
   
   // Timeout de 90 segundos (90000ms). O BERT pode ser lento sem GPU.
   timeout: 90000, 
@@ -21,7 +21,7 @@ api.interceptors.response.use(
       return Promise.reject({ message: "O modelo de IA demorou muito para processar os dados. Tente novamente." });
     }
     if (error.message === 'Network Error') {
-      return Promise.reject({ message: "Erro de rede. Verifique se o servidor Flask está rodando na porta 5000." });
+      return Promise.reject({ message: "Erro de rede. Verifique se o servidor Flask está rodando na porta 5001." });
     }
     return Promise.reject(error);
   }
@@ -47,5 +47,15 @@ export const analisarParlamentar = async (id, tipo) => {
       status: 'aviso',
       mensagem: error.message || "Erro desconhecido ao analisar o parlamentar."
     };
+  }
+};
+
+export const getDashboardMetrics = async () => {
+  try {
+    const response = await api.get('/dashboard-metrics');
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao obter métricas do dashboard:", error);
+    return null;
   }
 };

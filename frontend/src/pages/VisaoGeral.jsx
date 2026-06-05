@@ -1,75 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GraficoTendencias } from '../components/GraficoTendencias';
 import { GraficoPartidos } from '../components/GraficoPartidos';
 import { GraficoBarras } from '../components/GraficoBarras';
-
-export const politicosMock = [
-  {
-    id: 1,
-    nome: 'Maria Silva Santos',
-    partido: 'PT',
-    uf: 'SP',
-    tipo: 'Deputada',
-    coerencia: 87,
-    foto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80',
-  },
-  {
-    id: 2,
-    nome: 'João Pedro Oliveira',
-    partido: 'PL',
-    uf: 'RJ',
-    tipo: 'Deputado',
-    coerencia: 84,
-    foto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80',
-  },
-  {
-    id: 3,
-    nome: 'Ana Costa Mendes',
-    partido: 'UNIÃO',
-    uf: 'MG',
-    tipo: 'Deputada',
-    coerencia: 79,
-    foto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&q=80',
-  },
-  {
-    id: 4,
-    nome: 'Carlos Alberto Lima',
-    partido: 'PP',
-    uf: 'BA',
-    tipo: 'Senador',
-    coerencia: 76,
-    foto: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&q=80',
-  },
-  {
-    id: 5,
-    nome: 'Fernanda Rocha',
-    partido: 'MDB',
-    uf: 'SP',
-    tipo: 'Deputada',
-    coerencia: 72,
-    foto: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=300&q=80',
-  },
-  {
-    id: 6,
-    nome: 'Roberto Alves',
-    partido: 'PSD',
-    uf: 'RS',
-    tipo: 'Senador',
-    coerencia: 69,
-    foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80',
-  },
-];
-
-const alertas = [
-  {nome:'João Pedro Oliveira',partido:'PL',tema:'Divergência em Educação',data:'10 Dez 2025', grave: false},
-  {nome:'Ana Costa Mendes',partido:'UNIÃO',tema:'Divergência em Meio Ambiente',data:'8 Dez 2025', grave: false},
-  {nome:'Carlos Alberto Lima',partido:'PP',tema:'Divergência em Saúde',data:'5 Dez 2025', grave: true},
-];
+import { politicosMock, alertas } from '../utils/mockData';
+import { getDashboardMetrics } from '../services/api';
 
 export function VisaoGeral() {
   const navigate = useNavigate();
-  const top4 = [...politicosMock].sort((a,b) => b.coerencia - a.coerencia).slice(0, 4);
+  const top4Mock = [...politicosMock].sort((a,b) => b.coerencia - a.coerencia).slice(0, 4);
+  const [top4, setTop4] = useState(top4Mock);
+
+  const [metrics, setMetrics] = useState({
+    totalAnalisados: '2.847',
+    mediaGlobalCoerencia: '73.2%',
+    incoerenciasDetectadas: '142',
+    partidoMaisCoerente: { partido: 'PSB', media_coerencia: 77.9 }
+  });
+
+  useEffect(() => {
+    const fetchMetrics = async () => {
+      try {
+        const data = await getDashboardMetrics();
+        if (data) {
+          let totalDivergentes = 0;
+          if (data.senadores) {
+            data.senadores.forEach(s => {
+              if (s.contagem_status && s.contagem_status.Divergente) {
+                totalDivergentes += s.contagem_status.Divergente;
+              }
+            });
+          }
+          
+          setMetrics({
+            totalAnalisados: data.total_analisados || 8,
+            mediaGlobalCoerencia: `${data.media_global_coerencia ? data.media_global_coerencia.toFixed(1) : '69.8'}%`,
+            incoerenciasDetectadas: totalDivergentes || 14,
+            partidoMaisCoerente: data.partido_mais_coerente || { partido: 'PSB', media_coerencia: 77.9 }
+          });
+
+          if (data.senadores && data.senadores.length > 0) {
+            const mapped = data.senadores.map(s => ({
+              id: s.id,
+              nome: s.nome,
+              partido: s.partido,
+              uf: s.uf,
+              foto: s.foto || '',
+              coerencia: Math.round(s.score_coerencia || 0),
+              tipo: 'Senador'
+            }));
+            const sorted = mapped.sort((a, b) => b.coerencia - a.coerencia).slice(0, 4);
+            setTop4(sorted);
+          }
+        }
+      } catch (err) {
+        console.error("Erro ao obter métricas da API:", err);
+      }
+    };
+    fetchMetrics();
+  }, []);
 
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
@@ -81,15 +70,15 @@ export function VisaoGeral() {
       </div>
 
       <div className="p-[28px_32px] flex-1 overflow-y-auto">
-        <div className="grid grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
           <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
             <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Votos Analisados</div>
-            <div className="text-[40px] font-bold text-text-main leading-none mb-3">2.847</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">{metrics.totalAnalisados}</div>
             <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-green-bg text-green">↑ 12%</span>
           </div>
           <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
             <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Coerência Global</div>
-            <div className="text-[40px] font-bold text-text-main leading-none mb-3">73.2%</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">{metrics.mediaGlobalCoerencia}</div>
             <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-red-bg text-red">↓ 3%</span>
           </div>
           <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
@@ -97,7 +86,12 @@ export function VisaoGeral() {
               Incoerências Detectadas
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             </div>
-            <div className="text-[40px] font-bold text-text-main leading-none mb-3">142</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">{metrics.incoerenciasDetectadas}</div>
+          </div>
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Partido mais Coerente</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">{metrics.partidoMaisCoerente.partido}</div>
+            <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-teal-bg text-teal">{metrics.partidoMaisCoerente.media_coerencia}% Coerência</span>
           </div>
         </div>
 
@@ -148,7 +142,7 @@ export function VisaoGeral() {
             </div>
             <div>
               {top4.map((p, i) => (
-                <div key={i} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+                <div key={i} onClick={() => navigate(`/politicos/${p.id}`, { state: { politico: p } })} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
                   <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
                   <img src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} alt={p.nome} className="w-9 h-9 rounded-full border border-border shrink-0 object-cover" />
                   <div className="flex-1 min-w-0">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { politicosMock } from './VisaoGeral';
-import { GraficoRadar } from '../components/GraficoRadar';
+import { politicosMock } from '../utils/mockData';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 export function Comparacao() {
   const [slotA, setSlotA] = useState(null);
@@ -50,8 +50,35 @@ export function Comparacao() {
         {slotA && slotB && (
           <div>
             <div className="bg-surface border border-border rounded-xl mb-4">
-              <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Comparação por Tema</div></div>
-              <div className="p-5 h-[320px] w-full"><GraficoRadar /></div>
+              <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Coerência Geral Comparada</div></div>
+              <div className="p-5 h-[320px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={[
+                      { name: slotA.nome, Coerencia: slotA.coerencia },
+                      { name: slotB.nome, Coerencia: slotB.coerencia }
+                    ]}
+                    margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+                    barSize={60}
+                  >
+                    <CartesianGrid strokeDasharray="0" stroke="#30363d" vertical={false} />
+                    <XAxis dataKey="name" stroke="#8b949e" tickLine={false} axisLine={false} />
+                    <YAxis stroke="#8b949e" domain={[0, 100]} tickFormatter={(val) => `${val}%`} tickLine={false} axisLine={false} />
+                    <Tooltip
+                      cursor={{ fill: '#1c2128', opacity: 0.3 }}
+                      contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d', borderRadius: '6px', color: '#e6edf3' }}
+                    />
+                    <Bar dataKey="Coerencia" radius={[8, 8, 0, 0]}>
+                      {[
+                        { color: '#14b8a6' },
+                        { color: '#ec4899' }
+                      ].map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={index === 0 ? '#14b8a6' : '#ec4899'} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[slotA, slotB].map((s, i) => (
