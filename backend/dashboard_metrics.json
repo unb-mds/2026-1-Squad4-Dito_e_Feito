@@ -1,813 +1,460 @@
 {
-  "gerado_em": "2026-05-24T17:56:50.176553Z",
-  "total_analisados": 8,
-  "media_global_coerencia": 69.79,
+  "gerado_em": "2026-05-26T00:32:42.134312Z",
+  "total_analisados": 11,
+  "media_global_coerencia": 50.55,
   "partido_mais_coerente": {
-    "partido": "PSB",
-    "media_coerencia": 77.88,
-    "total_senadores": 1
+    "partido": "PODEMOS",
+    "media_coerencia": 72.33,
+    "total_senadores": 3
   },
   "metricas_por_partido": [
     {
-      "partido": "AVANTE",
-      "media_coerencia": 68.75,
-      "total_senadores": 1
-    },
-    {
-      "partido": "PDT",
-      "media_coerencia": 68.42,
-      "total_senadores": 1
-    },
-    {
       "partido": "PL",
-      "media_coerencia": 68.63,
+      "media_coerencia": 44.0,
+      "total_senadores": 3
+    },
+    {
+      "partido": "PODEMOS",
+      "media_coerencia": 72.33,
+      "total_senadores": 3
+    },
+    {
+      "partido": "PP",
+      "media_coerencia": 27.0,
       "total_senadores": 2
     },
     {
-      "partido": "PSB",
-      "media_coerencia": 77.88,
+      "partido": "PSD",
+      "media_coerencia": 59.0,
       "total_senadores": 1
     },
     {
       "partido": "PT",
-      "media_coerencia": 68.66,
-      "total_senadores": 3
+      "media_coerencia": 47.0,
+      "total_senadores": 2
     }
   ],
   "senadores": [
     {
-      "id": "5942",
-      "nome": "Marcos do Val",
-      "partido": "AVANTE",
-      "uf": "ES",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5942.jpg",
-      "score_coerencia": 68.75,
+      "id": "5959",
+      "nome": "Styvenson Valentim",
+      "partido": "PODEMOS",
+      "uf": "RN",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5959.jpg",
+      "score_coerencia": 76.0,
+      "pares_alinhados": 2,
       "total_pares": 10,
       "contagem_status": {
-        "Coerente": 9,
-        "Divergente": 0,
-        "Parcialmente Alinhado": 1,
-        "Não Relacionado": 0
+        "Coerente": 10
       },
       "detalhes": [
         {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.75,
+          "ementa": "Acrescenta o inciso LXXIX ao art. 5º da Constituição Federal, para introduzir a inclusão digital no rol de direitos fundamentais.",
+          "afinidade": 0.9,
+          "jaccard_pre_filtro": 0.0882,
           "status": "Coerente",
+          "justificativa": "O discurso apoia a alteração do art. 37 da Constituição Federal para permitir a acumulação remunerada de um cargo de professor com outro de qualquer natureza.",
           "voto": "Sim",
-          "data": "2022-05-11",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
+          "data": "2022-06-02",
+          "discurso": "O SR. STYVENSON VALENTIM  \r\n(Bloco Parlamentar Democracia/PSDB - RN. Para orientar a bancada.) – Vota \"sim\", Sr. Presidente."
         },
         {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.75,
+          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
+          "afinidade": 0.9,
+          "jaccard_pre_filtro": 0.0882,
           "status": "Coerente",
-          "voto": "P-NRV",
-          "data": "2022-05-11",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
-        },
-        {
-          "ementa": "Institui a Política Nacional de Atenção Psicossocial nas Comunidades Escolares.",
-          "afinidade": 0.55,
-          "status": "Parcialmente Alinhado",
-          "voto": "Sim",
-          "data": "2022-02-15",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 173, de 27 de maio de 2020, que estabelece o Programa Federativo de Enfrentamento ao Coronavírus SARS-CoV-2 (Covid-19).",
-          "afinidade": 0.68,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-10",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
-        },
-        {
-          "ementa": "Altera a Lei nº 9.656, de 3 de junho de 1998, para dispor sobre o processo de atualização das coberturas no âmbito da saúde suplementar.",
-          "afinidade": 0.67,
-          "status": "Coerente",
+          "justificativa": "O discurso apoia a alteração do art. 37 da Constituição Federal para permitir a acumulação remunerada de um cargo de professor com outro de qualquer natureza.",
           "voto": "Não",
-          "data": "2022-02-09",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.72,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.72,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 87, de 13 de setembro de 1996 (Lei Kandir), para regulamentar a cobrança do Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação (ICMS) nas operações e prestações interestaduais destinadas a consumidor final não contribuinte do imposto.",
-          "afinidade": 0.65,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-20",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar n° 123, de 14 de dezembro de 2006 (Estatuto Nacional da Microempresa e da Empresa de Pequeno Porte), para modificar a composição e o funcionamento do Comitê Gestor do Simples Nacional (CGSN) e ampliar o âmbito de aplicação de seu regime tributário.",
-          "afinidade": 0.7,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-16",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
-        },
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.67,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-16",
-          "discurso": "O SR. MARCOS DO VAL  \r\n(AVANTE - ES. Pela ordem.) – Obrigado, Presidente. \n      Ontem eu também vi a sua fala e concordo que a gente tem que ter um e..."
+          "data": "2022-05-03",
+          "discurso": "O SR. STYVENSON VALENTIM  \r\n(Bloco Parlamentar Democracia/PSDB - RN. Para orientar a bancada.) – Vota \"sim\", Sr. Presidente."
         }
       ]
     },
     {
-      "id": "5732",
-      "nome": "Rodrigo Pacheco",
-      "partido": "PSB",
-      "uf": "MG",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5732.jpg",
-      "score_coerencia": 77.88,
+      "id": "6008",
+      "nome": "Giordano",
+      "partido": "PODEMOS",
+      "uf": "SP",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6008.jpg",
+      "score_coerencia": 74.0,
+      "pares_alinhados": 3,
       "total_pares": 10,
       "contagem_status": {
         "Coerente": 9,
-        "Divergente": 0,
-        "Parcialmente Alinhado": 1,
-        "Não Relacionado": 0
+        "Não Relacionado": 1
       },
       "detalhes": [
         {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.82,
-          "status": "Coerente",
-          "voto": "Presidente (art. 51 RISF)",
-          "data": "2022-05-11",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
-        },
-        {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.82,
-          "status": "Coerente",
-          "voto": "Presidente (art. 51 RISF)",
-          "data": "2022-05-11",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
-        },
-        {
-          "ementa": "Institui a Política Nacional de Atenção Psicossocial nas Comunidades Escolares.",
-          "afinidade": 0.65,
-          "status": "Parcialmente Alinhado",
-          "voto": "Presidente (art. 51 RISF)",
-          "data": "2022-02-15",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 173, de 27 de maio de 2020, que estabelece o Programa Federativo de Enfrentamento ao Coronavírus SARS-CoV-2 (Covid-19).",
+          "ementa": "Acrescenta o inciso LXXIX ao art. 5º da Constituição Federal, para introduzir a inclusão digital no rol de direitos fundamentais.",
           "afinidade": 0.8,
+          "jaccard_pre_filtro": 0.0811,
           "status": "Coerente",
-          "voto": "Presidente (art. 51 RISF)",
-          "data": "2022-02-10",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
-        },
-        {
-          "ementa": "Altera a Lei nº 9.656, de 3 de junho de 1998, para dispor sobre o processo de atualização das coberturas no âmbito da saúde suplementar.",
-          "afinidade": 0.81,
-          "status": "Coerente",
-          "voto": "Presidente (art. 51 RISF)",
-          "data": "2022-02-09",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.78,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.78,
-          "status": "Coerente",
-          "voto": "Presidente (art. 51 RISF)",
-          "data": "2022-02-09",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 87, de 13 de setembro de 1996 (Lei Kandir), para regulamentar a cobrança do Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação (ICMS) nas operações e prestações interestaduais destinadas a consumidor final não contribuinte do imposto.",
-          "afinidade": 0.74,
-          "status": "Coerente",
-          "voto": "Presidente (art. 51 RISF)",
-          "data": "2021-12-20",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar n° 123, de 14 de dezembro de 2006 (Estatuto Nacional da Microempresa e da Empresa de Pequeno Porte), para modificar a composição e o funcionamento do Comitê Gestor do Simples Nacional (CGSN) e ampliar o âmbito de aplicação de seu regime tributário.",
-          "afinidade": 0.79,
-          "status": "Coerente",
+          "justificativa": "O discurso apoia a ementa sobre acumulação remunerada de cargos.",
           "voto": "P-NRV",
-          "data": "2021-12-16",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
+          "data": "2022-06-02",
+          "discurso": "O SR. GIORDANO  \r\n(Bloco Parlamentar Democracia/PODEMOS - SP. Para orientar a bancada.) – Vou orientar pelo Podemos, Presidente. \n      Vou votar \"sim\". Podemos votar \"sim\"."
         },
         {
           "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
           "afinidade": 0.8,
+          "jaccard_pre_filtro": 0.0811,
           "status": "Coerente",
-          "voto": "Presidente (art. 51 RISF)",
-          "data": "2021-12-16",
-          "discurso": "O SR. RODRIGO PACHECO  \r\n(Bloco/PSB - MG) – Emenda Constitucional nº 139, de 2026. \n      Altera o §1º do art. 31 e o art. 75 da Constituição Federal ..."
+          "justificativa": "O discurso apoia a ementa sobre acumulação remunerada de cargos.",
+          "voto": "Sim",
+          "data": "2022-05-03",
+          "discurso": "O SR. GIORDANO  \r\n(Bloco Parlamentar Democracia/PODEMOS - SP. Para orientar a bancada.) – Vou orientar pelo Podemos, Presidente. \n      Vou votar \"sim\". Podemos votar \"sim\"."
         }
       ]
     },
     {
-      "id": "5322",
-      "nome": "Romário",
+      "id": "3806",
+      "nome": "Zequinha Marinho",
+      "partido": "PODEMOS",
+      "uf": "PA",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador3806.jpg",
+      "score_coerencia": 67.0,
+      "pares_alinhados": 2,
+      "total_pares": 10,
+      "contagem_status": {
+        "Coerente": 9,
+        "Parcialmente Alinhado": 1
+      },
+      "detalhes": [
+        {
+          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
+          "afinidade": 0.8,
+          "jaccard_pre_filtro": 0.0882,
+          "status": "Coerente",
+          "justificativa": "Discurso e ementa tratam do mesmo tema de alteração da Constituição Federal",
+          "voto": "Sim",
+          "data": "2022-05-03",
+          "discurso": "O SR. ZEQUINHA MARINHO  \r\n(Bloco Parlamentar Democracia/PODEMOS - PA. Para orientar a bancada.) – O Podemos vota \"sim\"."
+        }
+      ]
+    },
+    {
+      "id": "4694",
+      "nome": "Rogerio Marinho",
       "partido": "PL",
-      "uf": "RJ",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5322.jpg",
-      "score_coerencia": 69.56,
+      "uf": "RN",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4694.jpg",
+      "score_coerencia": 64.0,
+      "pares_alinhados": 4,
       "total_pares": 10,
       "contagem_status": {
-        "Coerente": 9,
-        "Divergente": 0,
-        "Parcialmente Alinhado": 1,
-        "Não Relacionado": 0
+        "Coerente": 5,
+        "Parcialmente Alinhado": 2,
+        "Divergente": 3
       },
       "detalhes": [
         {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.74,
+          "ementa": "Altera o art. 5º da Constituição Federal, para prever como mandado de criminalização a posse e o porte de entorpecentes e drogas afins sem autorização ou em desacordo com determinação legal ou regulamentar.",
+          "afinidade": 0.8,
+          "jaccard_pre_filtro": 0.0707,
           "status": "Coerente",
+          "justificativa": "O discurso e a ementa tratam do mesmo tema de alteração da Constituição Federal.",
+          "voto": "Sim",
+          "data": "2024-04-16",
+          "discurso": "O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN. Pela ordem.) – O PLV, com as alterações feitas pelo Relator – não é, Sr. Presidente? –, que seriam aquelas que a gente acabou de elencar. ( Pausa. ) \n      Presidente, eu consulto a Mesa, em relação a essa segunda alteração que o Relator faria, que acordou conosco, se é possível, num acordo de procedimentos...  \n      A SRA. ELIZIANE GAMA  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MA) – Presidente, V. Exa. permite que eu fale enquanto fazem essas... \n      O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN) – ... que isso seja superado sem necessidade da apresentação do destaque, o.k.?"
+        },
+        {
+          "ementa": "Altera o art. 5º da Constituição Federal, para prever como mandado de criminalização a posse e o porte de entorpecentes e drogas afins sem autorização ou em desacordo com determinação legal ou regulamentar.",
+          "afinidade": 0.8,
+          "jaccard_pre_filtro": 0.0707,
+          "status": "Coerente",
+          "justificativa": "O discurso e a ementa tratam do mesmo tema de alteração da Constituição Federal.",
+          "voto": "Sim",
+          "data": "2024-04-16",
+          "discurso": "O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN. Pela ordem.) – O PLV, com as alterações feitas pelo Relator – não é, Sr. Presidente? –, que seriam aquelas que a gente acabou de elencar. ( Pausa. ) \n      Presidente, eu consulto a Mesa, em relação a essa segunda alteração que o Relator faria, que acordou conosco, se é possível, num acordo de procedimentos...  \n      A SRA. ELIZIANE GAMA  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MA) – Presidente, V. Exa. permite que eu fale enquanto fazem essas... \n      O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN) – ... que isso seja superado sem necessidade da apresentação do destaque, o.k.?"
+        },
+        {
+          "ementa": "Altera o inciso XXVIII do art. 22 e acrescenta dispositivos aos arts. 23 e 24 da Constituição Federal, para dispor sobre o regime de competência para legislar sobre defesa e segurança cibernética e fixar a competência comum dos entes federados para zelar pela segurança cibernética dos serviços públicos.",
+          "afinidade": 0.8,
+          "jaccard_pre_filtro": 0.0662,
+          "status": "Coerente",
+          "justificativa": "O discurso e a ementa tratam do mesmo tema de alteração da Constituição Federal.",
           "voto": "P-NRV",
-          "data": "2022-05-11",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
+          "data": "2024-12-17",
+          "discurso": "O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN. Pela ordem.) – Primeiro, eu quero dizer a V. Exa. que quem ganhou hoje foi a sociedade brasileira, os pescadores artesanais, aqueles que realmente precisam do seguro-defeso. Não tenho dúvida de que a Câmara dos Deputados, inclusive orientada por nós e pelo Governo, vai respaldar o texto que sai hoje do Senado da República. Nós fazemos o nosso papel como Casa revisora.  \n      Quero aqui agradecer muito a mediação do Líder Jaques Wagner, do Líder Randolfe Rodrigues, a sensibilidade que tiveram, de entender que a nossa fala, a nossa irresignação se dava em função de situações anteriores, que nos deixavam numa situação de extrema vulnerabilidade.  \n      Agradeço ao Relator a sua sensibilidade, aos Líderes que aqui estiveram conosco, a Senadora Tereza, o Senador Seif, o Senador Girão, o Senador Jaime Bagattoli, aqueles que ficaram aqui até esta hora. Quero dizer a V. Exas. que este é um dia que nos deixa muito felizes em relação ao nosso papel como Senador da República. Então agradeço a V. Exa. pela mediação e aos nossos pares aqui do Senado da República.  \n      Não tenho dúvida de que hoje nós cumprimos o nosso dever para com o país."
         },
         {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.74,
+          "ementa": "Altera o inciso XXVIII do art. 22 e acrescenta dispositivos aos arts. 23 e 24 da Constituição Federal, para dispor sobre o regime de competência para legislar sobre defesa e segurança cibernética e fixar a competência comum dos entes federados para zelar pela segurança cibernética dos serviços públicos.",
+          "afinidade": 0.8,
+          "jaccard_pre_filtro": 0.0662,
           "status": "Coerente",
+          "justificativa": "O discurso e a ementa tratam do mesmo tema de alteração da Constituição Federal.",
           "voto": "P-NRV",
-          "data": "2022-05-11",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
-        },
-        {
-          "ementa": "Institui a Política Nacional de Atenção Psicossocial nas Comunidades Escolares.",
-          "afinidade": 0.59,
-          "status": "Parcialmente Alinhado",
-          "voto": "Sim",
-          "data": "2022-02-15",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 173, de 27 de maio de 2020, que estabelece o Programa Federativo de Enfrentamento ao Coronavírus SARS-CoV-2 (Covid-19).",
-          "afinidade": 0.71,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-10",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
-        },
-        {
-          "ementa": "Altera a Lei nº 9.656, de 3 de junho de 1998, para dispor sobre o processo de atualização das coberturas no âmbito da saúde suplementar.",
-          "afinidade": 0.69,
-          "status": "Coerente",
-          "voto": "Não",
-          "data": "2022-02-09",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.7,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.7,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 87, de 13 de setembro de 1996 (Lei Kandir), para regulamentar a cobrança do Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação (ICMS) nas operações e prestações interestaduais destinadas a consumidor final não contribuinte do imposto.",
-          "afinidade": 0.68,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-20",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar n° 123, de 14 de dezembro de 2006 (Estatuto Nacional da Microempresa e da Empresa de Pequeno Porte), para modificar a composição e o funcionamento do Comitê Gestor do Simples Nacional (CGSN) e ampliar o âmbito de aplicação de seu regime tributário.",
-          "afinidade": 0.71,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-16",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
-        },
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.69,
-          "status": "Coerente",
-          "voto": "P-NRV",
-          "data": "2021-12-16",
-          "discurso": "O SR. ROMÁRIO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Para discursar.  Por vídeo .) – Bom dia a todos. \n      Quero aqui agradecer ao meu amigo e irm..."
+          "data": "2024-12-17",
+          "discurso": "O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN. Pela ordem.) – Primeiro, eu quero dizer a V. Exa. que quem ganhou hoje foi a sociedade brasileira, os pescadores artesanais, aqueles que realmente precisam do seguro-defeso. Não tenho dúvida de que a Câmara dos Deputados, inclusive orientada por nós e pelo Governo, vai respaldar o texto que sai hoje do Senado da República. Nós fazemos o nosso papel como Casa revisora.  \n      Quero aqui agradecer muito a mediação do Líder Jaques Wagner, do Líder Randolfe Rodrigues, a sensibilidade que tiveram, de entender que a nossa fala, a nossa irresignação se dava em função de situações anteriores, que nos deixavam numa situação de extrema vulnerabilidade.  \n      Agradeço ao Relator a sua sensibilidade, aos Líderes que aqui estiveram conosco, a Senadora Tereza, o Senador Seif, o Senador Girão, o Senador Jaime Bagattoli, aqueles que ficaram aqui até esta hora. Quero dizer a V. Exas. que este é um dia que nos deixa muito felizes em relação ao nosso papel como Senador da República. Então agradeço a V. Exa. pela mediação e aos nossos pares aqui do Senado da República.  \n      Não tenho dúvida de que hoje nós cumprimos o nosso dever para com o país."
         }
       ]
     },
     {
-      "id": "5012",
-      "nome": "Randolfe Rodrigues",
-      "partido": "PT",
-      "uf": "AP",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5012.jpg",
-      "score_coerencia": 68.35,
+      "id": "5917",
+      "nome": "Fernando Dueire",
+      "partido": "PSD",
+      "uf": "PE",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5917.jpg",
+      "score_coerencia": 59.0,
+      "pares_alinhados": 1,
       "total_pares": 10,
       "contagem_status": {
-        "Coerente": 9,
-        "Divergente": 0,
-        "Parcialmente Alinhado": 1,
-        "Não Relacionado": 0
+        "Coerente": 2,
+        "Parcialmente Alinhado": 6,
+        "Não Relacionado": 2
       },
       "detalhes": [
         {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.74,
-          "status": "Coerente",
-          "voto": "P-NRV",
-          "data": "2022-05-11",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
-        },
-        {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.74,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-05-11",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
-        },
-        {
-          "ementa": "Institui a Política Nacional de Atenção Psicossocial nas Comunidades Escolares.",
-          "afinidade": 0.58,
+          "ementa": "Altera o art. 24 da Constituição Federal, para incluir no rol das competências da União, dos Estados e do Distrito Federal legislar concorrentemente sobre proteção ao idoso.",
+          "afinidade": 0.6,
+          "jaccard_pre_filtro": 0.0541,
           "status": "Parcialmente Alinhado",
-          "voto": "Sim",
-          "data": "2022-02-15",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 173, de 27 de maio de 2020, que estabelece o Programa Federativo de Enfrentamento ao Coronavírus SARS-CoV-2 (Covid-19).",
-          "afinidade": 0.7,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-10",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
-        },
-        {
-          "ementa": "Altera a Lei nº 9.656, de 3 de junho de 1998, para dispor sobre o processo de atualização das coberturas no âmbito da saúde suplementar.",
-          "afinidade": 0.66,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.68,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.68,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 87, de 13 de setembro de 1996 (Lei Kandir), para regulamentar a cobrança do Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação (ICMS) nas operações e prestações interestaduais destinadas a consumidor final não contribuinte do imposto.",
-          "afinidade": 0.67,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-20",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar n° 123, de 14 de dezembro de 2006 (Estatuto Nacional da Microempresa e da Empresa de Pequeno Porte), para modificar a composição e o funcionamento do Comitê Gestor do Simples Nacional (CGSN) e ampliar o âmbito de aplicação de seu regime tributário.",
-          "afinidade": 0.71,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-16",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
-        },
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.67,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-16",
-          "discurso": "O SR. RANDOLFE RODRIGUES  \r\n(Bloco Parlamentar Pelo Brasil/PT - AP. Pela ordem.) – Obviamente, tal qual a Mesa fez, quero registrar e cumprimentar a p..."
+          "justificativa": "Discurso e ementa tratam de temas relacionados à educação e à saúde, mas não são diretamente relacionados.",
+          "voto": "AP",
+          "data": "2025-05-20",
+          "discurso": "O SR. FERNANDO DUEIRE  \r\n(Bloco Parlamentar Democracia/MDB - PE. Para discutir.) – Sr. Presidente, Srs. Senadores, hoje é um dia simbólico. A abertura dos trabalhos legislativos aqui, nesta Casa, neste início, traz como que um sentido da preocupação da Casa da Federação brasileira com a sua população. Esta medida provisória tem tudo a ver com a ponta, com aquilo que acontece nas mais diferentes regiões do país, exatamente com aqueles que precisam. Isso tem a ver com inclusão. Isso tem a ver com o atendimento à necessidade básica dos brasileiros.  \n      Eu quero cumprimentar V. Exa. pela diligência, pelo cuidado de não permitir que esta medida provisória perdesse a validade, trazendo hoje a esta Casa, no seu primeiro dia de trabalho, esta votação da Medida Provisória 1.313, que, com certeza absoluta, com o voto simbólico de todos que fazem esta Casa, com um quórum alto, inclusive, será aprovada. \n      E pronuncio o meu voto, de maneira clara e objetiva, junto aos meus colegas.  \n      Nós vamos aprová-la com distinção e louvor, porque ela vai ao encontro da necessidade de muitos irmãos nossos que precisam deste atendimento.  \n      Muito obrigado, Presidente."
         }
       ]
     },
     {
-      "id": "5953",
-      "nome": "Fabiano Contarato",
-      "partido": "PT",
-      "uf": "ES",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5953.jpg",
-      "score_coerencia": 72.1,
+      "id": "6340",
+      "nome": "Jaime Bagattoli",
+      "partido": "PL",
+      "uf": "RO",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6340.jpg",
+      "score_coerencia": 56.0,
+      "pares_alinhados": 5,
       "total_pares": 10,
       "contagem_status": {
-        "Coerente": 9,
-        "Divergente": 0,
-        "Parcialmente Alinhado": 1,
-        "Não Relacionado": 0
+        "Coerente": 4,
+        "Parcialmente Alinhado": 2,
+        "Divergente": 3,
+        "Não Relacionado": 1
       },
       "detalhes": [
         {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.77,
+          "ementa": "Dispõe sobre a transposição e a transferência de saldos financeiros de exercícios passados resultantes de repasses do Fundo Nacional de Desenvolvimento da Educação (FNDE) para os Estados, o Distrito Federal e os Municípios.",
+          "afinidade": 0.9,
+          "jaccard_pre_filtro": 0.0714,
           "status": "Coerente",
-          "voto": "Não",
-          "data": "2022-05-11",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
-        },
-        {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.77,
-          "status": "Coerente",
-          "voto": "Não",
-          "data": "2022-05-11",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
-        },
-        {
-          "ementa": "Institui a Política Nacional de Atenção Psicossocial nas Comunidades Escolares.",
-          "afinidade": 0.63,
-          "status": "Parcialmente Alinhado",
+          "justificativa": "O discurso apoia o tema macro da ementa sobre a alteração do art. 155 da Constituição Federal.",
           "voto": "Sim",
-          "data": "2022-02-15",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
+          "data": "2024-11-27",
+          "discurso": "O SR. JAIME BAGATTOLI  \r\n(Bloco Parlamentar Vanguarda/PL - RO. Para orientar a bancada.) – O PL vota \"sim\", Sr. Presidente."
         },
         {
-          "ementa": "Altera a Lei Complementar nº 173, de 27 de maio de 2020, que estabelece o Programa Federativo de Enfrentamento ao Coronavírus SARS-CoV-2 (Covid-19).",
-          "afinidade": 0.74,
+          "ementa": "Dá nova redação ao § 1º do art. 1º da Lei Complementar nº 94, de 19 de fevereiro de 1998, para incluir o Município de Uruana de Minas na Região Integrada de Desenvolvimento do Distrito Federal e Entorno – RIDE.",
+          "afinidade": 0.9,
+          "jaccard_pre_filtro": 0.0698,
           "status": "Coerente",
+          "justificativa": "O discurso apoia o tema macro da ementa sobre a alteração do art. 155 da Constituição Federal.",
           "voto": "Sim",
-          "data": "2022-02-10",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
+          "data": "2023-03-28",
+          "discurso": "O SR. JAIME BAGATTOLI  \r\n(Bloco Parlamentar Vanguarda/PL - RO. Para discutir.) – Eu quero aqui parabenizar a nossa Senadora Tereza Cristina. Ninguém mais do que você, Senadora, para relatar e saber a suma importância das nossas usinas de açúcar e etanol no Brasil. Você, como Ministra, sabe a importância que têm as nossas usinas de açúcar na geração de emprego e renda neste país, direta e indiretamente, reforçando a nossa economia e a importância que nós temos no PIB brasileiro. Parabéns pela sua relatoria. \n      Digo para vocês que estão nos acompanhando que chegamos a esta situação de líder hoje na produção de açúcar, porque nos ajudou demais, no final da década de 70, início da década de 80, a constituição do Proálcool no Brasil, quando as nossas usinas tiveram o privilégio de ter as duas produções ao mesmo tempo: momento fazendo açúcar e momento produzindo etanol, o álcool hidratado e o álcool anidro. \n      Parabéns, Presidenta."
         },
         {
-          "ementa": "Altera a Lei nº 9.656, de 3 de junho de 1998, para dispor sobre o processo de atualização das coberturas no âmbito da saúde suplementar.",
-          "afinidade": 0.71,
+          "ementa": "Altera o art. 155 da Constituição Federal para conceder imunidade do Imposto sobre a Propriedade de Veículos Automotores a veículos terrestres de passageiros com vinte anos ou mais de fabricação.",
+          "afinidade": 0.8,
+          "jaccard_pre_filtro": 0.0732,
           "status": "Coerente",
-          "voto": "Não",
-          "data": "2022-02-09",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.73,
-          "status": "Coerente",
+          "justificativa": "O discurso apoia o tema macro da ementa sobre a alteração do art. 5º da Constituição Federal.",
           "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
+          "data": "2024-03-13",
+          "discurso": "O SR. JAIME BAGATTOLI  \r\n(Bloco Parlamentar Vanguarda/PL - RO. Para orientar a bancada.) – O PL vota \"sim\", Sr. Presidente."
         },
         {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.73,
+          "ementa": "Altera o art. 155 da Constituição Federal para conceder imunidade do Imposto sobre a Propriedade de Veículos Automotores a veículos terrestres de passageiros com vinte anos ou mais de fabricação.",
+          "afinidade": 0.8,
+          "jaccard_pre_filtro": 0.0732,
           "status": "Coerente",
+          "justificativa": "O discurso apoia o tema macro da ementa sobre a alteração do art. 5º da Constituição Federal.",
           "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 87, de 13 de setembro de 1996 (Lei Kandir), para regulamentar a cobrança do Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação (ICMS) nas operações e prestações interestaduais destinadas a consumidor final não contribuinte do imposto.",
-          "afinidade": 0.71,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-20",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar n° 123, de 14 de dezembro de 2006 (Estatuto Nacional da Microempresa e da Empresa de Pequeno Porte), para modificar a composição e o funcionamento do Comitê Gestor do Simples Nacional (CGSN) e ampliar o âmbito de aplicação de seu regime tributário.",
-          "afinidade": 0.74,
-          "status": "Coerente",
-          "voto": "P-NRV",
-          "data": "2021-12-16",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
-        },
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.69,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-16",
-          "discurso": "O SR. FABIANO CONTARATO  \r\n(Bloco Parlamentar Pelo Brasil/PT - ES. Pela ordem.) – Sr. Presidente, com bastante alegria, estou vindo do Palácio do Plan..."
+          "data": "2024-03-13",
+          "discurso": "O SR. JAIME BAGATTOLI  \r\n(Bloco Parlamentar Vanguarda/PL - RO. Para orientar a bancada.) – O PL vota \"sim\", Sr. Presidente."
         }
       ]
     },
     {
-      "id": "5008",
-      "nome": "Humberto Costa",
+      "id": "6338",
+      "nome": "Teresa Leitão",
       "partido": "PT",
       "uf": "PE",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5008.jpg",
-      "score_coerencia": 65.53,
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6338.jpg",
+      "score_coerencia": 53.0,
+      "pares_alinhados": 3,
       "total_pares": 10,
       "contagem_status": {
-        "Coerente": 6,
-        "Divergente": 0,
-        "Parcialmente Alinhado": 4,
-        "Não Relacionado": 0
+        "Coerente": 4,
+        "Parcialmente Alinhado": 2,
+        "Divergente": 1,
+        "Não Relacionado": 3
       },
       "detalhes": [
         {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
+          "ementa": "Altera a Lei Complementar nº 200, de 30 de agosto de 2023, para excluir do cômputo dos limites de despesas primárias as despesas temporárias com educação pública e saúde de que trata o art. 6º da Lei nº 15.164, de 14 de julho de 2025, e as despesas financiadas com recursos oriundos de empréstimos internacionais e suas respectivas contrapartidas, bem como para excluir as referidas despesas com educação pública e saúde das metas fiscais; e dá outras providências.",
           "afinidade": 0.7,
+          "jaccard_pre_filtro": 0.0813,
           "status": "Coerente",
-          "voto": "AP",
-          "data": "2022-05-11",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
-        },
-        {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.7,
-          "status": "Coerente",
-          "voto": "AP",
-          "data": "2022-05-11",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
-        },
-        {
-          "ementa": "Institui a Política Nacional de Atenção Psicossocial nas Comunidades Escolares.",
-          "afinidade": 0.57,
-          "status": "Parcialmente Alinhado",
+          "justificativa": "Discurso e ementa tratam de educação pública",
           "voto": "Sim",
-          "data": "2022-02-15",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
+          "data": "2025-12-03",
+          "discurso": "A SRA. TERESA LEITÃO  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Como Relatora.) – É rapidinho. Tenho certeza de que o relatório, de que o projeto de lei da universidade indígena está em muito boas mãos pelo seu conhecimento, por onde V. Exa. mora, o que conhece daquela área amazônica, e isso, certamente, vai trazer uma grande importância para o relatório.  \n      Observando um dos pontos que foi relevante para mim na sua fala, o de que todos precisam se preocupar com este plano, todos, não apenas nós que somos legisladores, o que nós temos é que convencer a sociedade de que a educação é importante.  \n      Hoje de manhã, nós estivemos acompanhando toda a votação, a Campanha Nacional pelo Direito à Educação, o movimento Todos pela Educação, a Confederação Nacional dos Trabalhadores em Educação, que é a maior confederação de trabalhadores de redes públicas, a ANPG (Associação Nacional de Pós-Graduandos), vários Vereadores, e hoje aqui estamos também com a presença da Bianca Borges, da União Nacional dos Estudantes. Todos esses setores foram muito mobilizados durante a tramitação e a aprovação do plano.  \n      Muito obrigada."
         },
         {
-          "ementa": "Altera a Lei Complementar nº 173, de 27 de maio de 2020, que estabelece o Programa Federativo de Enfrentamento ao Coronavírus SARS-CoV-2 (Covid-19).",
-          "afinidade": 0.66,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-10",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
-        },
-        {
-          "ementa": "Altera a Lei nº 9.656, de 3 de junho de 1998, para dispor sobre o processo de atualização das coberturas no âmbito da saúde suplementar.",
-          "afinidade": 0.63,
-          "status": "Parcialmente Alinhado",
-          "voto": "Não",
-          "data": "2022-02-09",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.64,
-          "status": "Parcialmente Alinhado",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.64,
-          "status": "Parcialmente Alinhado",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 87, de 13 de setembro de 1996 (Lei Kandir), para regulamentar a cobrança do Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação (ICMS) nas operações e prestações interestaduais destinadas a consumidor final não contribuinte do imposto.",
-          "afinidade": 0.66,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-20",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar n° 123, de 14 de dezembro de 2006 (Estatuto Nacional da Microempresa e da Empresa de Pequeno Porte), para modificar a composição e o funcionamento do Comitê Gestor do Simples Nacional (CGSN) e ampliar o âmbito de aplicação de seu regime tributário.",
-          "afinidade": 0.69,
-          "status": "Coerente",
-          "voto": "AP",
-          "data": "2021-12-16",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
-        },
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.66,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-16",
-          "discurso": "O SR. HUMBERTO COSTA  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Para proferir parecer.  Por videoconferência .) – Sr. Presidente, Sras. Senadoras, Srs..."
-        }
-      ]
-    },
-    {
-      "id": "5894",
-      "nome": "Flávio Bolsonaro",
-      "partido": "PL",
-      "uf": "RJ",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5894.jpg",
-      "score_coerencia": 67.7,
-      "total_pares": 10,
-      "contagem_status": {
-        "Coerente": 9,
-        "Divergente": 0,
-        "Parcialmente Alinhado": 1,
-        "Não Relacionado": 0
-      },
-      "detalhes": [
-        {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.72,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-05-11",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        },
-        {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.72,
-          "status": "Coerente",
-          "voto": "Não",
-          "data": "2022-05-11",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        },
-        {
-          "ementa": "Institui a Política Nacional de Atenção Psicossocial nas Comunidades Escolares.",
-          "afinidade": 0.57,
-          "status": "Parcialmente Alinhado",
-          "voto": "Sim",
-          "data": "2022-02-15",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 173, de 27 de maio de 2020, que estabelece o Programa Federativo de Enfrentamento ao Coronavírus SARS-CoV-2 (Covid-19).",
-          "afinidade": 0.7,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-10",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        },
-        {
-          "ementa": "Altera a Lei nº 9.656, de 3 de junho de 1998, para dispor sobre o processo de atualização das coberturas no âmbito da saúde suplementar.",
-          "afinidade": 0.67,
-          "status": "Coerente",
-          "voto": "Não",
-          "data": "2022-02-09",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.68,
-          "status": "Coerente",
-          "voto": "Não",
-          "data": "2022-02-09",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        },
-        {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.68,
-          "status": "Coerente",
-          "voto": "Não",
-          "data": "2022-02-09",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar nº 87, de 13 de setembro de 1996 (Lei Kandir), para regulamentar a cobrança do Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação (ICMS) nas operações e prestações interestaduais destinadas a consumidor final não contribuinte do imposto.",
-          "afinidade": 0.67,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-20",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar n° 123, de 14 de dezembro de 2006 (Estatuto Nacional da Microempresa e da Empresa de Pequeno Porte), para modificar a composição e o funcionamento do Comitê Gestor do Simples Nacional (CGSN) e ampliar o âmbito de aplicação de seu regime tributário.",
-          "afinidade": 0.7,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-16",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        },
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.67,
-          "status": "Coerente",
-          "voto": "Não",
-          "data": "2021-12-16",
-          "discurso": "O SR. FLÁVIO BOLSONARO  \r\n(Bloco Parlamentar Vanguarda/PL - RJ. Pela ordem.) – Sr. Presidente Davi Alcolumbre, eu me lembro da fala de V. Exa., se não..."
-        }
-      ]
-    },
-    {
-      "id": "5979",
-      "nome": "Leila Barros",
-      "partido": "PDT",
-      "uf": "DF",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5979.jpg",
-      "score_coerencia": 68.42,
-      "total_pares": 10,
-      "contagem_status": {
-        "Coerente": 9,
-        "Divergente": 0,
-        "Parcialmente Alinhado": 1,
-        "Não Relacionado": 0
-      },
-      "detalhes": [
-        {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.74,
-          "status": "Coerente",
-          "voto": "AP",
-          "data": "2022-05-11",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
-        },
-        {
-          "ementa": "Altera as Leis nºs 8.906, de 4 de julho de 1994 (Estatuto da Advocacia), e 13.105, de 16 de março de 2015 (Código de Processo Civil), e o Decreto-Lei nº 3.689, de 3 de outubro de 1941 (Código de Processo Penal), para incluir disposições sobre a atividade privativa de advogado, a fiscalização, a competência, as prerrogativas, as sociedades de advogados, o advogado associado, os honorários advocatícios, os limites de impedimentos ao exercício da advocacia e a suspensão de prazo no processo penal.",
-          "afinidade": 0.74,
-          "status": "Coerente",
-          "voto": "AP",
-          "data": "2022-05-11",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
-        },
-        {
-          "ementa": "Institui a Política Nacional de Atenção Psicossocial nas Comunidades Escolares.",
+          "ementa": "Modifica o art. 144 da Constituição Federal, a fim de incluir as guardas municipais e os agentes de trânsito entre os órgãos que compõem a segurança pública.",
           "afinidade": 0.6,
+          "jaccard_pre_filtro": 0.0704,
           "status": "Parcialmente Alinhado",
-          "voto": "Sim",
-          "data": "2022-02-15",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
-        },
+          "justificativa": "Discurso e ementa tratam de participação popular e educação",
+          "voto": "Não",
+          "data": "2025-05-27",
+          "discurso": "A SRA. TERESA LEITÃO  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Como Relatora.) – Muito obrigada, Senador.  \n      Nós temos também essa mesma convicção. Temos agora um instrumento. Pode não ser o melhor, mas foi o possível e avança. Pode ter certeza de que ele avança em relação ao plano anterior e avança nos requerimentos, nos desafios, em tudo que nós temos a enfrentar adiante."
+        }
+      ]
+    },
+    {
+      "id": "4639",
+      "nome": "Beto Faro",
+      "partido": "PT",
+      "uf": "PA",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4639.jpg",
+      "score_coerencia": 41.0,
+      "pares_alinhados": 1,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 5,
+        "Parcialmente Alinhado": 4,
+        "Coerente": 1
+      },
+      "detalhes": [
         {
-          "ementa": "Altera a Lei Complementar nº 173, de 27 de maio de 2020, que estabelece o Programa Federativo de Enfrentamento ao Coronavírus SARS-CoV-2 (Covid-19).",
+          "ementa": "Fixa o número de Deputados Federais; estabelece normas para a distribuição das vagas da Câmara dos Deputados entre os Estados e o Distrito Federal; e revoga a Lei Complementar nº 78, de 30 de dezembro de 1993.",
+          "afinidade": 0.6,
+          "jaccard_pre_filtro": 0.0541,
+          "status": "Parcialmente Alinhado",
+          "justificativa": "O discurso menciona a incorporação de destaques, mas não aborda diretamente o tema da ementa.",
+          "voto": "Não",
+          "data": "2025-06-25",
+          "discurso": "O SR. BETO FARO  \r\n(Bloco Parlamentar Pelo Brasil/PT - PA. Como Relator.) – Sr. Presidente e demais membros da Casa, primeiro, quero agradecer pela indicação para ser Relator de uma matéria tão importante para o país, porque são cerca de 1,5 milhão de pescadores artesanais. Suas famílias estão muito ansiosas pelo resultado desta medida provisória, para garantir efetivamente que eles tenham acesso a esse benefício. \n      Então, a Liderança do nosso partido, do nosso Governo, me indicou, junto com o nosso Presidente, para ser Relator dessa matéria, uma matéria muito discutida. \n      Aqui, eu estava muito convicto do relatório, das medidas, mas a mediação possível para aprovar foi essa que nós estabelecemos aqui. Está certo? Então, também não dá para poder achar que teria que ser 100%. A mediação possível do Senado foi esta, e eu quero parabenizar o Senado por aprovar esta medida provisória que estabelece as novas regras para o pagamento do seguro-defeso. \n      E que a gente pague o mais rápido possível, até porque, em muitas regiões do país, o período do defeso já foi ultrapassado. \n      Então, obrigado. Agradeço mais uma vez."
+        }
+      ]
+    },
+    {
+      "id": "5793",
+      "nome": "Dr. Hiran",
+      "partido": "PP",
+      "uf": "RR",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5793.jpg",
+      "score_coerencia": 33.0,
+      "pares_alinhados": 1,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 5,
+        "Parcialmente Alinhado": 2,
+        "Divergente": 3
+      },
+      "detalhes": [
+        {
+          "ementa": "Fixa o número de Deputados Federais; estabelece normas para a distribuição das vagas da Câmara dos Deputados entre os Estados e o Distrito Federal; e revoga a Lei Complementar nº 78, de 30 de dezembro de 1993.",
+          "afinidade": 0.6,
+          "jaccard_pre_filtro": 0.0438,
+          "status": "Parcialmente Alinhado",
+          "justificativa": "O discurso aborda um tema relacionado à ementa, que é sobre alteração da Constituição Federal.",
+          "voto": "Não",
+          "data": "2025-06-25",
+          "discurso": "O SR. DR. HIRAN  \r\n(Bloco Parlamentar Aliança/PP - RR. Para discutir.) – Presidente, eu quero fazer uma referência à aprovação desse PL 5.874, que reestrutura a carreira de mais de 270 mil servidores. E quero aqui, Presidente, também fazer uma referência à Ministra Esther Dweck, que está aqui presente. Eu estava numa reunião no meu gabinete, mas, quando vi a senhora aqui, eu não podia deixar de fazer uma referência elogiosa ao seu trabalho, ao trabalho do ministério e, principalmente, da comissão que faz a análise dos documentos oriundos dos ex-servidores dos ex-Territórios do Amapá, de Roraima e de Rondônia. Agradeço a V. Exa. e à comissão, que tem sido muito diligente na análise desses documentos para restaurar e para reconhecer aquela expectativa de direito daquelas pessoas que construíram os nossos estados.  \n      Quero aqui, também, agradecer ao Presidente Davi e ao Presidente, querido amigo, Hugo Motta pela sensibilidade de encaminhar a PEC 47, que também é um sonho dos servidores do Legislativo, do Executivo, das empresas públicas dos nossos ex-territórios. Os dois Presidentes das Casas, num evento na semana passada, anunciaram para os nossos estados que estão encaminhando aquela PEC para a CCJ, para que, logo em seguida, nós possamos criar uma Comissão Especial. E eu pedi para o Presidente Hugo Motta para que, ao nomear a Comissão Especial, nomeasse com um número de 24 membros. Por quê? Porque as nossas bancadas são muito pequenas e isso facilita a composição dessa Comissão Especial para que possamos tramitar essa matéria, como é do compromisso do Presidente Davi e do Presidente Hugo de podermos votar essa matéria ainda neste ano. E, como vocês dois são homens de palavra, eu estou aqui para ajudar para que essa PEC, tão importante para reconhecer o trabalho desses servidores que já estão com 60, 70 anos... Muitos não estão mais aqui, mas que nós possamos, antes tarde do que nunca, reconhecer o trabalho que fizeram para construir aqueles rincões do nosso país.  \n      Muito obrigado, Ministra Esther. E quero aqui pedir a V. Exa. que a gente possa voltar a fazer as publicações dos novos servidores da União, porque houve um... A senhora já me prometeu, inclusive, que vai haver um esforço concentrado dentro do mês de março para que possamos satisfazer a ansiedade daqueles que estão esperando as publicações lá nas pontas.  \n      Um grande abraço. Parabéns à senhora e parabéns a todo o ministério.  \n      Presidente, muito obrigado. Presidente Hugo, um grande abraço. Seja muito bem-vindo."
+        }
+      ]
+    },
+    {
+      "id": "5736",
+      "nome": "Tereza Cristina",
+      "partido": "PP",
+      "uf": "MS",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5736.jpg",
+      "score_coerencia": 21.0,
+      "pares_alinhados": 2,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 7,
+        "Coerente": 3
+      },
+      "detalhes": [
+        {
+          "ementa": "Modifica o art. 144 da Constituição Federal, a fim de incluir as guardas municipais e os agentes de trânsito entre os órgãos que compõem a segurança pública.",
           "afinidade": 0.7,
+          "jaccard_pre_filtro": 0.0926,
           "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-10",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
+          "justificativa": "Discurso apoia a ementa sobre educação",
+          "voto": "MIS",
+          "data": "2025-05-27",
+          "discurso": "A SRA. TEREZA CRISTINA  \r\n(Bloco/PP - MS) – Decreto Legislativo n° 14, de 2026, que aprova o texto do Acordo Provisório de Comércio entre o Mercado Comum do Sul (Mercosul) e seus Estados-Partes, de um lado, e a União Europeia, de outro, assinado em Assunção, Paraguai, em 17 de janeiro de 2026. \n O Congresso Nacional decreta: \n Art. 1º Fica aprovado o texto do Acordo Provisório de Comércio entre o Mercado Comum do Sul (Mercosul) e seus Estados-Partes, de um lado, e a União Europeia, do outro, assinado em Assunção, Paraguai, em 17 de janeiro de 2026. \n Parágrafo único. Nos termos do inciso I do  caput  do art. 49 da Constituição Federal, ficam sujeitos à aprovação do Congresso Nacional quaisquer atos que possam resultar em denúncia ou em revisão do referido Acordo, bem como quaisquer ajustes complementares que acarretem encargos ou compromissos gravosos ao patrimônio nacional. \n Art. 2º Este Decreto Legislativo entra em vigor na data de sua publicação. \n Brasília, 17 de março de 2026."
         },
         {
-          "ementa": "Altera a Lei nº 9.656, de 3 de junho de 1998, para dispor sobre o processo de atualização das coberturas no âmbito da saúde suplementar.",
-          "afinidade": 0.68,
+          "ementa": "Altera o art. 205 da Constituição Federal, para definir a educação como vetor do progresso do País.",
+          "afinidade": 0.7,
+          "jaccard_pre_filtro": 0.0909,
           "status": "Coerente",
+          "justificativa": "Discurso apoia a ementa sobre educação",
           "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
+          "data": "2025-07-09",
+          "discurso": "A SRA. TEREZA CRISTINA  \r\n(Bloco Parlamentar Aliança/PP - MS. Para orientar a bancada.) – O PP orienta o voto \"sim\", Sr. Presidente."
         },
         {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.67,
-          "status": "Coerente",
+          "ementa": "Dispõe sobre normas gerais aplicáveis ao desmembramento de Municípios, nos termos do § 4º do art. 18 da Constituição Federal.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0762,
+          "status": "Não Relacionado",
+          "justificativa": "Discurso e ementa tratam de temas completamente diferentes",
           "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
+          "data": "2026-03-25",
+          "discurso": "A SRA. TEREZA CRISTINA  \r\n(Bloco/PP - MS) – Decreto Legislativo n° 14, de 2026, que aprova o texto do Acordo Provisório de Comércio entre o Mercado Comum do Sul (Mercosul) e seus Estados-Partes, de um lado, e a União Europeia, de outro, assinado em Assunção, Paraguai, em 17 de janeiro de 2026. \n O Congresso Nacional decreta: \n Art. 1º Fica aprovado o texto do Acordo Provisório de Comércio entre o Mercado Comum do Sul (Mercosul) e seus Estados-Partes, de um lado, e a União Europeia, do outro, assinado em Assunção, Paraguai, em 17 de janeiro de 2026. \n Parágrafo único. Nos termos do inciso I do  caput  do art. 49 da Constituição Federal, ficam sujeitos à aprovação do Congresso Nacional quaisquer atos que possam resultar em denúncia ou em revisão do referido Acordo, bem como quaisquer ajustes complementares que acarretem encargos ou compromissos gravosos ao patrimônio nacional. \n Art. 2º Este Decreto Legislativo entra em vigor na data de sua publicação. \n Brasília, 17 de março de 2026."
+        }
+      ]
+    },
+    {
+      "id": "4642",
+      "nome": "Efraim Filho",
+      "partido": "PL",
+      "uf": "PB",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4642.jpg",
+      "score_coerencia": 12.0,
+      "pares_alinhados": 2,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 8,
+        "Parcialmente Alinhado": 2
+      },
+      "detalhes": [
+        {
+          "ementa": "Dispõe sobre a transposição e a transferência de saldos financeiros de exercícios passados resultantes de repasses do Fundo Nacional de Desenvolvimento da Educação (FNDE) para os Estados, o Distrito Federal e os Municípios.",
+          "afinidade": 0.6,
+          "jaccard_pre_filtro": 0.1071,
+          "status": "Parcialmente Alinhado",
+          "justificativa": "O discurso menciona segurança viária, que está relacionada à ementa sobre imposto sobre veículos.",
+          "voto": "Sim",
+          "data": "2024-11-27",
+          "discurso": "O SR. EFRAIM FILHO  \r\n(Bloco Parlamentar Democracia/UNIÃO - PB. Para orientar a bancada.) – Sr. Presidente, a proposta equilibra a segurança viária, a saúde do motorista e a realidade da malha rodoviária brasileira. Por isso, o União Brasil orienta o voto “sim”."
         },
         {
-          "ementa": "Insere art. 175-A na Constituição para determinar que pelo menos 70% dos recursos obtidos com outorgas onerosas de obras e serviços de transportes sejam reinvestidos no próprio setor.",
-          "afinidade": 0.67,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2022-02-09",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
+          "ementa": "Dá nova redação ao § 1º do art. 1º da Lei Complementar nº 94, de 19 de fevereiro de 1998, para incluir o Município de Uruana de Minas na Região Integrada de Desenvolvimento do Distrito Federal e Entorno – RIDE.",
+          "afinidade": 0.6,
+          "jaccard_pre_filtro": 0.0968,
+          "status": "Parcialmente Alinhado",
+          "justificativa": "O discurso menciona segurança viária, que está relacionada à ementa sobre imposto sobre veículos.",
+          "voto": "AP",
+          "data": "2023-03-28",
+          "discurso": "O SR. EFRAIM FILHO  \r\n(Bloco Parlamentar Democracia/UNIÃO - PB. Para orientar a bancada.) – Sr. Presidente, a proposta equilibra a segurança viária, a saúde do motorista e a realidade da malha rodoviária brasileira. Por isso, o União Brasil orienta o voto “sim”."
         },
         {
-          "ementa": "Altera a Lei Complementar nº 87, de 13 de setembro de 1996 (Lei Kandir), para regulamentar a cobrança do Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação (ICMS) nas operações e prestações interestaduais destinadas a consumidor final não contribuinte do imposto.",
-          "afinidade": 0.66,
-          "status": "Coerente",
+          "ementa": "Altera o art. 5º da Constituição Federal, para prever como mandado de criminalização a posse e o porte de entorpecentes e drogas afins sem autorização ou em desacordo com determinação legal ou regulamentar.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0847,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não tem relação com a ementa sobre transposição de saldos financeiros.",
           "voto": "Sim",
-          "data": "2021-12-20",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
-        },
-        {
-          "ementa": "Altera a Lei Complementar n° 123, de 14 de dezembro de 2006 (Estatuto Nacional da Microempresa e da Empresa de Pequeno Porte), para modificar a composição e o funcionamento do Comitê Gestor do Simples Nacional (CGSN) e ampliar o âmbito de aplicação de seu regime tributário.",
-          "afinidade": 0.71,
-          "status": "Coerente",
-          "voto": "Sim",
-          "data": "2021-12-16",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
-        },
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.68,
-          "status": "Coerente",
-          "voto": "P-NRV",
-          "data": "2021-12-16",
-          "discurso": "A SRA. PRESIDENTE  \r\n(Leila Barros. Bloco Parlamentar Pelo Brasil/PDT - DF. Para discursar - Presidente.) – Boa tarde a todas e a todos. \n       Cumpr..."
+          "data": "2024-04-16",
+          "discurso": "O SR. EFRAIM FILHO  \r\n(Bloco Parlamentar Democracia/UNIÃO - PB. Para orientar a bancada.) – Sr. Presidente, a proposta equilibra a segurança viária, a saúde do motorista e a realidade da malha rodoviária brasileira. Por isso, o União Brasil orienta o voto “sim”."
         }
       ]
     }
