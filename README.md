@@ -33,6 +33,11 @@ Uma Single Page Application construída com React 19, Vite e TailwindCSS v4, foc
 
 ---
 
+### 🚀 Conquistas do Ciclo (Desafio Técnico)
+- [X] **Pipeline Unificado Multi-Casa:** Conseguimos unificar a ingestão de dados das APIs do Senado Federal e da Câmara dos Deputados em um pipeline robusto com normalização de dados e IA local/nuvem. Detalhes completos disponíveis na [documentação da Expansão do Pipeline e Monitoramento Multi-Casa](docs/backend/pipeline_multicasa.md) ou para testes dinâmicos no [Notebook Google Colab de Monitoramento Multi-Casa](https://colab.research.google.com/drive/1-9jCu3MbPG_Qr0O2RLV9TA5qVeYRxS3a#scrollTo=og-j5MS7H_J9).
+
+---
+
 ## Guia de Instalação e Execução
 
 Siga os passos abaixo para configurar e executar os ambientes de desenvolvimento do projeto localmente.

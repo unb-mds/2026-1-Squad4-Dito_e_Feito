@@ -82,6 +82,7 @@ nav:
   - Backend:
       - Visão Geral: backend/backend.md
       - Banco de Dados: backend/banco_de_dados.md
+      - Monitoramento Multi-Casa: backend/pipeline_multicasa.md
 
   - Tecnologias:
       - Stack do Projeto: tecnologias/stack.md
