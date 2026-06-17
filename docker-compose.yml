@@ -1,0 +1,46 @@
+services:
+  # --- BACKEND (Flask API) ---
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dito_efeito_backend
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./backend/.env
+    volumes:
+      # Sincroniza o código local com o container para refletir alterações sem reconstruir
+      - ./backend:/app
+      # Protege a pasta de dependências do container contra sobreposição local
+      - /app/venv
+      # Cria um volume persistente para o cache de modelos do Hugging Face (BERTimbau)
+      - hf_cache:/root/.cache/huggingface
+    restart: always
+
+  # --- FRONTEND (React Dev Server) ---
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: dev-stage # Executa no estágio de desenvolvimento
+    container_name: dito_efeito_frontend
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - "5173:5173"
+    volumes:
+      # Sincroniza o código do front para HMR (Hot Module Replacement)
+      - ./frontend:/app
+      # Evita que a node_modules local apague a node_modules do container
+      - /app/node_modules
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  hf_cache:
