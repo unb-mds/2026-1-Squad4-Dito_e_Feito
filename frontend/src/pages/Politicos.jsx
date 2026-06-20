@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { politicosMock } from '../utils/mockData';
 import { getDashboardMetrics } from '../services/api';
+import { formatTipoParlamentar } from '../utils/formatters';
 
 export function Politicos() {
   const [busca, setBusca] = useState('');
@@ -22,7 +23,7 @@ export function Politicos() {
             uf: s.uf,
             foto: s.foto || '',
             coerencia: Math.round(s.score_coerencia || 0),
-            tipo: 'Senador'
+            tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar)
           }));
           setPoliticosList(mapped);
         }
