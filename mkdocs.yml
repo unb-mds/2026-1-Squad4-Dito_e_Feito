@@ -62,6 +62,9 @@ markdown_extensions:
 nav:
   - Início: index.md
 
+  - Releases:
+      - Release 1 (R1): releases/release1.md
+
   - Sprints:
       - Sprint 01 — Abertura: sprints/sprint01.md
       - Sprint 02 — Definições: sprints/sprint02.md
@@ -70,7 +73,6 @@ nav:
       - Sprint 05 — Story Map: sprints/sprint05.md
       - Sprint 06 — Consolidação R1: sprints/sprint06.md
       - Sprint 07 — Planejamento R2: sprints/sprint07.md
-
   - Requisitos:
       - Levantamento Inicial: requisitos/levantamento_inicial.md
       - Requisitos Gerais Oficiais: requisitos/requisitos.md
