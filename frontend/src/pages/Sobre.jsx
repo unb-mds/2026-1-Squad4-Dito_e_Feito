@@ -33,7 +33,7 @@ export function Sobre() {
 
   return (
     <div className="flex flex-col flex-1 bg-bg text-text-main animate-[fadeIn_0.2s_ease]">
-      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+      <div className="p-4 md:p-[28px_32px] flex-1 overflow-y-auto">
 
         {/* INTRO */}
         <div className="bg-surface border border-border rounded-xl p-6 mb-4">

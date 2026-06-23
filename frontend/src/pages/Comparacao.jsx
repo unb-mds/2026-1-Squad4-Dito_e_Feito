@@ -25,7 +25,7 @@ export function Comparacao() {
               uf: s.uf,
               foto: s.foto || '',
               coerencia: Math.round(s.score_coerencia || 0),
-              tipo: 'Senador',
+              tipo: s.tipo || 'Senador',
               detalhes: s.detalhes || []
             }));
             setPoliticosList(mapped);
@@ -153,15 +153,19 @@ export function Comparacao() {
     );
   };
 
+  const slotAHasData = !!(slotA && slotA.coerencia !== null && slotA.coerencia !== undefined && slotA.detalhes && slotA.detalhes.length > 0);
+  const slotBHasData = !!(slotB && slotB.coerencia !== null && slotB.coerencia !== undefined && slotB.detalhes && slotB.detalhes.length > 0);
+  const bothHaveData = slotAHasData && slotBHasData;
+
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease] relative">
-      <div className="p-[16px_32px] border-b border-border shrink-0">
+      <div className="p-4 md:p-[16px_32px] border-b border-border shrink-0">
         <div className="text-[20px] font-bold text-text-main">Comparação (VS)</div>
         <div className="text-[13px] text-text2 mt-1">Selecione dois parlamentares para comparar seus dados de coerência.</div>
       </div>
 
-      <div className="p-[28px_32px] flex-1 overflow-y-auto">
-        <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="p-4 md:p-[28px_32px] flex-1 overflow-y-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           {renderSlot(slotA, setSlotA, 'A')}
           {renderSlot(slotB, setSlotB, 'B')}
         </div>
@@ -170,27 +174,44 @@ export function Comparacao() {
           <div>
             <div className="bg-surface border border-border rounded-xl mb-4">
               <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Coerência Geral Comparada</div></div>
-              <div className="p-5 h-[320px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={getBarChartData()}
-                    margin={{ top: 20, right: 30, left: -20, bottom: 5 }}
-                    barSize={50}
-                  >
-                    <CartesianGrid strokeDasharray="0" stroke="#30363d" vertical={false} />
-                    <XAxis dataKey="name" stroke="#8b949e" tickLine={false} axisLine={false} fontSize={11} />
-                    <YAxis stroke="#8b949e" domain={[0, 100]} tickFormatter={(val) => `${val}%`} tickLine={false} axisLine={false} fontSize={11} />
-                    <Tooltip
-                      cursor={{ fill: '#1c2128', opacity: 0.3 }}
-                      contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d', borderRadius: '6px', color: '#e6edf3' }}
-                    />
-                    <Bar dataKey="Coerencia" radius={[8, 8, 0, 0]}>
-                      {getBarChartData().map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.fill} />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+              <div className="p-5 h-[320px] w-full flex items-center justify-center">
+                {bothHaveData ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                      data={getBarChartData()}
+                      margin={{ top: 20, right: 30, left: -20, bottom: 5 }}
+                      barSize={50}
+                    >
+                      <CartesianGrid strokeDasharray="0" stroke="#30363d" vertical={false} />
+                      <XAxis dataKey="name" stroke="#8b949e" tickLine={false} axisLine={false} fontSize={11} />
+                      <YAxis stroke="#8b949e" domain={[0, 100]} tickFormatter={(val) => `${val}%`} tickLine={false} axisLine={false} fontSize={11} />
+                      <Tooltip
+                        cursor={{ fill: '#1c2128', opacity: 0.3 }}
+                        contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d', borderRadius: '6px', color: '#e6edf3' }}
+                      />
+                      <Bar dataKey="Coerencia" radius={[8, 8, 0, 0]}>
+                        {getBarChartData().map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.fill} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="text-center flex flex-col items-center justify-center max-w-md px-4 py-8">
+                    <svg className="w-12 h-12 text-text3 mb-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <h4 className="text-[15px] font-semibold text-text-main mb-1">Dados Insuficientes para Comparação</h4>
+                    <p className="text-[13px] text-text2">
+                      {!slotAHasData && !slotBHasData 
+                        ? `Ambos os parlamentares selecionados (${slotA.nome} e ${slotB.nome}) não possuem dados de votação suficientes.`
+                        : !slotAHasData 
+                          ? `O parlamentar ${slotA.nome} não possui dados de votação suficientes para gerar o gráfico.`
+                          : `O parlamentar ${slotB.nome} não possui dados de votação suficientes para gerar o gráfico.`
+                      }
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -199,32 +220,49 @@ export function Comparacao() {
               <div className="p-[16px_20px] border-b border-border2">
                 <div className="text-[16px] font-bold text-text-main">Histórico de Coerência Comparado</div>
               </div>
-              <div className="p-5 h-[320px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={getLineChartData()} margin={{ top: 20, right: 30, left: -20, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="0" stroke="#30363d" vertical={false} />
-                    <XAxis dataKey="mes" stroke="#8b949e" tickLine={false} axisLine={false} fontSize={11} />
-                    <YAxis stroke="#8b949e" domain={[50, 100]} tickFormatter={(val) => `${val}%`} tickLine={false} axisLine={false} fontSize={11} />
-                    <Tooltip
-                      contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d', borderRadius: '6px', color: '#e6edf3' }}
-                    />
-                    <Line type="monotone" dataKey={slotA.nome} stroke="#14b8a6" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
-                    <Line type="monotone" dataKey={slotB.nome} stroke="#ec4899" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
-                  </LineChart>
-                </ResponsiveContainer>
+              <div className="p-5 h-[320px] w-full flex items-center justify-center">
+                {bothHaveData ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={getLineChartData()} margin={{ top: 20, right: 30, left: -20, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="0" stroke="#30363d" vertical={false} />
+                      <XAxis dataKey="mes" stroke="#8b949e" tickLine={false} axisLine={false} fontSize={11} />
+                      <YAxis stroke="#8b949e" domain={[50, 100]} tickFormatter={(val) => `${val}%`} tickLine={false} axisLine={false} fontSize={11} />
+                      <Tooltip
+                        contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d', borderRadius: '6px', color: '#e6edf3' }}
+                      />
+                      <Line type="monotone" dataKey={slotA.nome} stroke="#14b8a6" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                      <Line type="monotone" dataKey={slotB.nome} stroke="#ec4899" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="text-center flex flex-col items-center justify-center max-w-md px-4 py-8">
+                    <svg className="w-12 h-12 text-text3 mb-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <h4 className="text-[15px] font-semibold text-text-main mb-1">Dados Insuficientes para Comparação</h4>
+                    <p className="text-[13px] text-text2">
+                      {!slotAHasData && !slotBHasData 
+                        ? `Ambos os parlamentares selecionados (${slotA.nome} e ${slotB.nome}) não possuem dados de votação suficientes.`
+                        : !slotAHasData 
+                          ? `O parlamentar ${slotA.nome} não possui dados de votação suficientes para gerar o gráfico.`
+                          : `O parlamentar ${slotB.nome} não possui dados de votação suficientes para gerar o gráfico.`
+                      }
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[slotA, slotB].map((s, i) => (
                 <div key={i} className="bg-surface border border-border rounded-xl p-5">
                   <div className="text-[16px] font-bold text-text-main mb-4">Alinhamento Global de {s.nome}</div>
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-[13px] text-text2">Score</span>
-                    <span className="text-[16px] font-bold text-teal">{s.coerencia}%</span>
+                    <span className="text-[16px] font-bold text-teal">{s.coerencia !== null && s.coerencia !== undefined ? `${s.coerencia}%` : 'N/A'}</span>
                   </div>
                   <div className="h-[5px] bg-border rounded w-full overflow-hidden">
-                    <div className="h-full bg-green rounded" style={{ width: `${s.coerencia}%` }}></div>
+                    <div className="h-full bg-green rounded" style={{ width: `${s.coerencia || 0}%` }}></div>
                   </div>
                 </div>
               ))}

@@ -9,11 +9,11 @@ const relatorios = [
 export function Relatorios() {
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
-      <div className="p-[16px_32px] border-b border-border shrink-0">
+      <div className="p-4 md:p-[16px_32px] border-b border-border shrink-0">
         <div className="text-[20px] font-bold text-text-main">Relatórios</div>
       </div>
       
-      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+      <div className="p-4 md:p-[28px_32px] flex-1 overflow-y-auto">
         <div className="bg-surface border border-border rounded-xl">
           <div className="p-[16px_20px] border-b border-border2">
             <div className="text-[16px] font-bold text-text-main">Central de Relatórios</div>
