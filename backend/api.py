@@ -358,7 +358,8 @@ def dashboard_metrics():
                     p.id_externo, p.nome_civil, p.sigla_partido, p.sigla_uf,
                     p.foto_url,
                     ROUND(AVG(sc.score)::numeric, 2) as avg_score,
-                    COUNT(sc.id) as total_scores
+                    COUNT(sc.id) as total_scores,
+                    p.tipo_parlamentar
                 FROM parlamentar p
                 JOIN score_coerencia sc ON sc.parlamentar_id = p.id
                 WHERE p.tipo_parlamentar IN ('senador', 'deputado')
@@ -399,6 +400,7 @@ def dashboard_metrics():
                             "total_pares": s_local.get("total_pares", r[6]),
                             "contagem_status": s_local.get("contagem_status", {}),
                             "detalhes": s_local.get("detalhes", []),
+                            "tipo": r[7].capitalize() if r[7] else "Senador",
                         }
                     )
 

@@ -144,7 +144,7 @@ export function VisaoGeral() {
 
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
-      <div className="p-[16px_32px] border-b border-border shrink-0">
+      <div className="p-4 md:p-[16px_32px] border-b border-border shrink-0">
         <div className="relative max-w-[600px] mx-auto">
           <svg className="absolute left-[15px] top-1/2 -translate-y-1/2 text-text3 pointer-events-none" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input 
@@ -181,7 +181,7 @@ export function VisaoGeral() {
         </div>
       </div>
 
-      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+      <div className="p-4 md:p-[28px_32px] flex-1 overflow-y-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
           <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
             <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Votos Analisados</div>
@@ -207,7 +207,7 @@ export function VisaoGeral() {
           </div>
         </div>
 
-        <div className="grid grid-cols-[1.8fr_1fr] gap-4 mb-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr] gap-4 mb-4">
           <div className="bg-surface border border-border rounded-xl flex flex-col">
             <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Tendências de Coerência</div></div>
             <div className="p-5 h-[260px] w-full"><GraficoTendencias /></div>
@@ -223,7 +223,7 @@ export function VisaoGeral() {
           <div className="p-5 h-[240px] w-full"><GraficoBarras /></div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="bg-surface border border-border rounded-xl">
             <div className="flex justify-between items-center p-[16px_20px] border-b border-border2">
               <div className="text-[16px] font-bold text-text-main flex items-center gap-2">
@@ -258,7 +258,16 @@ export function VisaoGeral() {
                   <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
                   <img src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} alt={p.nome} className="w-9 h-9 rounded-full border border-border shrink-0 object-cover" />
                   <div className="flex-1 min-w-0">
-                    <div className="text-[14px] font-semibold text-text-main truncate">{p.nome}</div>
+                    <div className="text-[14px] font-semibold text-text-main truncate flex items-center gap-2">
+                      {p.nome}
+                      <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold border shrink-0 ${
+                        p.tipo && p.tipo.toLowerCase().includes('senad')
+                          ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                          : 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+                      }`}>
+                        {p.tipo && p.tipo.toLowerCase().includes('senad') ? 'Senador' : 'Deputado'}
+                      </span>
+                    </div>
                     <div className="text-[12px] text-teal mt-0.5">{p.partido} - {p.uf}</div>
                   </div>
                   <div className="flex flex-col items-end gap-1.5 min-w-[110px]">
