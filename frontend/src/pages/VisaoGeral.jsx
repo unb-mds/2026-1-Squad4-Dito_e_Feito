@@ -5,6 +5,7 @@ import { GraficoPartidos } from '../components/GraficoPartidos';
 import { GraficoBarras } from '../components/GraficoBarras';
 import { politicosMock, alertas } from '../utils/mockData';
 import { getDashboardMetrics, getSenadores, getDeputados } from '../services/api';
+import { formatTipoParlamentar } from '../utils/formatters';
 
 export function VisaoGeral() {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ export function VisaoGeral() {
                 uf: s.uf,
                 foto: s.foto || '',
                 coerencia: Math.round(s.score_coerencia || 0),
-                tipo: s.tipo || 'Senador',
+                tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar),
                 analisado: true
               });
             });

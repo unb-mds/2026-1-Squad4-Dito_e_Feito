@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { politicosMock } from '../utils/mockData';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { getDashboardMetrics } from '../services/api';
+import { formatTipoParlamentar } from '../utils/formatters';
 
 export function Comparacao() {
   const [slotA, setSlotA] = useState(null);
@@ -25,7 +26,7 @@ export function Comparacao() {
               uf: s.uf,
               foto: s.foto || '',
               coerencia: Math.round(s.score_coerencia || 0),
-              tipo: s.tipo || 'Senador',
+              tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar),
               detalhes: s.detalhes || []
             }));
             setPoliticosList(mapped);
