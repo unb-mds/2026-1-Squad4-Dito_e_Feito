@@ -7,6 +7,7 @@ services:
     container_name: dito_efeito_backend
     dns:
       - 8.8.8.8
+      - 1.1.1.1
       - 8.8.4.4
     ports:
       - "5001:5001"
@@ -19,6 +20,8 @@ services:
       - /app/venv
       # Cria um volume persistente para o cache de modelos do Hugging Face (BERTimbau)
       - hf_cache:/root/.cache/huggingface
+    networks:
+      - dito_net
     restart: always
 
   # --- FRONTEND (React Dev Server) ---
@@ -30,6 +33,7 @@ services:
     container_name: dito_efeito_frontend
     dns:
       - 8.8.8.8
+      - 1.1.1.1
       - 8.8.4.4
     ports:
       - "5173:5173"
@@ -40,7 +44,16 @@ services:
       - /app/node_modules
     depends_on:
       - backend
+    networks:
+      - dito_net
     restart: always
+
+networks:
+  dito_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "true"
 
 volumes:
   hf_cache:
+

@@ -45,21 +45,30 @@ O ecossistema é dividido em três camadas principais:
 │   ├── dashboard.html         # Dashboard alternativo em vanilla JS servido pela API
 │   ├── dashboard_metrics.json # Cache/Fallback local das métricas analisadas
 │   ├── requirements.txt       # Dependências do Python (Flask, BS4, psycopg2, etc.)
-│   └── database/
-│       ├── schema.sql         # Estrutura DDL do banco PostgreSQL
-│       ├── Migrations.sql     # Histórico de alterações estruturais
-│       └── Conexão.md         # Guia de conexão ao banco para desenvolvedores
+│   ├── database/
+│   │   ├── schema.sql         # Estrutura DDL do banco PostgreSQL
+│   │   ├── Migrations.sql     # Histórico de alterações estruturais
+│   │   └── Conexão.md         # Guia de conexão ao banco para desenvolvedores
+│   └── tests/                 # Suíte de testes unitários do backend (Pytest)
 ├── docs/                      # Documentação técnica oficial (lida pelo MkDocs)
+│   └── backend/
+│       └── pipeline_multicasa.md # Documentação da expansão do pipeline Senado/Câmara
 ├── frontend/                  # Código-fonte do Frontend (React 19)
+│   ├── e2e/                   # Testes de ponta a ponta (Playwright)
 │   ├── src/
 │   │   ├── App.jsx            # Roteamento principal (React Router DOM v7)
 │   │   ├── services/api.js    # Camada de comunicação Axios (aponta para :5001/api)
 │   │   ├── pages/             # Páginas da SPA (VisaoGeral, Perfil, Comparacao, etc.)
 │   │   └── components/        # Componentes visuais (Sidebar, Gráficos Recharts, etc.)
+│   ├── vitest.config.js       # Configuração do Vitest (testes unitários do frontend)
+│   └── playwright.config.js   # Configuração do Playwright (testes E2E do frontend)
 ├── index.html                 # Página vanilla JS legada/alternativa na raiz (aponta para :5000)
 ├── mkdocs.yml                 # Configurações do site de documentação (GitHub Pages)
-└── README.md                  # Apresentação geral do repositório
+├── README.md                  # Apresentação geral do repositório
+└── scripts/
+    └── setup-git-hooks.js     # Script de automação do git hook de pré-commit
 ```
+
 
 ---
 
@@ -89,6 +98,14 @@ O sistema combina três abordagens para mapear a coerência dos parlamentares:
 * **Filtro L1 (Volume)**: Verifica a quantidade de discursos via API antes de fazer scraping (Fail Fast).
 * **Mecanismo de Fallback Dinâmico**: Se 3 senadores seguidos retornarem zero discursos no período de busca (ex: 2024-2026), o script alarga automaticamente a busca retroativamente até 2022 para obter histórico suficiente.
 * **Filtro L2 (Jaccard)**: Filtra os discursos e ementas mais próximos sintaticamente para enviar apenas uma amostra relevante (`MAX_PARES_LLM = 10`) para a LLM, economizando tokens.
+
+### Pipeline Multi-Casa (Senado Federal & Câmara dos Deputados):
+O pipeline foi expandido para suportar o monitoramento integrado de ambas as casas legislativas.
+* **Heterogeneidade de Dados**: Integra a API do Senado (XML/JSON legados) com a API v2 da Câmara dos Deputados (REST JSON paginada) sob a classe `MonitoramentoLegislativo`.
+* **Data Wrangling & Normalização (MDS)**: Utiliza `pd.json_normalize()` para tratar os dicionários da API da Câmara e gera uma ementa sintética (`df_final['ementa'] = f"Votação da proposição {sigla} {numero}/{ano}. Orientação de voto: " + df_final['Voto']`), garantindo buscas semânticas equivalentes.
+* **Eficiência Computacional**: Limita o processamento de textos a 512 tokens e utiliza `with torch.no_grad():` no PyTorch, o que reduz o consumo de memória RAM em até 60% durante a extração de embeddings.
+* **Documentação & Experimentos**: Para mais detalhes de modelagem e arquitetura, consulte a [Documentação de Pipeline Multi-Casa](file:///c:/Users/DELL/Desktop/Metodos%20de%20DS/2026-1-Squad4-Dito_e_Feito/docs/backend/pipeline_multicasa.md) e o [Notebook Google Colab de Monitoramento Multi-Casa](https://colab.research.google.com/drive/1-9jCu3MbPG_Qr0O2RLV9TA5qVeYRxS3a#scrollTo=og-j5MS7H_J9).
+
 
 ---
 
@@ -132,6 +149,7 @@ source venv/Scripts/activate  # Ou venv/bin/activate no Linux
 pip install -r requirements.txt
 python api.py                 # Roda o servidor na porta 5001
 python scan_senators.py       # Roda a varredura completa (36 senadores)
+pytest                        # Executa toda a suíte de testes unitários do backend
 ```
 
 ### Frontend:
@@ -139,4 +157,36 @@ python scan_senators.py       # Roda a varredura completa (36 senadores)
 cd frontend
 npm install
 npm run dev                   # Inicia o servidor Vite local (geralmente http://localhost:5173)
+npm run test                  # Executa testes unitários/componentes (Vitest)
+npx playwright test           # Executa testes End-to-End (Playwright)
 ```
+
+### Configurar Git Hook (Pré-Commit):
+```bash
+node scripts/setup-git-hooks.js # Configura a validação automática de testes no commit
+```
+
+---
+
+## 9. Suíte de Testes e Automações
+
+O projeto conta com testes automatizados integrados para garantir a estabilidade do sistema nas duas frentes (Frontend e Backend).
+
+### Backend (Python)
+* **Framework**: `pytest`.
+* **Cobertura**: Mocks para requisições de APIs externas (Senado e Câmara), conexões de banco de dados (Supabase/PostgreSQL) e fallbacks do algoritmo de similaridade (Jaccard).
+* **Localização**: `backend/tests/` (ver [test_api.py](file:///c:/Users/DELL/Desktop/Metodos%20de%20DS/2026-1-Squad4-Dito_e_Feito/backend/tests/test_api.py) e [conftest.py](file:///c:/Users/DELL/Desktop/Metodos%20de%20DS/2026-1-Squad4-Dito_e_Feito/backend/tests/conftest.py)).
+
+### Frontend (React)
+* **Testes Unitários / Componentes**:
+  * **Framework**: `Vitest` + `jsdom`.
+  * **Configuração**: [vitest.config.js](file:///c:/Users/DELL/Desktop/Metodos%20de%20DS/2026-1-Squad4-Dito_e_Feito/frontend/vitest.config.js) e [setupTests.js](file:///c:/Users/DELL/Desktop/Metodos%20de%20DS/2026-1-Squad4-Dito_e_Feito/frontend/src/setupTests.js).
+* **Testes End-to-End (E2E)**:
+  * **Framework**: `Playwright`.
+  * **Configuração**: [playwright.config.js](file:///c:/Users/DELL/Desktop/Metodos%20de%20DS/2026-1-Squad4-Dito_e_Feito/frontend/playwright.config.js).
+  * **Arquivo de Teste**: [dashboard.spec.js](file:///c:/Users/DELL/Desktop/Metodos%20de%20DS/2026-1-Squad4-Dito_e_Feito/frontend/e2e/dashboard.spec.js).
+
+### Automação de Pré-Commit (Git Hooks)
+* O script [setup-git-hooks.js](file:///c:/Users/DELL/Desktop/Metodos%20de%20DS/2026-1-Squad4-Dito_e_Feito/scripts/setup-git-hooks.js) configura um hook de `pre-commit` no Git.
+* Sempre que um desenvolvedor executa `git commit`, os testes unitários do backend (`pytest`) e os testes do frontend (`npm run test`) são executados automaticamente. O commit é abortado se algum teste falhar.
+

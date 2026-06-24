@@ -767,4 +767,5 @@ def serve_metrics_json():
 
 if __name__ == "__main__":
     print("[backend] Iniciando na porta 5001...")
-    app.run(debug=True, port=5001)
+    app.run(debug=True, host="0.0.0.0", port=5001)
+
