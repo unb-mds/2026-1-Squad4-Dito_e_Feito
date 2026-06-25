@@ -1,7 +1,7 @@
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
-const data = [
+const defaultData = [
   { name: 'PT', value: 30, color: '#9b2335' },
   { name: 'PL', value: 25, color: '#14b8a6' },
   { name: 'UNIÃO', value: 20, color: '#166534' },
@@ -9,13 +9,14 @@ const data = [
   { name: 'OUTROS', value: 10, color: '#b0bec5' },
 ];
 
-export function GraficoPartidos() {
+export function GraficoPartidos({ data }) {
+  const chartData = data || defaultData;
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
       <ResponsiveContainer width="100%" height="70%">
         <PieChart>
-          <Pie data={data} innerRadius="55%" outerRadius="85%" paddingAngle={2} dataKey="value" stroke="#161b22" strokeWidth={2}>
-            {data.map((entry, index) => (
+          <Pie data={chartData} innerRadius="55%" outerRadius="85%" paddingAngle={2} dataKey="value" stroke="#161b22" strokeWidth={2}>
+            {chartData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
@@ -24,7 +25,7 @@ export function GraficoPartidos() {
       </ResponsiveContainer>
       
       <div className="flex flex-wrap gap-x-3 gap-y-1.5 justify-center">
-        {data.map((item, i) => (
+        {chartData.map((item, i) => (
           <div key={i} className="flex items-center gap-1.5 text-[12px] text-text2">
             <div className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ backgroundColor: item.color }}></div>
             {item.name}

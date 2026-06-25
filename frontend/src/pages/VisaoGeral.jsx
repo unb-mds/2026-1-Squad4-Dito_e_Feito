@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { GraficoTendencias } from '../components/GraficoTendencias';
 import { GraficoPartidos } from '../components/GraficoPartidos';
 import { GraficoBarras } from '../components/GraficoBarras';
+import { MapaBrasil } from '../components/MapaBrasil';
 import { politicosMock, alertas } from '../utils/mockData';
 import { getDashboardMetrics, getSenadores, getDeputados } from '../services/api';
 import { formatTipoParlamentar } from '../utils/formatters';
@@ -22,6 +23,7 @@ export function VisaoGeral() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [allPoliticos, setAllPoliticos] = useState(politicosMock);
+  const [dataByState, setDataByState] = useState({});
 
   useEffect(() => {
     const fetchMetrics = async () => {
@@ -59,10 +61,56 @@ export function VisaoGeral() {
               });
             });
           }
+          
+          if (data.deputados) {
+            data.deputados.forEach(d => {
+              if (d.contagem_status && d.contagem_status.Divergente) {
+                totalDivergentes += d.contagem_status.Divergente;
+              }
+              analyzedMap[d.id] = Math.round(d.score_coerencia || 0);
+              analyzedList.push({
+                id: d.id,
+                nome: d.nome,
+                partido: d.partido,
+                uf: d.uf,
+                foto: d.foto || '',
+                coerencia: Math.round(d.score_coerencia || 0),
+                tipo: formatTipoParlamentar(d.tipo || d.tipo_parlamentar),
+                analisado: true
+              });
+            });
+          }
+          
+          if (analyzedList.length === 0) {
+            analyzedList = politicosMock;
+          }
+
           if (analyzedList.length > 0) {
             top4List = [...analyzedList].sort((a, b) => b.coerencia - a.coerencia).slice(0, 4);
           }
+        } else {
+            analyzedList = politicosMock;
         }
+
+        // Group analyzed list by state to pass to Map
+        const ufMap = {};
+        analyzedList.forEach(p => {
+          if (p.uf) {
+            if (!ufMap[p.uf]) ufMap[p.uf] = { soma: 0, count: 0 };
+            if (p.analisado !== false) {
+                ufMap[p.uf].soma += p.coerencia;
+                ufMap[p.uf].count += 1;
+            }
+          }
+        });
+        
+        const finalMapData = {};
+        for (const [uf, data] of Object.entries(ufMap)) {
+            if (data.count > 0) {
+                finalMapData[uf] = { coerencia: Math.round(data.soma / data.count), total: data.count };
+            }
+        }
+        setDataByState(finalMapData);
 
         setMetrics({
           totalAnalisados,
@@ -169,7 +217,12 @@ export function VisaoGeral() {
                   />
                   <div className="flex-1 min-w-0">
                     <div className="text-[14px] font-semibold text-text-main truncate">{p.nome}</div>
-                    <div className="text-[12px] text-teal">{p.partido} · {p.uf} · {p.tipo}</div>
+                    <div className="text-[12px] text-teal flex gap-1 items-center">
+                       <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer">{p.partido}</span> 
+                       · 
+                       <span onClick={(e) => { e.stopPropagation(); navigate(`/estados/${p.uf.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer">{p.uf}</span> 
+                       · {p.tipo}
+                    </div>
                   </div>
                   <div className="text-[13px] font-bold text-teal">
                     {p.analisado ? `${p.coerencia}%` : 'Não analisado'}
@@ -208,13 +261,20 @@ export function VisaoGeral() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr] gap-4 mb-4">
-          <div className="bg-surface border border-border rounded-xl flex flex-col">
-            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Tendências de Coerência</div></div>
-            <div className="p-5 h-[260px] w-full"><GraficoTendencias /></div>
+          <div className="bg-surface border border-border rounded-xl flex flex-col min-h-[400px]">
+            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Mapeamento de Coerência</div></div>
+            <div className="p-5 flex-1 flex items-center justify-center relative"><MapaBrasil dataByState={dataByState} /></div>
           </div>
           <div className="bg-surface border border-border rounded-xl flex flex-col">
             <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Comparação por Partido</div></div>
-            <div className="p-5 h-[260px] w-full flex items-center justify-center"><GraficoPartidos /></div>
+            <div className="p-5 h-[360px] w-full flex items-center justify-center"><GraficoPartidos /></div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 mb-4">
+          <div className="bg-surface border border-border rounded-xl flex flex-col">
+            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Tendências de Coerência</div></div>
+            <div className="p-5 h-[260px] w-full"><GraficoTendencias /></div>
           </div>
         </div>
 
@@ -236,7 +296,10 @@ export function VisaoGeral() {
               {alertas.map((a, i) => (
                 <div key={i} className="flex justify-between items-center p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
                   <div className={`border-l-3 pl-3 ${a.grave ? 'border-teal' : 'border-red'}`}>
-                    <div className="text-[14px] font-semibold text-text-main flex items-center gap-2 mb-1">{a.nome} <span className="text-[11px] text-teal bg-teal-bg px-1.5 py-0.5 rounded">{a.partido}</span></div>
+                    <div className="text-[14px] font-semibold text-text-main flex items-center gap-2 mb-1">
+                      {a.nome} 
+                      <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${a.partido.toLowerCase()}`); }} className="text-[11px] text-teal bg-teal-bg px-1.5 py-0.5 rounded hover:bg-teal hover:text-white transition-colors">{a.partido}</span>
+                    </div>
                     <div className="text-[12px] text-text2 flex items-center gap-1.5">
                       <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
                       {a.tema} · {a.data}
@@ -268,7 +331,11 @@ export function VisaoGeral() {
                         {p.tipo && p.tipo.toLowerCase().includes('senad') ? 'Senador' : 'Deputado'}
                       </span>
                     </div>
-                    <div className="text-[12px] text-teal mt-0.5">{p.partido} - {p.uf}</div>
+                    <div className="text-[12px] text-teal mt-0.5 flex gap-1 items-center">
+                       <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white">{p.partido}</span>
+                       -
+                       <span onClick={(e) => { e.stopPropagation(); navigate(`/estados/${p.uf.toLowerCase()}`); }} className="hover:underline hover:text-white">{p.uf}</span>
+                    </div>
                   </div>
                   <div className="flex flex-col items-end gap-1.5 min-w-[110px]">
                     <div className="flex items-center gap-1.5">

@@ -8,6 +8,8 @@ import { Relatorios } from './pages/Relatorios';
 import { Sobre } from './pages/Sobre';
 import { Footer } from './components/Footer';
 import { PerfilPolitico } from './pages/PerfilPolitico';
+import { Estados } from './pages/Estados';
+import { Partidos } from './pages/Partidos';
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -43,6 +45,10 @@ export default function App() {
           <Route path="/" element={<VisaoGeral />} />
           <Route path="/politicos" element={<Politicos />} />
           <Route path="/politicos/:id" element={<PerfilPolitico />} />
+          <Route path="/estados" element={<Estados />} />
+          <Route path="/estados/:uf" element={<Estados />} />
+          <Route path="/partidos" element={<Partidos />} />
+          <Route path="/partidos/:sigla" element={<Partidos />} />
           <Route path="/comparacao" element={<Comparacao />} />
           <Route path="/relatorios" element={<Relatorios />} />
           <Route path="/sobre" element={<Sobre />} />

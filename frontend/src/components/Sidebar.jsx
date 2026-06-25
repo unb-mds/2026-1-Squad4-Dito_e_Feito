@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, BarChart3, Info, Users, FileText } from 'lucide-react';
+import { LayoutDashboard, BarChart3, Info, Users, FileText, Map, Flag } from 'lucide-react';
 
 export function Sidebar({ isOpen, onClose }) {
   const location = useLocation();
@@ -88,6 +88,16 @@ export function Sidebar({ isOpen, onClose }) {
             />
           </svg>
           Políticos
+        </Link>
+
+        <Link to="/estados" className={getLinkClass('/estados')} onClick={onClose}>
+          <Map className="w-[18px] h-[18px] shrink-0" strokeWidth={2} />
+          Estados
+        </Link>
+
+        <Link to="/partidos" className={getLinkClass('/partidos')} onClick={onClose}>
+          <Flag className="w-[18px] h-[18px] shrink-0" strokeWidth={2} />
+          Partidos
         </Link>
 
         <Link to="/comparacao" className={getLinkClass('/comparacao')} onClick={onClose}>
