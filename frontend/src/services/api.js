@@ -60,6 +60,18 @@ export const getDashboardMetrics = async () => {
   }
 };
 
+export const getMetricsJson = async () => {
+  try {
+    const response = await axios.get('http://localhost:5001/dashboard_metrics.json', {
+      timeout: 30000,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar JSON de métricas:', error);
+    return null;
+  }
+};
+
 export const getPoliticoById = async (id) => {
   try {
     const response = await api.get(`/politico/${id}`);
