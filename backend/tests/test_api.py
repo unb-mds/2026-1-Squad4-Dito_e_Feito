@@ -121,7 +121,7 @@ def test_dashboard_metrics_db(mock_connect, client, mock_metrics_json, monkeypat
     
     # Mock dos dados retornados pela query do banco
     mock_cur.fetchall.return_value = [
-        ("12345", "Senador Banco", "PBANK", "BK", "http://photo.bank", 92.5, 12)
+        ("12345", "Senador Banco", "PBANK", "BK", "http://photo.bank", 92.5, 12, "senador")
     ]
     
     res = client.get('/api/dashboard-metrics')

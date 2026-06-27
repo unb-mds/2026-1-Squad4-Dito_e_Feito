@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useParams, useLocation, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Users, AlertTriangle, CheckCircle, FileQuestion } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, LineChart, Line, BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { analisarParlamentar, getDashboardMetrics, getPoliticoById } from '../services/api';
@@ -8,6 +8,7 @@ import { SkeletonPerfil } from '../components/Skeleton';
 export function PerfilPolitico() {
   const { id } = useParams();
   const { state } = useLocation(); 
+  const navigate = useNavigate();
   const [dadosPolitico, setDadosPolitico] = useState(state?.politico || null);
 
   const [analise, setAnalise] = useState(null);
@@ -202,7 +203,11 @@ export function PerfilPolitico() {
           <img src={dadosPolitico.foto} alt={dadosPolitico.nome} className="w-24 h-24 rounded-full border-2 border-brand-petroleo object-cover shrink-0" />
           <div>
             <h1 className="text-2xl sm:text-3xl font-display font-bold text-texto-principal">{dadosPolitico.nome}</h1>
-            <p className="text-texto-secundario mt-1 uppercase tracking-wider">{dadosPolitico.partido} • {dadosPolitico.uf}</p>
+            <p className="text-texto-secundario mt-1 uppercase tracking-wider flex items-center justify-center sm:justify-start gap-2">
+              <span onClick={() => navigate(`/partidos/${dadosPolitico.partido.toLowerCase()}`)} className="hover:text-white cursor-pointer hover:underline">{dadosPolitico.partido}</span>
+              •
+              <span onClick={() => navigate(`/estados/${dadosPolitico.uf.toLowerCase()}`)} className="hover:text-white cursor-pointer hover:underline">{dadosPolitico.uf}</span>
+            </p>
           </div>
         </div>
       )}
