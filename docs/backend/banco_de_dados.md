@@ -264,4 +264,4 @@ O `Migrations.md` complementa esse histórico com a documentação operacional d
 
 | Nome | Matrícula | GitHub | Papel |
 |------|-----------|--------|-------|
-| JUAN COSTA INDIANO | 232011578 | [IndianoDev](https://github.com/IndianoDev) | Scrum Master & Data Engineer |
+| JUAN COSTA INDIANO | 242015648 | [IndianoDev](https://github.com/IndianoDev) | Scrum Master & Data Engineer |
