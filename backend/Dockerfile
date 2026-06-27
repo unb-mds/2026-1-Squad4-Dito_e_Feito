@@ -9,13 +9,6 @@ ENV PYTHONUNBUFFERED=1
 # Define o diretório de trabalho
 WORKDIR /app
 
-# Instala dependências de sistema necessárias para compilar bibliotecas C (como psycopg2)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    libpq-dev \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
 # Copia e instala as dependências do Python
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
