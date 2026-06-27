@@ -288,7 +288,7 @@ def analisar_afinidade_local(pares: List[dict]) -> List[dict]:
             "idx": p["idx"],
             "afinidade": round(af, 4),
             "status": status,
-            "justificativa": "Calculado via similaridade Jaccard (fallback local devido à ausência de API).",
+            "justificativa": f"Calculado via similaridade Jaccard (fallback local). Ementa: {p['ementa'][:100]}...",
         })
     return resultados
 
@@ -375,55 +375,84 @@ def buscar_todos_senadores() -> List[dict]:
         return []
 
 
-def buscar_discursos_senador(id_senador, qtd: int = 10) -> List[str]:
-    """Faz scraping dos últimos `qtd` discursos do senador e retorna textos."""
-    url = f"https://www25.senado.leg.br/web/atividade/pronunciamentos/-/p/parlamentar/{id_senador}"
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; DitoeFeito/1.0)"}
-    try:
-        res = requests.get(url, headers=headers, timeout=20)
-        soup = BeautifulSoup(res.text, "html.parser")
-        tabela = soup.find("table")
-        if not tabela:
-            return []
-        links = []
-        for linha in tabela.find_all("tr")[1 : qtd + 1]:
-            colunas = linha.find_all("td")
-            if colunas:
-                link = colunas[0].find("a")
-                if link and "href" in link.attrs:
-                    href = link["href"]
-                    links.append(
-                        "https://www25.senado.leg.br" + href
-                        if href.startswith("/")
-                        else href
-                    )
+def buscar_discursos_senador(id_senador, qtd: int = 10, data_inicio: str = None, data_fim: str = None) -> List[str]:
+    """Obtém a lista de discursos do senador via API filtrada por data e faz scraping dos textos."""
+    if not data_inicio:
+        data_inicio = CONFIG_BUSCA["data_inicio"]
+    if not data_fim:
+        data_fim = CONFIG_BUSCA["data_fim"]
 
+    url = (
+        f"{BASE_SENADO}/senador/{id_senador}/discursos"
+        f"?dataInicio={data_inicio}&dataFim={data_fim}"
+    )
+    headers_api = {"Accept": "application/json"}
+    headers_scraping = {"User-Agent": "Mozilla/5.0 (compatible; DitoeFeito/1.0)"}
+    
+    log(f"[DEBUG API] Buscando discursos do senador {id_senador} no período {data_inicio} a {data_fim}. URL: {url}", "INFO")
+    
+    try:
+        res = requests.get(url, headers=headers_api, timeout=20)
+        if not res.ok:
+            log(f"Erro ao obter discursos da API (status {res.status_code}) para o senador {id_senador}", "WARN")
+            return []
+            
+        data = res.json()
+        dp = data.get("DiscursosParlamentar", {})
+        parlamentar = dp.get("Parlamentar", {})
+        pronunciamentos_node = parlamentar.get("Pronunciamentos")
+        
+        if not pronunciamentos_node:
+            return []
+            
+        pronunciamentos = pronunciamentos_node.get("Pronunciamento", [])
+        if isinstance(pronunciamentos, dict):
+            pronunciamentos = [pronunciamentos]
+            
+        # Ordena do mais recente para o mais antigo e limita a 'qtd'
+        pronunciamentos = sorted(pronunciamentos, key=lambda x: x.get("DataPronunciamento", ""), reverse=True)
+        pronunciamentos = pronunciamentos[:qtd]
+        
+        links = []
+        for p in pronunciamentos:
+            link = p.get("UrlTexto") or p.get("UrlTextoHtml")
+            if link:
+                links.append(link)
+                
+        if not links:
+            return []
+            
         textos = [None] * len(links)
 
         def _fetch(args):
             idx, url_d = args
             try:
-                r = requests.get(url_d, headers=headers, timeout=15)
+                if url_d.startswith("http://"):
+                    url_d = url_d.replace("http://", "https://")
+                r = requests.get(url_d, headers=headers_scraping, timeout=15)
                 soup2 = BeautifulSoup(r.text, "html.parser")
                 div = soup2.find("div", class_="texto-integral") or soup2.find(
                     "div", id="textoPronunciamento"
-                )
+                ) or soup2.find("div", class_="publicacaoTexto")
                 if div:
                     textos[idx] = div.get_text(separator=" ").strip()
-            except Exception:
-                pass
+            except Exception as ex:
+                log(f"Erro ao buscar texto do discurso {url_d}: {ex}", "WARN")
 
         with ThreadPoolExecutor(max_workers=5) as ex:
             ex.map(_fetch, enumerate(links))
 
         return [t for t in textos if t]
     except Exception as e:
-        log(f"Erro scraping discursos (id={id_senador}): {e}", "ERR")
+        log(f"Erro ao obter discursos por API/Scraping (id={id_senador}): {e}", "ERR")
         return []
 
 
-def buscar_votos_senador(id_senador) -> List[dict]:
-    """Retorna lista de votos (ementa, voto, data) do senador via API XML."""
+def buscar_votos_senador(id_senador, data_inicio: str = None) -> List[dict]:
+    """Retorna lista de votos (ementa, voto, data) do senador via API XML filtrada por data."""
+    if not data_inicio:
+        data_inicio = CONFIG_BUSCA["data_inicio"]
+        
     url = f"{BASE_SENADO}/senador/{id_senador}/votacoes"
     headers = {"Accept": "application/xml"}
     try:
@@ -431,22 +460,29 @@ def buscar_votos_senador(id_senador) -> List[dict]:
         res.raise_for_status()
         root = ET.fromstring(res.content)
         todas = root.findall(".//Votacao")
-        limite = max(1, len(todas) // 3)  # ~1/3 das votações
         votos = []
-        for v in todas[:limite]:
+        for v in todas:
             secreto = v.find("IndicadorVotacaoSecreta")
             if secreto is not None and secreto.text == "Sim":
                 continue
+            data_node = v.find(".//DataSessao")
+            data_str = data_node.text if data_node is not None else "N/A"
+            
+            # Filtro incremental por data
+            if data_str != "N/A" and data_inicio:
+                if data_str < data_inicio:
+                    continue
+                    
             ementa_node = v.find(".//Ementa")
             voto_node   = v.find("SiglaDescricaoVoto")
-            data_node   = v.find(".//DataSessao")
             ementa = (ementa_node.text or "Sem ementa") if ementa_node is not None else "Sem ementa"
             if ementa == "Sem ementa":
-                continue  # descarta votos sem contexto temático
+                continue
+                
             votos.append({
                 "ementa": ementa,
                 "voto": voto_node.text if voto_node is not None else "N/A",
-                "data": data_node.text if data_node is not None else "N/A",
+                "data": data_str,
             })
         return votos
     except Exception as e:
@@ -462,6 +498,7 @@ def validar_senador(
     qtd_discursos: int = 10,
     min_discursos_volume: int = None,
     jaccard_gate: float = JACCARD_GATE,
+    data_inicio: str = None,
 ) -> Optional[dict]:
     """
     Retorna um dict com métricas de coerência se o senador atingir o threshold,
@@ -480,6 +517,8 @@ def validar_senador(
 
     if min_discursos_volume is None:
         min_discursos_volume = CONFIG_BUSCA["min_discursos_volume"]
+    if data_inicio is None:
+        data_inicio = CONFIG_BUSCA["data_inicio"]
 
     # ── Camada 1: Pré-Filtro de Volume ──────────────────────────────
     qtd_real = buscar_qtd_discursos(sid)
@@ -497,6 +536,7 @@ def validar_senador(
         CONFIG_BUSCA["fallback_ativado"] = True
         # Alarga o período retroativamente (volta até 2022-01-01 para obter mais histórico)
         CONFIG_BUSCA["data_inicio"] = "2022-01-01"
+        data_inicio = "2022-01-01"
         CONFIG_BUSCA["min_discursos_volume"] = 1
         min_discursos_volume = 1
         
@@ -519,14 +559,14 @@ def validar_senador(
     log(f"  [Pre-Filter L1] {nome} – {qtd_real} discursos encontrados. Prosseguindo...", "INFO")
 
     # ── Coleta completa ──────────────────────────────────────────────
-    discursos = buscar_discursos_senador(sid, qtd=qtd_discursos)
+    discursos = buscar_discursos_senador(sid, qtd=qtd_discursos, data_inicio=data_inicio)
     if not discursos:
-        log(f"  ⤼ {nome} – nenhum discurso no scraping. Descartado.", "SKIP")
+        log(f"  ⤼ {nome} – nenhum discurso no período. Descartado.", "SKIP")
         return None
 
-    votos = buscar_votos_senador(sid)
+    votos = buscar_votos_senador(sid, data_inicio=data_inicio)
     if not votos:
-        log(f"  ⤼ {nome} – nenhum voto encontrado. Descartado.", "SKIP")
+        log(f"  ⤼ {nome} – nenhum voto encontrado no período. Descartado.", "SKIP")
         return None
 
     # ── Camada 2: Pré-Filtro Jaccard (antes da LLM) ─────────────────
@@ -689,6 +729,19 @@ def salvar_no_banco(conn, senador_data: dict):
 
         if parl_uuid:
             for detalhe in senador_data.get("detalhes", []):
+                # Evita duplicar se a mesma justificativa e score já existem para este parlamentar
+                cur.execute(
+                    """
+                    SELECT 1 FROM score_coerencia 
+                    WHERE parlamentar_id = %s AND justificativa = %s AND score = %s
+                    LIMIT 1
+                    """,
+                    (parl_uuid, detalhe.get("justificativa", ""), round(detalhe["afinidade"] * 100, 2))
+                )
+                if cur.fetchone():
+                    log(f"  [DB] Score já existente para {senador_data['nome']} (justificativa repetida). Ignorando inserção redundante.", "INFO")
+                    continue
+
                 cur.execute(
                     """
                     INSERT INTO score_coerencia
@@ -820,12 +873,23 @@ def main():
     # Inicializa estado de busca com os parâmetros da CLI
     CONFIG_BUSCA["min_discursos_volume"] = args.min_discursos
 
+    # Carrega o checkpoint
+    try:
+        from utils.config import obter_checkpoint, atualizar_checkpoint
+    except ImportError:
+        sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+        from utils.config import obter_checkpoint, atualizar_checkpoint
+
+    checkpoint_data = obter_checkpoint()
+    CONFIG_BUSCA["data_inicio"] = checkpoint_data
+
     log("=" * 60)
     log("  Dito e Feito – Varredura de Coerência Parlamentar (backend2)")
     log("=" * 60)
     log(f"Partidos alvo: {', '.join(PARTIDOS_ALVO)}")
     log(f"Meta: {args.limit_per_party} senadores válidos por partido")
     log(f"Limite total de análise: {args.limit_total if args.limit_total else 'Sem limite'}")
+    log(f"Período de busca: de {CONFIG_BUSCA['data_inicio']} até {CONFIG_BUSCA['data_fim']}")
     log(f"Threshold afinidade: >= {THRESHOLD_AFINIDADE} | Mínimo de pares: {MIN_MATCHES}")
     log(f"[L1] Min. discursos para processar: {args.min_discursos}")
     log(f"[L2] Jaccard gate (pré-LLM): {args.jaccard_gate}")
@@ -935,6 +999,10 @@ def main():
     log(f"{'=' * 60}")
 
     gerar_metricas_json(todos_validados, args.output)
+
+    # Salva o novo checkpoint
+    hoje_str = datetime.now().strftime("%Y-%m-%d")
+    atualizar_checkpoint(hoje_str)
 
     log("\n🏁 Processo finalizado com sucesso.", "OK")
 
