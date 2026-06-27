@@ -23,7 +23,7 @@ export function PerfilPolitico() {
     const contagem = {
       'Coerente': 0,
       'Parcialmente Alinhado': 0,
-      'Divergente': 0,
+      'Incoerente': 0,
       'Não Relacionado': 0
     };
     
@@ -31,8 +31,8 @@ export function PerfilPolitico() {
       const status = item.status || 'Não Relacionado';
       if (status === 'Coerente') {
         contagem['Coerente']++;
-      } else if (status === 'Divergente') {
-        contagem['Divergente']++;
+      } else if (status === 'Divergente' || status === 'Incoerente') {
+        contagem['Incoerente']++;
       } else if (status === 'Parcialmente Alinhado') {
         contagem['Parcialmente Alinhado']++;
       } else {
@@ -43,7 +43,7 @@ export function PerfilPolitico() {
     const formatoPizza = [
       { name: 'Coerente', value: contagem['Coerente'], color: '#10b981' },
       { name: 'Parcialmente Alinhado', value: contagem['Parcialmente Alinhado'], color: '#f59e0b' },
-      { name: 'Divergente', value: contagem['Divergente'], color: '#ef4444' },
+      { name: 'Incoerente', value: contagem['Incoerente'], color: '#ef4444' },
       { name: 'Não Relacionado', value: contagem['Não Relacionado'], color: '#64748b' }
     ].filter(d => d.value > 0);
 
@@ -177,8 +177,8 @@ export function PerfilPolitico() {
 
   const renderizarStatus = (status) => {
     if (status === "Coerente") return <span className="bg-brand-sucesso/20 text-brand-sucesso px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit"><CheckCircle size={12}/> Coerente</span>;
-    if (status === "Divergente") return <span className="bg-brand-alerta/20 text-brand-alerta px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit"><AlertTriangle size={12}/> Divergente</span>;
-    if (status === "Não Relacionado") return <span className="bg-slate-800 text-slate-400 px-2 py-1 rounded text-xs font-bold w-fit">Não Relacionado</span>;
+    if (status === "Divergente" || status === "Incoerente") return <span className="bg-brand-alerta/20 text-brand-alerta px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit"><AlertTriangle size={12}/> Incoerente</span>;
+    if (status === "Não Relacionado" || status === "Sem Avaliação da IA") return <span className="bg-slate-800 text-slate-400 px-2 py-1 rounded text-xs font-bold w-fit">{status}</span>;
     return <span className="bg-slate-700 text-texto-principal px-2 py-1 rounded text-xs font-bold w-fit">Parcialmente Alinhado</span>;
   };
 
@@ -337,11 +337,16 @@ export function PerfilPolitico() {
                       <span className="text-texto-secundario">Voto: </span>
                       <strong className="text-white bg-slate-800 px-2 py-0.5 rounded">{voto.voto}</strong>
                     </p>
+                    {voto.justificativa && (
+                      <p className="text-sm mt-3 text-texto-secundario bg-slate-800/50 p-3 rounded italic border-l-2 border-brand-petroleo">
+                        "{voto.justificativa}"
+                      </p>
+                    )}
                   </div>
                   <div className="md:w-48 w-full flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start gap-2 bg-fundo p-3 rounded border border-slate-800">
                     <div className="text-right">
-                      <p className="text-xs text-texto-secundario uppercase">Afinidade</p>
-                      <p className="text-lg font-mono text-white font-bold">{(voto.afinidade * 100).toFixed(1)}%</p>
+                      <p className="text-xs text-texto-secundario uppercase">Coerência</p>
+                      <p className="text-lg font-mono text-white font-bold">{Math.round(voto.afinidade * 100)}%</p>
                     </div>
                     {renderizarStatus(voto.status)}
                   </div>

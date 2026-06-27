@@ -45,8 +45,9 @@ export function VisaoGeral() {
 
           if (data.senadores) {
             data.senadores.forEach(s => {
-              if (s.contagem_status && s.contagem_status.Divergente) {
-                totalDivergentes += s.contagem_status.Divergente;
+              if (s.contagem_status) {
+                if (s.contagem_status.Incoerente) totalDivergentes += s.contagem_status.Incoerente;
+                if (s.contagem_status.Divergente) totalDivergentes += s.contagem_status.Divergente; // fallback pra dados legados
               }
               analyzedMap[s.id] = Math.round(s.score_coerencia || 0);
               analyzedList.push({
@@ -288,7 +289,7 @@ export function VisaoGeral() {
             <div className="flex justify-between items-center p-[16px_20px] border-b border-border2">
               <div className="text-[16px] font-bold text-text-main flex items-center gap-2">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
-                Alertas de Divergência
+                Alertas de Incoerência
               </div>
               <span className="text-[11px] font-semibold text-red bg-red-bg border border-red/25 px-2 py-1 rounded-md">3 casos graves</span>
             </div>

@@ -1,220 +1,196 @@
 {
-  "gerado_em": "2026-05-26T00:32:42.134312Z",
-  "total_analisados": 11,
-  "media_global_coerencia": 50.55,
+  "gerado_em": "2026-06-27T16:03:30.143923Z",
+  "total_analisados": 53,
+  "media_global_coerencia": 0.4,
   "partido_mais_coerente": {
-    "partido": "PODEMOS",
-    "media_coerencia": 72.33,
-    "total_senadores": 3
+    "partido": "PL",
+    "media_coerencia": 1.62,
+    "total_senadores": 13
   },
   "metricas_por_partido": [
     {
+      "partido": "MDB",
+      "media_coerencia": 0.0,
+      "total_senadores": 8
+    },
+    {
       "partido": "PL",
-      "media_coerencia": 44.0,
-      "total_senadores": 3
+      "media_coerencia": 1.62,
+      "total_senadores": 13
     },
     {
       "partido": "PODEMOS",
-      "media_coerencia": 72.33,
+      "media_coerencia": 0.0,
       "total_senadores": 3
     },
     {
       "partido": "PP",
-      "media_coerencia": 27.0,
-      "total_senadores": 2
+      "media_coerencia": 0.0,
+      "total_senadores": 6
     },
     {
       "partido": "PSD",
-      "media_coerencia": 59.0,
-      "total_senadores": 1
+      "media_coerencia": 0.0,
+      "total_senadores": 14
     },
     {
       "partido": "PT",
-      "media_coerencia": 47.0,
-      "total_senadores": 2
+      "media_coerencia": 0.0,
+      "total_senadores": 9
     }
   ],
   "senadores": [
     {
-      "id": "5959",
-      "nome": "Styvenson Valentim",
-      "partido": "PODEMOS",
-      "uf": "RN",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5959.jpg",
-      "score_coerencia": 76.0,
-      "pares_alinhados": 2,
-      "total_pares": 10,
-      "contagem_status": {
-        "Coerente": 10
-      },
-      "detalhes": [
-        {
-          "ementa": "Acrescenta o inciso LXXIX ao art. 5º da Constituição Federal, para introduzir a inclusão digital no rol de direitos fundamentais.",
-          "afinidade": 0.9,
-          "jaccard_pre_filtro": 0.0882,
-          "status": "Coerente",
-          "justificativa": "O discurso apoia a alteração do art. 37 da Constituição Federal para permitir a acumulação remunerada de um cargo de professor com outro de qualquer natureza.",
-          "voto": "Sim",
-          "data": "2022-06-02",
-          "discurso": "O SR. STYVENSON VALENTIM  \r\n(Bloco Parlamentar Democracia/PSDB - RN. Para orientar a bancada.) – Vota \"sim\", Sr. Presidente."
-        },
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.9,
-          "jaccard_pre_filtro": 0.0882,
-          "status": "Coerente",
-          "justificativa": "O discurso apoia a alteração do art. 37 da Constituição Federal para permitir a acumulação remunerada de um cargo de professor com outro de qualquer natureza.",
-          "voto": "Não",
-          "data": "2022-05-03",
-          "discurso": "O SR. STYVENSON VALENTIM  \r\n(Bloco Parlamentar Democracia/PSDB - RN. Para orientar a bancada.) – Vota \"sim\", Sr. Presidente."
-        }
-      ]
-    },
-    {
-      "id": "6008",
-      "nome": "Giordano",
-      "partido": "PODEMOS",
-      "uf": "SP",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6008.jpg",
-      "score_coerencia": 74.0,
-      "pares_alinhados": 3,
-      "total_pares": 10,
-      "contagem_status": {
-        "Coerente": 9,
-        "Não Relacionado": 1
-      },
-      "detalhes": [
-        {
-          "ementa": "Acrescenta o inciso LXXIX ao art. 5º da Constituição Federal, para introduzir a inclusão digital no rol de direitos fundamentais.",
-          "afinidade": 0.8,
-          "jaccard_pre_filtro": 0.0811,
-          "status": "Coerente",
-          "justificativa": "O discurso apoia a ementa sobre acumulação remunerada de cargos.",
-          "voto": "P-NRV",
-          "data": "2022-06-02",
-          "discurso": "O SR. GIORDANO  \r\n(Bloco Parlamentar Democracia/PODEMOS - SP. Para orientar a bancada.) – Vou orientar pelo Podemos, Presidente. \n      Vou votar \"sim\". Podemos votar \"sim\"."
-        },
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.8,
-          "jaccard_pre_filtro": 0.0811,
-          "status": "Coerente",
-          "justificativa": "O discurso apoia a ementa sobre acumulação remunerada de cargos.",
-          "voto": "Sim",
-          "data": "2022-05-03",
-          "discurso": "O SR. GIORDANO  \r\n(Bloco Parlamentar Democracia/PODEMOS - SP. Para orientar a bancada.) – Vou orientar pelo Podemos, Presidente. \n      Vou votar \"sim\". Podemos votar \"sim\"."
-        }
-      ]
-    },
-    {
-      "id": "3806",
-      "nome": "Zequinha Marinho",
-      "partido": "PODEMOS",
-      "uf": "PA",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador3806.jpg",
-      "score_coerencia": 67.0,
-      "pares_alinhados": 2,
-      "total_pares": 10,
-      "contagem_status": {
-        "Coerente": 9,
-        "Parcialmente Alinhado": 1
-      },
-      "detalhes": [
-        {
-          "ementa": "Acrescenta o inciso X ao art. 170 da Constituição Federal para incluir a economia solidária entre os princípios da Ordem Econômica.",
-          "afinidade": 0.8,
-          "jaccard_pre_filtro": 0.0882,
-          "status": "Coerente",
-          "justificativa": "Discurso e ementa tratam do mesmo tema de alteração da Constituição Federal",
-          "voto": "Sim",
-          "data": "2022-05-03",
-          "discurso": "O SR. ZEQUINHA MARINHO  \r\n(Bloco Parlamentar Democracia/PODEMOS - PA. Para orientar a bancada.) – O Podemos vota \"sim\"."
-        }
-      ]
-    },
-    {
-      "id": "4694",
-      "nome": "Rogerio Marinho",
+      "id": "4642",
+      "nome": "Efraim Filho",
       "partido": "PL",
-      "uf": "RN",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4694.jpg",
-      "score_coerencia": 64.0,
-      "pares_alinhados": 4,
-      "total_pares": 10,
-      "contagem_status": {
-        "Coerente": 5,
-        "Parcialmente Alinhado": 2,
-        "Divergente": 3
-      },
-      "detalhes": [
-        {
-          "ementa": "Altera o art. 5º da Constituição Federal, para prever como mandado de criminalização a posse e o porte de entorpecentes e drogas afins sem autorização ou em desacordo com determinação legal ou regulamentar.",
-          "afinidade": 0.8,
-          "jaccard_pre_filtro": 0.0707,
-          "status": "Coerente",
-          "justificativa": "O discurso e a ementa tratam do mesmo tema de alteração da Constituição Federal.",
-          "voto": "Sim",
-          "data": "2024-04-16",
-          "discurso": "O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN. Pela ordem.) – O PLV, com as alterações feitas pelo Relator – não é, Sr. Presidente? –, que seriam aquelas que a gente acabou de elencar. ( Pausa. ) \n      Presidente, eu consulto a Mesa, em relação a essa segunda alteração que o Relator faria, que acordou conosco, se é possível, num acordo de procedimentos...  \n      A SRA. ELIZIANE GAMA  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MA) – Presidente, V. Exa. permite que eu fale enquanto fazem essas... \n      O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN) – ... que isso seja superado sem necessidade da apresentação do destaque, o.k.?"
-        },
-        {
-          "ementa": "Altera o art. 5º da Constituição Federal, para prever como mandado de criminalização a posse e o porte de entorpecentes e drogas afins sem autorização ou em desacordo com determinação legal ou regulamentar.",
-          "afinidade": 0.8,
-          "jaccard_pre_filtro": 0.0707,
-          "status": "Coerente",
-          "justificativa": "O discurso e a ementa tratam do mesmo tema de alteração da Constituição Federal.",
-          "voto": "Sim",
-          "data": "2024-04-16",
-          "discurso": "O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN. Pela ordem.) – O PLV, com as alterações feitas pelo Relator – não é, Sr. Presidente? –, que seriam aquelas que a gente acabou de elencar. ( Pausa. ) \n      Presidente, eu consulto a Mesa, em relação a essa segunda alteração que o Relator faria, que acordou conosco, se é possível, num acordo de procedimentos...  \n      A SRA. ELIZIANE GAMA  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MA) – Presidente, V. Exa. permite que eu fale enquanto fazem essas... \n      O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN) – ... que isso seja superado sem necessidade da apresentação do destaque, o.k.?"
-        },
-        {
-          "ementa": "Altera o inciso XXVIII do art. 22 e acrescenta dispositivos aos arts. 23 e 24 da Constituição Federal, para dispor sobre o regime de competência para legislar sobre defesa e segurança cibernética e fixar a competência comum dos entes federados para zelar pela segurança cibernética dos serviços públicos.",
-          "afinidade": 0.8,
-          "jaccard_pre_filtro": 0.0662,
-          "status": "Coerente",
-          "justificativa": "O discurso e a ementa tratam do mesmo tema de alteração da Constituição Federal.",
-          "voto": "P-NRV",
-          "data": "2024-12-17",
-          "discurso": "O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN. Pela ordem.) – Primeiro, eu quero dizer a V. Exa. que quem ganhou hoje foi a sociedade brasileira, os pescadores artesanais, aqueles que realmente precisam do seguro-defeso. Não tenho dúvida de que a Câmara dos Deputados, inclusive orientada por nós e pelo Governo, vai respaldar o texto que sai hoje do Senado da República. Nós fazemos o nosso papel como Casa revisora.  \n      Quero aqui agradecer muito a mediação do Líder Jaques Wagner, do Líder Randolfe Rodrigues, a sensibilidade que tiveram, de entender que a nossa fala, a nossa irresignação se dava em função de situações anteriores, que nos deixavam numa situação de extrema vulnerabilidade.  \n      Agradeço ao Relator a sua sensibilidade, aos Líderes que aqui estiveram conosco, a Senadora Tereza, o Senador Seif, o Senador Girão, o Senador Jaime Bagattoli, aqueles que ficaram aqui até esta hora. Quero dizer a V. Exas. que este é um dia que nos deixa muito felizes em relação ao nosso papel como Senador da República. Então agradeço a V. Exa. pela mediação e aos nossos pares aqui do Senado da República.  \n      Não tenho dúvida de que hoje nós cumprimos o nosso dever para com o país."
-        },
-        {
-          "ementa": "Altera o inciso XXVIII do art. 22 e acrescenta dispositivos aos arts. 23 e 24 da Constituição Federal, para dispor sobre o regime de competência para legislar sobre defesa e segurança cibernética e fixar a competência comum dos entes federados para zelar pela segurança cibernética dos serviços públicos.",
-          "afinidade": 0.8,
-          "jaccard_pre_filtro": 0.0662,
-          "status": "Coerente",
-          "justificativa": "O discurso e a ementa tratam do mesmo tema de alteração da Constituição Federal.",
-          "voto": "P-NRV",
-          "data": "2024-12-17",
-          "discurso": "O SR. ROGERIO MARINHO  \r\n(Bloco Parlamentar Vanguarda/PL - RN. Pela ordem.) – Primeiro, eu quero dizer a V. Exa. que quem ganhou hoje foi a sociedade brasileira, os pescadores artesanais, aqueles que realmente precisam do seguro-defeso. Não tenho dúvida de que a Câmara dos Deputados, inclusive orientada por nós e pelo Governo, vai respaldar o texto que sai hoje do Senado da República. Nós fazemos o nosso papel como Casa revisora.  \n      Quero aqui agradecer muito a mediação do Líder Jaques Wagner, do Líder Randolfe Rodrigues, a sensibilidade que tiveram, de entender que a nossa fala, a nossa irresignação se dava em função de situações anteriores, que nos deixavam numa situação de extrema vulnerabilidade.  \n      Agradeço ao Relator a sua sensibilidade, aos Líderes que aqui estiveram conosco, a Senadora Tereza, o Senador Seif, o Senador Girão, o Senador Jaime Bagattoli, aqueles que ficaram aqui até esta hora. Quero dizer a V. Exas. que este é um dia que nos deixa muito felizes em relação ao nosso papel como Senador da República. Então agradeço a V. Exa. pela mediação e aos nossos pares aqui do Senado da República.  \n      Não tenho dúvida de que hoje nós cumprimos o nosso dever para com o país."
-        }
-      ]
-    },
-    {
-      "id": "5917",
-      "nome": "Fernando Dueire",
-      "partido": "PSD",
-      "uf": "PE",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5917.jpg",
-      "score_coerencia": 59.0,
+      "uf": "PB",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4642.jpg",
+      "score_coerencia": 11.11,
       "pares_alinhados": 1,
       "total_pares": 10,
       "contagem_status": {
-        "Coerente": 2,
-        "Parcialmente Alinhado": 6,
-        "Não Relacionado": 2
+        "Coerente": 5,
+        "Incoerente": 1,
+        "Não Relacionado": 4
       },
       "detalhes": [
         {
-          "ementa": "Altera o art. 24 da Constituição Federal, para incluir no rol das competências da União, dos Estados e do Distrito Federal legislar concorrentemente sobre proteção ao idoso.",
-          "afinidade": 0.6,
-          "jaccard_pre_filtro": 0.0541,
-          "status": "Parcialmente Alinhado",
-          "justificativa": "Discurso e ementa tratam de temas relacionados à educação e à saúde, mas não são diretamente relacionados.",
-          "voto": "AP",
-          "data": "2025-05-20",
-          "discurso": "O SR. FERNANDO DUEIRE  \r\n(Bloco Parlamentar Democracia/MDB - PE. Para discutir.) – Sr. Presidente, Srs. Senadores, hoje é um dia simbólico. A abertura dos trabalhos legislativos aqui, nesta Casa, neste início, traz como que um sentido da preocupação da Casa da Federação brasileira com a sua população. Esta medida provisória tem tudo a ver com a ponta, com aquilo que acontece nas mais diferentes regiões do país, exatamente com aqueles que precisam. Isso tem a ver com inclusão. Isso tem a ver com o atendimento à necessidade básica dos brasileiros.  \n      Eu quero cumprimentar V. Exa. pela diligência, pelo cuidado de não permitir que esta medida provisória perdesse a validade, trazendo hoje a esta Casa, no seu primeiro dia de trabalho, esta votação da Medida Provisória 1.313, que, com certeza absoluta, com o voto simbólico de todos que fazem esta Casa, com um quórum alto, inclusive, será aprovada. \n      E pronuncio o meu voto, de maneira clara e objetiva, junto aos meus colegas.  \n      Nós vamos aprová-la com distinção e louvor, porque ela vai ao encontro da necessidade de muitos irmãos nossos que precisam deste atendimento.  \n      Muito obrigado, Presidente."
+          "ementa": "Acrescenta o art. 5º-A à Lei Complementar nº 91, de 22 de dezembro de 1997, para manter os coeficientes do Fundo de Participação dos Municípios (FPM) de Municípios com redução populacional aferida em censo demográfico, aplicado redutor financeiro sobre eventuais ganhos, na forma e no prazo que especifica; e altera a Lei nº 14.133, de 1º de abril de 2021.",
+          "afinidade": 1.0,
+          "jaccard_pre_filtro": 0.0887,
+          "status": "Coerente",
+          "justificativa": "O discurso apoia o voto 'Sim' registrado.",
+          "voto": "Sim",
+          "data": "2023-06-14",
+          "discurso": "O SR. EFRAIM FILHO  \r\n(Bloco Parlamentar Democracia/UNIÃO - PB. Pela ordem.) – Eu já votei, mas queria me associar à fala do Senador Zequinha Marinho e dizer que esse tema é de extrema importância. Lá nas ruas da minha querida Paraíba, os agentes comunitários de saúde, os agentes de combate a endemias também têm feito essa solicitação.  \n      Os técnicos em educação também têm feito a sua solicitação a respeito do PL 2.531, Presidente, e acredito que é importante, sim, valorizar quem está na educação, quem está ali de domingo a domingo, de sol a sol, muitas vezes se comprometendo para que a educação brasileira possa ser transformada, e valorizar o técnico em educação é importantíssimo."
         }
       ]
+    },
+    {
+      "id": "5070",
+      "nome": "Wilder Morais",
+      "partido": "PL",
+      "uf": "GO",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5070.jpg",
+      "score_coerencia": 10.0,
+      "pares_alinhados": 1,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 2,
+        "Coerente": 6,
+        "Incoerente": 2
+      },
+      "detalhes": [
+        {
+          "ementa": "Altera o art. 3º da Lei Complementar nº 116, de 31 de julho de 2003, para explicitar que o Imposto Sobre Serviços de Qualquer Natureza – ISS incidente sobre os serviços de guincho intramunicipal, guindaste e içamento é devido no local da execução da obra.",
+          "afinidade": 1.0,
+          "jaccard_pre_filtro": 0.1039,
+          "status": "Coerente",
+          "justificativa": "O discurso apoia o voto registrado.",
+          "voto": "Sim",
+          "data": "2024-12-18",
+          "discurso": "O SR. WILDER MORAIS  \r\n(Bloco Parlamentar Vanguarda/PL - GO. Como Relator.) – Presidente, as emendas apresentadas da CAS foram de minha autoria, mas, recebendo aí a orientação da Mesa para que a gente não possa voltar esse projeto para a Câmara, eu vou retirar essas emendas para que a gente possa dar celeridade e aprovarmos hoje aqui no Plenário."
+        }
+      ]
+    },
+    {
+      "id": "3777",
+      "nome": "Eduardo Gomes",
+      "partido": "PL",
+      "uf": "TO",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador3777.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5894",
+      "nome": "Flávio Bolsonaro",
+      "partido": "PL",
+      "uf": "RJ",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5894.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Incoerente": 5,
+        "Não Relacionado": 5
+      },
+      "detalhes": []
+    },
+    {
+      "id": "6381",
+      "nome": "Hermes Klann",
+      "partido": "PL",
+      "uf": "SC",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6381.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 4,
+      "contagem_status": {
+        "Não Relacionado": 4
+      },
+      "detalhes": [
+        {
+          "ementa": "Altera o art. 9º da Lei Complementar nº 101, de 4 de maio de 2000, para ressalvar despesas das agências reguladoras federais da limitação de empenho e movimentação financeira.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.023,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não trata da ementa de forma clara.",
+          "voto": "Sim",
+          "data": "2026-06-16",
+          "discurso": "O SR. HERMES KLANN  \r\n(Bloco Parlamentar Vanguarda/PL - SC. Para discursar.) – Sr. Presidente Senador Chico Rodrigues, Senador Izalci, Sras. e Srs. Senadores, subo a esta tribuna para tratar de um tema que, à primeira vista, pode parecer simples, mas que, na verdade, toca em algo muito mais profundo: o respeito à história, à cultura, à identidade e às tradições do povo catarinense. \n      Estamos assistindo com preocupação a uma mudança regulatória que ameaça descaracterizar um dos maiores símbolos gastronômicos de Santa Catarina: a tradicional linguiça Blumenau. Uma portaria editada para adequação a normas federais reduziu o limite de gordura permitido na receita de 42% para 30%. Pode parecer apenas um número, mas não é! Essa alteração mexe diretamente nas características que tornaram a linguiça Blumenau um produto único, reconhecido e preservado há gerações. Estamos falando de uma receita trazida pelos imigrantes alemães, aperfeiçoada ao longo de décadas no Vale do Itajaí, e que se tornou parte da memória afetiva de milhares de famílias catarinenses. Não é apenas um alimento, é um patrimônio cultural, é história, é identidade. E o mais grave: em 2024, a linguiça Blumenau recebeu o selo de indicação geográfica, concedido pelo INPI, justamente por possuir características próprias e tradicionais que a diferenciam de qualquer outro produto do país.  \n      Ora, como pode o poder público reconhecer, oficialmente, uma tradição e, depois, criar exigências que levam à sua descaracterização? Que segurança jurídica é essa? Que lógica é essa? De um lado, o Estado reconhece o produto como patrimônio e como expressão da cultura regional; de outro, exige mudanças que afetam exatamente os elementos que justificaram esse reconhecimento. Não estamos discutindo flexibilização sanitária, não estamos discutindo redução de qualidade, estamos discutindo o direito de uma região preservar sua história e sua forma tradicional de produção, desde que respeitadas todas as exigências de segurança alimentar.  \n      O Brasil é grande demais para ser tratado de forma padronizada em tudo. Nossa força está justamente na diversidade das nossas regiões, está no que faz o queijo da Canastra ser diferente, está no que faz o vinho da Serra Gaúcha ser diferente, está no que faz a linguiça Blumenau ser diferente. Quando a burocracia passa a desconsiderar cultura local, ela deixa de ser um instrumento de organização e passa a ser um instrumento de destruição de identidades. E não é apenas a cultura que está em jogo, estão em jogo pequenas e médias empresas, estão em jogo empregos, está em jogo a renda de famílias que há décadas produzem essa iguaria e ajudam a movimentar a economia do Vale do Itajaí.  \n      Por isso, manifesto minha solidariedade aos produtores catarinenses e a todos que estão mobilizados na defesa da autenticidade da linguiça Blumenau. Defender essa tradição não é defender apenas uma receita, é defender a memória dos nossos antepassados, é defender a cultura dos imigrantes que ajudaram a construir Santa Catarina, é defender a liberdade das comunidades de preservarem sua história diante de decisões distantes da sua realidade.  \n      Que o bom senso prevaleça. Que haja diálogo com os produtores. Que haja respeito à indicação geográfica já reconhecida oficialmente. E que ninguém, em nome de uma frieza burocrática, apague o sabor da nossa história.  \n      Muito obrigado."
+        },
+        {
+          "ementa": "Altera o art. 4º, §8º, inciso V, da Lei Complementar nº 224, de 26 de dezembro de 2025.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0118,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não trata da ementa de forma clara.",
+          "voto": "Sim",
+          "data": "2026-05-27",
+          "discurso": "O SR. HERMES KLANN  \r\n(Bloco Parlamentar Vanguarda/PL - SC. Para discursar.) – Sr. Presidente Chico Rodrigues, Srs. Senadores, Sras. Senadoras, o brasileiro está cansado de ser roubado e o bandido sair impune, por isso hoje quero falar sobre o PL 3.630, de 2025. \n      A proposta estabelece que a divulgação deve ter como finalidade identificar o infrator, alertar a população e colaborar com as autoridades policiais. Mais conhecido como \"PL dos amostradinhos\", de autoria da Deputada Bia Kicis, relatado pelo brilhante Senador Amin, esse projeto garante que comerciantes possam utilizar imagens de câmeras de segurança para divulgar na identificação de infratores em flagrante delito. \n      Os números demonstram que a situação está fugindo do controle, pois, segundo dados da federação nacional do varejo, os furtos em lojas aumentaram 93% em 2023, no comparativo ao ano de 2019. Repito, senhores: a incidência de furtos em lojas aumentou em 93%. Em 2023, por exemplo, alguns setores chegaram a registrar mais de mil furtos por dia, revelando que estamos vivendo um completo absurdo no Brasil.  \n      Atualmente, quando o infrator é filmado em flagrante, a vítima fica impedida de divulgar as imagens do furto ou do roubo, porque interpretações jurídicas distorcidas podem estimular processo por divulgação de imagens não autorizadas. \n      Dessa forma, Sr. Presidente, empreendedor sofre duplamente: primeiro, nas mãos do delinquente, que furta os bens de seu estabelecimento; e, segundo, torna-se penalizado por um sistema judicial que favorece, indiscriminadamente, a divulgação de qualquer imagem. \n      Reconheço a importância da iniciativa da Deputada Federal Bia Kicis – novamente, relatada pelo brilhante Senador Amin –, que pretende aprimorar a segurança jurídica aos comerciantes e cidadãos diante do aumento desses crimes praticados nos setores comerciais, permitindo que esses registros de vigilância possam ser utilizados como ferramenta de apoio à segurança pública e à identificação de infratores. \n      Ressalto a coragem da autora desse projeto ao enfrentar um tema que aflige diariamente milhares de brasileiros honestos, que trabalham para manter seus negócios abertos em meio à crescente ocorrência de furtos e roubos em estabelecimentos comerciais. \n      Apresento, nesta ocasião, algumas indicações objetivas. A quem defenderá o Estado brasileiro na temática furtos ou roubos em estabelecimentos comerciais? Será na defesa do empreendedor que acorda às 5h da manhã para abrir sua loja, que paga impostos, que é vítima de transgressores que furtam ou roubam produtos à venda? Ou apoiará infratores reincidentes que furtam, roubam, ameaçam, agridem e saem rindo do cidadão de bem, principalmente pela sensação de impunidade? \n      Essa sensação de impunidade que paira no inconsciente coletivo da população brasileira é como se o Brasil tivesse se transformado no país onde o bandido tem mais proteção legal do que as vítimas, as quais são empreendedores e empreendedoras que, sob suor e lágrimas, lutam diariamente para manter suas empresas. \n      O cenário encontrado no território nacional é de que os comerciantes vivem como se trancafiados fossem, por estarem atrás das grades, câmeras e cercas elétricas, enquanto bandidos circulam livremente pelas ruas, agindo sem ter qualquer receio de ser penalizados.  \n      Além disso, é notável a revolta dos nossos comerciantes brasileiros, que atualmente estão impossibilitados de reagir, pois estão com medo de denunciar, de divulgar imagens e de serem processados judicialmente por divulgar imagens dos delinquentes. Essa realidade precisa ser resolvida, bem como mudar esta inversão de valores básicos: quem escolheu praticar o crime deve responder pelos seus atos, é algo simples assim.  \n      O Senado Federal precisa dar uma resposta firme no combate a furtos e roubos em estabelecimentos comerciais, contribuindo com algo essencial à sociedade brasileira. Portanto, faço aqui um apelo aos meus colegas Parlamentares e ao Presidente Davi Alcolumbre: tão logo seja apreciado na Comissão de Constituição, Justiça e Cidadania, irei requerer urgência ao Projeto de Lei 3.630, de 2025, para ser logo pautado, discutido e votado aqui neste Plenário. \n      Os brasileiros que empreendem não aguentam mais a sensação de impunidade existente. É tempo de este Parlamento mostrar que ainda sabe distinguir quem é a vítima e quem é o criminoso. E, na defesa dos cidadãos e cidadãs trabalhadores que prezam pela honestidade, bem como dos empreendedores comerciais, dos trabalhadores e das famílias brasileiras, peço o apoio dos Senadores e Senadoras para a aprovação do Projeto de Lei 3.630, de 2025. \n      Muito obrigado, Presidente."
+        },
+        {
+          "ementa": "Estabelece condições à concessão de isenção do Imposto sobre Serviços de Qualquer Natureza (ISS) para fatos geradores relacionados à organização ou à realização da Copa do Mundo Feminina da FIFA 2027.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0229,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não trata da ementa de forma clara.",
+          "voto": "Sim",
+          "data": "2026-06-09",
+          "discurso": "O SR. HERMES KLANN  \r\n(Bloco Parlamentar Vanguarda/PL - SC. Para discursar.) – Sr. Presidente Senador Chico Rodrigues, Senador Izalci, Sras. e Srs. Senadores, subo a esta tribuna para tratar de um tema que, à primeira vista, pode parecer simples, mas que, na verdade, toca em algo muito mais profundo: o respeito à história, à cultura, à identidade e às tradições do povo catarinense. \n      Estamos assistindo com preocupação a uma mudança regulatória que ameaça descaracterizar um dos maiores símbolos gastronômicos de Santa Catarina: a tradicional linguiça Blumenau. Uma portaria editada para adequação a normas federais reduziu o limite de gordura permitido na receita de 42% para 30%. Pode parecer apenas um número, mas não é! Essa alteração mexe diretamente nas características que tornaram a linguiça Blumenau um produto único, reconhecido e preservado há gerações. Estamos falando de uma receita trazida pelos imigrantes alemães, aperfeiçoada ao longo de décadas no Vale do Itajaí, e que se tornou parte da memória afetiva de milhares de famílias catarinenses. Não é apenas um alimento, é um patrimônio cultural, é história, é identidade. E o mais grave: em 2024, a linguiça Blumenau recebeu o selo de indicação geográfica, concedido pelo INPI, justamente por possuir características próprias e tradicionais que a diferenciam de qualquer outro produto do país.  \n      Ora, como pode o poder público reconhecer, oficialmente, uma tradição e, depois, criar exigências que levam à sua descaracterização? Que segurança jurídica é essa? Que lógica é essa? De um lado, o Estado reconhece o produto como patrimônio e como expressão da cultura regional; de outro, exige mudanças que afetam exatamente os elementos que justificaram esse reconhecimento. Não estamos discutindo flexibilização sanitária, não estamos discutindo redução de qualidade, estamos discutindo o direito de uma região preservar sua história e sua forma tradicional de produção, desde que respeitadas todas as exigências de segurança alimentar.  \n      O Brasil é grande demais para ser tratado de forma padronizada em tudo. Nossa força está justamente na diversidade das nossas regiões, está no que faz o queijo da Canastra ser diferente, está no que faz o vinho da Serra Gaúcha ser diferente, está no que faz a linguiça Blumenau ser diferente. Quando a burocracia passa a desconsiderar cultura local, ela deixa de ser um instrumento de organização e passa a ser um instrumento de destruição de identidades. E não é apenas a cultura que está em jogo, estão em jogo pequenas e médias empresas, estão em jogo empregos, está em jogo a renda de famílias que há décadas produzem essa iguaria e ajudam a movimentar a economia do Vale do Itajaí.  \n      Por isso, manifesto minha solidariedade aos produtores catarinenses e a todos que estão mobilizados na defesa da autenticidade da linguiça Blumenau. Defender essa tradição não é defender apenas uma receita, é defender a memória dos nossos antepassados, é defender a cultura dos imigrantes que ajudaram a construir Santa Catarina, é defender a liberdade das comunidades de preservarem sua história diante de decisões distantes da sua realidade.  \n      Que o bom senso prevaleça. Que haja diálogo com os produtores. Que haja respeito à indicação geográfica já reconhecida oficialmente. E que ninguém, em nome de uma frieza burocrática, apague o sabor da nossa história.  \n      Muito obrigado."
+        },
+        {
+          "ementa": "Altera a Lei Complementar nº 79, de 7 de janeiro de 1994, para destinar recursos do Fundo Penitenciário Nacional (Funpen) à formação, ao aperfeiçoamento, à especialização e à capacitação continuada dos servidores do sistema penitenciário nacional e dos policiais penais.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0294,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não trata da ementa de forma clara.",
+          "voto": "Sim",
+          "data": "2026-06-10",
+          "discurso": "O SR. HERMES KLANN  \r\n(Bloco Parlamentar Vanguarda/PL - SC. Para discursar.  Por videoconferência .) – Bom dia, Senador Amin. O senhor não precisa pedir desculpa nunca, o.k.? \n      Meu amigo Senador Amin, cumprimento e parabenizo V. Exa. pela importante iniciativa de promover este debate tão necessário diante dos desafios climáticos que o Brasil enfrenta. Cumprimento também os demais componentes da mesa e convidados. \n      Trazemos ao debate os desastres climáticos, um tema... ( Falha no \r\náudio. ) Hoje o fazemos com evidências, dados e mais preocupações.  \n      Os desastres naturais deixaram de ser exceção no Brasil, eles viraram parte da rotina. Em maio de 2026, o Centro Europeu de Previsões Meteorológicas alertou que o retorno do fenômeno El Niño pode fazer de 2027 o ano mais quente já registrado na história. Ou seja, não estamos falando de passado, estamos falando de um futuro muito próximo. O Brasil não está mais lidando com eventos climáticos isolados, está lidando com uma nova realidade climática.  \n      No mesmo sentido, nota técnica conjunta do Inpe, Inmet, Funceme e Censipam indica aumento da probabilidade de formação de El Niño ainda em 2026, com chance superior a 80% de consolidação no segundo semestre. A própria ciência está dizendo ao Estado brasileiro: o fenômeno está em formação. E aqui está o ponto central deste debate: nós já sabemos. A pergunta é: o que faremos com essa informação? O problema não é a falta de previsão, o problema é a falta de prevenção.  \n      Sr. Presidente, Santa Catarina conhece essa realidade como poucos estados. Enchentes, enxurradas, deslizamentos deixaram de ser eventos raros, tornaram-se recorrentes. Municípios do Vale do Itajaí, do norte e do litoral já convivem com a reconstrução como se fosse um ciclo permanente, e isso revela uma falha estrutural do Estado brasileiro. Nós seguimos mais preparados para reagir do que para prevenir.  \n      Em termos legislativos, este Senado tem avançado em medidas importantes, como o PL 636, de 2023, que reforça a obrigatoriedade de planos de contingência da defesa civil e fortalece o planejamento municipal em áreas de risco. Isso é essencial, mas ainda não é o suficiente, porque muitos municípios brasileiros, especialmente os menores, não têm estrutura técnica, equipe permanente ou capacidade de acessar recursos federais com rapidez. E isso cria um gargalo federativo perigoso. A tragédia é local, mas a resposta chega tarde. O município sofre a tragédia, mas o sistema público só chega depois de a água baixar. Enquanto isso, seguimos repetindo o ciclo: desastre, reconstrução, novo desastre.  \n      A ciência já nos alerta que esses eventos vão se intensificar. Portanto, a pergunta que este debate nos impõe não é se novos desastres vão acontecer. Eles vão acontecer. A pergunta é simples: o Estado brasileiro vai continuar chegando depois da tragédia ou finalmente vai aprender a chegar antes dela? Porque prevenção não é... \n ( Soa a campainha. ) \n      O SR. HERMES KLANN  \r\n(Bloco Parlamentar Vanguarda/PL - SC) – ... mas é ela que impede que o fato exista. \n      Presidente, eu não posso finalizar minha fala sem registrar que Santa Catarina possui uma das Defesas Civis mais preparadas e respeitadas do Brasil. O estado se tornou referência nacional em monitoramento, alerta, mapeamento de áreas de risco e respostas rápidas às emergências. A Defesa Civil catarinense tem investido em tecnologia, centros de monitoramento, sistema de alerta via celular e capacitação permanente das equipes municipais, salvando vidas e reduzindo danos em momentos críticos. Por isso deixo aqui meu reconhecimento e parabéns a todos os profissionais da Defesa Civil de Santa Catarina, homens e mulheres que atuam muitas vezes sob pressão extrema em madrugadas, temporais e situações de risco, protegendo a população catarinense.  \n      Muito obrigado."
+        }
+      ]
+    },
+    {
+      "id": "4770",
+      "nome": "Izalci Lucas",
+      "partido": "PL",
+      "uf": "DF",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4770.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 10
+      },
+      "detalhes": []
     },
     {
       "id": "6340",
@@ -222,95 +198,111 @@
       "partido": "PL",
       "uf": "RO",
       "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6340.jpg",
-      "score_coerencia": 56.0,
-      "pares_alinhados": 5,
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
       "total_pares": 10,
       "contagem_status": {
-        "Coerente": 4,
-        "Parcialmente Alinhado": 2,
-        "Divergente": 3,
-        "Não Relacionado": 1
+        "Coerente": 8,
+        "Incoerente": 2
+      },
+      "detalhes": []
+    },
+    {
+      "id": "631",
+      "nome": "Magno Malta",
+      "partido": "PL",
+      "uf": "ES",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador631.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Coerente": 3,
+        "Não Relacionado": 6,
+        "Incoerente": 1
+      },
+      "detalhes": []
+    },
+    {
+      "id": "285",
+      "nome": "Marcio Bittar",
+      "partido": "PL",
+      "uf": "AC",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador285.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5422",
+      "nome": "Marcos Rogério",
+      "partido": "PL",
+      "uf": "RO",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5422.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "4694",
+      "nome": "Rogerio Marinho",
+      "partido": "PL",
+      "uf": "RN",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4694.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "6331",
+      "nome": "Sergio Moro",
+      "partido": "PL",
+      "uf": "PR",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6331.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Não Relacionado": 10
       },
       "detalhes": [
         {
-          "ementa": "Dispõe sobre a transposição e a transferência de saldos financeiros de exercícios passados resultantes de repasses do Fundo Nacional de Desenvolvimento da Educação (FNDE) para os Estados, o Distrito Federal e os Municípios.",
-          "afinidade": 0.9,
-          "jaccard_pre_filtro": 0.0714,
-          "status": "Coerente",
-          "justificativa": "O discurso apoia o tema macro da ementa sobre a alteração do art. 155 da Constituição Federal.",
+          "ementa": "Institui o Programa de Pleno Pagamento de Dívidas dos Estados (Propag), destinado a promover a revisão dos termos das dívidas dos Estados e do Distrito Federal com a União firmadas no âmbito da Lei nº 9.496, de 11 de setembro de 1997, e das Leis Complementares nºs 159, de 19 de maio de 2017, 178, de 13 de janeiro de 2021, e 201, de 24 de outubro de 2023 e prevê instituição de fundo de equalização federativa.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0658,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não trata da ementa de forma clara.",
           "voto": "Sim",
-          "data": "2024-11-27",
-          "discurso": "O SR. JAIME BAGATTOLI  \r\n(Bloco Parlamentar Vanguarda/PL - RO. Para orientar a bancada.) – O PL vota \"sim\", Sr. Presidente."
-        },
-        {
-          "ementa": "Dá nova redação ao § 1º do art. 1º da Lei Complementar nº 94, de 19 de fevereiro de 1998, para incluir o Município de Uruana de Minas na Região Integrada de Desenvolvimento do Distrito Federal e Entorno – RIDE.",
-          "afinidade": 0.9,
-          "jaccard_pre_filtro": 0.0698,
-          "status": "Coerente",
-          "justificativa": "O discurso apoia o tema macro da ementa sobre a alteração do art. 155 da Constituição Federal.",
-          "voto": "Sim",
-          "data": "2023-03-28",
-          "discurso": "O SR. JAIME BAGATTOLI  \r\n(Bloco Parlamentar Vanguarda/PL - RO. Para discutir.) – Eu quero aqui parabenizar a nossa Senadora Tereza Cristina. Ninguém mais do que você, Senadora, para relatar e saber a suma importância das nossas usinas de açúcar e etanol no Brasil. Você, como Ministra, sabe a importância que têm as nossas usinas de açúcar na geração de emprego e renda neste país, direta e indiretamente, reforçando a nossa economia e a importância que nós temos no PIB brasileiro. Parabéns pela sua relatoria. \n      Digo para vocês que estão nos acompanhando que chegamos a esta situação de líder hoje na produção de açúcar, porque nos ajudou demais, no final da década de 70, início da década de 80, a constituição do Proálcool no Brasil, quando as nossas usinas tiveram o privilégio de ter as duas produções ao mesmo tempo: momento fazendo açúcar e momento produzindo etanol, o álcool hidratado e o álcool anidro. \n      Parabéns, Presidenta."
-        },
-        {
-          "ementa": "Altera o art. 155 da Constituição Federal para conceder imunidade do Imposto sobre a Propriedade de Veículos Automotores a veículos terrestres de passageiros com vinte anos ou mais de fabricação.",
-          "afinidade": 0.8,
-          "jaccard_pre_filtro": 0.0732,
-          "status": "Coerente",
-          "justificativa": "O discurso apoia o tema macro da ementa sobre a alteração do art. 5º da Constituição Federal.",
-          "voto": "Sim",
-          "data": "2024-03-13",
-          "discurso": "O SR. JAIME BAGATTOLI  \r\n(Bloco Parlamentar Vanguarda/PL - RO. Para orientar a bancada.) – O PL vota \"sim\", Sr. Presidente."
-        },
-        {
-          "ementa": "Altera o art. 155 da Constituição Federal para conceder imunidade do Imposto sobre a Propriedade de Veículos Automotores a veículos terrestres de passageiros com vinte anos ou mais de fabricação.",
-          "afinidade": 0.8,
-          "jaccard_pre_filtro": 0.0732,
-          "status": "Coerente",
-          "justificativa": "O discurso apoia o tema macro da ementa sobre a alteração do art. 5º da Constituição Federal.",
-          "voto": "Sim",
-          "data": "2024-03-13",
-          "discurso": "O SR. JAIME BAGATTOLI  \r\n(Bloco Parlamentar Vanguarda/PL - RO. Para orientar a bancada.) – O PL vota \"sim\", Sr. Presidente."
+          "data": "2024-08-14",
+          "discurso": "O SR. SERGIO MORO  \r\n(PL - PR. Pela ordem. Sem revisão do orador.) - Vamos colocar a história no devido lugar. O PT, o Governo do PT roubou a Petrobras. O pessoal foi condenado lá no mensalão. Eu sei que o pessoal está nervoso porque perdeu, ontem, a indicação do Jorge Messias. Essa é uma sinalização de que o Governo Lula está no seu fim, mas a gente não pode aceitar ofensa gratuita. \n      Eu tenho a consciência absolutamente tranquila do que eu fiz na Operação Lava-Jato. O roubo da Petrobras foi real. A Petrobras recuperou 6 bilhões de reais. E tudo isso aconteceu no Governo Lula. Como se não bastasse, agora a gente está vendo toda essa roubalheira dos aposentados e pensionistas, com suspeita de envolvimento do filho do Presidente Lula. \n      Então, vamos focar no que é objeto desta sessão: a derrubada desse veto cruel do Presidente Lula aos condenados que receberam penas excessivas no 8 de Janeiro. \n      Muito obrigado."
         }
       ]
     },
     {
-      "id": "6338",
-      "nome": "Teresa Leitão",
-      "partido": "PT",
-      "uf": "PE",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6338.jpg",
-      "score_coerencia": 53.0,
-      "pares_alinhados": 3,
+      "id": "1173",
+      "nome": "Wellington Fagundes",
+      "partido": "PL",
+      "uf": "MT",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador1173.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
       "total_pares": 10,
       "contagem_status": {
-        "Coerente": 4,
-        "Parcialmente Alinhado": 2,
-        "Divergente": 1,
-        "Não Relacionado": 3
+        "Não Relacionado": 10
       },
-      "detalhes": [
-        {
-          "ementa": "Altera a Lei Complementar nº 200, de 30 de agosto de 2023, para excluir do cômputo dos limites de despesas primárias as despesas temporárias com educação pública e saúde de que trata o art. 6º da Lei nº 15.164, de 14 de julho de 2025, e as despesas financiadas com recursos oriundos de empréstimos internacionais e suas respectivas contrapartidas, bem como para excluir as referidas despesas com educação pública e saúde das metas fiscais; e dá outras providências.",
-          "afinidade": 0.7,
-          "jaccard_pre_filtro": 0.0813,
-          "status": "Coerente",
-          "justificativa": "Discurso e ementa tratam de educação pública",
-          "voto": "Sim",
-          "data": "2025-12-03",
-          "discurso": "A SRA. TERESA LEITÃO  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Como Relatora.) – É rapidinho. Tenho certeza de que o relatório, de que o projeto de lei da universidade indígena está em muito boas mãos pelo seu conhecimento, por onde V. Exa. mora, o que conhece daquela área amazônica, e isso, certamente, vai trazer uma grande importância para o relatório.  \n      Observando um dos pontos que foi relevante para mim na sua fala, o de que todos precisam se preocupar com este plano, todos, não apenas nós que somos legisladores, o que nós temos é que convencer a sociedade de que a educação é importante.  \n      Hoje de manhã, nós estivemos acompanhando toda a votação, a Campanha Nacional pelo Direito à Educação, o movimento Todos pela Educação, a Confederação Nacional dos Trabalhadores em Educação, que é a maior confederação de trabalhadores de redes públicas, a ANPG (Associação Nacional de Pós-Graduandos), vários Vereadores, e hoje aqui estamos também com a presença da Bianca Borges, da União Nacional dos Estudantes. Todos esses setores foram muito mobilizados durante a tramitação e a aprovação do plano.  \n      Muito obrigada."
-        },
-        {
-          "ementa": "Modifica o art. 144 da Constituição Federal, a fim de incluir as guardas municipais e os agentes de trânsito entre os órgãos que compõem a segurança pública.",
-          "afinidade": 0.6,
-          "jaccard_pre_filtro": 0.0704,
-          "status": "Parcialmente Alinhado",
-          "justificativa": "Discurso e ementa tratam de participação popular e educação",
-          "voto": "Não",
-          "data": "2025-05-27",
-          "discurso": "A SRA. TERESA LEITÃO  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Como Relatora.) – Muito obrigada, Senador.  \n      Nós temos também essa mesma convicção. Temos agora um instrumento. Pode não ser o melhor, mas foi o possível e avança. Pode ter certeza de que ele avança em relação ao plano anterior e avança nos requerimentos, nos desafios, em tudo que nós temos a enfrentar adiante."
-        }
-      ]
+      "detalhes": []
     },
     {
       "id": "4639",
@@ -318,24 +310,215 @@
       "partido": "PT",
       "uf": "PA",
       "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4639.jpg",
-      "score_coerencia": 41.0,
-      "pares_alinhados": 1,
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
       "total_pares": 10,
       "contagem_status": {
-        "Não Relacionado": 5,
-        "Parcialmente Alinhado": 4,
-        "Coerente": 1
+        "Não Relacionado": 9,
+        "Incoerente": 1
+      },
+      "detalhes": []
+    },
+    {
+      "id": "6336",
+      "nome": "Camilo Santana",
+      "partido": "PT",
+      "uf": "CE",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6336.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 4,
+      "contagem_status": {
+        "Não Relacionado": 4
       },
       "detalhes": [
         {
-          "ementa": "Fixa o número de Deputados Federais; estabelece normas para a distribuição das vagas da Câmara dos Deputados entre os Estados e o Distrito Federal; e revoga a Lei Complementar nº 78, de 30 de dezembro de 1993.",
-          "afinidade": 0.6,
-          "jaccard_pre_filtro": 0.0541,
-          "status": "Parcialmente Alinhado",
-          "justificativa": "O discurso menciona a incorporação de destaques, mas não aborda diretamente o tema da ementa.",
+          "ementa": "Estabelece condições à concessão de isenção do Imposto sobre Serviços de Qualquer Natureza (ISS) para fatos geradores relacionados à organização ou à realização da Copa do Mundo Feminina da FIFA 2027.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0136,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não trata da ementa de forma clara.",
+          "voto": "Sim",
+          "data": "2026-06-09",
+          "discurso": "O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE. Para discursar.) – Sr. Presidente Davi Alcolumbre, meus caros colegas Senadores e Senadoras, primeiro retorno a esta Casa após um período de três anos e três meses como Ministro da Educação deste país, com muita honra. E pedi a palavra aqui hoje para dizer, Presidente, que poucos minutos atrás nós estávamos no Palácio do Planalto, onde o Presidente sancionou o novo Plano Nacional de Educação, e eu queria destacar e agradecer o papel desta Casa e da Senadora Teresa Leitão como Relatora desse projeto aqui nesta Casa.  \n      Antes disso, Presidente, eu não posso deixar de falar um pouco do que o Senador Rogerio Marinho acabou de falar aqui, há pouco tempo. Eu acho que será uma experiência... É a minha primeira experiência no Parlamento do Senado Federal, e nós vamos ter oportunidades de ter bons debates em relação... Com franqueza, com seriedade, com os bons números, mas teve uma coisa que se destacou aqui, que me chamou atenção, Senador Rogerio, que foi você falar que este é um Governo de perseguição. Talvez não haja nenhum Governo mais republicano na história deste país do que o Governo do Presidente Lula, que trata todos os municípios e todos os Governadores, independentemente do partido político, de forma republicana. Diferentemente, eu quero dizer aqui, Presidente, como testemunha que fui, quando fui Governador do meu estado, Senador Cid, no Governo passado, e nunca fui recebido pelo Governo passado. Ao contrário, o Ceará, Senadora Dorinha, se destacava na educação brasileira, e eu precisei entrar na Justiça, no Supremo Tribunal Federal, para receber os recursos que o FNDE devia às obras do meu estado, de creches, de escolas naquele estado. Eu fico perguntando: qual é a política pública, na área da educação, que o Governo passado teve?  \n      Portanto, eu queria dizer que não é verdade, Senador Rogerio, e a minha presença aqui vai ser para que a gente possa fazer um bom debate, para mostrar o que este Governo tem feito, um Governo de diálogo, que respeita a relação federativa deste país, respeita os Prefeitos, respeita os Governadores, quando muitas vezes, os ministros iam ao meu estado, e o Presidente ia ao meu estado, e nem sequer o Governador era citado ou tinha conhecimento da ida de um Presidente ou de um ministro, Senador Presidente Alcolumbre.  \n      Mas eu quero falar aqui, meu caro Presidente, sobre o PNE. O Plano Nacional de Educação é o principal instrumento de planejamento estratégico da educação brasileira. O último plano vencia em 2024, nós assumimos o Ministério da Educação sem nenhum planejamento da construção de um novo plano de educação para o Brasil, desmantelaram o Fórum Nacional de Educação, não tinha previsão das conferências municipais, estaduais e nacional quando era iniciada a escuta e a discussão do Plano Nacional de Educação. E foi a partir daí, da reconstrução, que nós iniciamos a elaboração do novo Plano Nacional de Educação, que esta Casa, o Congresso Nacional aprovou, passando de 2024, o término do plano, para 2025, para que houvesse tempo para fazer o bom debate nestas duas Casas e aprovar o novo Plano Nacional de Educação.  \n      Então, juntamente com isso, depois de 16 anos nesta Casa e na Câmara, nós aprovamos o Sistema Nacional de Educação, que é exatamente o  summus  da educação brasileira, que determina, dentro da existência do Plano Nacional de Educação, o papel federativo dos entes federados deste país. Esse plano tramitou, Senadora Dorinha, que eu quero parabenizar, que é uma Senadora da educação, sob a liderança também da Senadora Teresa Leitão e também dos Deputados da Câmara dos Deputados.  \n      Foi um trâmite rápido de discussão, foi um plano nacional discutido de forma técnica, com objetivos claros. Ele foi elaborado com 19 objetivos, 8 temáticas, 73 metas, 372 estratégias, para a gente poder definir as metas estabelecidas para os próximos 10 anos para a educação brasileira.  \n      E teve algumas inovações importantes nesse plano, Presidente. Primeiro, dar ênfase à qualidade. Não basta ter só acesso à escola ou só acesso à educação; é preciso qualidade na aprendizagem. E esse plano traz essa inovação na mensuração da qualidade da aprendizagem do Plano Nacional de Educação.  \n      A segunda inovação diz respeito à equidade, a não deixar nenhum para trás, porque nós sabemos as desigualdades que existem neste país, e não é diferente na área da educação. Portanto, agregar e dar oportunidade de inclusão na educação neste país, também mensurada nas metas desse novo PNE.  \n      Depois o plano se dedica também à educação escolar indígena, quilombola, do campo, porque é uma dívida histórica que este país tem com esses setores dedicados a essas pessoas deste país. \n      Depois, a educação em tempo integral. Aliás, esta Casa aprovou o projeto de lei que garantiu que, pela primeira vez, nós atingíssemos a meta do plano anterior, que era 25%, chegando a 2025 com 25,8% das matrículas em tempo integral na educação básica brasileira. Também traz a inovação com a educação digital, com a sustentabilidade socioeconômica. Traz também uma inovação importante, que é o Programa Nacional de Infraestrutura Escolar, para garantir que toda escola brasileira tenha o mínimo de condições para garantir a qualidade da educação das suas crianças e dos seus jovens. \n      Aliás, Presidente, há um projeto de lei complementar na Câmara Federal, que virá para esta Casa, ao qual eu estou atento para que a gente possa aprová-lo e parte dos recursos do Fundo Social do Pré-Sal possam ser destinados à educação brasileira, para cumprir as metas. Não adianta ter um PNE só com as metas no papel, para não as cumprir.  \n      Esse novo plano também traz uma inovação no monitoramento. O anterior era avaliado a cada cinco anos – nos cinco anos e nos dez anos –; agora, o monitoramento vai ser feito a cada dois anos, com metas estabelecidas por município, por estado, para dar a transparência de a sociedade civil poder cobrar e de a população poder cobrar dos seus gestores o resultado das metas estabelecidas no novo Plano Nacional de Educação. \n      E, com esse plano, o Inep passará a produzir as projeções e as metas de cada município e de cada estado a cada dois anos, avaliados através dos seus planos municipais e estaduais, que deverão ser apresentados a partir da sanção de hoje. \n      E o ponto fundamental, Presidente: o financiamento da educação. A gente continua estabelecendo a meta de 10% do PIB, mas eu quero aqui parabenizar o Senado e a Câmara Federal pelo estudo que foi feito para avaliar quanto precisaria o Brasil para atingir as metas nos próximos dez anos da educação brasileira. E se estabeleceu exatamente que, a partir da criação do Programa Nacional de Infraestrutura Escolar, o país poderá, fora do arcabouço fiscal, fora do primário, ter, absolutamente, nos próximos dez anos, mais R$220 bilhões para investimento na educação básica e educação superior deste país. \n      Eu quero agradecer ao senhor, Presidente Alcolumbre, pela celeridade na aprovação desse PNE aqui no Senado Federal. Quero agradecer ao Presidente Hugo Motta também; à Deputada Tabata, que é a Presidente da Comissão Especial do PNE; ao Relator também, Moses Rodrigues, Deputado Federal, Relator do PNE na Câmara Federal. E quero agradecer, mais uma vez, aqui, à Relatora, Senadora Teresa Leitão, Presidente da Comissão de Educação e Cultura do Senado, que, agilmente, fez com que o projeto pudesse andar com agilidade e ser aprovado, até porque o antigo PNE tinha findado o seu prazo em dezembro de 2025. \n      Então, o PNE amplia o acesso à educação infantil, amplia a qualidade da educação, garante a alfabetização das crianças, inclusive na criação do programa nacional Criança Alfabetizada, criado em 2023, em que o Brasil alcançou a meta estabelecida no ano passado, de 64% dos municípios e estados. \n      Pela primeira vez na história, nós estamos fazendo uma avaliação censitária por aluno, por escola, por município, com metas estabelecidas; e todos os municípios brasileiros e estados brasileiros aderiram. Independentemente de questão partidária ou coloração política, todos aderiram, porque a educação precisa estar acima de qualquer questão política ou partidária ou ideológica neste país.  \n      Queremos ampliar o tempo integral, porque a meta era de 25%, e nós a alcançamos, para 50% nos próximos dez anos, enfim. \n      E aqui a gente pode apresentar um resumo, Presidente, mas quero dizer da importância, porque o PNE significa a bússola, os rumos que a educação... \n ( Soa a campainha. ) \n      O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE) – ... brasileira precisa tomar nos próximos dez anos. E é importante que a sociedade, todos nós Parlamentares, representando-a, possamos monitorar, acompanhar o seu município, o seu estado, o Vereador, o líder sindical, o professor, a professora, acompanhar os indicadores e as metas dos seus municípios, das suas escolas, da sua rede, para que a gente possa alcançar as metas de forma objetiva nos próximos dez anos.  \n      Que, daqui a dez anos, a gente não esteja lamentando porque não alcançamos as metas do último PNE! \n      Que, realmente, essas metas possam estar estabelecidas na sua concretude, porque isso é lei, aprovada por esta Casa e hoje sancionada pelo Presidente Lula, no Palácio do Planalto! \n      Quero aqui, mais uma vez, Presidente, agradecer a todos os Senadores e Senadoras que votaram aqui nesta Casa o PNE, no mês passado, e agradecer também a todos os Parlamentares da Câmara por essa aprovação.  \n ( Soa a campainha. ) \n      O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE) – Que esse não seja apenas um documento, mas seja um instrumento de sonhos, de esperança para a população, para crianças e jovens, porque não há outro caminho para um país se desenvolver, gerar oportunidades com justiça social se nós não investirmos na educação do seu povo!  \n      É isso, Presidente. \n      Muito obrigado. \n      E que a gente possa monitorar e acompanhar o PNE!  \n      Aliás, que, nesta Casa, Senadora Teresa Leitão, a gente possa constituir uma Comissão, tanto da Comissão do Senado, da Educação, como da Câmara, para acompanhar a execução do PNE nos próximos dez anos.  \n      Muito obrigado, Presidente."
+        },
+        {
+          "ementa": "Altera o art. 9º da Lei Complementar nº 101, de 4 de maio de 2000, para ressalvar despesas das agências reguladoras federais da limitação de empenho e movimentação financeira.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0121,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não trata da ementa de forma clara.",
           "voto": "Não",
-          "data": "2025-06-25",
-          "discurso": "O SR. BETO FARO  \r\n(Bloco Parlamentar Pelo Brasil/PT - PA. Como Relator.) – Sr. Presidente e demais membros da Casa, primeiro, quero agradecer pela indicação para ser Relator de uma matéria tão importante para o país, porque são cerca de 1,5 milhão de pescadores artesanais. Suas famílias estão muito ansiosas pelo resultado desta medida provisória, para garantir efetivamente que eles tenham acesso a esse benefício. \n      Então, a Liderança do nosso partido, do nosso Governo, me indicou, junto com o nosso Presidente, para ser Relator dessa matéria, uma matéria muito discutida. \n      Aqui, eu estava muito convicto do relatório, das medidas, mas a mediação possível para aprovar foi essa que nós estabelecemos aqui. Está certo? Então, também não dá para poder achar que teria que ser 100%. A mediação possível do Senado foi esta, e eu quero parabenizar o Senado por aprovar esta medida provisória que estabelece as novas regras para o pagamento do seguro-defeso. \n      E que a gente pague o mais rápido possível, até porque, em muitas regiões do país, o período do defeso já foi ultrapassado. \n      Então, obrigado. Agradeço mais uma vez."
+          "data": "2026-06-16",
+          "discurso": "O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE. Para discursar.) – Sr. Presidente Davi Alcolumbre, meus caros colegas Senadores e Senadoras, primeiro retorno a esta Casa após um período de três anos e três meses como Ministro da Educação deste país, com muita honra. E pedi a palavra aqui hoje para dizer, Presidente, que poucos minutos atrás nós estávamos no Palácio do Planalto, onde o Presidente sancionou o novo Plano Nacional de Educação, e eu queria destacar e agradecer o papel desta Casa e da Senadora Teresa Leitão como Relatora desse projeto aqui nesta Casa.  \n      Antes disso, Presidente, eu não posso deixar de falar um pouco do que o Senador Rogerio Marinho acabou de falar aqui, há pouco tempo. Eu acho que será uma experiência... É a minha primeira experiência no Parlamento do Senado Federal, e nós vamos ter oportunidades de ter bons debates em relação... Com franqueza, com seriedade, com os bons números, mas teve uma coisa que se destacou aqui, que me chamou atenção, Senador Rogerio, que foi você falar que este é um Governo de perseguição. Talvez não haja nenhum Governo mais republicano na história deste país do que o Governo do Presidente Lula, que trata todos os municípios e todos os Governadores, independentemente do partido político, de forma republicana. Diferentemente, eu quero dizer aqui, Presidente, como testemunha que fui, quando fui Governador do meu estado, Senador Cid, no Governo passado, e nunca fui recebido pelo Governo passado. Ao contrário, o Ceará, Senadora Dorinha, se destacava na educação brasileira, e eu precisei entrar na Justiça, no Supremo Tribunal Federal, para receber os recursos que o FNDE devia às obras do meu estado, de creches, de escolas naquele estado. Eu fico perguntando: qual é a política pública, na área da educação, que o Governo passado teve?  \n      Portanto, eu queria dizer que não é verdade, Senador Rogerio, e a minha presença aqui vai ser para que a gente possa fazer um bom debate, para mostrar o que este Governo tem feito, um Governo de diálogo, que respeita a relação federativa deste país, respeita os Prefeitos, respeita os Governadores, quando muitas vezes, os ministros iam ao meu estado, e o Presidente ia ao meu estado, e nem sequer o Governador era citado ou tinha conhecimento da ida de um Presidente ou de um ministro, Senador Presidente Alcolumbre.  \n      Mas eu quero falar aqui, meu caro Presidente, sobre o PNE. O Plano Nacional de Educação é o principal instrumento de planejamento estratégico da educação brasileira. O último plano vencia em 2024, nós assumimos o Ministério da Educação sem nenhum planejamento da construção de um novo plano de educação para o Brasil, desmantelaram o Fórum Nacional de Educação, não tinha previsão das conferências municipais, estaduais e nacional quando era iniciada a escuta e a discussão do Plano Nacional de Educação. E foi a partir daí, da reconstrução, que nós iniciamos a elaboração do novo Plano Nacional de Educação, que esta Casa, o Congresso Nacional aprovou, passando de 2024, o término do plano, para 2025, para que houvesse tempo para fazer o bom debate nestas duas Casas e aprovar o novo Plano Nacional de Educação.  \n      Então, juntamente com isso, depois de 16 anos nesta Casa e na Câmara, nós aprovamos o Sistema Nacional de Educação, que é exatamente o  summus  da educação brasileira, que determina, dentro da existência do Plano Nacional de Educação, o papel federativo dos entes federados deste país. Esse plano tramitou, Senadora Dorinha, que eu quero parabenizar, que é uma Senadora da educação, sob a liderança também da Senadora Teresa Leitão e também dos Deputados da Câmara dos Deputados.  \n      Foi um trâmite rápido de discussão, foi um plano nacional discutido de forma técnica, com objetivos claros. Ele foi elaborado com 19 objetivos, 8 temáticas, 73 metas, 372 estratégias, para a gente poder definir as metas estabelecidas para os próximos 10 anos para a educação brasileira.  \n      E teve algumas inovações importantes nesse plano, Presidente. Primeiro, dar ênfase à qualidade. Não basta ter só acesso à escola ou só acesso à educação; é preciso qualidade na aprendizagem. E esse plano traz essa inovação na mensuração da qualidade da aprendizagem do Plano Nacional de Educação.  \n      A segunda inovação diz respeito à equidade, a não deixar nenhum para trás, porque nós sabemos as desigualdades que existem neste país, e não é diferente na área da educação. Portanto, agregar e dar oportunidade de inclusão na educação neste país, também mensurada nas metas desse novo PNE.  \n      Depois o plano se dedica também à educação escolar indígena, quilombola, do campo, porque é uma dívida histórica que este país tem com esses setores dedicados a essas pessoas deste país. \n      Depois, a educação em tempo integral. Aliás, esta Casa aprovou o projeto de lei que garantiu que, pela primeira vez, nós atingíssemos a meta do plano anterior, que era 25%, chegando a 2025 com 25,8% das matrículas em tempo integral na educação básica brasileira. Também traz a inovação com a educação digital, com a sustentabilidade socioeconômica. Traz também uma inovação importante, que é o Programa Nacional de Infraestrutura Escolar, para garantir que toda escola brasileira tenha o mínimo de condições para garantir a qualidade da educação das suas crianças e dos seus jovens. \n      Aliás, Presidente, há um projeto de lei complementar na Câmara Federal, que virá para esta Casa, ao qual eu estou atento para que a gente possa aprová-lo e parte dos recursos do Fundo Social do Pré-Sal possam ser destinados à educação brasileira, para cumprir as metas. Não adianta ter um PNE só com as metas no papel, para não as cumprir.  \n      Esse novo plano também traz uma inovação no monitoramento. O anterior era avaliado a cada cinco anos – nos cinco anos e nos dez anos –; agora, o monitoramento vai ser feito a cada dois anos, com metas estabelecidas por município, por estado, para dar a transparência de a sociedade civil poder cobrar e de a população poder cobrar dos seus gestores o resultado das metas estabelecidas no novo Plano Nacional de Educação. \n      E, com esse plano, o Inep passará a produzir as projeções e as metas de cada município e de cada estado a cada dois anos, avaliados através dos seus planos municipais e estaduais, que deverão ser apresentados a partir da sanção de hoje. \n      E o ponto fundamental, Presidente: o financiamento da educação. A gente continua estabelecendo a meta de 10% do PIB, mas eu quero aqui parabenizar o Senado e a Câmara Federal pelo estudo que foi feito para avaliar quanto precisaria o Brasil para atingir as metas nos próximos dez anos da educação brasileira. E se estabeleceu exatamente que, a partir da criação do Programa Nacional de Infraestrutura Escolar, o país poderá, fora do arcabouço fiscal, fora do primário, ter, absolutamente, nos próximos dez anos, mais R$220 bilhões para investimento na educação básica e educação superior deste país. \n      Eu quero agradecer ao senhor, Presidente Alcolumbre, pela celeridade na aprovação desse PNE aqui no Senado Federal. Quero agradecer ao Presidente Hugo Motta também; à Deputada Tabata, que é a Presidente da Comissão Especial do PNE; ao Relator também, Moses Rodrigues, Deputado Federal, Relator do PNE na Câmara Federal. E quero agradecer, mais uma vez, aqui, à Relatora, Senadora Teresa Leitão, Presidente da Comissão de Educação e Cultura do Senado, que, agilmente, fez com que o projeto pudesse andar com agilidade e ser aprovado, até porque o antigo PNE tinha findado o seu prazo em dezembro de 2025. \n      Então, o PNE amplia o acesso à educação infantil, amplia a qualidade da educação, garante a alfabetização das crianças, inclusive na criação do programa nacional Criança Alfabetizada, criado em 2023, em que o Brasil alcançou a meta estabelecida no ano passado, de 64% dos municípios e estados. \n      Pela primeira vez na história, nós estamos fazendo uma avaliação censitária por aluno, por escola, por município, com metas estabelecidas; e todos os municípios brasileiros e estados brasileiros aderiram. Independentemente de questão partidária ou coloração política, todos aderiram, porque a educação precisa estar acima de qualquer questão política ou partidária ou ideológica neste país.  \n      Queremos ampliar o tempo integral, porque a meta era de 25%, e nós a alcançamos, para 50% nos próximos dez anos, enfim. \n      E aqui a gente pode apresentar um resumo, Presidente, mas quero dizer da importância, porque o PNE significa a bússola, os rumos que a educação... \n ( Soa a campainha. ) \n      O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE) – ... brasileira precisa tomar nos próximos dez anos. E é importante que a sociedade, todos nós Parlamentares, representando-a, possamos monitorar, acompanhar o seu município, o seu estado, o Vereador, o líder sindical, o professor, a professora, acompanhar os indicadores e as metas dos seus municípios, das suas escolas, da sua rede, para que a gente possa alcançar as metas de forma objetiva nos próximos dez anos.  \n      Que, daqui a dez anos, a gente não esteja lamentando porque não alcançamos as metas do último PNE! \n      Que, realmente, essas metas possam estar estabelecidas na sua concretude, porque isso é lei, aprovada por esta Casa e hoje sancionada pelo Presidente Lula, no Palácio do Planalto! \n      Quero aqui, mais uma vez, Presidente, agradecer a todos os Senadores e Senadoras que votaram aqui nesta Casa o PNE, no mês passado, e agradecer também a todos os Parlamentares da Câmara por essa aprovação.  \n ( Soa a campainha. ) \n      O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE) – Que esse não seja apenas um documento, mas seja um instrumento de sonhos, de esperança para a população, para crianças e jovens, porque não há outro caminho para um país se desenvolver, gerar oportunidades com justiça social se nós não investirmos na educação do seu povo!  \n      É isso, Presidente. \n      Muito obrigado. \n      E que a gente possa monitorar e acompanhar o PNE!  \n      Aliás, que, nesta Casa, Senadora Teresa Leitão, a gente possa constituir uma Comissão, tanto da Comissão do Senado, da Educação, como da Câmara, para acompanhar a execução do PNE nos próximos dez anos.  \n      Muito obrigado, Presidente."
+        },
+        {
+          "ementa": "Altera o art. 4º, §8º, inciso V, da Lei Complementar nº 224, de 26 de dezembro de 2025.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0107,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não trata da ementa de forma clara.",
+          "voto": "Sim",
+          "data": "2026-05-27",
+          "discurso": "O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE. Para discursar.) – Sr. Presidente Davi Alcolumbre, meus caros colegas Senadores e Senadoras, primeiro retorno a esta Casa após um período de três anos e três meses como Ministro da Educação deste país, com muita honra. E pedi a palavra aqui hoje para dizer, Presidente, que poucos minutos atrás nós estávamos no Palácio do Planalto, onde o Presidente sancionou o novo Plano Nacional de Educação, e eu queria destacar e agradecer o papel desta Casa e da Senadora Teresa Leitão como Relatora desse projeto aqui nesta Casa.  \n      Antes disso, Presidente, eu não posso deixar de falar um pouco do que o Senador Rogerio Marinho acabou de falar aqui, há pouco tempo. Eu acho que será uma experiência... É a minha primeira experiência no Parlamento do Senado Federal, e nós vamos ter oportunidades de ter bons debates em relação... Com franqueza, com seriedade, com os bons números, mas teve uma coisa que se destacou aqui, que me chamou atenção, Senador Rogerio, que foi você falar que este é um Governo de perseguição. Talvez não haja nenhum Governo mais republicano na história deste país do que o Governo do Presidente Lula, que trata todos os municípios e todos os Governadores, independentemente do partido político, de forma republicana. Diferentemente, eu quero dizer aqui, Presidente, como testemunha que fui, quando fui Governador do meu estado, Senador Cid, no Governo passado, e nunca fui recebido pelo Governo passado. Ao contrário, o Ceará, Senadora Dorinha, se destacava na educação brasileira, e eu precisei entrar na Justiça, no Supremo Tribunal Federal, para receber os recursos que o FNDE devia às obras do meu estado, de creches, de escolas naquele estado. Eu fico perguntando: qual é a política pública, na área da educação, que o Governo passado teve?  \n      Portanto, eu queria dizer que não é verdade, Senador Rogerio, e a minha presença aqui vai ser para que a gente possa fazer um bom debate, para mostrar o que este Governo tem feito, um Governo de diálogo, que respeita a relação federativa deste país, respeita os Prefeitos, respeita os Governadores, quando muitas vezes, os ministros iam ao meu estado, e o Presidente ia ao meu estado, e nem sequer o Governador era citado ou tinha conhecimento da ida de um Presidente ou de um ministro, Senador Presidente Alcolumbre.  \n      Mas eu quero falar aqui, meu caro Presidente, sobre o PNE. O Plano Nacional de Educação é o principal instrumento de planejamento estratégico da educação brasileira. O último plano vencia em 2024, nós assumimos o Ministério da Educação sem nenhum planejamento da construção de um novo plano de educação para o Brasil, desmantelaram o Fórum Nacional de Educação, não tinha previsão das conferências municipais, estaduais e nacional quando era iniciada a escuta e a discussão do Plano Nacional de Educação. E foi a partir daí, da reconstrução, que nós iniciamos a elaboração do novo Plano Nacional de Educação, que esta Casa, o Congresso Nacional aprovou, passando de 2024, o término do plano, para 2025, para que houvesse tempo para fazer o bom debate nestas duas Casas e aprovar o novo Plano Nacional de Educação.  \n      Então, juntamente com isso, depois de 16 anos nesta Casa e na Câmara, nós aprovamos o Sistema Nacional de Educação, que é exatamente o  summus  da educação brasileira, que determina, dentro da existência do Plano Nacional de Educação, o papel federativo dos entes federados deste país. Esse plano tramitou, Senadora Dorinha, que eu quero parabenizar, que é uma Senadora da educação, sob a liderança também da Senadora Teresa Leitão e também dos Deputados da Câmara dos Deputados.  \n      Foi um trâmite rápido de discussão, foi um plano nacional discutido de forma técnica, com objetivos claros. Ele foi elaborado com 19 objetivos, 8 temáticas, 73 metas, 372 estratégias, para a gente poder definir as metas estabelecidas para os próximos 10 anos para a educação brasileira.  \n      E teve algumas inovações importantes nesse plano, Presidente. Primeiro, dar ênfase à qualidade. Não basta ter só acesso à escola ou só acesso à educação; é preciso qualidade na aprendizagem. E esse plano traz essa inovação na mensuração da qualidade da aprendizagem do Plano Nacional de Educação.  \n      A segunda inovação diz respeito à equidade, a não deixar nenhum para trás, porque nós sabemos as desigualdades que existem neste país, e não é diferente na área da educação. Portanto, agregar e dar oportunidade de inclusão na educação neste país, também mensurada nas metas desse novo PNE.  \n      Depois o plano se dedica também à educação escolar indígena, quilombola, do campo, porque é uma dívida histórica que este país tem com esses setores dedicados a essas pessoas deste país. \n      Depois, a educação em tempo integral. Aliás, esta Casa aprovou o projeto de lei que garantiu que, pela primeira vez, nós atingíssemos a meta do plano anterior, que era 25%, chegando a 2025 com 25,8% das matrículas em tempo integral na educação básica brasileira. Também traz a inovação com a educação digital, com a sustentabilidade socioeconômica. Traz também uma inovação importante, que é o Programa Nacional de Infraestrutura Escolar, para garantir que toda escola brasileira tenha o mínimo de condições para garantir a qualidade da educação das suas crianças e dos seus jovens. \n      Aliás, Presidente, há um projeto de lei complementar na Câmara Federal, que virá para esta Casa, ao qual eu estou atento para que a gente possa aprová-lo e parte dos recursos do Fundo Social do Pré-Sal possam ser destinados à educação brasileira, para cumprir as metas. Não adianta ter um PNE só com as metas no papel, para não as cumprir.  \n      Esse novo plano também traz uma inovação no monitoramento. O anterior era avaliado a cada cinco anos – nos cinco anos e nos dez anos –; agora, o monitoramento vai ser feito a cada dois anos, com metas estabelecidas por município, por estado, para dar a transparência de a sociedade civil poder cobrar e de a população poder cobrar dos seus gestores o resultado das metas estabelecidas no novo Plano Nacional de Educação. \n      E, com esse plano, o Inep passará a produzir as projeções e as metas de cada município e de cada estado a cada dois anos, avaliados através dos seus planos municipais e estaduais, que deverão ser apresentados a partir da sanção de hoje. \n      E o ponto fundamental, Presidente: o financiamento da educação. A gente continua estabelecendo a meta de 10% do PIB, mas eu quero aqui parabenizar o Senado e a Câmara Federal pelo estudo que foi feito para avaliar quanto precisaria o Brasil para atingir as metas nos próximos dez anos da educação brasileira. E se estabeleceu exatamente que, a partir da criação do Programa Nacional de Infraestrutura Escolar, o país poderá, fora do arcabouço fiscal, fora do primário, ter, absolutamente, nos próximos dez anos, mais R$220 bilhões para investimento na educação básica e educação superior deste país. \n      Eu quero agradecer ao senhor, Presidente Alcolumbre, pela celeridade na aprovação desse PNE aqui no Senado Federal. Quero agradecer ao Presidente Hugo Motta também; à Deputada Tabata, que é a Presidente da Comissão Especial do PNE; ao Relator também, Moses Rodrigues, Deputado Federal, Relator do PNE na Câmara Federal. E quero agradecer, mais uma vez, aqui, à Relatora, Senadora Teresa Leitão, Presidente da Comissão de Educação e Cultura do Senado, que, agilmente, fez com que o projeto pudesse andar com agilidade e ser aprovado, até porque o antigo PNE tinha findado o seu prazo em dezembro de 2025. \n      Então, o PNE amplia o acesso à educação infantil, amplia a qualidade da educação, garante a alfabetização das crianças, inclusive na criação do programa nacional Criança Alfabetizada, criado em 2023, em que o Brasil alcançou a meta estabelecida no ano passado, de 64% dos municípios e estados. \n      Pela primeira vez na história, nós estamos fazendo uma avaliação censitária por aluno, por escola, por município, com metas estabelecidas; e todos os municípios brasileiros e estados brasileiros aderiram. Independentemente de questão partidária ou coloração política, todos aderiram, porque a educação precisa estar acima de qualquer questão política ou partidária ou ideológica neste país.  \n      Queremos ampliar o tempo integral, porque a meta era de 25%, e nós a alcançamos, para 50% nos próximos dez anos, enfim. \n      E aqui a gente pode apresentar um resumo, Presidente, mas quero dizer da importância, porque o PNE significa a bússola, os rumos que a educação... \n ( Soa a campainha. ) \n      O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE) – ... brasileira precisa tomar nos próximos dez anos. E é importante que a sociedade, todos nós Parlamentares, representando-a, possamos monitorar, acompanhar o seu município, o seu estado, o Vereador, o líder sindical, o professor, a professora, acompanhar os indicadores e as metas dos seus municípios, das suas escolas, da sua rede, para que a gente possa alcançar as metas de forma objetiva nos próximos dez anos.  \n      Que, daqui a dez anos, a gente não esteja lamentando porque não alcançamos as metas do último PNE! \n      Que, realmente, essas metas possam estar estabelecidas na sua concretude, porque isso é lei, aprovada por esta Casa e hoje sancionada pelo Presidente Lula, no Palácio do Planalto! \n      Quero aqui, mais uma vez, Presidente, agradecer a todos os Senadores e Senadoras que votaram aqui nesta Casa o PNE, no mês passado, e agradecer também a todos os Parlamentares da Câmara por essa aprovação.  \n ( Soa a campainha. ) \n      O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE) – Que esse não seja apenas um documento, mas seja um instrumento de sonhos, de esperança para a população, para crianças e jovens, porque não há outro caminho para um país se desenvolver, gerar oportunidades com justiça social se nós não investirmos na educação do seu povo!  \n      É isso, Presidente. \n      Muito obrigado. \n      E que a gente possa monitorar e acompanhar o PNE!  \n      Aliás, que, nesta Casa, Senadora Teresa Leitão, a gente possa constituir uma Comissão, tanto da Comissão do Senado, da Educação, como da Câmara, para acompanhar a execução do PNE nos próximos dez anos.  \n      Muito obrigado, Presidente."
+        },
+        {
+          "ementa": "Altera a Lei Complementar nº 79, de 7 de janeiro de 1994, para destinar recursos do Fundo Penitenciário Nacional (Funpen) à formação, ao aperfeiçoamento, à especialização e à capacitação continuada dos servidores do sistema penitenciário nacional e dos policiais penais.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0211,
+          "status": "Não Relacionado",
+          "justificativa": "O discurso não trata da ementa de forma clara.",
+          "voto": "Sim",
+          "data": "2026-06-10",
+          "discurso": "O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE. Para discursar.) – Sr. Presidente Davi Alcolumbre, meus caros colegas Senadores e Senadoras, primeiro retorno a esta Casa após um período de três anos e três meses como Ministro da Educação deste país, com muita honra. E pedi a palavra aqui hoje para dizer, Presidente, que poucos minutos atrás nós estávamos no Palácio do Planalto, onde o Presidente sancionou o novo Plano Nacional de Educação, e eu queria destacar e agradecer o papel desta Casa e da Senadora Teresa Leitão como Relatora desse projeto aqui nesta Casa.  \n      Antes disso, Presidente, eu não posso deixar de falar um pouco do que o Senador Rogerio Marinho acabou de falar aqui, há pouco tempo. Eu acho que será uma experiência... É a minha primeira experiência no Parlamento do Senado Federal, e nós vamos ter oportunidades de ter bons debates em relação... Com franqueza, com seriedade, com os bons números, mas teve uma coisa que se destacou aqui, que me chamou atenção, Senador Rogerio, que foi você falar que este é um Governo de perseguição. Talvez não haja nenhum Governo mais republicano na história deste país do que o Governo do Presidente Lula, que trata todos os municípios e todos os Governadores, independentemente do partido político, de forma republicana. Diferentemente, eu quero dizer aqui, Presidente, como testemunha que fui, quando fui Governador do meu estado, Senador Cid, no Governo passado, e nunca fui recebido pelo Governo passado. Ao contrário, o Ceará, Senadora Dorinha, se destacava na educação brasileira, e eu precisei entrar na Justiça, no Supremo Tribunal Federal, para receber os recursos que o FNDE devia às obras do meu estado, de creches, de escolas naquele estado. Eu fico perguntando: qual é a política pública, na área da educação, que o Governo passado teve?  \n      Portanto, eu queria dizer que não é verdade, Senador Rogerio, e a minha presença aqui vai ser para que a gente possa fazer um bom debate, para mostrar o que este Governo tem feito, um Governo de diálogo, que respeita a relação federativa deste país, respeita os Prefeitos, respeita os Governadores, quando muitas vezes, os ministros iam ao meu estado, e o Presidente ia ao meu estado, e nem sequer o Governador era citado ou tinha conhecimento da ida de um Presidente ou de um ministro, Senador Presidente Alcolumbre.  \n      Mas eu quero falar aqui, meu caro Presidente, sobre o PNE. O Plano Nacional de Educação é o principal instrumento de planejamento estratégico da educação brasileira. O último plano vencia em 2024, nós assumimos o Ministério da Educação sem nenhum planejamento da construção de um novo plano de educação para o Brasil, desmantelaram o Fórum Nacional de Educação, não tinha previsão das conferências municipais, estaduais e nacional quando era iniciada a escuta e a discussão do Plano Nacional de Educação. E foi a partir daí, da reconstrução, que nós iniciamos a elaboração do novo Plano Nacional de Educação, que esta Casa, o Congresso Nacional aprovou, passando de 2024, o término do plano, para 2025, para que houvesse tempo para fazer o bom debate nestas duas Casas e aprovar o novo Plano Nacional de Educação.  \n      Então, juntamente com isso, depois de 16 anos nesta Casa e na Câmara, nós aprovamos o Sistema Nacional de Educação, que é exatamente o  summus  da educação brasileira, que determina, dentro da existência do Plano Nacional de Educação, o papel federativo dos entes federados deste país. Esse plano tramitou, Senadora Dorinha, que eu quero parabenizar, que é uma Senadora da educação, sob a liderança também da Senadora Teresa Leitão e também dos Deputados da Câmara dos Deputados.  \n      Foi um trâmite rápido de discussão, foi um plano nacional discutido de forma técnica, com objetivos claros. Ele foi elaborado com 19 objetivos, 8 temáticas, 73 metas, 372 estratégias, para a gente poder definir as metas estabelecidas para os próximos 10 anos para a educação brasileira.  \n      E teve algumas inovações importantes nesse plano, Presidente. Primeiro, dar ênfase à qualidade. Não basta ter só acesso à escola ou só acesso à educação; é preciso qualidade na aprendizagem. E esse plano traz essa inovação na mensuração da qualidade da aprendizagem do Plano Nacional de Educação.  \n      A segunda inovação diz respeito à equidade, a não deixar nenhum para trás, porque nós sabemos as desigualdades que existem neste país, e não é diferente na área da educação. Portanto, agregar e dar oportunidade de inclusão na educação neste país, também mensurada nas metas desse novo PNE.  \n      Depois o plano se dedica também à educação escolar indígena, quilombola, do campo, porque é uma dívida histórica que este país tem com esses setores dedicados a essas pessoas deste país. \n      Depois, a educação em tempo integral. Aliás, esta Casa aprovou o projeto de lei que garantiu que, pela primeira vez, nós atingíssemos a meta do plano anterior, que era 25%, chegando a 2025 com 25,8% das matrículas em tempo integral na educação básica brasileira. Também traz a inovação com a educação digital, com a sustentabilidade socioeconômica. Traz também uma inovação importante, que é o Programa Nacional de Infraestrutura Escolar, para garantir que toda escola brasileira tenha o mínimo de condições para garantir a qualidade da educação das suas crianças e dos seus jovens. \n      Aliás, Presidente, há um projeto de lei complementar na Câmara Federal, que virá para esta Casa, ao qual eu estou atento para que a gente possa aprová-lo e parte dos recursos do Fundo Social do Pré-Sal possam ser destinados à educação brasileira, para cumprir as metas. Não adianta ter um PNE só com as metas no papel, para não as cumprir.  \n      Esse novo plano também traz uma inovação no monitoramento. O anterior era avaliado a cada cinco anos – nos cinco anos e nos dez anos –; agora, o monitoramento vai ser feito a cada dois anos, com metas estabelecidas por município, por estado, para dar a transparência de a sociedade civil poder cobrar e de a população poder cobrar dos seus gestores o resultado das metas estabelecidas no novo Plano Nacional de Educação. \n      E, com esse plano, o Inep passará a produzir as projeções e as metas de cada município e de cada estado a cada dois anos, avaliados através dos seus planos municipais e estaduais, que deverão ser apresentados a partir da sanção de hoje. \n      E o ponto fundamental, Presidente: o financiamento da educação. A gente continua estabelecendo a meta de 10% do PIB, mas eu quero aqui parabenizar o Senado e a Câmara Federal pelo estudo que foi feito para avaliar quanto precisaria o Brasil para atingir as metas nos próximos dez anos da educação brasileira. E se estabeleceu exatamente que, a partir da criação do Programa Nacional de Infraestrutura Escolar, o país poderá, fora do arcabouço fiscal, fora do primário, ter, absolutamente, nos próximos dez anos, mais R$220 bilhões para investimento na educação básica e educação superior deste país. \n      Eu quero agradecer ao senhor, Presidente Alcolumbre, pela celeridade na aprovação desse PNE aqui no Senado Federal. Quero agradecer ao Presidente Hugo Motta também; à Deputada Tabata, que é a Presidente da Comissão Especial do PNE; ao Relator também, Moses Rodrigues, Deputado Federal, Relator do PNE na Câmara Federal. E quero agradecer, mais uma vez, aqui, à Relatora, Senadora Teresa Leitão, Presidente da Comissão de Educação e Cultura do Senado, que, agilmente, fez com que o projeto pudesse andar com agilidade e ser aprovado, até porque o antigo PNE tinha findado o seu prazo em dezembro de 2025. \n      Então, o PNE amplia o acesso à educação infantil, amplia a qualidade da educação, garante a alfabetização das crianças, inclusive na criação do programa nacional Criança Alfabetizada, criado em 2023, em que o Brasil alcançou a meta estabelecida no ano passado, de 64% dos municípios e estados. \n      Pela primeira vez na história, nós estamos fazendo uma avaliação censitária por aluno, por escola, por município, com metas estabelecidas; e todos os municípios brasileiros e estados brasileiros aderiram. Independentemente de questão partidária ou coloração política, todos aderiram, porque a educação precisa estar acima de qualquer questão política ou partidária ou ideológica neste país.  \n      Queremos ampliar o tempo integral, porque a meta era de 25%, e nós a alcançamos, para 50% nos próximos dez anos, enfim. \n      E aqui a gente pode apresentar um resumo, Presidente, mas quero dizer da importância, porque o PNE significa a bússola, os rumos que a educação... \n ( Soa a campainha. ) \n      O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE) – ... brasileira precisa tomar nos próximos dez anos. E é importante que a sociedade, todos nós Parlamentares, representando-a, possamos monitorar, acompanhar o seu município, o seu estado, o Vereador, o líder sindical, o professor, a professora, acompanhar os indicadores e as metas dos seus municípios, das suas escolas, da sua rede, para que a gente possa alcançar as metas de forma objetiva nos próximos dez anos.  \n      Que, daqui a dez anos, a gente não esteja lamentando porque não alcançamos as metas do último PNE! \n      Que, realmente, essas metas possam estar estabelecidas na sua concretude, porque isso é lei, aprovada por esta Casa e hoje sancionada pelo Presidente Lula, no Palácio do Planalto! \n      Quero aqui, mais uma vez, Presidente, agradecer a todos os Senadores e Senadoras que votaram aqui nesta Casa o PNE, no mês passado, e agradecer também a todos os Parlamentares da Câmara por essa aprovação.  \n ( Soa a campainha. ) \n      O SR. CAMILO SANTANA  \r\n(Bloco Parlamentar Pelo Brasil/PT - CE) – Que esse não seja apenas um documento, mas seja um instrumento de sonhos, de esperança para a população, para crianças e jovens, porque não há outro caminho para um país se desenvolver, gerar oportunidades com justiça social se nós não investirmos na educação do seu povo!  \n      É isso, Presidente. \n      Muito obrigado. \n      E que a gente possa monitorar e acompanhar o PNE!  \n      Aliás, que, nesta Casa, Senadora Teresa Leitão, a gente possa constituir uma Comissão, tanto da Comissão do Senado, da Educação, como da Câmara, para acompanhar a execução do PNE nos próximos dez anos.  \n      Muito obrigado, Presidente."
+        }
+      ]
+    },
+    {
+      "id": "5953",
+      "nome": "Fabiano Contarato",
+      "partido": "PT",
+      "uf": "ES",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5953.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5008",
+      "nome": "Humberto Costa",
+      "partido": "PT",
+      "uf": "PE",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5008.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": [
+        {
+          "ementa": "Acrescenta os §§ 7º, 8º, 9º, 10 e 11 ao art. 198 da Constituição Federal, para dispor sobre a responsabilidade financeira da União, corresponsável pelo Sistema Único de Saúde (SUS), na política remuneratória e na valorização dos profissionais que exercem atividades de agente comunitário de saúde e de agente de combate às endemias.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0634,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.0673, mas não é possível verificar a coerência do voto sem a IA.",
+          "voto": "Sim",
+          "data": "2022-05-04",
+          "discurso": "O SR. PRESIDENTE  \r\n(Humberto Costa. Bloco Parlamentar Pelo Brasil/PT - PE) – Obrigado. \n      A Presidência informa que o Senador Mecias de Jesus apresentou à Mesa o Ofício nº 26, de 2026, por meio do qual comunica sua renúncia ao mandato de Senador da República, a partir de 11 de março do corrente ano, a fim de assumir o cargo de Conselheiro do Tribunal de Contas do Estado de Roraima. \n      O ofício será encaminhado à publicação, nos termos regimentais. ( Pausa. ) \n      Encontra-se na Casa a Sra. Roberta Leontina Xisto Acioly, primeira suplente do Senador Mecias de Jesus, da representação do Estado de Roraima, convocada em virtude da vacância do cargo. \n      S. Exa. encaminhou à Mesa certidão da Justiça Eleitoral comprobatória da condição de suplente, que será publicada na forma regimental, e demais documentos exigidos por lei. \n      Designo comissão formada pela Senadora Damares Alves, pela Senadora Tereza Cristina e pela Senadora Dra. Eudócia, três mulheres, para que possam conduzi-la até à mesa, a fim de prestar o seu compromisso regimental. \n      Solicito que todos fiquem em posição de respeito para que a Sra. Roberta Acioly preste o compromisso regimental. \n (A Sra. Roberta Acioly \r\né conduzida ao Plenário e presta, perante a Mesa, o compromisso.) \n      A SRA. ROBERTA ACIOLY  \r\n(REPUBLICANOS - RR) – Prometo guardar a Constituição Federal e as leis do país, desempenhar fiel e lealmente o mandato de Senadora que o povo me conferiu e sustentar a união, a integridade e a independência do Brasil. \n      O SR. PRESIDENTE  \r\n(Humberto Costa. Bloco Parlamentar Pelo Brasil/PT - PE) – Declaro empossada, no mandato de Senadora da República, a nobre Sra. Roberta Leontina Xisto Acioly, que, a partir deste momento, passa a participar dos trabalhos da Casa, adotando o nome parlamentar Roberta Acioly e integrando a Bancada do Partido Republicanos. \n      Sentados. ( Palmas. ) \n      Concedo a palavra à Senadora Roberta Acioly."
+        }
+      ]
+    },
+    {
+      "id": "581",
+      "nome": "Jaques Wagner",
+      "partido": "PT",
+      "uf": "BA",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador581.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Coerente": 5,
+        "Incoerente": 5
+      },
+      "detalhes": []
+    },
+    {
+      "id": "825",
+      "nome": "Paulo Paim",
+      "partido": "PT",
+      "uf": "RS",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador825.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Incoerente": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5012",
+      "nome": "Randolfe Rodrigues",
+      "partido": "PT",
+      "uf": "AP",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5012.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Incoerente": 3,
+        "Coerente": 7
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5352",
+      "nome": "Rogério Carvalho",
+      "partido": "PT",
+      "uf": "SE",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5352.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Incoerente": 5,
+        "Coerente": 5
+      },
+      "detalhes": []
+    },
+    {
+      "id": "6338",
+      "nome": "Teresa Leitão",
+      "partido": "PT",
+      "uf": "PE",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6338.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": [
+        {
+          "ementa": "Autoriza a União a postergar o pagamento da dívida de entes federativos afetados por calamidade pública reconhecida pelo Congresso Nacional, mediante proposta do Poder Executivo federal, e a reduzir a taxa de juros dos contratos de dívida dos referidos entes com a União; e altera a Lei Complementar nº 101, de 4 de maio de 2000 (Lei de Responsabilidade Fiscal), e a Lei Complementar nº 159, de 19 de maio de 2017.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0602,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.0654, mas não é possível verificar a coerência do voto sem a IA.",
+          "voto": "Não",
+          "data": "2024-05-15",
+          "discurso": "A SRA. TERESA LEITÃO  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE. Pela ordem.) – Senador, são duas questões muito rápidas. \n      Eu não estava no Plenário, estava atendendo os Prefeitos – muitos estão aqui, participando da marcha –, e, quando eu cheguei, já havia sido concluído o debate sobre os pisos profissionais. Aí, eu quero me agregar ao apelo que foi feito pela Senadora Professora Dorinha e pelo Senador Omar Aziz em relação ao Projeto de Lei 2.531, que é um projeto que está mobilizando o país inteiro; as pessoas estão com uma expectativa muito grande e muito ansiosas para que esse projeto seja pautado. Ele diz respeito a um percentual do piso do magistério que nós debatemos hoje; a medida provisória foi concluída hoje, com a aprovação unânime do relatório da Senadora Dorinha. Portanto, nós temos já um projeto de piso – negociado quando o nosso Senador Camilo estava no MEC – que envolveu os entes estaduais e municipais. Portanto, a gente tem mais previsibilidade para votar o piso de quem não é do magistério. E é a isto que esse projeto se refere: é o piso dos funcionários. A proposta é que ele corresponda a um percentual do piso dos professores, na casa de 75%. Então, eu quero me agregar ao pedido que foi feito pelo Senador Omar Aziz e pela Senadora Dorinha. \n      E o outro pedido é um requerimento da Senadora Augusta Brito, que pede a realização de uma sessão especial destinada a celebrar os cem anos da Associação Brasileira de Enfermagem. A Senadora protocolou, mas não houve tempo hábil, porque ela teve que ceder para voltar o nosso titular, Camilo Santana, e aí a gente está apresentando também esse pedido da Senadora. \n      O SR. PRESIDENTE  \r\n(Davi Alcolumbre. Bloco Parlamentar Democracia/UNIÃO - AP) – Senadora Teresa, V. Exa. tem o número? É porque eu já vou incluir. \n      A SRA. TERESA LEITÃO  \r\n(Bloco Parlamentar Pelo Brasil/PT - PE) – Requerimento nº 79, de 2026."
+        }
+      ]
+    },
+    {
+      "id": "5998",
+      "nome": "Daniella Ribeiro",
+      "partido": "PP",
+      "uf": "PB",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5998.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": [
+        {
+          "ementa": "Dispõe sobre prazo para liquidação de restos a pagar não processados e dá outras providências.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0645,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.0679, mas não é possível verificar a coerência do voto sem a IA.",
+          "voto": "Sim",
+          "data": "2025-02-19",
+          "discurso": "A SRA. DANIELLA RIBEIRO  \r\n(Bloco Parlamentar Aliança/PP - PB. Para orientar a bancada.) – Progressistas vota \"sim\", Sr. Presidente."
         }
       ]
     },
@@ -345,26 +528,56 @@
       "partido": "PP",
       "uf": "RR",
       "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5793.jpg",
-      "score_coerencia": 33.0,
-      "pares_alinhados": 1,
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
       "total_pares": 10,
       "contagem_status": {
-        "Não Relacionado": 5,
-        "Parcialmente Alinhado": 2,
-        "Divergente": 3
+        "Sem Avaliação da IA": 10
       },
-      "detalhes": [
-        {
-          "ementa": "Fixa o número de Deputados Federais; estabelece normas para a distribuição das vagas da Câmara dos Deputados entre os Estados e o Distrito Federal; e revoga a Lei Complementar nº 78, de 30 de dezembro de 1993.",
-          "afinidade": 0.6,
-          "jaccard_pre_filtro": 0.0438,
-          "status": "Parcialmente Alinhado",
-          "justificativa": "O discurso aborda um tema relacionado à ementa, que é sobre alteração da Constituição Federal.",
-          "voto": "Não",
-          "data": "2025-06-25",
-          "discurso": "O SR. DR. HIRAN  \r\n(Bloco Parlamentar Aliança/PP - RR. Para discutir.) – Presidente, eu quero fazer uma referência à aprovação desse PL 5.874, que reestrutura a carreira de mais de 270 mil servidores. E quero aqui, Presidente, também fazer uma referência à Ministra Esther Dweck, que está aqui presente. Eu estava numa reunião no meu gabinete, mas, quando vi a senhora aqui, eu não podia deixar de fazer uma referência elogiosa ao seu trabalho, ao trabalho do ministério e, principalmente, da comissão que faz a análise dos documentos oriundos dos ex-servidores dos ex-Territórios do Amapá, de Roraima e de Rondônia. Agradeço a V. Exa. e à comissão, que tem sido muito diligente na análise desses documentos para restaurar e para reconhecer aquela expectativa de direito daquelas pessoas que construíram os nossos estados.  \n      Quero aqui, também, agradecer ao Presidente Davi e ao Presidente, querido amigo, Hugo Motta pela sensibilidade de encaminhar a PEC 47, que também é um sonho dos servidores do Legislativo, do Executivo, das empresas públicas dos nossos ex-territórios. Os dois Presidentes das Casas, num evento na semana passada, anunciaram para os nossos estados que estão encaminhando aquela PEC para a CCJ, para que, logo em seguida, nós possamos criar uma Comissão Especial. E eu pedi para o Presidente Hugo Motta para que, ao nomear a Comissão Especial, nomeasse com um número de 24 membros. Por quê? Porque as nossas bancadas são muito pequenas e isso facilita a composição dessa Comissão Especial para que possamos tramitar essa matéria, como é do compromisso do Presidente Davi e do Presidente Hugo de podermos votar essa matéria ainda neste ano. E, como vocês dois são homens de palavra, eu estou aqui para ajudar para que essa PEC, tão importante para reconhecer o trabalho desses servidores que já estão com 60, 70 anos... Muitos não estão mais aqui, mas que nós possamos, antes tarde do que nunca, reconhecer o trabalho que fizeram para construir aqueles rincões do nosso país.  \n      Muito obrigado, Ministra Esther. E quero aqui pedir a V. Exa. que a gente possa voltar a fazer as publicações dos novos servidores da União, porque houve um... A senhora já me prometeu, inclusive, que vai haver um esforço concentrado dentro do mês de março para que possamos satisfazer a ansiedade daqueles que estão esperando as publicações lá nas pontas.  \n      Um grande abraço. Parabéns à senhora e parabéns a todo o ministério.  \n      Presidente, muito obrigado. Presidente Hugo, um grande abraço. Seja muito bem-vindo."
-        }
-      ]
+      "detalhes": []
+    },
+    {
+      "id": "22",
+      "nome": "Esperidião Amin",
+      "partido": "PP",
+      "uf": "SC",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador22.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "4811",
+      "nome": "Laércio Oliveira",
+      "partido": "PP",
+      "uf": "SE",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4811.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Incoerente": 6,
+        "Coerente": 4
+      },
+      "detalhes": []
+    },
+    {
+      "id": "1186",
+      "nome": "Luis Carlos Heinze",
+      "partido": "PP",
+      "uf": "RS",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador1186.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
     },
     {
       "id": "5736",
@@ -372,91 +585,446 @@
       "partido": "PP",
       "uf": "MS",
       "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5736.jpg",
-      "score_coerencia": 21.0,
-      "pares_alinhados": 2,
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
       "total_pares": 10,
       "contagem_status": {
-        "Não Relacionado": 7,
-        "Coerente": 3
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "6295",
+      "nome": "Carlos Fávaro",
+      "partido": "PSD",
+      "uf": "MT",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6295.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
       },
       "detalhes": [
         {
-          "ementa": "Modifica o art. 144 da Constituição Federal, a fim de incluir as guardas municipais e os agentes de trânsito entre os órgãos que compõem a segurança pública.",
-          "afinidade": 0.7,
-          "jaccard_pre_filtro": 0.0926,
-          "status": "Coerente",
-          "justificativa": "Discurso apoia a ementa sobre educação",
-          "voto": "MIS",
-          "data": "2025-05-27",
-          "discurso": "A SRA. TEREZA CRISTINA  \r\n(Bloco/PP - MS) – Decreto Legislativo n° 14, de 2026, que aprova o texto do Acordo Provisório de Comércio entre o Mercado Comum do Sul (Mercosul) e seus Estados-Partes, de um lado, e a União Europeia, de outro, assinado em Assunção, Paraguai, em 17 de janeiro de 2026. \n O Congresso Nacional decreta: \n Art. 1º Fica aprovado o texto do Acordo Provisório de Comércio entre o Mercado Comum do Sul (Mercosul) e seus Estados-Partes, de um lado, e a União Europeia, do outro, assinado em Assunção, Paraguai, em 17 de janeiro de 2026. \n Parágrafo único. Nos termos do inciso I do  caput  do art. 49 da Constituição Federal, ficam sujeitos à aprovação do Congresso Nacional quaisquer atos que possam resultar em denúncia ou em revisão do referido Acordo, bem como quaisquer ajustes complementares que acarretem encargos ou compromissos gravosos ao patrimônio nacional. \n Art. 2º Este Decreto Legislativo entra em vigor na data de sua publicação. \n Brasília, 17 de março de 2026."
-        },
-        {
-          "ementa": "Altera o art. 205 da Constituição Federal, para definir a educação como vetor do progresso do País.",
-          "afinidade": 0.7,
-          "jaccard_pre_filtro": 0.0909,
-          "status": "Coerente",
-          "justificativa": "Discurso apoia a ementa sobre educação",
-          "voto": "Sim",
-          "data": "2025-07-09",
-          "discurso": "A SRA. TEREZA CRISTINA  \r\n(Bloco Parlamentar Aliança/PP - MS. Para orientar a bancada.) – O PP orienta o voto \"sim\", Sr. Presidente."
-        },
-        {
-          "ementa": "Dispõe sobre normas gerais aplicáveis ao desmembramento de Municípios, nos termos do § 4º do art. 18 da Constituição Federal.",
+          "ementa": "Dispõe sobre apoio financeiro da União aos Estados, ao Distrito Federal e aos Municípios para garantir ações emergenciais direcionadas ao setor cultural; altera a Lei Complementar nº 101, de 4 de maio de 2000 (Lei de Responsabilidade Fiscal), para não contabilizar na meta de resultado primário as transferências federais aos demais entes da Federação para enfrentamento das consequências sociais e econômicas no setor cultural decorrentes de calamidades públicas ou pandemias; e altera a Lei nº 8.313, de 23 de dezembro de 1991, para atribuir outras fontes de recursos ao Fundo Nacional da Cultura (FNC).",
           "afinidade": 0.0,
-          "jaccard_pre_filtro": 0.0762,
-          "status": "Não Relacionado",
-          "justificativa": "Discurso e ementa tratam de temas completamente diferentes",
+          "jaccard_pre_filtro": 0.0502,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.0614, mas não é possível verificar a coerência do voto sem a IA.",
           "voto": "Sim",
-          "data": "2026-03-25",
-          "discurso": "A SRA. TEREZA CRISTINA  \r\n(Bloco/PP - MS) – Decreto Legislativo n° 14, de 2026, que aprova o texto do Acordo Provisório de Comércio entre o Mercado Comum do Sul (Mercosul) e seus Estados-Partes, de um lado, e a União Europeia, de outro, assinado em Assunção, Paraguai, em 17 de janeiro de 2026. \n O Congresso Nacional decreta: \n Art. 1º Fica aprovado o texto do Acordo Provisório de Comércio entre o Mercado Comum do Sul (Mercosul) e seus Estados-Partes, de um lado, e a União Europeia, do outro, assinado em Assunção, Paraguai, em 17 de janeiro de 2026. \n Parágrafo único. Nos termos do inciso I do  caput  do art. 49 da Constituição Federal, ficam sujeitos à aprovação do Congresso Nacional quaisquer atos que possam resultar em denúncia ou em revisão do referido Acordo, bem como quaisquer ajustes complementares que acarretem encargos ou compromissos gravosos ao patrimônio nacional. \n Art. 2º Este Decreto Legislativo entra em vigor na data de sua publicação. \n Brasília, 17 de março de 2026."
+          "data": "2022-03-15",
+          "discurso": "O SR. CARLOS FÁVARO  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MT. Pela ordem.) – Sr. Presidente, muito obrigado pela oportunidade. \n      Quero aqui, antes de mais nada, congratular com todos os colegas Senadores e Senadoras, em especial com o Senador Jayme Campos. \n      E peço à Mesa que consigne uma manifestação de apoio irrestrito à manifestação do Senador Jayme Campos. \n      Diante do quadro, hoje, do Estado de Mato Grosso, estado rico, próspero, em que o Governo do Estado diz que tem bastantes recursos e o maior grau de investimento da história do nosso país, chega a dizer 20% da receita de corrente líquida em investimentos, mas deixa os nossos municípios à míngua, com atraso do repasse do Fethab, que é fundamental para a sobrevivência, em especial, dos pequenos municípios. \n      Quero também, Sr. Presidente, registrar um pedido, extrapauta, para que nós possamos votar a moção de congratulação pela passagem dos 70 anos de idade do nosso ex-Senador, ex-Ministro... \n ( Soa a campainha. ) \n      O SR. CARLOS FÁVARO  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MT) – ... e ex-Governador do Estado de Mato Grosso, Blairo Maggi, empresário... \n      O SR. PRESIDENTE  \r\n(Davi Alcolumbre. Bloco Parlamentar Democracia/UNIÃO - AP) – Senador Fávaro, eu queria pedir a atenção do Plenário. \n      Nós temos um orador na tribuna. Todos os convidados são muito bem-vindos, mas eu não estou conseguindo ouvir o que o Senador Fávaro está falando com a Presidência. \n      O SR. CARLOS FÁVARO  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MT) – Muito obrigado, Sr. Presidente. \n      Então, novamente, consignando o voto de aplauso e irrestrito companheirismo pelo pronunciamento do Senador Jayme Campos, em função dos atrasos do repasse do Fethab aos municípios mato-grossenses, é inadmissível. E é importante que fique registrada a nossa cobrança, como Parlamentares do Estado de Mato Grosso. \n      E, também, um pedido extrapauta ao senhor, para que possa colocar, ao final desta sessão, hoje, uma moção de congratulação ao ex-Senador, amigo desta Casa, ex-Ministro e ex-Governador do Estado de Mato Grosso, Blairo Maggi, pela passagem dos seus 70 anos de idade."
+        },
+        {
+          "ementa": "Altera a Lei nº 11.664, de 29 de abril de 2008, para dispor sobre a atenção integral à mulher na prevenção dos cânceres do colo uterino, de mama e colorretal.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0452,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.0614, mas não é possível verificar a coerência do voto sem a IA.",
+          "voto": "Sim",
+          "data": "2022-03-29",
+          "discurso": "O SR. CARLOS FÁVARO  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MT. Pela ordem.) – Sr. Presidente, muito obrigado pela oportunidade. \n      Quero aqui, antes de mais nada, congratular com todos os colegas Senadores e Senadoras, em especial com o Senador Jayme Campos. \n      E peço à Mesa que consigne uma manifestação de apoio irrestrito à manifestação do Senador Jayme Campos. \n      Diante do quadro, hoje, do Estado de Mato Grosso, estado rico, próspero, em que o Governo do Estado diz que tem bastantes recursos e o maior grau de investimento da história do nosso país, chega a dizer 20% da receita de corrente líquida em investimentos, mas deixa os nossos municípios à míngua, com atraso do repasse do Fethab, que é fundamental para a sobrevivência, em especial, dos pequenos municípios. \n      Quero também, Sr. Presidente, registrar um pedido, extrapauta, para que nós possamos votar a moção de congratulação pela passagem dos 70 anos de idade do nosso ex-Senador, ex-Ministro... \n ( Soa a campainha. ) \n      O SR. CARLOS FÁVARO  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MT) – ... e ex-Governador do Estado de Mato Grosso, Blairo Maggi, empresário... \n      O SR. PRESIDENTE  \r\n(Davi Alcolumbre. Bloco Parlamentar Democracia/UNIÃO - AP) – Senador Fávaro, eu queria pedir a atenção do Plenário. \n      Nós temos um orador na tribuna. Todos os convidados são muito bem-vindos, mas eu não estou conseguindo ouvir o que o Senador Fávaro está falando com a Presidência. \n      O SR. CARLOS FÁVARO  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - MT) – Muito obrigado, Sr. Presidente. \n      Então, novamente, consignando o voto de aplauso e irrestrito companheirismo pelo pronunciamento do Senador Jayme Campos, em função dos atrasos do repasse do Fethab aos municípios mato-grossenses, é inadmissível. E é importante que fique registrada a nossa cobrança, como Parlamentares do Estado de Mato Grosso. \n      E, também, um pedido extrapauta ao senhor, para que possa colocar, ao final desta sessão, hoje, uma moção de congratulação ao ex-Senador, amigo desta Casa, ex-Ministro e ex-Governador do Estado de Mato Grosso, Blairo Maggi, pela passagem dos seus 70 anos de idade."
         }
       ]
     },
     {
-      "id": "4642",
-      "nome": "Efraim Filho",
-      "partido": "PL",
-      "uf": "PB",
-      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4642.jpg",
-      "score_coerencia": 12.0,
-      "pares_alinhados": 2,
+      "id": "5990",
+      "nome": "Carlos Viana",
+      "partido": "PSD",
+      "uf": "MG",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5990.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
       "total_pares": 10,
       "contagem_status": {
-        "Não Relacionado": 8,
-        "Parcialmente Alinhado": 2
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5718",
+      "nome": "Eliziane Gama",
+      "partido": "PSD",
+      "uf": "MA",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5718.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5917",
+      "nome": "Fernando Dueire",
+      "partido": "PSD",
+      "uf": "PE",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5917.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5385",
+      "nome": "Irajá",
+      "partido": "PSD",
+      "uf": "TO",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5385.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "6369",
+      "nome": "Jussara Lima",
+      "partido": "PSD",
+      "uf": "PI",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6369.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5926",
+      "nome": "Lucas Barreto",
+      "partido": "PSD",
+      "uf": "AP",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5926.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
       },
       "detalhes": [
         {
-          "ementa": "Dispõe sobre a transposição e a transferência de saldos financeiros de exercícios passados resultantes de repasses do Fundo Nacional de Desenvolvimento da Educação (FNDE) para os Estados, o Distrito Federal e os Municípios.",
-          "afinidade": 0.6,
-          "jaccard_pre_filtro": 0.1071,
-          "status": "Parcialmente Alinhado",
-          "justificativa": "O discurso menciona segurança viária, que está relacionada à ementa sobre imposto sobre veículos.",
-          "voto": "Sim",
-          "data": "2024-11-27",
-          "discurso": "O SR. EFRAIM FILHO  \r\n(Bloco Parlamentar Democracia/UNIÃO - PB. Para orientar a bancada.) – Sr. Presidente, a proposta equilibra a segurança viária, a saúde do motorista e a realidade da malha rodoviária brasileira. Por isso, o União Brasil orienta o voto “sim”."
-        },
-        {
-          "ementa": "Dá nova redação ao § 1º do art. 1º da Lei Complementar nº 94, de 19 de fevereiro de 1998, para incluir o Município de Uruana de Minas na Região Integrada de Desenvolvimento do Distrito Federal e Entorno – RIDE.",
-          "afinidade": 0.6,
-          "jaccard_pre_filtro": 0.0968,
-          "status": "Parcialmente Alinhado",
-          "justificativa": "O discurso menciona segurança viária, que está relacionada à ementa sobre imposto sobre veículos.",
-          "voto": "AP",
-          "data": "2023-03-28",
-          "discurso": "O SR. EFRAIM FILHO  \r\n(Bloco Parlamentar Democracia/UNIÃO - PB. Para orientar a bancada.) – Sr. Presidente, a proposta equilibra a segurança viária, a saúde do motorista e a realidade da malha rodoviária brasileira. Por isso, o União Brasil orienta o voto “sim”."
-        },
-        {
-          "ementa": "Altera o art. 5º da Constituição Federal, para prever como mandado de criminalização a posse e o porte de entorpecentes e drogas afins sem autorização ou em desacordo com determinação legal ou regulamentar.",
+          "ementa": "Altera o art. 37 da Constituição Federal para permitir a acumulação remunerada de um cargo de professor com outro de qualquer natureza.",
           "afinidade": 0.0,
-          "jaccard_pre_filtro": 0.0847,
-          "status": "Não Relacionado",
-          "justificativa": "O discurso não tem relação com a ementa sobre transposição de saldos financeiros.",
+          "jaccard_pre_filtro": 0.1111,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.1111, mas não é possível verificar a coerência do voto sem a IA.",
           "voto": "Sim",
-          "data": "2024-04-16",
-          "discurso": "O SR. EFRAIM FILHO  \r\n(Bloco Parlamentar Democracia/UNIÃO - PB. Para orientar a bancada.) – Sr. Presidente, a proposta equilibra a segurança viária, a saúde do motorista e a realidade da malha rodoviária brasileira. Por isso, o União Brasil orienta o voto “sim”."
+          "data": "2025-12-10",
+          "discurso": "O SR. LUCAS BARRETO  \r\n(Bloco Parlamentar da Resistência Democrática/PSD - AP. Para orientar a bancada.) – O PSD orienta \"sim\", Sr. Presidente."
         }
       ]
+    },
+    {
+      "id": "5376",
+      "nome": "Mara Gabrilli",
+      "partido": "PSD",
+      "uf": "SP",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5376.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5985",
+      "nome": "Nelsinho Trad",
+      "partido": "PSD",
+      "uf": "MS",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5985.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5525",
+      "nome": "Omar Aziz",
+      "partido": "PSD",
+      "uf": "AM",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5525.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5523",
+      "nome": "Otto Alencar",
+      "partido": "PSD",
+      "uf": "BA",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5523.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "4560",
+      "nome": "Sérgio Petecão",
+      "partido": "PSD",
+      "uf": "AC",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4560.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5899",
+      "nome": "Vanderlan Cardoso",
+      "partido": "PSD",
+      "uf": "GO",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5899.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5783",
+      "nome": "Zenaide Maia",
+      "partido": "PSD",
+      "uf": "RN",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5783.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5982",
+      "nome": "Alessandro Vieira",
+      "partido": "MDB",
+      "uf": "SE",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5982.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "475",
+      "nome": "Confúcio Moura",
+      "partido": "MDB",
+      "uf": "RO",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador475.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "4994",
+      "nome": "Eduardo Braga",
+      "partido": "MDB",
+      "uf": "AM",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador4994.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "6010",
+      "nome": "Ivete da Silveira",
+      "partido": "MDB",
+      "uf": "SC",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6010.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "742",
+      "nome": "Marcelo Castro",
+      "partido": "MDB",
+      "uf": "PI",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador742.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "70",
+      "nome": "Renan Calheiros",
+      "partido": "MDB",
+      "uf": "AL",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador70.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5207",
+      "nome": "Renan Filho",
+      "partido": "MDB",
+      "uf": "AL",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5207.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 6,
+      "contagem_status": {
+        "Sem Avaliação da IA": 6
+      },
+      "detalhes": [
+        {
+          "ementa": "Altera a Lei Complementar nº 79, de 7 de janeiro de 1994, para destinar recursos do Fundo Penitenciário Nacional (Funpen) à formação, ao aperfeiçoamento, à especialização e à capacitação continuada dos servidores do sistema penitenciário nacional e dos policiais penais.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0138,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.0138, mas não é possível verificar a coerência do voto sem a IA.",
+          "voto": "AP",
+          "data": "2026-06-10",
+          "discurso": "O SR. RENAN FILHO  \r\n(Bloco Parlamentar Democracia/MDB - AL. Como Relator.) – Sr. Presidente, Senador Davi Alcolumbre; Líder do Governo no Congresso Nacional, Senador Randolfe Rodrigues; Senador Jaques Wagner; demais colegas; Senador Hiran, que participou bastante comigo deste debate; eu queria dizer que hoje é um dia muito importante para o país: nós simplificamos, desburocratizamos e barateamos a carteira nacional de habilitação.  \n      Isso é um fato histórico, porque a burocracia no Brasil afasta as pessoas de muitas coisas, até do mercado de trabalho. Ao dificultar ao cidadão ter a sua própria carteira nacional de habilitação, o país dificulta o acesso ao mercado de trabalho. E para algumas categorias isso chega a ser impeditivo.  \n      Senão vejamos, Senador Eduardo Braga. No Brasil, a média de idade para tirar a primeira habilitação é 27 anos – 27! Se leva mais ou menos também, em média, aproximadamente mais dez anos para a pessoa conseguir dirigir um caminhão de grande porte, o caminhoneiro, em média, teria que tirar a primeira carteira aos 37 anos. Entretanto, Sr. Presidente Davi Alcolumbre, aos 37 anos, o cidadão já escolheu outra profissão. É por isso que o Brasil vive, Senadora Tereza Cristina – a senhora foi Ministra da Agricultura –, de certa maneira, um apagão de motoristas de caminhão, especialmente dos caminhões de grande porte, porque a burocracia afugenta o jovem da primeira habilitação e, ao fazê-lo, afugenta também a formação de condutores profissionais. Ao facilitar a habilitação para a idade certa, mais próxima dos 18 anos, nós vamos criar um novo mercado em diversas profissões, inclusive para motoristas de caminhão.  \n      Queria dizer, Sr. Presidente Davi Alcolumbre, que nós fizemos uma discussão muito produtiva, com a participação de muitos Senadores. E eu queria destacar aqui a participação do Dr. Hiran, que é um experimentado membro da medicina neste Senado Federal, que já atuou em diversos segmentos e que conhece muito bem a realidade do trânsito brasileiro e da formação de condutores.  \n      E, hoje, Dr. Hiran, nós trazemos esta medida provisória ao Plenário do Senado Federal, depois de ela ter passado pela Comissão Mista à unanimidade, em nome de um entendimento que construímos, Senador Eduardo Braga. Depois, ela foi para a Câmara dos Deputados e, também por lá, foi votada simbolicamente, o que demonstra que o texto é amplo, que é um texto que melhora a lei e que vai beneficiar as pessoas.  \n      Queria, ao usar a palavra neste momento, Sr. Presidente, destacar aqui também a atuação do Senador Eduardo Braga, que fez a mim chegar a necessidade de que nós conciliássemos a desburocratização, a redução dos custos da CNH com a manutenção dos exames médicos, como maneira de garantir também àqueles que já estão no segmento a continuidade do seu trabalho e também de garantir mais segurança em saúde para os nossos condutores. Então, agradeço ao Eduardo Braga, Líder do MDB, que fez chegar também a nós essa ponderação.  \n      Eu acredito que, a partir da discussão, nós tivemos uma lei, a partir da medida provisória editada pelo Presidente Lula, melhor do que a própria medida provisória. Por isso, é muito importante que o Congresso Nacional, Senador Randolfe Rodrigues... E, depois de ter sido Ministro, eu pude viver, na prática, a experiência de ver o Congresso Nacional aperfeiçoar, melhorar a discussão de uma legislação.  \n      Nós mantivemos a renovação automática para o bom condutor. Se ele não levar ponto, se não cometer infração de trânsito, Senador Laércio, ele não vai precisar se preocupar com o Estado. Aquele sujeito que não comete infração, não sofre acidente, não avança sinal, não leva multa por excesso de velocidade, não cria problemas no trânsito vai ter a sua renovação automática. O cidadão só vai precisar fazer o exame que garante a sanidade para que continue tendo um bom desempenho no trânsito. Então, isso foi muito importante, porque a legislação brasileira apenas punia o infrator. Quem avança um sinal, por exemplo, leva pontos na carteira. Se se reúne uma quantidade de pontos, Senador Jaques Wagner, chega-se até a perder a própria carteira. Isso não é errado, é correto, é a punição para o infrator, mas, com a medida provisória editada pelo Presidente Lula, a gente agora beneficia o bom condutor. Isso faz uma balança equilibrada: além de punir quem comete infração de trânsito, a gente premia quem ajuda o Brasil a ter um trânsito melhor.  \n      Queria dizer, Senador Hiran, Senador Randolfe Rodrigues, que, no dia de ontem, toda a mídia nacional divulgou que, nesses primeiros quatro meses, que são coincidentes com a edição, Sr. Presidente, da medida provisória, nós tivemos 4,8 milhões de pedidos de primeira habilitação no Brasil. É o maior volume da história de pedidos de novas habilitações no país. Antes, em um ano inteiro, não chegávamos a 3 milhões; nós tivemos, em um quadrimestre, 4,8 milhões de pedidos. Se mantivermos esse ritmo até o final do ano... Eu acho que, depois que o Congresso Nacional aprovar a lei, depois que deixar de ser medida provisória e virar lei, nós vamos ter ainda mais, porque haverá uma divulgação, a partir de hoje. Talvez nós cheguemos a este ano, Eduardo, com o pedido, Senador Hiran, de 20 milhões de brasileiros no intuito de tirar a sua primeira habilitação.  \n      Era exatamente isso, Sr. Presidente Davi Alcolumbre, que eu conversava com V. Exa. quando fui lá à Residência Oficial da Presidência do Senado para dizer que, infelizmente, este país, pela burocracia e pelo alto custo, tinha chegado ao ponto de ter 20 milhões de brasileiros dirigindo sem carteira – sem carteira! Isso é a própria falência do sistema. Eu dizia isso, mas era uma informação técnica. Agora, a gente está observando que quase 5 milhões de brasileiros em quatro meses... E olhem que, nesses quatro meses, tivemos, no meio, o Natal, o Ano-Novo, o começo do ano, que é um tempo em que a turma não gosta muito de ir atrás de documentos, e o Carnaval também – teve uma turma que ainda teve que pular Carnaval. Mesmo assim, Senadora Tereza Cristina, nós tivemos 4,8 milhões de inscritos para tirar a primeira carteira de habilitação, o que demonstra a importância disso, o que demonstra que as pessoas estão felizes e que o jovem precisa dessa ferramenta para acessar mais facilmente o mercado de trabalho.  \n      Eu acho que esta é uma medida muito relevante para o país, que simplifica o Brasil, que prioriza o interesse do cidadão e que vai melhorar o nosso trânsito.  \n      Eu queria agradecer ao Presidente Davi Alcolumbre; parabenizar o Presidente da Comissão Mista que debateu a medida provisória, o Deputado Luciano Amaral; agradecer, muito destacadamente, ao Senador Randolfe Rodrigues, Líder do Governo, Líder Eduardo, no Congresso Nacional, que usou a sua experiência, que o coloca hoje como um homem menos combativo do que eu... No passado, eu já assisti, muitas vezes, ao Randolfe Rodrigues e o admirei tanto pela sua capacidade de combate, mas a lida no Parlamento vai polindo a pessoa, e hoje, talvez, eu seja mais combativo numa conversa, em nome dos meus próprios argumentos, até do que o próprio Líder do Governo no Congresso, o Senador Randolfe Rodrigues, que, do alto da sua experiência de negociação, ouviu as reivindicações do Senador Hiran, do Senador Portinho... E nós chegamos ao Plenário desta Casa com uma medida suprapartidária, não ideológica, em que, independentemente de se o sujeito é mais à esquerda ou mais à direita, todos compreendem que há um grande benefício para a população. Eu agradeço ao Senador Randolfe pela sua experiência – facilitou a minha participação nesta Comissão.  \n      E queria, Presidente, ao finalizar, dizer que, no final de semana, eu fui para o Alto Sertão de Alagoas, Senador Eduardo Braga, Alto Sertão de Alagoas, para uma cidade chamada Canapi, onde, alguns anos atrás, nós construímos a BR-316 e tiramos a cidade do isolamento. E tínhamos recuperado a estrada, e eu fui para Canapi fazer a entrega, ao lado do Ministro dos Transportes, George Santoro, e de várias lideranças políticas locais, Senador Davi Alcolumbre. Quando cheguei à cidade, tinha um senhor que eu nunca tinha visto, Senadora Tereza, e que já se aproximou dizendo para mim assim: \"Renan, eu tenho 53 anos de idade\". Aí eu disse: \"Oh, é um prazer conhecê-lo!\". O nome dele é Seu Zezinho, Seu Zezinho lá de Canapi. E ele levou uma carteira de habilitação, bem novinha. E ele falou para mim assim: \"Olhe, Renan, eu fiz questão de vir aqui quando soube que você estava vindo para cá para te dizer que, depois de muitos anos dirigindo sem carteira\". E ele fez questão de registrar que é um homem direito, que sempre cumpriu a lei, um trabalhador do campo, mas que tinha uma moto, porque não tinha como comprar ração para os animais, como ir à cidade pagar uma conta sem aquele instrumento de trabalho – a moto substituiu o próprio cavalo no Nordeste brasileiro, no Norte, certamente, Presidente, também. E ele disse assim: \"Quando soava uma sirene de polícia, o meu coração ficava a ponto de sair pela boca. Eu tinha que parar a moto, descer de cima, fingir que não estava dirigindo. Eu me passava, naquele momento, como se fosse bandido. Eu me sentia um bandido, porque não tinha um documento de habilitação. Quando eu vi que você anunciou isso aqui no Ministério dos Transportes ainda, eu fui lá ao Detran, tirei a minha carteira em três meses\". Ele disse que já dirigia há mais de 20 anos, que nunca sofreu um acidente. Ele tirou a carteira em três meses, gastou algo em torno de R$800 para tirar a carteira. E olhem que ele mora no interior do Estado de Alagoas, no Alto Sertão, Senador Laércio. Ele me apresentou o documento, novinho em folha, com o orgulho que eu próprio senti quando eu tirei a minha primeira carteira nacional de habilitação. Eu fiquei tão feliz quando tirei a minha que eu fiquei com vontade de dormir com ela, Senador Randolfe, debaixo do travesseiro. Quando a gente tira o primeiro documento importante, a gente fica com vontade de dormir com o documento embaixo do travesseiro. \n      Eu finalizo, Sr. Presidente, a discussão desta matéria – vai passar a palavra, provavelmente, depois, ao Dr. Hiran – dizendo que, em homenagem a brasileiros como Zezinho, de Canapi, que, aos 53 anos, tirou a sua primeira carteira nacional de habilitação, viva o Brasil e viva o Congresso Nacional, porque nós estamos aqui simplificando e facilitando a vida do povo. Eu acho que a gente tem muita coisa a fazer, mas esse deveria ser o nosso papel principal. \n      Muito obrigado. \n      Era o que eu tinha a dizer."
+        },
+        {
+          "ementa": "Estabelece condições à concessão de isenção do Imposto sobre Serviços de Qualquer Natureza (ISS) para fatos geradores relacionados à organização ou à realização da Copa do Mundo Feminina da FIFA 2027.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0083,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.0083, mas não é possível verificar a coerência do voto sem a IA.",
+          "voto": "AP",
+          "data": "2026-06-09",
+          "discurso": "O SR. RENAN FILHO  \r\n(Bloco Parlamentar Democracia/MDB - AL. Como Relator.) – Sr. Presidente, Senador Davi Alcolumbre; Líder do Governo no Congresso Nacional, Senador Randolfe Rodrigues; Senador Jaques Wagner; demais colegas; Senador Hiran, que participou bastante comigo deste debate; eu queria dizer que hoje é um dia muito importante para o país: nós simplificamos, desburocratizamos e barateamos a carteira nacional de habilitação.  \n      Isso é um fato histórico, porque a burocracia no Brasil afasta as pessoas de muitas coisas, até do mercado de trabalho. Ao dificultar ao cidadão ter a sua própria carteira nacional de habilitação, o país dificulta o acesso ao mercado de trabalho. E para algumas categorias isso chega a ser impeditivo.  \n      Senão vejamos, Senador Eduardo Braga. No Brasil, a média de idade para tirar a primeira habilitação é 27 anos – 27! Se leva mais ou menos também, em média, aproximadamente mais dez anos para a pessoa conseguir dirigir um caminhão de grande porte, o caminhoneiro, em média, teria que tirar a primeira carteira aos 37 anos. Entretanto, Sr. Presidente Davi Alcolumbre, aos 37 anos, o cidadão já escolheu outra profissão. É por isso que o Brasil vive, Senadora Tereza Cristina – a senhora foi Ministra da Agricultura –, de certa maneira, um apagão de motoristas de caminhão, especialmente dos caminhões de grande porte, porque a burocracia afugenta o jovem da primeira habilitação e, ao fazê-lo, afugenta também a formação de condutores profissionais. Ao facilitar a habilitação para a idade certa, mais próxima dos 18 anos, nós vamos criar um novo mercado em diversas profissões, inclusive para motoristas de caminhão.  \n      Queria dizer, Sr. Presidente Davi Alcolumbre, que nós fizemos uma discussão muito produtiva, com a participação de muitos Senadores. E eu queria destacar aqui a participação do Dr. Hiran, que é um experimentado membro da medicina neste Senado Federal, que já atuou em diversos segmentos e que conhece muito bem a realidade do trânsito brasileiro e da formação de condutores.  \n      E, hoje, Dr. Hiran, nós trazemos esta medida provisória ao Plenário do Senado Federal, depois de ela ter passado pela Comissão Mista à unanimidade, em nome de um entendimento que construímos, Senador Eduardo Braga. Depois, ela foi para a Câmara dos Deputados e, também por lá, foi votada simbolicamente, o que demonstra que o texto é amplo, que é um texto que melhora a lei e que vai beneficiar as pessoas.  \n      Queria, ao usar a palavra neste momento, Sr. Presidente, destacar aqui também a atuação do Senador Eduardo Braga, que fez a mim chegar a necessidade de que nós conciliássemos a desburocratização, a redução dos custos da CNH com a manutenção dos exames médicos, como maneira de garantir também àqueles que já estão no segmento a continuidade do seu trabalho e também de garantir mais segurança em saúde para os nossos condutores. Então, agradeço ao Eduardo Braga, Líder do MDB, que fez chegar também a nós essa ponderação.  \n      Eu acredito que, a partir da discussão, nós tivemos uma lei, a partir da medida provisória editada pelo Presidente Lula, melhor do que a própria medida provisória. Por isso, é muito importante que o Congresso Nacional, Senador Randolfe Rodrigues... E, depois de ter sido Ministro, eu pude viver, na prática, a experiência de ver o Congresso Nacional aperfeiçoar, melhorar a discussão de uma legislação.  \n      Nós mantivemos a renovação automática para o bom condutor. Se ele não levar ponto, se não cometer infração de trânsito, Senador Laércio, ele não vai precisar se preocupar com o Estado. Aquele sujeito que não comete infração, não sofre acidente, não avança sinal, não leva multa por excesso de velocidade, não cria problemas no trânsito vai ter a sua renovação automática. O cidadão só vai precisar fazer o exame que garante a sanidade para que continue tendo um bom desempenho no trânsito. Então, isso foi muito importante, porque a legislação brasileira apenas punia o infrator. Quem avança um sinal, por exemplo, leva pontos na carteira. Se se reúne uma quantidade de pontos, Senador Jaques Wagner, chega-se até a perder a própria carteira. Isso não é errado, é correto, é a punição para o infrator, mas, com a medida provisória editada pelo Presidente Lula, a gente agora beneficia o bom condutor. Isso faz uma balança equilibrada: além de punir quem comete infração de trânsito, a gente premia quem ajuda o Brasil a ter um trânsito melhor.  \n      Queria dizer, Senador Hiran, Senador Randolfe Rodrigues, que, no dia de ontem, toda a mídia nacional divulgou que, nesses primeiros quatro meses, que são coincidentes com a edição, Sr. Presidente, da medida provisória, nós tivemos 4,8 milhões de pedidos de primeira habilitação no Brasil. É o maior volume da história de pedidos de novas habilitações no país. Antes, em um ano inteiro, não chegávamos a 3 milhões; nós tivemos, em um quadrimestre, 4,8 milhões de pedidos. Se mantivermos esse ritmo até o final do ano... Eu acho que, depois que o Congresso Nacional aprovar a lei, depois que deixar de ser medida provisória e virar lei, nós vamos ter ainda mais, porque haverá uma divulgação, a partir de hoje. Talvez nós cheguemos a este ano, Eduardo, com o pedido, Senador Hiran, de 20 milhões de brasileiros no intuito de tirar a sua primeira habilitação.  \n      Era exatamente isso, Sr. Presidente Davi Alcolumbre, que eu conversava com V. Exa. quando fui lá à Residência Oficial da Presidência do Senado para dizer que, infelizmente, este país, pela burocracia e pelo alto custo, tinha chegado ao ponto de ter 20 milhões de brasileiros dirigindo sem carteira – sem carteira! Isso é a própria falência do sistema. Eu dizia isso, mas era uma informação técnica. Agora, a gente está observando que quase 5 milhões de brasileiros em quatro meses... E olhem que, nesses quatro meses, tivemos, no meio, o Natal, o Ano-Novo, o começo do ano, que é um tempo em que a turma não gosta muito de ir atrás de documentos, e o Carnaval também – teve uma turma que ainda teve que pular Carnaval. Mesmo assim, Senadora Tereza Cristina, nós tivemos 4,8 milhões de inscritos para tirar a primeira carteira de habilitação, o que demonstra a importância disso, o que demonstra que as pessoas estão felizes e que o jovem precisa dessa ferramenta para acessar mais facilmente o mercado de trabalho.  \n      Eu acho que esta é uma medida muito relevante para o país, que simplifica o Brasil, que prioriza o interesse do cidadão e que vai melhorar o nosso trânsito.  \n      Eu queria agradecer ao Presidente Davi Alcolumbre; parabenizar o Presidente da Comissão Mista que debateu a medida provisória, o Deputado Luciano Amaral; agradecer, muito destacadamente, ao Senador Randolfe Rodrigues, Líder do Governo, Líder Eduardo, no Congresso Nacional, que usou a sua experiência, que o coloca hoje como um homem menos combativo do que eu... No passado, eu já assisti, muitas vezes, ao Randolfe Rodrigues e o admirei tanto pela sua capacidade de combate, mas a lida no Parlamento vai polindo a pessoa, e hoje, talvez, eu seja mais combativo numa conversa, em nome dos meus próprios argumentos, até do que o próprio Líder do Governo no Congresso, o Senador Randolfe Rodrigues, que, do alto da sua experiência de negociação, ouviu as reivindicações do Senador Hiran, do Senador Portinho... E nós chegamos ao Plenário desta Casa com uma medida suprapartidária, não ideológica, em que, independentemente de se o sujeito é mais à esquerda ou mais à direita, todos compreendem que há um grande benefício para a população. Eu agradeço ao Senador Randolfe pela sua experiência – facilitou a minha participação nesta Comissão.  \n      E queria, Presidente, ao finalizar, dizer que, no final de semana, eu fui para o Alto Sertão de Alagoas, Senador Eduardo Braga, Alto Sertão de Alagoas, para uma cidade chamada Canapi, onde, alguns anos atrás, nós construímos a BR-316 e tiramos a cidade do isolamento. E tínhamos recuperado a estrada, e eu fui para Canapi fazer a entrega, ao lado do Ministro dos Transportes, George Santoro, e de várias lideranças políticas locais, Senador Davi Alcolumbre. Quando cheguei à cidade, tinha um senhor que eu nunca tinha visto, Senadora Tereza, e que já se aproximou dizendo para mim assim: \"Renan, eu tenho 53 anos de idade\". Aí eu disse: \"Oh, é um prazer conhecê-lo!\". O nome dele é Seu Zezinho, Seu Zezinho lá de Canapi. E ele levou uma carteira de habilitação, bem novinha. E ele falou para mim assim: \"Olhe, Renan, eu fiz questão de vir aqui quando soube que você estava vindo para cá para te dizer que, depois de muitos anos dirigindo sem carteira\". E ele fez questão de registrar que é um homem direito, que sempre cumpriu a lei, um trabalhador do campo, mas que tinha uma moto, porque não tinha como comprar ração para os animais, como ir à cidade pagar uma conta sem aquele instrumento de trabalho – a moto substituiu o próprio cavalo no Nordeste brasileiro, no Norte, certamente, Presidente, também. E ele disse assim: \"Quando soava uma sirene de polícia, o meu coração ficava a ponto de sair pela boca. Eu tinha que parar a moto, descer de cima, fingir que não estava dirigindo. Eu me passava, naquele momento, como se fosse bandido. Eu me sentia um bandido, porque não tinha um documento de habilitação. Quando eu vi que você anunciou isso aqui no Ministério dos Transportes ainda, eu fui lá ao Detran, tirei a minha carteira em três meses\". Ele disse que já dirigia há mais de 20 anos, que nunca sofreu um acidente. Ele tirou a carteira em três meses, gastou algo em torno de R$800 para tirar a carteira. E olhem que ele mora no interior do Estado de Alagoas, no Alto Sertão, Senador Laércio. Ele me apresentou o documento, novinho em folha, com o orgulho que eu próprio senti quando eu tirei a minha primeira carteira nacional de habilitação. Eu fiquei tão feliz quando tirei a minha que eu fiquei com vontade de dormir com ela, Senador Randolfe, debaixo do travesseiro. Quando a gente tira o primeiro documento importante, a gente fica com vontade de dormir com o documento embaixo do travesseiro. \n      Eu finalizo, Sr. Presidente, a discussão desta matéria – vai passar a palavra, provavelmente, depois, ao Dr. Hiran – dizendo que, em homenagem a brasileiros como Zezinho, de Canapi, que, aos 53 anos, tirou a sua primeira carteira nacional de habilitação, viva o Brasil e viva o Congresso Nacional, porque nós estamos aqui simplificando e facilitando a vida do povo. Eu acho que a gente tem muita coisa a fazer, mas esse deveria ser o nosso papel principal. \n      Muito obrigado. \n      Era o que eu tinha a dizer."
+        },
+        {
+          "ementa": "Altera o art. 9º da Lei Complementar nº 101, de 4 de maio de 2000, para ressalvar despesas das agências reguladoras federais da limitação de empenho e movimentação financeira.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0083,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.0083, mas não é possível verificar a coerência do voto sem a IA.",
+          "voto": "AP",
+          "data": "2026-06-16",
+          "discurso": "O SR. RENAN FILHO  \r\n(Bloco Parlamentar Democracia/MDB - AL. Como Relator.) – Sr. Presidente, Senador Davi Alcolumbre; Líder do Governo no Congresso Nacional, Senador Randolfe Rodrigues; Senador Jaques Wagner; demais colegas; Senador Hiran, que participou bastante comigo deste debate; eu queria dizer que hoje é um dia muito importante para o país: nós simplificamos, desburocratizamos e barateamos a carteira nacional de habilitação.  \n      Isso é um fato histórico, porque a burocracia no Brasil afasta as pessoas de muitas coisas, até do mercado de trabalho. Ao dificultar ao cidadão ter a sua própria carteira nacional de habilitação, o país dificulta o acesso ao mercado de trabalho. E para algumas categorias isso chega a ser impeditivo.  \n      Senão vejamos, Senador Eduardo Braga. No Brasil, a média de idade para tirar a primeira habilitação é 27 anos – 27! Se leva mais ou menos também, em média, aproximadamente mais dez anos para a pessoa conseguir dirigir um caminhão de grande porte, o caminhoneiro, em média, teria que tirar a primeira carteira aos 37 anos. Entretanto, Sr. Presidente Davi Alcolumbre, aos 37 anos, o cidadão já escolheu outra profissão. É por isso que o Brasil vive, Senadora Tereza Cristina – a senhora foi Ministra da Agricultura –, de certa maneira, um apagão de motoristas de caminhão, especialmente dos caminhões de grande porte, porque a burocracia afugenta o jovem da primeira habilitação e, ao fazê-lo, afugenta também a formação de condutores profissionais. Ao facilitar a habilitação para a idade certa, mais próxima dos 18 anos, nós vamos criar um novo mercado em diversas profissões, inclusive para motoristas de caminhão.  \n      Queria dizer, Sr. Presidente Davi Alcolumbre, que nós fizemos uma discussão muito produtiva, com a participação de muitos Senadores. E eu queria destacar aqui a participação do Dr. Hiran, que é um experimentado membro da medicina neste Senado Federal, que já atuou em diversos segmentos e que conhece muito bem a realidade do trânsito brasileiro e da formação de condutores.  \n      E, hoje, Dr. Hiran, nós trazemos esta medida provisória ao Plenário do Senado Federal, depois de ela ter passado pela Comissão Mista à unanimidade, em nome de um entendimento que construímos, Senador Eduardo Braga. Depois, ela foi para a Câmara dos Deputados e, também por lá, foi votada simbolicamente, o que demonstra que o texto é amplo, que é um texto que melhora a lei e que vai beneficiar as pessoas.  \n      Queria, ao usar a palavra neste momento, Sr. Presidente, destacar aqui também a atuação do Senador Eduardo Braga, que fez a mim chegar a necessidade de que nós conciliássemos a desburocratização, a redução dos custos da CNH com a manutenção dos exames médicos, como maneira de garantir também àqueles que já estão no segmento a continuidade do seu trabalho e também de garantir mais segurança em saúde para os nossos condutores. Então, agradeço ao Eduardo Braga, Líder do MDB, que fez chegar também a nós essa ponderação.  \n      Eu acredito que, a partir da discussão, nós tivemos uma lei, a partir da medida provisória editada pelo Presidente Lula, melhor do que a própria medida provisória. Por isso, é muito importante que o Congresso Nacional, Senador Randolfe Rodrigues... E, depois de ter sido Ministro, eu pude viver, na prática, a experiência de ver o Congresso Nacional aperfeiçoar, melhorar a discussão de uma legislação.  \n      Nós mantivemos a renovação automática para o bom condutor. Se ele não levar ponto, se não cometer infração de trânsito, Senador Laércio, ele não vai precisar se preocupar com o Estado. Aquele sujeito que não comete infração, não sofre acidente, não avança sinal, não leva multa por excesso de velocidade, não cria problemas no trânsito vai ter a sua renovação automática. O cidadão só vai precisar fazer o exame que garante a sanidade para que continue tendo um bom desempenho no trânsito. Então, isso foi muito importante, porque a legislação brasileira apenas punia o infrator. Quem avança um sinal, por exemplo, leva pontos na carteira. Se se reúne uma quantidade de pontos, Senador Jaques Wagner, chega-se até a perder a própria carteira. Isso não é errado, é correto, é a punição para o infrator, mas, com a medida provisória editada pelo Presidente Lula, a gente agora beneficia o bom condutor. Isso faz uma balança equilibrada: além de punir quem comete infração de trânsito, a gente premia quem ajuda o Brasil a ter um trânsito melhor.  \n      Queria dizer, Senador Hiran, Senador Randolfe Rodrigues, que, no dia de ontem, toda a mídia nacional divulgou que, nesses primeiros quatro meses, que são coincidentes com a edição, Sr. Presidente, da medida provisória, nós tivemos 4,8 milhões de pedidos de primeira habilitação no Brasil. É o maior volume da história de pedidos de novas habilitações no país. Antes, em um ano inteiro, não chegávamos a 3 milhões; nós tivemos, em um quadrimestre, 4,8 milhões de pedidos. Se mantivermos esse ritmo até o final do ano... Eu acho que, depois que o Congresso Nacional aprovar a lei, depois que deixar de ser medida provisória e virar lei, nós vamos ter ainda mais, porque haverá uma divulgação, a partir de hoje. Talvez nós cheguemos a este ano, Eduardo, com o pedido, Senador Hiran, de 20 milhões de brasileiros no intuito de tirar a sua primeira habilitação.  \n      Era exatamente isso, Sr. Presidente Davi Alcolumbre, que eu conversava com V. Exa. quando fui lá à Residência Oficial da Presidência do Senado para dizer que, infelizmente, este país, pela burocracia e pelo alto custo, tinha chegado ao ponto de ter 20 milhões de brasileiros dirigindo sem carteira – sem carteira! Isso é a própria falência do sistema. Eu dizia isso, mas era uma informação técnica. Agora, a gente está observando que quase 5 milhões de brasileiros em quatro meses... E olhem que, nesses quatro meses, tivemos, no meio, o Natal, o Ano-Novo, o começo do ano, que é um tempo em que a turma não gosta muito de ir atrás de documentos, e o Carnaval também – teve uma turma que ainda teve que pular Carnaval. Mesmo assim, Senadora Tereza Cristina, nós tivemos 4,8 milhões de inscritos para tirar a primeira carteira de habilitação, o que demonstra a importância disso, o que demonstra que as pessoas estão felizes e que o jovem precisa dessa ferramenta para acessar mais facilmente o mercado de trabalho.  \n      Eu acho que esta é uma medida muito relevante para o país, que simplifica o Brasil, que prioriza o interesse do cidadão e que vai melhorar o nosso trânsito.  \n      Eu queria agradecer ao Presidente Davi Alcolumbre; parabenizar o Presidente da Comissão Mista que debateu a medida provisória, o Deputado Luciano Amaral; agradecer, muito destacadamente, ao Senador Randolfe Rodrigues, Líder do Governo, Líder Eduardo, no Congresso Nacional, que usou a sua experiência, que o coloca hoje como um homem menos combativo do que eu... No passado, eu já assisti, muitas vezes, ao Randolfe Rodrigues e o admirei tanto pela sua capacidade de combate, mas a lida no Parlamento vai polindo a pessoa, e hoje, talvez, eu seja mais combativo numa conversa, em nome dos meus próprios argumentos, até do que o próprio Líder do Governo no Congresso, o Senador Randolfe Rodrigues, que, do alto da sua experiência de negociação, ouviu as reivindicações do Senador Hiran, do Senador Portinho... E nós chegamos ao Plenário desta Casa com uma medida suprapartidária, não ideológica, em que, independentemente de se o sujeito é mais à esquerda ou mais à direita, todos compreendem que há um grande benefício para a população. Eu agradeço ao Senador Randolfe pela sua experiência – facilitou a minha participação nesta Comissão.  \n      E queria, Presidente, ao finalizar, dizer que, no final de semana, eu fui para o Alto Sertão de Alagoas, Senador Eduardo Braga, Alto Sertão de Alagoas, para uma cidade chamada Canapi, onde, alguns anos atrás, nós construímos a BR-316 e tiramos a cidade do isolamento. E tínhamos recuperado a estrada, e eu fui para Canapi fazer a entrega, ao lado do Ministro dos Transportes, George Santoro, e de várias lideranças políticas locais, Senador Davi Alcolumbre. Quando cheguei à cidade, tinha um senhor que eu nunca tinha visto, Senadora Tereza, e que já se aproximou dizendo para mim assim: \"Renan, eu tenho 53 anos de idade\". Aí eu disse: \"Oh, é um prazer conhecê-lo!\". O nome dele é Seu Zezinho, Seu Zezinho lá de Canapi. E ele levou uma carteira de habilitação, bem novinha. E ele falou para mim assim: \"Olhe, Renan, eu fiz questão de vir aqui quando soube que você estava vindo para cá para te dizer que, depois de muitos anos dirigindo sem carteira\". E ele fez questão de registrar que é um homem direito, que sempre cumpriu a lei, um trabalhador do campo, mas que tinha uma moto, porque não tinha como comprar ração para os animais, como ir à cidade pagar uma conta sem aquele instrumento de trabalho – a moto substituiu o próprio cavalo no Nordeste brasileiro, no Norte, certamente, Presidente, também. E ele disse assim: \"Quando soava uma sirene de polícia, o meu coração ficava a ponto de sair pela boca. Eu tinha que parar a moto, descer de cima, fingir que não estava dirigindo. Eu me passava, naquele momento, como se fosse bandido. Eu me sentia um bandido, porque não tinha um documento de habilitação. Quando eu vi que você anunciou isso aqui no Ministério dos Transportes ainda, eu fui lá ao Detran, tirei a minha carteira em três meses\". Ele disse que já dirigia há mais de 20 anos, que nunca sofreu um acidente. Ele tirou a carteira em três meses, gastou algo em torno de R$800 para tirar a carteira. E olhem que ele mora no interior do Estado de Alagoas, no Alto Sertão, Senador Laércio. Ele me apresentou o documento, novinho em folha, com o orgulho que eu próprio senti quando eu tirei a minha primeira carteira nacional de habilitação. Eu fiquei tão feliz quando tirei a minha que eu fiquei com vontade de dormir com ela, Senador Randolfe, debaixo do travesseiro. Quando a gente tira o primeiro documento importante, a gente fica com vontade de dormir com o documento embaixo do travesseiro. \n      Eu finalizo, Sr. Presidente, a discussão desta matéria – vai passar a palavra, provavelmente, depois, ao Dr. Hiran – dizendo que, em homenagem a brasileiros como Zezinho, de Canapi, que, aos 53 anos, tirou a sua primeira carteira nacional de habilitação, viva o Brasil e viva o Congresso Nacional, porque nós estamos aqui simplificando e facilitando a vida do povo. Eu acho que a gente tem muita coisa a fazer, mas esse deveria ser o nosso papel principal. \n      Muito obrigado. \n      Era o que eu tinha a dizer."
+        },
+        {
+          "ementa": "Dispõe sobre o crédito fiscal decorrente de subvenção para a implantação ou a expansão de empreendimento econômico.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.007,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.007, mas não é possível verificar a coerência do voto sem a IA.",
+          "voto": "Não",
+          "data": "2023-12-20",
+          "discurso": "O SR. RENAN FILHO  \r\n(Bloco Parlamentar Democracia/MDB - AL. Como Relator.) – Sr. Presidente, Senador Davi Alcolumbre; Líder do Governo no Congresso Nacional, Senador Randolfe Rodrigues; Senador Jaques Wagner; demais colegas; Senador Hiran, que participou bastante comigo deste debate; eu queria dizer que hoje é um dia muito importante para o país: nós simplificamos, desburocratizamos e barateamos a carteira nacional de habilitação.  \n      Isso é um fato histórico, porque a burocracia no Brasil afasta as pessoas de muitas coisas, até do mercado de trabalho. Ao dificultar ao cidadão ter a sua própria carteira nacional de habilitação, o país dificulta o acesso ao mercado de trabalho. E para algumas categorias isso chega a ser impeditivo.  \n      Senão vejamos, Senador Eduardo Braga. No Brasil, a média de idade para tirar a primeira habilitação é 27 anos – 27! Se leva mais ou menos também, em média, aproximadamente mais dez anos para a pessoa conseguir dirigir um caminhão de grande porte, o caminhoneiro, em média, teria que tirar a primeira carteira aos 37 anos. Entretanto, Sr. Presidente Davi Alcolumbre, aos 37 anos, o cidadão já escolheu outra profissão. É por isso que o Brasil vive, Senadora Tereza Cristina – a senhora foi Ministra da Agricultura –, de certa maneira, um apagão de motoristas de caminhão, especialmente dos caminhões de grande porte, porque a burocracia afugenta o jovem da primeira habilitação e, ao fazê-lo, afugenta também a formação de condutores profissionais. Ao facilitar a habilitação para a idade certa, mais próxima dos 18 anos, nós vamos criar um novo mercado em diversas profissões, inclusive para motoristas de caminhão.  \n      Queria dizer, Sr. Presidente Davi Alcolumbre, que nós fizemos uma discussão muito produtiva, com a participação de muitos Senadores. E eu queria destacar aqui a participação do Dr. Hiran, que é um experimentado membro da medicina neste Senado Federal, que já atuou em diversos segmentos e que conhece muito bem a realidade do trânsito brasileiro e da formação de condutores.  \n      E, hoje, Dr. Hiran, nós trazemos esta medida provisória ao Plenário do Senado Federal, depois de ela ter passado pela Comissão Mista à unanimidade, em nome de um entendimento que construímos, Senador Eduardo Braga. Depois, ela foi para a Câmara dos Deputados e, também por lá, foi votada simbolicamente, o que demonstra que o texto é amplo, que é um texto que melhora a lei e que vai beneficiar as pessoas.  \n      Queria, ao usar a palavra neste momento, Sr. Presidente, destacar aqui também a atuação do Senador Eduardo Braga, que fez a mim chegar a necessidade de que nós conciliássemos a desburocratização, a redução dos custos da CNH com a manutenção dos exames médicos, como maneira de garantir também àqueles que já estão no segmento a continuidade do seu trabalho e também de garantir mais segurança em saúde para os nossos condutores. Então, agradeço ao Eduardo Braga, Líder do MDB, que fez chegar também a nós essa ponderação.  \n      Eu acredito que, a partir da discussão, nós tivemos uma lei, a partir da medida provisória editada pelo Presidente Lula, melhor do que a própria medida provisória. Por isso, é muito importante que o Congresso Nacional, Senador Randolfe Rodrigues... E, depois de ter sido Ministro, eu pude viver, na prática, a experiência de ver o Congresso Nacional aperfeiçoar, melhorar a discussão de uma legislação.  \n      Nós mantivemos a renovação automática para o bom condutor. Se ele não levar ponto, se não cometer infração de trânsito, Senador Laércio, ele não vai precisar se preocupar com o Estado. Aquele sujeito que não comete infração, não sofre acidente, não avança sinal, não leva multa por excesso de velocidade, não cria problemas no trânsito vai ter a sua renovação automática. O cidadão só vai precisar fazer o exame que garante a sanidade para que continue tendo um bom desempenho no trânsito. Então, isso foi muito importante, porque a legislação brasileira apenas punia o infrator. Quem avança um sinal, por exemplo, leva pontos na carteira. Se se reúne uma quantidade de pontos, Senador Jaques Wagner, chega-se até a perder a própria carteira. Isso não é errado, é correto, é a punição para o infrator, mas, com a medida provisória editada pelo Presidente Lula, a gente agora beneficia o bom condutor. Isso faz uma balança equilibrada: além de punir quem comete infração de trânsito, a gente premia quem ajuda o Brasil a ter um trânsito melhor.  \n      Queria dizer, Senador Hiran, Senador Randolfe Rodrigues, que, no dia de ontem, toda a mídia nacional divulgou que, nesses primeiros quatro meses, que são coincidentes com a edição, Sr. Presidente, da medida provisória, nós tivemos 4,8 milhões de pedidos de primeira habilitação no Brasil. É o maior volume da história de pedidos de novas habilitações no país. Antes, em um ano inteiro, não chegávamos a 3 milhões; nós tivemos, em um quadrimestre, 4,8 milhões de pedidos. Se mantivermos esse ritmo até o final do ano... Eu acho que, depois que o Congresso Nacional aprovar a lei, depois que deixar de ser medida provisória e virar lei, nós vamos ter ainda mais, porque haverá uma divulgação, a partir de hoje. Talvez nós cheguemos a este ano, Eduardo, com o pedido, Senador Hiran, de 20 milhões de brasileiros no intuito de tirar a sua primeira habilitação.  \n      Era exatamente isso, Sr. Presidente Davi Alcolumbre, que eu conversava com V. Exa. quando fui lá à Residência Oficial da Presidência do Senado para dizer que, infelizmente, este país, pela burocracia e pelo alto custo, tinha chegado ao ponto de ter 20 milhões de brasileiros dirigindo sem carteira – sem carteira! Isso é a própria falência do sistema. Eu dizia isso, mas era uma informação técnica. Agora, a gente está observando que quase 5 milhões de brasileiros em quatro meses... E olhem que, nesses quatro meses, tivemos, no meio, o Natal, o Ano-Novo, o começo do ano, que é um tempo em que a turma não gosta muito de ir atrás de documentos, e o Carnaval também – teve uma turma que ainda teve que pular Carnaval. Mesmo assim, Senadora Tereza Cristina, nós tivemos 4,8 milhões de inscritos para tirar a primeira carteira de habilitação, o que demonstra a importância disso, o que demonstra que as pessoas estão felizes e que o jovem precisa dessa ferramenta para acessar mais facilmente o mercado de trabalho.  \n      Eu acho que esta é uma medida muito relevante para o país, que simplifica o Brasil, que prioriza o interesse do cidadão e que vai melhorar o nosso trânsito.  \n      Eu queria agradecer ao Presidente Davi Alcolumbre; parabenizar o Presidente da Comissão Mista que debateu a medida provisória, o Deputado Luciano Amaral; agradecer, muito destacadamente, ao Senador Randolfe Rodrigues, Líder do Governo, Líder Eduardo, no Congresso Nacional, que usou a sua experiência, que o coloca hoje como um homem menos combativo do que eu... No passado, eu já assisti, muitas vezes, ao Randolfe Rodrigues e o admirei tanto pela sua capacidade de combate, mas a lida no Parlamento vai polindo a pessoa, e hoje, talvez, eu seja mais combativo numa conversa, em nome dos meus próprios argumentos, até do que o próprio Líder do Governo no Congresso, o Senador Randolfe Rodrigues, que, do alto da sua experiência de negociação, ouviu as reivindicações do Senador Hiran, do Senador Portinho... E nós chegamos ao Plenário desta Casa com uma medida suprapartidária, não ideológica, em que, independentemente de se o sujeito é mais à esquerda ou mais à direita, todos compreendem que há um grande benefício para a população. Eu agradeço ao Senador Randolfe pela sua experiência – facilitou a minha participação nesta Comissão.  \n      E queria, Presidente, ao finalizar, dizer que, no final de semana, eu fui para o Alto Sertão de Alagoas, Senador Eduardo Braga, Alto Sertão de Alagoas, para uma cidade chamada Canapi, onde, alguns anos atrás, nós construímos a BR-316 e tiramos a cidade do isolamento. E tínhamos recuperado a estrada, e eu fui para Canapi fazer a entrega, ao lado do Ministro dos Transportes, George Santoro, e de várias lideranças políticas locais, Senador Davi Alcolumbre. Quando cheguei à cidade, tinha um senhor que eu nunca tinha visto, Senadora Tereza, e que já se aproximou dizendo para mim assim: \"Renan, eu tenho 53 anos de idade\". Aí eu disse: \"Oh, é um prazer conhecê-lo!\". O nome dele é Seu Zezinho, Seu Zezinho lá de Canapi. E ele levou uma carteira de habilitação, bem novinha. E ele falou para mim assim: \"Olhe, Renan, eu fiz questão de vir aqui quando soube que você estava vindo para cá para te dizer que, depois de muitos anos dirigindo sem carteira\". E ele fez questão de registrar que é um homem direito, que sempre cumpriu a lei, um trabalhador do campo, mas que tinha uma moto, porque não tinha como comprar ração para os animais, como ir à cidade pagar uma conta sem aquele instrumento de trabalho – a moto substituiu o próprio cavalo no Nordeste brasileiro, no Norte, certamente, Presidente, também. E ele disse assim: \"Quando soava uma sirene de polícia, o meu coração ficava a ponto de sair pela boca. Eu tinha que parar a moto, descer de cima, fingir que não estava dirigindo. Eu me passava, naquele momento, como se fosse bandido. Eu me sentia um bandido, porque não tinha um documento de habilitação. Quando eu vi que você anunciou isso aqui no Ministério dos Transportes ainda, eu fui lá ao Detran, tirei a minha carteira em três meses\". Ele disse que já dirigia há mais de 20 anos, que nunca sofreu um acidente. Ele tirou a carteira em três meses, gastou algo em torno de R$800 para tirar a carteira. E olhem que ele mora no interior do Estado de Alagoas, no Alto Sertão, Senador Laércio. Ele me apresentou o documento, novinho em folha, com o orgulho que eu próprio senti quando eu tirei a minha primeira carteira nacional de habilitação. Eu fiquei tão feliz quando tirei a minha que eu fiquei com vontade de dormir com ela, Senador Randolfe, debaixo do travesseiro. Quando a gente tira o primeiro documento importante, a gente fica com vontade de dormir com o documento embaixo do travesseiro. \n      Eu finalizo, Sr. Presidente, a discussão desta matéria – vai passar a palavra, provavelmente, depois, ao Dr. Hiran – dizendo que, em homenagem a brasileiros como Zezinho, de Canapi, que, aos 53 anos, tirou a sua primeira carteira nacional de habilitação, viva o Brasil e viva o Congresso Nacional, porque nós estamos aqui simplificando e facilitando a vida do povo. Eu acho que a gente tem muita coisa a fazer, mas esse deveria ser o nosso papel principal. \n      Muito obrigado. \n      Era o que eu tinha a dizer."
+        },
+        {
+          "ementa": "Altera o art. 4º, §8º, inciso V, da Lei Complementar nº 224, de 26 de dezembro de 2025.",
+          "afinidade": 0.0,
+          "jaccard_pre_filtro": 0.0056,
+          "status": "Sem Avaliação da IA",
+          "justificativa": "Calculado via similaridade Jaccard (fallback local). Tem afinidade temática 0.007, mas não é possível verificar a coerência do voto sem a IA.",
+          "voto": "Sim",
+          "data": "2026-05-27",
+          "discurso": "O SR. RENAN FILHO  \r\n(Bloco Parlamentar Democracia/MDB - AL. Como Relator.) – Sr. Presidente, Senador Davi Alcolumbre; Líder do Governo no Congresso Nacional, Senador Randolfe Rodrigues; Senador Jaques Wagner; demais colegas; Senador Hiran, que participou bastante comigo deste debate; eu queria dizer que hoje é um dia muito importante para o país: nós simplificamos, desburocratizamos e barateamos a carteira nacional de habilitação.  \n      Isso é um fato histórico, porque a burocracia no Brasil afasta as pessoas de muitas coisas, até do mercado de trabalho. Ao dificultar ao cidadão ter a sua própria carteira nacional de habilitação, o país dificulta o acesso ao mercado de trabalho. E para algumas categorias isso chega a ser impeditivo.  \n      Senão vejamos, Senador Eduardo Braga. No Brasil, a média de idade para tirar a primeira habilitação é 27 anos – 27! Se leva mais ou menos também, em média, aproximadamente mais dez anos para a pessoa conseguir dirigir um caminhão de grande porte, o caminhoneiro, em média, teria que tirar a primeira carteira aos 37 anos. Entretanto, Sr. Presidente Davi Alcolumbre, aos 37 anos, o cidadão já escolheu outra profissão. É por isso que o Brasil vive, Senadora Tereza Cristina – a senhora foi Ministra da Agricultura –, de certa maneira, um apagão de motoristas de caminhão, especialmente dos caminhões de grande porte, porque a burocracia afugenta o jovem da primeira habilitação e, ao fazê-lo, afugenta também a formação de condutores profissionais. Ao facilitar a habilitação para a idade certa, mais próxima dos 18 anos, nós vamos criar um novo mercado em diversas profissões, inclusive para motoristas de caminhão.  \n      Queria dizer, Sr. Presidente Davi Alcolumbre, que nós fizemos uma discussão muito produtiva, com a participação de muitos Senadores. E eu queria destacar aqui a participação do Dr. Hiran, que é um experimentado membro da medicina neste Senado Federal, que já atuou em diversos segmentos e que conhece muito bem a realidade do trânsito brasileiro e da formação de condutores.  \n      E, hoje, Dr. Hiran, nós trazemos esta medida provisória ao Plenário do Senado Federal, depois de ela ter passado pela Comissão Mista à unanimidade, em nome de um entendimento que construímos, Senador Eduardo Braga. Depois, ela foi para a Câmara dos Deputados e, também por lá, foi votada simbolicamente, o que demonstra que o texto é amplo, que é um texto que melhora a lei e que vai beneficiar as pessoas.  \n      Queria, ao usar a palavra neste momento, Sr. Presidente, destacar aqui também a atuação do Senador Eduardo Braga, que fez a mim chegar a necessidade de que nós conciliássemos a desburocratização, a redução dos custos da CNH com a manutenção dos exames médicos, como maneira de garantir também àqueles que já estão no segmento a continuidade do seu trabalho e também de garantir mais segurança em saúde para os nossos condutores. Então, agradeço ao Eduardo Braga, Líder do MDB, que fez chegar também a nós essa ponderação.  \n      Eu acredito que, a partir da discussão, nós tivemos uma lei, a partir da medida provisória editada pelo Presidente Lula, melhor do que a própria medida provisória. Por isso, é muito importante que o Congresso Nacional, Senador Randolfe Rodrigues... E, depois de ter sido Ministro, eu pude viver, na prática, a experiência de ver o Congresso Nacional aperfeiçoar, melhorar a discussão de uma legislação.  \n      Nós mantivemos a renovação automática para o bom condutor. Se ele não levar ponto, se não cometer infração de trânsito, Senador Laércio, ele não vai precisar se preocupar com o Estado. Aquele sujeito que não comete infração, não sofre acidente, não avança sinal, não leva multa por excesso de velocidade, não cria problemas no trânsito vai ter a sua renovação automática. O cidadão só vai precisar fazer o exame que garante a sanidade para que continue tendo um bom desempenho no trânsito. Então, isso foi muito importante, porque a legislação brasileira apenas punia o infrator. Quem avança um sinal, por exemplo, leva pontos na carteira. Se se reúne uma quantidade de pontos, Senador Jaques Wagner, chega-se até a perder a própria carteira. Isso não é errado, é correto, é a punição para o infrator, mas, com a medida provisória editada pelo Presidente Lula, a gente agora beneficia o bom condutor. Isso faz uma balança equilibrada: além de punir quem comete infração de trânsito, a gente premia quem ajuda o Brasil a ter um trânsito melhor.  \n      Queria dizer, Senador Hiran, Senador Randolfe Rodrigues, que, no dia de ontem, toda a mídia nacional divulgou que, nesses primeiros quatro meses, que são coincidentes com a edição, Sr. Presidente, da medida provisória, nós tivemos 4,8 milhões de pedidos de primeira habilitação no Brasil. É o maior volume da história de pedidos de novas habilitações no país. Antes, em um ano inteiro, não chegávamos a 3 milhões; nós tivemos, em um quadrimestre, 4,8 milhões de pedidos. Se mantivermos esse ritmo até o final do ano... Eu acho que, depois que o Congresso Nacional aprovar a lei, depois que deixar de ser medida provisória e virar lei, nós vamos ter ainda mais, porque haverá uma divulgação, a partir de hoje. Talvez nós cheguemos a este ano, Eduardo, com o pedido, Senador Hiran, de 20 milhões de brasileiros no intuito de tirar a sua primeira habilitação.  \n      Era exatamente isso, Sr. Presidente Davi Alcolumbre, que eu conversava com V. Exa. quando fui lá à Residência Oficial da Presidência do Senado para dizer que, infelizmente, este país, pela burocracia e pelo alto custo, tinha chegado ao ponto de ter 20 milhões de brasileiros dirigindo sem carteira – sem carteira! Isso é a própria falência do sistema. Eu dizia isso, mas era uma informação técnica. Agora, a gente está observando que quase 5 milhões de brasileiros em quatro meses... E olhem que, nesses quatro meses, tivemos, no meio, o Natal, o Ano-Novo, o começo do ano, que é um tempo em que a turma não gosta muito de ir atrás de documentos, e o Carnaval também – teve uma turma que ainda teve que pular Carnaval. Mesmo assim, Senadora Tereza Cristina, nós tivemos 4,8 milhões de inscritos para tirar a primeira carteira de habilitação, o que demonstra a importância disso, o que demonstra que as pessoas estão felizes e que o jovem precisa dessa ferramenta para acessar mais facilmente o mercado de trabalho.  \n      Eu acho que esta é uma medida muito relevante para o país, que simplifica o Brasil, que prioriza o interesse do cidadão e que vai melhorar o nosso trânsito.  \n      Eu queria agradecer ao Presidente Davi Alcolumbre; parabenizar o Presidente da Comissão Mista que debateu a medida provisória, o Deputado Luciano Amaral; agradecer, muito destacadamente, ao Senador Randolfe Rodrigues, Líder do Governo, Líder Eduardo, no Congresso Nacional, que usou a sua experiência, que o coloca hoje como um homem menos combativo do que eu... No passado, eu já assisti, muitas vezes, ao Randolfe Rodrigues e o admirei tanto pela sua capacidade de combate, mas a lida no Parlamento vai polindo a pessoa, e hoje, talvez, eu seja mais combativo numa conversa, em nome dos meus próprios argumentos, até do que o próprio Líder do Governo no Congresso, o Senador Randolfe Rodrigues, que, do alto da sua experiência de negociação, ouviu as reivindicações do Senador Hiran, do Senador Portinho... E nós chegamos ao Plenário desta Casa com uma medida suprapartidária, não ideológica, em que, independentemente de se o sujeito é mais à esquerda ou mais à direita, todos compreendem que há um grande benefício para a população. Eu agradeço ao Senador Randolfe pela sua experiência – facilitou a minha participação nesta Comissão.  \n      E queria, Presidente, ao finalizar, dizer que, no final de semana, eu fui para o Alto Sertão de Alagoas, Senador Eduardo Braga, Alto Sertão de Alagoas, para uma cidade chamada Canapi, onde, alguns anos atrás, nós construímos a BR-316 e tiramos a cidade do isolamento. E tínhamos recuperado a estrada, e eu fui para Canapi fazer a entrega, ao lado do Ministro dos Transportes, George Santoro, e de várias lideranças políticas locais, Senador Davi Alcolumbre. Quando cheguei à cidade, tinha um senhor que eu nunca tinha visto, Senadora Tereza, e que já se aproximou dizendo para mim assim: \"Renan, eu tenho 53 anos de idade\". Aí eu disse: \"Oh, é um prazer conhecê-lo!\". O nome dele é Seu Zezinho, Seu Zezinho lá de Canapi. E ele levou uma carteira de habilitação, bem novinha. E ele falou para mim assim: \"Olhe, Renan, eu fiz questão de vir aqui quando soube que você estava vindo para cá para te dizer que, depois de muitos anos dirigindo sem carteira\". E ele fez questão de registrar que é um homem direito, que sempre cumpriu a lei, um trabalhador do campo, mas que tinha uma moto, porque não tinha como comprar ração para os animais, como ir à cidade pagar uma conta sem aquele instrumento de trabalho – a moto substituiu o próprio cavalo no Nordeste brasileiro, no Norte, certamente, Presidente, também. E ele disse assim: \"Quando soava uma sirene de polícia, o meu coração ficava a ponto de sair pela boca. Eu tinha que parar a moto, descer de cima, fingir que não estava dirigindo. Eu me passava, naquele momento, como se fosse bandido. Eu me sentia um bandido, porque não tinha um documento de habilitação. Quando eu vi que você anunciou isso aqui no Ministério dos Transportes ainda, eu fui lá ao Detran, tirei a minha carteira em três meses\". Ele disse que já dirigia há mais de 20 anos, que nunca sofreu um acidente. Ele tirou a carteira em três meses, gastou algo em torno de R$800 para tirar a carteira. E olhem que ele mora no interior do Estado de Alagoas, no Alto Sertão, Senador Laércio. Ele me apresentou o documento, novinho em folha, com o orgulho que eu próprio senti quando eu tirei a minha primeira carteira nacional de habilitação. Eu fiquei tão feliz quando tirei a minha que eu fiquei com vontade de dormir com ela, Senador Randolfe, debaixo do travesseiro. Quando a gente tira o primeiro documento importante, a gente fica com vontade de dormir com o documento embaixo do travesseiro. \n      Eu finalizo, Sr. Presidente, a discussão desta matéria – vai passar a palavra, provavelmente, depois, ao Dr. Hiran – dizendo que, em homenagem a brasileiros como Zezinho, de Canapi, que, aos 53 anos, tirou a sua primeira carteira nacional de habilitação, viva o Brasil e viva o Congresso Nacional, porque nós estamos aqui simplificando e facilitando a vida do povo. Eu acho que a gente tem muita coisa a fazer, mas esse deveria ser o nosso papel principal. \n      Muito obrigado. \n      Era o que eu tinha a dizer."
+        }
+      ]
+    },
+    {
+      "id": "5748",
+      "nome": "Veneziano Vital do Rêgo",
+      "partido": "MDB",
+      "uf": "PB",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5748.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "6008",
+      "nome": "Giordano",
+      "partido": "PODEMOS",
+      "uf": "SP",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador6008.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "5959",
+      "nome": "Styvenson Valentim",
+      "partido": "PODEMOS",
+      "uf": "RN",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5959.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
+    },
+    {
+      "id": "3806",
+      "nome": "Zequinha Marinho",
+      "partido": "PODEMOS",
+      "uf": "PA",
+      "foto": "http://www.senado.leg.br/senadores/img/fotos-oficiais/senador3806.jpg",
+      "score_coerencia": 0.0,
+      "pares_alinhados": 0,
+      "total_pares": 10,
+      "contagem_status": {
+        "Sem Avaliação da IA": 10
+      },
+      "detalhes": []
     }
   ]
 }
