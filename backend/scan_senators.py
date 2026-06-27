@@ -214,19 +214,20 @@ def analisar_afinidade_openrouter(pares: List[dict]) -> List[dict]:
 
     system_prompt = (
         "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
-        "Sua tarefa é comparar um discurso parlamentar com a ementa de uma votação e avaliar a afinidade temática ou ideológica.\n"
+        "Sua tarefa é avaliar a COERÊNCIA POLÍTICA de um parlamentar. Você receberá um discurso, a ementa de uma votação e o VOTO real registrado por ele.\n"
         "Determine:\n"
-        "  1. afinidade: número de 0.0 a 1.0. Seja razoável: se o discurso e a ementa tratarem do mesmo universo temático macro (ex: ambos são sobre economia, ou ambos sobre segurança, ou ambos sobre gestão pública), atribua afinidade entre 0.6 e 0.8. Atribua >= 0.8 apenas se forem diretamente sobre o mesmo projeto de lei. Atribua < 0.5 apenas se forem temas completamente sem relação (ex: futebol vs saúde).\n"
-        "  2. status: 'Coerente' (se o discurso apoia o tema macro da ementa), 'Parcialmente Alinhado', 'Divergente' ou 'Não Relacionado'.\n"
-        "  3. justificativa: 1 frase curta em português explicando a correlação encontrada.\n"
+        "  1. coerencia_score: número de 0.0 a 1.0 indicando se o discurso justifica ou se alinha com o voto registrado (1.0 para coerente, 0.0 para contraditório).\n"
+        "  2. status: 'Coerente' (se o discurso apoia o voto), 'Incoerente' (se o discurso contradiz o voto), ou 'Não Relacionado' (se o discurso não trata da ementa de forma clara).\n"
+        "  3. justificativa: 1 frase curta em português explicando se o voto registrado condiz com o posicionamento falado no discurso.\n"
         "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos "
-        "{idx, afinidade, status, justificativa}. Não adicione nenhuma marcação extra."
+        "{idx, coerencia_score, status, justificativa}. Não adicione nenhuma marcação extra."
     )
 
     payload_pares = [
         {
             "idx": p["idx"],
             "ementa": p["ementa"][:400],
+            "voto": p.get("voto", "N/A"),
             "discurso": p["discurso"][:600] if p.get("discurso") else "Sem discurso.",
         }
         # Pegamos uma amostra maior (600 carac) para dar contexto à LLM
@@ -277,18 +278,11 @@ def analisar_afinidade_local(pares: List[dict]) -> List[dict]:
     resultados = []
     for p in pares:
         af = similaridade_jaccard(p.get("discurso", ""), p["ementa"])
-        # Reduzido o threshold do Jaccard, pois ele raramente passa de 0.3 em textos reais diferentes
-        if af >= 0.25:
-            status = "Coerente"
-        elif af >= 0.12:
-            status = "Parcialmente Alinhado"
-        else:
-            status = "Não Relacionado"
         resultados.append({
             "idx": p["idx"],
-            "afinidade": round(af, 4),
-            "status": status,
-            "justificativa": f"Calculado via similaridade Jaccard (fallback local). Ementa: {p['ementa'][:100]}...",
+            "coerencia_score": 0.0,
+            "status": "Sem Avaliação da IA",
+            "justificativa": f"Calculado via similaridade Jaccard (fallback local). Tem afinidade temática {round(af, 4)}, mas não é possível verificar a coerência do voto sem a IA.",
         })
     return resultados
 
@@ -582,6 +576,7 @@ def validar_senador(
             "ementa": v["ementa"],
             "discurso": melhor_disc,
             "jaccard": round(score_jac, 4),
+            "voto": v["voto"],
             "voto_original_idx": idx,  # preserva idx original para lookup de votos
         })
 
@@ -612,33 +607,33 @@ def validar_senador(
         log(f"  ERR análise {nome}: {e}", "ERR")
         return None
 
-    # Conta pares com afinidade suficiente (>= THRESHOLD_AFINIDADE)
+    # Conta pares coerentes
     analises_by_idx = {a["idx"]: a for a in analises}
     matches_alinhados = sum(
         1 for idx in range(len(pares_amostra))
-        if analises_by_idx.get(idx, {}).get("afinidade", 0.0) >= THRESHOLD_AFINIDADE
+        if analises_by_idx.get(idx, {}).get("status", "") == "Coerente"
     )
 
-    if matches_alinhados < MIN_MATCHES:
-        log(
-            f"  ⤼ {nome} – apenas {matches_alinhados}/{MIN_MATCHES} pares alinhados pela LLM. "
-            "Descartado.",
-            "SKIP",
-        )
-        return None
-
     # ── Métricas consolidadas ────────────────────────────────────────
-    afinidades = [a.get("afinidade", 0.0) for a in analises]
-    media_afinidade = round(sum(afinidades) / len(afinidades), 4) if afinidades else 0.0
+    # A porcentagem de coerência global agora é focada APENAS em votos válidos e relacionados.
+    pares_relacionados = sum(
+        1 for idx in range(len(pares_amostra))
+        if analises_by_idx.get(idx, {}).get("status", "") != "Não Relacionado" and analises_by_idx.get(idx, {}).get("status", "") != "Sem Avaliação da IA"
+    )
+
+    if pares_relacionados > 0:
+        score_coerencia = round((matches_alinhados / pares_relacionados) * 100, 2)
+    else:
+        # Se nenhum discurso tem relação com os votos, a coerência é 0 ou fallback.
+        score_coerencia = 0.0
+
     contagem_status: Dict[str, int] = {}
     for a in analises:
         s = a.get("status", "Não Relacionado")
         contagem_status[s] = contagem_status.get(s, 0) + 1
 
-    score_coerencia = round(media_afinidade * 100, 2)
-
     # Amostras dos discursos mais alinhados
-    top_analises = sorted(analises, key=lambda x: x.get("afinidade", 0.0), reverse=True)[:5]
+    top_analises = sorted(analises, key=lambda x: x.get("coerencia_score", 0.0), reverse=True)[:5]
     detalhes = []
     for a in top_analises:
         a_idx = a.get("idx", 0)
@@ -647,7 +642,7 @@ def validar_senador(
             orig_idx = par["voto_original_idx"]
             detalhes.append({
                 "ementa": par["ementa"],
-                "afinidade": a.get("afinidade", 0.0),
+                "afinidade": a.get("coerencia_score", 0.0),
                 "jaccard_pre_filtro": par["jaccard"],
                 "status": a.get("status", ""),
                 "justificativa": a.get("justificativa", ""),
@@ -670,7 +665,7 @@ def validar_senador(
         "foto": senador.get("foto", ""),
         "tipo_parlamentar": "senador",
         "score_coerencia": score_coerencia,
-        "media_afinidade": media_afinidade,
+        "media_afinidade": score_coerencia / 100.0 if score_coerencia > 0 else 0.0,
         "total_pares_analisados": len(pares_amostra),
         "pares_alinhados": matches_alinhados,
         "contagem_status": contagem_status,

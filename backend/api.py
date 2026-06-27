@@ -230,16 +230,16 @@ def analisar_coerencia_groq(votos_com_discurso: list[dict]) -> list[dict]:
     MODELS   = ["llama-3.1-8b-instant", "llama-3.3-70b-versatile"]
 
     system_prompt = (
-        "Você é analista político sênior. Para cada item, compare ementa e discurso e retorne:\n"
-        "  afinidade (0.0-1.0), status ('Coerente','Parcialmente Alinhado','Divergente','Não Relacionado'), justificativa (1 frase).\n"
-        "Se temas distintos ou discurso vazio: status='Não Relacionado', afinidade < 0.6.\n"
-        "Retorne APENAS JSON com chave 'analises'."
+        "Você é analista político sênior. Avalie a COERÊNCIA POLÍTICA. Para cada item, compare ementa, discurso e o VOTO real.\n"
+        "Retorne: coerencia_score (0.0 a 1.0 indicando se discurso justifica o voto), status ('Coerente','Incoerente','Não Relacionado'), justificativa (1 frase).\n"
+        "Retorne APENAS JSON com chave 'analises' contendo {idx, coerencia_score, status, justificativa}."
     )
 
     payload_items = [
         {
             "idx": i,
             "ementa": v["ementa"][:300],
+            "voto": v.get("voto", "N/A"),
             "discurso": v.get("discurso", "")[:400],
         }
         for i, v in enumerate(votos_com_discurso)
@@ -280,16 +280,16 @@ def analisar_coerencia_openrouter(votos_com_discurso: list[dict]) -> list[dict]:
         raise RuntimeError("OPENROUTER_API_KEY ausente")
 
     system_prompt = (
-        "Você é analista político sênior. Para cada item, compare ementa e discurso e retorne:\n"
-        "  afinidade (0.0-1.0), status ('Coerente','Parcialmente Alinhado','Divergente','Não Relacionado'), justificativa (1 frase).\n"
-        "Se temas distintos ou discurso vazio: status='Não Relacionado', afinidade < 0.6.\n"
-        "Retorne APENAS JSON com chave 'analises'."
+        "Você é analista político sênior. Avalie a COERÊNCIA POLÍTICA. Para cada item, compare ementa, discurso e o VOTO real.\n"
+        "Retorne: coerencia_score (0.0 a 1.0 indicando se discurso justifica o voto), status ('Coerente','Incoerente','Não Relacionado'), justificativa (1 frase).\n"
+        "Retorne APENAS JSON com chave 'analises' contendo {idx, coerencia_score, status, justificativa}."
     )
 
     payload_items = [
         {
             "idx": i,
             "ementa": v["ementa"][:300],
+            "voto": v.get("voto", "N/A"),
             "discurso": v.get("discurso", "")[:400],
         }
         for i, v in enumerate(votos_com_discurso)
@@ -687,7 +687,7 @@ def analisar_parlamentar():
                             "data": v["data"],
                             "ementa": v["ementa"],
                             "voto": v["voto"],
-                            "afinidade": float(a.get("afinidade", 0.0)),
+                            "afinidade": float(a.get("coerencia_score", 0.0)),
                             "status": a.get("status", "Não Relacionado"),
                             "justificativa": a.get("justificativa", ""),
                             "discurso": v.get("discurso", ""),
@@ -709,7 +709,7 @@ def analisar_parlamentar():
                             "data": v["data"],
                             "ementa": v["ementa"],
                             "voto": v["voto"],
-                            "afinidade": float(a.get("afinidade", 0.0)),
+                            "afinidade": float(a.get("coerencia_score", 0.0)),
                             "status": a.get("status", "Não Relacionado"),
                             "justificativa": a.get("justificativa", ""),
                             "discurso": v.get("discurso", ""),
@@ -723,15 +723,15 @@ def analisar_parlamentar():
             modelo_usado = "Jaccard (fallback)"
             for v in votos_com_disc:
                 af = similaridade_jaccard(v.get("discurso", ""), v["ementa"])
-                status = "Coerente" if af >= 0.6 else "Parcialmente Alinhado" if af >= 0.4 else "Não Relacionado"
+                status = "Sem Avaliação da IA"
                 resultados.append(
                     {
                         "data": v["data"],
                         "ementa": v["ementa"],
                         "voto": v["voto"],
-                        "afinidade": round(af, 4),
+                        "afinidade": 0.0,
                         "status": status,
-                        "justificativa": "",
+                        "justificativa": f"Calculado via similaridade Jaccard (fallback local). Afinidade temática {round(af, 4)}.",
                         "discurso": v.get("discurso", ""),
                     }
                 )
