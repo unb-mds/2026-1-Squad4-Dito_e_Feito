@@ -222,7 +222,7 @@ def extrair_votos_deputado(deputado_id) -> list[dict]:
 
 
 def analisar_coerencia_groq(votos_com_discurso: list[dict]) -> list[dict]:
-    """Envia pares (ementa, discurso) ao Groq e retorna análises."""
+    """Envia pares (ementa, voto, discurso) ao Groq e retorna análises de coerência booleana."""
     if not GROQ_API_KEY:
         raise RuntimeError("GROQ_API_KEY ausente")
 
@@ -230,16 +230,31 @@ def analisar_coerencia_groq(votos_com_discurso: list[dict]) -> list[dict]:
     MODELS   = ["llama-3.1-8b-instant", "llama-3.3-70b-versatile"]
 
     system_prompt = (
-        "Você é analista político sênior. Avalie a COERÊNCIA POLÍTICA. Para cada item, compare ementa, discurso e o VOTO real.\n"
-        "Retorne: coerencia_score (0.0 a 1.0 indicando se discurso justifica o voto), status ('Coerente','Incoerente','Não Relacionado'), justificativa (1 frase).\n"
-        "Retorne APENAS JSON com chave 'analises' contendo {idx, coerencia_score, status, justificativa}."
+        "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+        "Não adicione nenhuma marcação extra, apenas o JSON puro."
     )
 
     payload_items = [
         {
             "idx": i,
             "ementa": v["ementa"][:300],
-            "voto": v.get("voto", "N/A"),
+            "voto_oficial": v.get("voto", "N/A"),
             "discurso": v.get("discurso", "")[:400],
         }
         for i, v in enumerate(votos_com_discurso)
@@ -275,21 +290,36 @@ def analisar_coerencia_groq(votos_com_discurso: list[dict]) -> list[dict]:
 
 
 def analisar_coerencia_openrouter(votos_com_discurso: list[dict]) -> list[dict]:
-    """Envia pares (ementa, discurso) ao OpenRouter e retorna análises."""
+    """Envia pares (ementa, voto, discurso) ao OpenRouter e retorna análises de coerência booleana."""
     if not OPENROUTER_API_KEY:
         raise RuntimeError("OPENROUTER_API_KEY ausente")
 
     system_prompt = (
-        "Você é analista político sênior. Avalie a COERÊNCIA POLÍTICA. Para cada item, compare ementa, discurso e o VOTO real.\n"
-        "Retorne: coerencia_score (0.0 a 1.0 indicando se discurso justifica o voto), status ('Coerente','Incoerente','Não Relacionado'), justificativa (1 frase).\n"
-        "Retorne APENAS JSON com chave 'analises' contendo {idx, coerencia_score, status, justificativa}."
+        "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+        "Não adicione nenhuma marcação extra, apenas o JSON puro."
     )
 
     payload_items = [
         {
             "idx": i,
             "ementa": v["ementa"][:300],
-            "voto": v.get("voto", "N/A"),
+            "voto_oficial": v.get("voto", "N/A"),
             "discurso": v.get("discurso", "")[:400],
         }
         for i, v in enumerate(votos_com_discurso)
@@ -670,83 +700,95 @@ def analisar_parlamentar():
             melhor = max(discursos, key=lambda d: similaridade_jaccard(d, v["ementa"]))
             votos_com_disc.append({**v, "discurso": melhor})
 
-        # Análise
-        resultados = []
+        # ── Análise via LLM ────────────────────────────────────────
+        analises_raw = []
         modelo_usado = ""
-        
+
         # 1. Tentar Groq
         if GROQ_API_KEY:
             try:
-                analises = analisar_coerencia_groq(votos_com_disc)
+                analises_raw = analisar_coerencia_groq(votos_com_disc)
                 modelo_usado = "Groq (Llama-3)"
-                for i, a in enumerate(analises):
-                    idx = a.get("idx", i)
-                    v = votos_com_disc[idx] if idx < len(votos_com_disc) else votos_com_disc[i]
-                    resultados.append(
-                        {
-                            "data": v["data"],
-                            "ementa": v["ementa"],
-                            "voto": v["voto"],
-                            "afinidade": float(a.get("coerencia_score", 0.0)),
-                            "status": a.get("status", "Não Relacionado"),
-                            "justificativa": a.get("justificativa", ""),
-                            "discurso": v.get("discurso", ""),
-                        }
-                    )
             except Exception as e:
                 print(f"[WARN] Groq falhou: {e}")
 
         # 2. Tentar OpenRouter como Fallback
-        if not resultados and OPENROUTER_API_KEY:
+        if not analises_raw and OPENROUTER_API_KEY:
             try:
-                analises = analisar_coerencia_openrouter(votos_com_disc)
+                analises_raw = analisar_coerencia_openrouter(votos_com_disc)
                 modelo_usado = "OpenRouter"
-                for i, a in enumerate(analises):
-                    idx = a.get("idx", i)
-                    v = votos_com_disc[idx] if idx < len(votos_com_disc) else votos_com_disc[i]
-                    resultados.append(
-                        {
-                            "data": v["data"],
-                            "ementa": v["ementa"],
-                            "voto": v["voto"],
-                            "afinidade": float(a.get("coerencia_score", 0.0)),
-                            "status": a.get("status", "Não Relacionado"),
-                            "justificativa": a.get("justificativa", ""),
-                            "discurso": v.get("discurso", ""),
-                        }
-                    )
             except Exception as e:
                 print(f"[WARN] OpenRouter falhou: {e}")
 
-        # 3. Fallback Jaccard
-        if not resultados:
-            modelo_usado = "Jaccard (fallback)"
+        # ── Cálculo do score booleano ───────────────────────────────
+        # Votos que não devem entrar no denominador
+        VOTOS_INVALIDOS = {
+            "abstenção", "abstencao", "ausente", "obstrução", "obstrucao",
+            "art. 17", "art.17", "n/a", "none", "null", "não compareceu"
+        }
+
+        resultados = []
+        votos_coerentes = 0
+        total_validos = 0
+
+        if analises_raw:
+            # Monta dict por idx para lookup rápido
+            analises_map = {a.get("idx", i): a for i, a in enumerate(analises_raw)}
+
+            for i, v in enumerate(votos_com_disc):
+                a = analises_map.get(i, {})
+                coerente = a.get("coerente")   # True | False | None
+                voto_str = str(v.get("voto", "")).strip().lower()
+
+                # RF27: Abstenções e ausências não entram no denominador
+                if voto_str in VOTOS_INVALIDOS:
+                    coerente = None
+
+                if coerente is True:
+                    votos_coerentes += 1
+                    total_validos += 1
+                elif coerente is False:
+                    total_validos += 1
+
+                resultados.append({
+                    "data": v["data"],
+                    "ementa": v["ementa"],
+                    "voto": v["voto"],
+                    "postura_extraida": a.get("postura_extraida", "Neutro"),
+                    "coerente": coerente,
+                    "justificativa": a.get("justificativa", ""),
+                    "discurso": v.get("discurso", ""),
+                })
+        else:
+            # Fallback Jaccard: não temos avaliação real — marca coerente=null
+            modelo_usado = "Jaccard (fallback — sem avaliação de coerência)"
             for v in votos_com_disc:
-                af = similaridade_jaccard(v.get("discurso", ""), v["ementa"])
-                status = "Sem Avaliação da IA"
-                resultados.append(
-                    {
-                        "data": v["data"],
-                        "ementa": v["ementa"],
-                        "voto": v["voto"],
-                        "afinidade": 0.0,
-                        "status": status,
-                        "justificativa": f"Calculado via similaridade Jaccard (fallback local). Afinidade temática {round(af, 4)}.",
-                        "discurso": v.get("discurso", ""),
-                    }
-                )
+                resultados.append({
+                    "data": v["data"],
+                    "ementa": v["ementa"],
+                    "voto": v["voto"],
+                    "postura_extraida": "Neutro",
+                    "coerente": None,
+                    "justificativa": "LLM indisponível. Sem avaliação de coerência.",
+                    "discurso": v.get("discurso", ""),
+                })
 
-        resultados.sort(key=lambda x: x["afinidade"], reverse=True)
-        top10 = resultados[:10]
+        # RF15: score só é calculado com mínimo de 3 pares válidos
+        VOLUME_MINIMO = 3
+        if total_validos >= VOLUME_MINIMO:
+            score_coerencia = round((votos_coerentes / total_validos) * 100, 1)
+        else:
+            score_coerencia = None  # dados insuficientes
 
-        return jsonify(
-            {
-                "status": "ok",
-                "modelo_usado": modelo_usado,
-                "total_votos_analisados": len(resultados),
-                "dados": top10,
-            }
-        )
+        return jsonify({
+            "status": "ok",
+            "modelo_usado": modelo_usado,
+            "score_coerencia": score_coerencia,
+            "total_validos": total_validos,
+            "votos_coerentes": votos_coerentes,
+            "total_votos_analisados": len(resultados),
+            "dados": resultados,
+        })
 
     except Exception as e:
         traceback.print_exc()

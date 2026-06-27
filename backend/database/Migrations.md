@@ -193,13 +193,57 @@ alembic upgrade head
 
 ## Migrations já aplicadas no projeto
 
-| Migration | Descrição | Sprint |
-|---|---|---|
-| `schema_inicial` | Criação das 6 tabelas principais | Sprint 03 |
-| `add_pgvector` | Suporte a embeddings com pgvector | Sprint 05 |
-| `add_status_coerencia` | Campo de classificação da IA | Sprint 05 |
+| Migration | Arquivo | Descrição | Sprint |
+|---|---|---|---|
+| `schema_inicial` | `schema.sql` | Criação das 6 tabelas principais | Sprint 03 |
+| `add_pgvector` | — | Suporte a embeddings com pgvector | Sprint 05 |
+| `add_status_coerencia` | — | Campo de classificação da IA | Sprint 05 |
+| `001_add_tipo_parlamentar` | `001_add_tipo_parlamentar.sql` | Suporte a senadores e cache de análise | Sprint 05 |
+| `004_coerencia_booleana` | `004_coerencia_booleana.sql` | **Modelo booleano de coerência** — substitui similaridade textual (float) por postura vs. voto (bool) | Sprint 07 |
 
 > 📝 Atualize esta tabela sempre que uma nova migration for aplicada.
+
+---
+
+## Sobre a Migration 004 — Coerência Booleana
+
+Esta é a mudança mais significativa na filosofia do projeto.
+
+**Antes (modelo errado):**
+> O sistema media "quão similar é o texto do discurso ao texto da ementa" — retornando um float de 0 a 1.
+
+**Depois (modelo correto):**
+> O sistema extrai a **postura do parlamentar no discurso** (`A Favor` / `Contra` / `Neutro`) e compara com o **voto oficial** (`Sim` / `Não`). O resultado é booleano: coerente ou incoerente.
+
+### Campos adicionados em `score_coerencia`
+
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `postura_extraida` | `TEXT` | Postura extraída do discurso pelo LLM: `'A Favor'`, `'Contra'` ou `'Neutro'` |
+| `voto_registrado` | `TEXT` | Voto oficial: `Sim`, `Não`, `Abstenção`, `Ausente`, etc. |
+| `coerente` | `BOOLEAN` | `TRUE` = coerente, `FALSE` = incoerente, `NULL` = não avaliável |
+
+### Campos removidos
+
+| Campo | Motivo |
+|---|---|
+| `similaridade_coseno` | Não tem mais semântica no modelo booleano |
+
+### Regras do denominador do score (RF27)
+
+Votos que **não entram** no denominador do score de coerência:
+- `Abstenção` / `Abstenção`
+- `Ausente`
+- `Obstrução`
+- `Art. 17`
+- Qualquer valor `NULL` ou `N/A`
+
+### Como aplicar
+
+```sql
+-- Rode no SQL Editor do Supabase ou via psql
+\i database/004_coerencia_booleana.sql
+```
 
 ---
 
