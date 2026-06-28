@@ -4,14 +4,16 @@ import { GraficoTendencias } from '../components/GraficoTendencias';
 import { GraficoPartidos } from '../components/GraficoPartidos';
 import { GraficoBarras } from '../components/GraficoBarras';
 import { MapaBrasil } from '../components/MapaBrasil';
-import { politicosMock, alertas } from '../utils/mockData';
+import { politicosMock } from '../utils/mockData';
 import { getDashboardMetrics, getSenadores, getDeputados } from '../services/api';
-import { formatTipoParlamentar } from '../utils/formatters';
+import { formatTipoParlamentar, getPartidoLogo, getEstadoFlag } from '../utils/formatters';
 
 export function VisaoGeral() {
   const navigate = useNavigate();
   const top4Mock = [...politicosMock].sort((a,b) => b.coerencia - a.coerencia).slice(0, 4);
   const [top4, setTop4] = useState(top4Mock);
+  const [topPartidos, setTopPartidos] = useState([]);
+  const [topEstados, setTopEstados] = useState([]);
 
   const [metrics, setMetrics] = useState({
     totalAnalisados: '2.847',
@@ -106,12 +108,33 @@ export function VisaoGeral() {
         });
         
         const finalMapData = {};
+        const topEstadosList = [];
         for (const [uf, data] of Object.entries(ufMap)) {
             if (data.count > 0) {
-                finalMapData[uf] = { coerencia: Math.round(data.soma / data.count), total: data.count };
+                const coerencia = Math.round(data.soma / data.count);
+                finalMapData[uf] = { coerencia, total: data.count };
+                topEstadosList.push({ uf, coerencia, total: data.count });
             }
         }
         setDataByState(finalMapData);
+        setTopEstados(topEstadosList.sort((a, b) => b.coerencia - a.coerencia).slice(0, 4));
+
+        const partidoMap = {};
+        analyzedList.forEach(p => {
+          if (p.partido) {
+            if (!partidoMap[p.partido]) partidoMap[p.partido] = { soma: 0, count: 0 };
+            if (p.analisado !== false) {
+              partidoMap[p.partido].soma += p.coerencia;
+              partidoMap[p.partido].count += 1;
+            }
+          }
+        });
+        const topPartidosList = Object.entries(partidoMap)
+            .filter(([_, d]) => d.count > 0)
+            .map(([partido, d]) => ({ partido, coerencia: Math.round(d.soma / d.count), total: d.count }))
+            .sort((a,b) => b.coerencia - a.coerencia)
+            .slice(0, 4);
+        setTopPartidos(topPartidosList);
 
         setMetrics({
           totalAnalisados,
@@ -212,9 +235,10 @@ export function VisaoGeral() {
                   className="flex items-center gap-3 p-[12px_20px] border-b border-border2 hover:bg-surface2 cursor-pointer last:border-0"
                 >
                   <img 
-                    src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} 
-                    onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`; }}
-                    className="w-8 h-8 rounded-full object-cover border border-border" 
+                    src={p.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`} 
+                    onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`; }}
+                    className="w-8 h-8 rounded-full object-cover border border-border shrink-0" 
+                    alt={p.nome}
                   />
                   <div className="flex-1 min-w-0">
                     <div className="text-[14px] font-semibold text-text-main truncate">{p.nome}</div>
@@ -284,26 +308,50 @@ export function VisaoGeral() {
           <div className="p-5 h-[240px] w-full"><GraficoBarras /></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="bg-surface border border-border rounded-xl">
             <div className="flex justify-between items-center p-[16px_20px] border-b border-border2">
-              <div className="text-[16px] font-bold text-text-main flex items-center gap-2">
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
-                Alertas de Incoerência
-              </div>
-              <span className="text-[11px] font-semibold text-red bg-red-bg border border-red/25 px-2 py-1 rounded-md">3 casos graves</span>
+              <div className="text-[16px] font-bold text-text-main">Ranking de Partidos</div>
+              <span onClick={() => navigate('/partidos')} className="text-[13px] font-medium text-teal cursor-pointer hover:underline">Ver Todos</span>
             </div>
             <div>
-              {alertas.map((a, i) => (
-                <div key={i} className="flex justify-between items-center p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
-                  <div className={`border-l-3 pl-3 ${a.grave ? 'border-teal' : 'border-red'}`}>
-                    <div className="text-[14px] font-semibold text-text-main flex items-center gap-2 mb-1">
-                      {a.nome} 
-                      <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${a.partido.toLowerCase()}`); }} className="text-[11px] text-teal bg-teal-bg px-1.5 py-0.5 rounded hover:bg-teal hover:text-white transition-colors">{a.partido}</span>
+              {topPartidos.map((p, i) => (
+                <div key={i} onClick={() => navigate(`/partidos/${p.partido.toLowerCase()}`)} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+                  <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
+                  <img src={getPartidoLogo(p.partido)} alt={p.partido} className="w-9 h-9 rounded-full border border-border shrink-0 object-contain p-1 bg-white" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[14px] font-semibold text-text-main truncate">{p.partido}</div>
+                    <div className="text-[11px] text-text2 mt-0.5">{p.total} analisados</div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1.5 min-w-[70px]">
+                    <div className="text-[14px] font-bold text-text-main">{p.coerencia}%</div>
+                    <div className="h-[4px] bg-border rounded w-full overflow-hidden">
+                      <div className={`h-full rounded transition-all duration-600 ${p.coerencia >= 70 ? 'bg-green' : p.coerencia >= 50 ? 'bg-amber-500' : 'bg-red'}`} style={{ width: `${p.coerencia}%` }}></div>
                     </div>
-                    <div className="text-[12px] text-text2 flex items-center gap-1.5">
-                      <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
-                      {a.tema} · {a.data}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-surface border border-border rounded-xl">
+            <div className="flex justify-between items-center p-[16px_20px] border-b border-border2">
+              <div className="text-[16px] font-bold text-text-main">Ranking de Estados</div>
+              <span onClick={() => navigate('/estados')} className="text-[13px] font-medium text-teal cursor-pointer hover:underline">Ver Todos</span>
+            </div>
+            <div>
+              {topEstados.map((e, i) => (
+                <div key={i} onClick={() => navigate(`/estados/${e.uf.toLowerCase()}`)} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+                  <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
+                  <img src={getEstadoFlag(e.uf)} alt={e.uf} className="w-9 h-9 rounded-full border border-border shrink-0 object-cover" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[14px] font-semibold text-text-main truncate">{e.uf}</div>
+                    <div className="text-[11px] text-text2 mt-0.5">{e.total} analisados</div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1.5 min-w-[70px]">
+                    <div className="text-[14px] font-bold text-text-main">{e.coerencia}%</div>
+                    <div className="h-[4px] bg-border rounded w-full overflow-hidden">
+                      <div className={`h-full rounded transition-all duration-600 ${e.coerencia >= 70 ? 'bg-green' : e.coerencia >= 50 ? 'bg-amber-500' : 'bg-red'}`} style={{ width: `${e.coerencia}%` }}></div>
                     </div>
                   </div>
                 </div>
@@ -320,7 +368,7 @@ export function VisaoGeral() {
               {top4.map((p, i) => (
                 <div key={i} onClick={() => navigate(`/politicos/${p.id}`, { state: { politico: p } })} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
                   <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
-                  <img src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} alt={p.nome} className="w-9 h-9 rounded-full border border-border shrink-0 object-cover" />
+                  <img src={p.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`} alt={p.nome} className="w-9 h-9 rounded-full border border-border shrink-0 object-cover" onError={(ev) => { ev.currentTarget.onerror = null; ev.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`; }} />
                   <div className="flex-1 min-w-0">
                     <div className="text-[14px] font-semibold text-text-main truncate flex items-center gap-2">
                       {p.nome}
