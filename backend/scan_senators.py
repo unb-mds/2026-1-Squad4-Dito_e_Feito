@@ -62,6 +62,10 @@ CONFIG_BUSCA = {
     "fallback_ativado": False
 }
 
+# Configurações Ollama Local
+OLLAMA_URL = "http://localhost:11434/v1/chat/completions"
+OLLAMA_MODEL = "qwen2.5-coder:7b"
+
 # Configurações OpenRouter
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -304,8 +308,74 @@ def analisar_afinidade_local(pares: List[dict]) -> List[dict]:
     return resultados
 
 
+def analisar_afinidade_ollama(pares: List[dict]) -> List[dict]:
+    """
+    Recebe lista de {idx, ementa, voto, discurso} e envia para o Ollama local (qwen2.5-coder:7b)
+    avaliar a coerência política booleana: o parlamentar votou de acordo com
+    a postura que assumiu no discurso?
+    """
+    system_prompt = (
+        "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+        "Não adicione nenhuma marcação extra, apenas o JSON puro."
+    )
+
+    payload_pares = [
+        {
+            "idx": p["idx"],
+            "ementa": p["ementa"][:400],
+            "voto_oficial": p.get("voto", "N/A"),
+            "discurso": p["discurso"][:600] if p.get("discurso") else "Sem discurso.",
+        }
+        for p in pares
+    ]
+
+    payload = {
+        "model": OLLAMA_MODEL,
+        "response_format": {"type": "json_object"},
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": json.dumps(payload_pares, ensure_ascii=False)},
+        ],
+        "temperature": 0.1,
+    }
+
+    log(f"Enviando lote de {len(payload_pares)} pares para Ollama ({OLLAMA_MODEL})...", "INFO")
+    res = requests.post(OLLAMA_URL, json=payload, timeout=180)
+    if not res.ok:
+        raise RuntimeError(f"Ollama retornou status {res.status_code}: {res.text}")
+
+    content = res.json()["choices"][0]["message"]["content"]
+    if "```" in content:
+        content = content.split("```json")[-1].split("```")[0].strip()
+
+    data = json.loads(content)
+    log(f"Sucesso via Ollama ({OLLAMA_MODEL})!", "OK")
+    return data.get("analises", [])
+
+
 def analisar_pares(pares: List[dict]) -> List[dict]:
-    """Tenta via LLM do OpenRouter; se falhar ou não tiver chave, usa o Jaccard local."""
+    """Tenta via Ollama local (qwen2.5-coder:7b); se falhar, tenta OpenRouter; se falhar, usa fallback local."""
+    try:
+        return analisar_afinidade_ollama(pares)
+    except Exception as e:
+        log(f"Ollama local falhou ({e}). Tentando OpenRouter...", "WARN")
+
     if OPENROUTER_API_KEY:
         try:
             return analisar_afinidade_openrouter(pares)

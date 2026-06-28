@@ -83,6 +83,7 @@ nav:
 
   - Backend:
       - Visão Geral: backend/backend.md
+      - Coerência Política e Carga Incremental: backend/coerencia_e_incremental.md
       - Banco de Dados: backend/banco_de_dados.md
       - Monitoramento Multi-Casa: backend/pipeline_multicasa.md
 
