@@ -312,60 +312,148 @@ export function Estados() {
     );
   }
 
-  const chartData = dataByUf.filter(e => e.countAnalisados > 0).slice(0, 15);
+  const chartData = [...dataByUf].filter(e => e.countAnalisados > 0).slice(0, 15);
+
+  const totalAnalisados = dataByUf.reduce((acc, e) => acc + e.countAnalisados, 0);
+  const totalSomaCoerencia = dataByUf.reduce((acc, e) => acc + (e.somaCoerencia || 0), 0);
+  const mediaGeral = totalAnalisados > 0 ? Math.round(totalSomaCoerencia / totalAnalisados) : 0;
+  
+  const estadosComDados = dataByUf.filter(e => e.countAnalisados > 0);
+  let estadoMaisCoerente = null;
+  let estadoMenosCoerente = null;
+  
+  if (estadosComDados.length > 0) {
+    const sorted = [...estadosComDados].sort((a, b) => b.media - a.media);
+    estadoMaisCoerente = sorted[0];
+    estadoMenosCoerente = sorted[sorted.length - 1];
+  }
+
+  const sortedAllStates = [...dataByUf].sort((a, b) => b.media - a.media);
 
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
       <div className="p-4 md:p-[28px_32px] border-b border-border shrink-0 bg-surface">
         <h1 className="text-[24px] font-bold text-text-main">Estados</h1>
-        <p className="text-[14px] text-text2 mt-1">Análise de coerência consolidada por Unidade Federativa.</p>
+        <p className="text-[14px] text-text2 mt-1">Dashboard consolidado de coerência por Unidade Federativa.</p>
       </div>
 
       <div className="p-4 md:p-[28px_32px] flex-1 overflow-y-auto">
-        {chartData.length > 0 && (
-          <div className="bg-surface border border-border rounded-xl mb-6 flex flex-col">
-            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Ranking de Estados (Top 15 Analisados)</div></div>
-            <div className="p-5 h-[300px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#30363d" vertical={false} />
-                  <XAxis dataKey="sigla" stroke="#8b949e" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#8b949e" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `${val}%`} />
-                  <Tooltip content={<CustomTooltip />} cursor={{ fill: '#21262d' }} />
-                  <Bar dataKey="media" radius={[4, 4, 0, 0]}>
-                    {chartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.media >= 70 ? '#2ea043' : entry.media >= 50 ? '#d29922' : '#f85149'} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Média Nacional</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">
+              {totalAnalisados > 0 ? `${mediaGeral}%` : '--'}
+            </div>
+            {totalAnalisados > 0 && (
+              <div className="mt-4 h-[5px] w-full bg-surface2 rounded-full overflow-hidden">
+                <div className="h-full bg-teal" style={{width: `${mediaGeral}%`}}></div>
+              </div>
+            )}
+          </div>
+          
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Políticos Analisados</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">{totalAnalisados}</div>
+            <div className="text-[12px] text-text2 mt-2">em {dataByUf.length} estados</div>
+          </div>
+
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Mais Coerente</div>
+            <div className="text-[32px] font-bold text-text-main leading-none mb-3 flex items-center gap-2">
+              {estadoMaisCoerente && (
+                <img 
+                  src={getEstadoFlag(estadoMaisCoerente.sigla)} 
+                  alt={estadoMaisCoerente.sigla} 
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+              )}
+              {estadoMaisCoerente ? estadoMaisCoerente.sigla : '--'}
+            </div>
+            {estadoMaisCoerente && (
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-teal-bg text-teal">
+                {estadoMaisCoerente.media}% Coerência
+              </span>
+            )}
+          </div>
+
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Menos Coerente</div>
+            <div className="text-[32px] font-bold text-text-main leading-none mb-3 flex items-center gap-2">
+              {estadoMenosCoerente && (
+                <img 
+                  src={getEstadoFlag(estadoMenosCoerente.sigla)} 
+                  alt={estadoMenosCoerente.sigla} 
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+              )}
+              {estadoMenosCoerente ? estadoMenosCoerente.sigla : '--'}
+            </div>
+            {estadoMenosCoerente && (
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-red-500/10 text-red-500">
+                {estadoMenosCoerente.media}% Coerência
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 xl:grid-cols-[1.5fr_1fr] gap-6">
+          <div className="bg-surface border border-border rounded-xl flex flex-col max-h-[600px]">
+            <div className="p-[16px_20px] border-b border-border2">
+              <div className="text-[16px] font-bold text-text-main">Ranking de Todos os Estados</div>
+            </div>
+            <div className="overflow-y-auto flex-1">
+              {sortedAllStates.map((e, i) => (
+                <div 
+                  key={e.sigla} 
+                  onClick={() => navigate(`/estados/${e.sigla.toLowerCase()}`)} 
+                  className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0"
+                >
+                  <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
+                  <img 
+                    src={getEstadoFlag(e.sigla)} 
+                    alt={e.sigla} 
+                    className="w-10 h-10 rounded-full border border-border shrink-0 object-cover" 
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[15px] font-bold text-text-main truncate">{e.nome}</div>
+                    <div className="text-[12px] text-text2 mt-0.5">{e.politicos.length} representantes ({e.countAnalisados} analisados)</div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1.5 min-w-[110px]">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[11px] text-text2">Média</span>
+                      <span className="text-[15px] font-bold text-text-main">{e.countAnalisados > 0 ? `${e.media}%` : '--'}</span>
+                    </div>
+                    {e.countAnalisados > 0 && (
+                      <div className="h-[5px] bg-border rounded w-full overflow-hidden">
+                        <div className={`h-full rounded transition-all duration-600 ${e.media >= 70 ? 'bg-green' : e.media >= 50 ? 'bg-amber-500' : 'bg-red'}`} style={{ width: `${e.media}%` }}></div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {dataByUf.map(e => (
-            <div 
-              key={e.sigla} 
-              onClick={() => navigate(`/estados/${e.sigla.toLowerCase()}`)}
-              className="bg-surface border border-border rounded-xl p-4 cursor-pointer hover:bg-surface2 hover:border-teal transition-all group"
-            >
-              <div className="flex justify-between items-start mb-3">
-                <img 
-                  src={getEstadoFlag(e.sigla)} 
-                  alt={e.sigla} 
-                  className="w-10 h-10 rounded-full border border-border object-cover group-hover:scale-110 transition-transform" 
-                />
-                {e.countAnalisados > 0 && (
-                  <div className={`text-[12px] font-bold px-1.5 py-0.5 rounded ${e.media >= 70 ? 'bg-green-bg text-green' : 'bg-amber-500/10 text-amber-400'}`}>
-                    {e.media}%
-                  </div>
-                )}
+          {chartData.length > 0 && (
+            <div className="bg-surface border border-border rounded-xl flex flex-col max-h-[600px]">
+              <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Top 15 Estados Analisados</div></div>
+              <div className="p-5 flex-1 min-h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }} layout="vertical">
+                    <CartesianGrid strokeDasharray="3 3" stroke="#30363d" horizontal={true} vertical={false} />
+                    <XAxis type="number" stroke="#8b949e" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `${val}%`} domain={[0, 100]} />
+                    <YAxis dataKey="sigla" type="category" stroke="#8b949e" fontSize={12} tickLine={false} axisLine={false} width={60} />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: '#21262d' }} />
+                    <Bar dataKey="media" radius={[0, 4, 4, 0]}>
+                      {chartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.media >= 70 ? '#2ea043' : entry.media >= 50 ? '#d29922' : '#f85149'} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
               </div>
-              <div className="text-[13px] font-semibold text-text-main truncate mb-1">{e.nome} ({e.sigla})</div>
-              <div className="text-[11px] text-text2">{e.countAnalisados} analisados de {e.politicos.length}</div>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

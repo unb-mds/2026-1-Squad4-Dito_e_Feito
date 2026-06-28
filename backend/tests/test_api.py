@@ -170,6 +170,6 @@ def test_analisar_parlamentar_jaccard_fallback(mock_votos, mock_discursos, clien
     assert res.status_code == 200
     data = res.get_json()
     assert data['status'] == 'ok'
-    assert data['modelo_usado'] == 'Jaccard (fallback)'
+    assert data['modelo_usado'] == 'Jaccard (fallback — sem avaliação de coerência)'
     assert len(data['dados']) == 1
-    assert data['dados'][0]['status'] in ['Coerente', 'Parcialmente Alinhado', 'Divergente', 'Não Relacionado']
+    assert data['dados'][0]['coerente'] is None
