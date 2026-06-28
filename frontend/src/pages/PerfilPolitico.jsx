@@ -19,63 +19,58 @@ export function PerfilPolitico() {
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(null);
 
+  // ─ Gráfico de pizza: Coerente | Incoerente | Não Avaliável ─
   const gerarDadosPizza = (dadosApi) => {
-    const contagem = {
-      'Coerente': 0,
-      'Parcialmente Alinhado': 0,
-      'Incoerente': 0,
-      'Não Relacionado': 0
-    };
-    
+    const contagem = { Coerente: 0, Incoerente: 0, 'Não Avaliável': 0 };
+
     dadosApi.forEach(item => {
-      const status = item.status || 'Não Relacionado';
-      if (status === 'Coerente') {
-        contagem['Coerente']++;
-      } else if (status === 'Divergente' || status === 'Incoerente') {
-        contagem['Incoerente']++;
-      } else if (status === 'Parcialmente Alinhado') {
-        contagem['Parcialmente Alinhado']++;
-      } else {
-        contagem['Não Relacionado']++;
-      }
+      if (item.coerente === true)  contagem.Coerente++;
+      else if (item.coerente === false) contagem.Incoerente++;
+      else contagem['Não Avaliável']++;
     });
 
     const formatoPizza = [
-      { name: 'Coerente', value: contagem['Coerente'], color: '#10b981' },
-      { name: 'Parcialmente Alinhado', value: contagem['Parcialmente Alinhado'], color: '#f59e0b' },
-      { name: 'Incoerente', value: contagem['Incoerente'], color: '#ef4444' },
-      { name: 'Não Relacionado', value: contagem['Não Relacionado'], color: '#64748b' }
+      { name: 'Coerente',       value: contagem.Coerente,         color: '#10b981' },
+      { name: 'Incoerente',     value: contagem.Incoerente,       color: '#ef4444' },
+      { name: 'Não Avaliável',  value: contagem['Não Avaliável'], color: '#64748b' },
     ].filter(d => d.value > 0);
 
     setDadosPizza(formatoPizza);
   };
 
+  // ─ Gráfico de linha: taxa de coerência booleana agrupada por mês ─
   const gerarHistorico = (dadosApi) => {
-    const sortedVotes = [...dadosApi].sort((a, b) => new Date(a.data) - new Date(b.data));
+    const sortedVotes = [...dadosApi]
+      .filter(v => v.coerente !== null && v.coerente !== undefined)
+      .sort((a, b) => new Date(a.data) - new Date(b.data));
+
+    const mesesAbreviados = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
     const mesesMap = {};
-    const mesesAbreviados = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-    
+
     sortedVotes.forEach(v => {
       if (!v.data || v.data === 'N/A') return;
       const dataObj = new Date(v.data);
       if (isNaN(dataObj)) return;
       const chave = `${dataObj.getFullYear()}-${String(dataObj.getMonth() + 1).padStart(2, '0')}`;
       if (!mesesMap[chave]) {
-        mesesMap[chave] = { 
-          soma: 0, 
-          count: 0, 
-          nome: `${mesesAbreviados[dataObj.getMonth()]}/${String(dataObj.getFullYear()).slice(2)}` 
+        mesesMap[chave] = {
+          coerentes: 0,
+          total: 0,
+          nome: `${mesesAbreviados[dataObj.getMonth()]}/${String(dataObj.getFullYear()).slice(2)}`
         };
       }
-      mesesMap[chave].soma += (v.afinidade * 100);
-      mesesMap[chave].count += 1;
+      mesesMap[chave].total += 1;
+      if (v.coerente === true) mesesMap[chave].coerentes += 1;
     });
 
     const formatoHistorico = Object.keys(mesesMap).sort().map(chave => ({
       mes: mesesMap[chave].nome,
-      coerencia: Math.round(mesesMap[chave].soma / mesesMap[chave].count)
+      coerencia: mesesMap[chave].total > 0
+        ? Math.round((mesesMap[chave].coerentes / mesesMap[chave].total) * 100)
+        : 0
     }));
 
+    // Fallback por voto individual se não houver dados mensais suficientes
     if (formatoHistorico.length < 2) {
       const fallbacks = sortedVotes.slice(-6).map((v, i) => {
         let label = `Voto ${i + 1}`;
@@ -83,10 +78,7 @@ export function PerfilPolitico() {
           const pts = v.data.split('-');
           if (pts.length === 3) label = `${pts[2]}/${pts[1]}`;
         }
-        return {
-          mes: label,
-          coerencia: Math.round(v.afinidade * 100)
-        };
+        return { mes: label, coerencia: v.coerente ? 100 : 0 };
       });
       setDadosLinha(fallbacks);
     } else {
@@ -136,14 +128,11 @@ export function PerfilPolitico() {
           gerarDadosPizza(resData.dados);
           gerarHistorico(resData.dados);
 
-          // Atualiza a coerência média calculada
-          if (resData.dados && resData.dados.length > 0) {
-            let totalAfinidade = 0;
-            resData.dados.forEach(d => totalAfinidade += d.afinidade);
-            const mediaCalculada = Math.round((totalAfinidade / resData.dados.length) * 100);
+          // Usa o score_coerencia retornado diretamente pela API (taxa booleana)
+          if (resData.score_coerencia != null) {
             setDadosPolitico(prev => ({
               ...prev,
-              coerencia: mediaCalculada
+              coerencia: Math.round(resData.score_coerencia)
             }));
           }
         } else if (resposta.status === 'fulfilled' && resposta.value.status === 'aviso') {
@@ -175,11 +164,26 @@ export function PerfilPolitico() {
     processarAnalise();
   }, [id]);
 
-  const renderizarStatus = (status) => {
-    if (status === "Coerente") return <span className="bg-brand-sucesso/20 text-brand-sucesso px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit"><CheckCircle size={12}/> Coerente</span>;
-    if (status === "Divergente" || status === "Incoerente") return <span className="bg-brand-alerta/20 text-brand-alerta px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit"><AlertTriangle size={12}/> Incoerente</span>;
-    if (status === "Não Relacionado" || status === "Sem Avaliação da IA") return <span className="bg-slate-800 text-slate-400 px-2 py-1 rounded text-xs font-bold w-fit">{status}</span>;
-    return <span className="bg-slate-700 text-texto-principal px-2 py-1 rounded text-xs font-bold w-fit">Parcialmente Alinhado</span>;
+  // ─ Badge de coerência booleana ─
+  const renderizarStatus = (item) => {
+    if (item.coerente === true)
+      return (
+        <span className="bg-brand-sucesso/20 text-brand-sucesso px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit">
+          <CheckCircle size={12}/> Coerente
+        </span>
+      );
+    if (item.coerente === false)
+      return (
+        <span className="bg-brand-alerta/20 text-brand-alerta px-2 py-1 rounded text-xs font-bold flex items-center gap-1 w-fit">
+          <AlertTriangle size={12}/> Incoerente
+        </span>
+      );
+    // coerente === null → neutro, não avaliável
+    return (
+      <span className="bg-slate-800 text-slate-400 px-2 py-1 rounded text-xs font-bold w-fit">
+        Não Avaliável
+      </span>
+    );
   };
 
   const comparacaoData = [
@@ -241,9 +245,12 @@ export function PerfilPolitico() {
           {dadosPizza.length > 0 && (
             <section className="bg-surface p-6 rounded-lg border border-slate-800 mb-8 flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
-                <h3 className="text-xl font-display font-bold text-texto-principal mb-2">Distribuição de Alinhamento</h3>
+                <h3 className="text-xl font-display font-bold text-texto-principal mb-2">Distribuição de Coerência</h3>
                 <p className="text-texto-secundario text-sm">
-                  Proporção de coerência dos votos do parlamentar baseada nos {analise.total_votos_analisados} votos mais recentes auditados pela IA.
+                  Proporção de votos coerentes vs. incoerentes dos {analise.total_votos_analisados} votos auditados pela IA.
+                  {analise.score_coerencia != null && (
+                    <strong className="ml-1 text-white">Score: {Math.round(analise.score_coerencia)}%</strong>
+                  )}
                 </p>
               </div>
               <div className="w-full md:w-1/2 h-[220px]">
@@ -333,22 +340,29 @@ export function PerfilPolitico() {
                   <div className="flex-1">
                     <span className="text-xs text-texto-secundario font-mono">{voto.data}</span>
                     <h3 className="text-texto-principal font-medium mt-1 mb-2 leading-relaxed">{voto.ementa}</h3>
-                    <p className="text-sm">
-                      <span className="text-texto-secundario">Voto: </span>
+
+                    {/* Linha: Postura no discurso → Voto oficial */}
+                    <div className="flex flex-wrap items-center gap-2 text-sm mt-1">
+                      <span className="text-texto-secundario">Postura no discurso:</span>
+                      <span className={`px-2 py-0.5 rounded font-semibold text-xs ${
+                        voto.postura_extraida === 'A Favor'
+                          ? 'bg-emerald-900/40 text-emerald-400'
+                          : voto.postura_extraida === 'Contra'
+                          ? 'bg-red-900/40 text-red-400'
+                          : 'bg-slate-800 text-slate-400'
+                      }`}>{voto.postura_extraida || 'Neutro'}</span>
+                      <span className="text-texto-secundario">→ Voto:</span>
                       <strong className="text-white bg-slate-800 px-2 py-0.5 rounded">{voto.voto}</strong>
-                    </p>
+                    </div>
+
                     {voto.justificativa && (
                       <p className="text-sm mt-3 text-texto-secundario bg-slate-800/50 p-3 rounded italic border-l-2 border-brand-petroleo">
-                        "{voto.justificativa}"
+                        &ldquo;{voto.justificativa}&rdquo;
                       </p>
                     )}
                   </div>
-                  <div className="md:w-48 w-full flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start gap-2 bg-fundo p-3 rounded border border-slate-800">
-                    <div className="text-right">
-                      <p className="text-xs text-texto-secundario uppercase">Coerência</p>
-                      <p className="text-lg font-mono text-white font-bold">{Math.round(voto.afinidade * 100)}%</p>
-                    </div>
-                    {renderizarStatus(voto.status)}
+                  <div className="md:w-40 w-full flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start gap-2 bg-fundo p-3 rounded border border-slate-800">
+                    {renderizarStatus(voto)}
                   </div>
                 </div>
               ))}

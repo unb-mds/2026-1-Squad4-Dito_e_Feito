@@ -62,6 +62,10 @@ CONFIG_BUSCA = {
     "fallback_ativado": False
 }
 
+# Configurações Ollama Local
+OLLAMA_URL = "http://localhost:11434/v1/chat/completions"
+OLLAMA_MODEL = "qwen2.5-coder:7b"
+
 # Configurações OpenRouter
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -206,31 +210,44 @@ def similaridade_jaccard(texto1: str, texto2: str) -> float:
 # ─────────────────────────────────────────────────────────
 def analisar_afinidade_openrouter(pares: List[dict]) -> List[dict]:
     """
-    Recebe lista de {idx, ementa, discurso} e envia para o OpenRouter
-    avaliar a coerência temática real usando LLM.
+    Recebe lista de {idx, ementa, voto, discurso} e envia para o OpenRouter
+    avaliar a coerência política booleana: o parlamentar votou de acordo com
+    a postura que assumiu no discurso?
+
+    Retorna lista de:
+      {idx, postura_extraida, voto_registrado, coerente (bool), justificativa}
     """
     if not OPENROUTER_API_KEY:
         raise RuntimeError("OPENROUTER_API_KEY não configurado no ambiente.")
 
     system_prompt = (
         "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
-        "Sua tarefa é avaliar a COERÊNCIA POLÍTICA de um parlamentar. Você receberá um discurso, a ementa de uma votação e o VOTO real registrado por ele.\n"
-        "Determine:\n"
-        "  1. coerencia_score: número de 0.0 a 1.0 indicando se o discurso justifica ou se alinha com o voto registrado (1.0 para coerente, 0.0 para contraditório).\n"
-        "  2. status: 'Coerente' (se o discurso apoia o voto), 'Incoerente' (se o discurso contradiz o voto), ou 'Não Relacionado' (se o discurso não trata da ementa de forma clara).\n"
-        "  3. justificativa: 1 frase curta em português explicando se o voto registrado condiz com o posicionamento falado no discurso.\n"
-        "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos "
-        "{idx, coerencia_score, status, justificativa}. Não adicione nenhuma marcação extra."
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+        "Não adicione nenhuma marcação extra, apenas o JSON puro."
     )
 
     payload_pares = [
         {
             "idx": p["idx"],
             "ementa": p["ementa"][:400],
-            "voto": p.get("voto", "N/A"),
+            "voto_oficial": p.get("voto", "N/A"),
             "discurso": p["discurso"][:600] if p.get("discurso") else "Sem discurso.",
         }
-        # Pegamos uma amostra maior (600 carac) para dar contexto à LLM
         for p in pares
     ]
 
@@ -249,22 +266,22 @@ def analisar_afinidade_openrouter(pares: List[dict]) -> List[dict]:
         try:
             payload["model"] = model_name
             log(f"Enviando lote de {len(payload_pares)} pares para {model_name}...", "INFO")
-            
+
             res = requests.post(OPENROUTER_URL, json=payload, headers=OPENROUTER_HEADERS, timeout=40)
-            
+
             if not res.ok:
                 print(f"[DEBUG OPENROUTER] Model: {model_name} | Status: {res.status_code} | Response: {res.text}", flush=True)
                 continue
-                
+
             content = res.json()["choices"][0]["message"]["content"]
             # Limpeza preventiva caso o modelo envie markdown block ```json
             if "```" in content:
                 content = content.split("```json")[-1].split("```")[0].strip()
-                
+
             data = json.loads(content)
             print(f"[DEBUG OPENROUTER] Sucesso via modelo: {model_name}", flush=True)
             return data.get("analises", [])
-            
+
         except Exception as e:
             last_err = e
             time.sleep(1)
@@ -274,21 +291,91 @@ def analisar_afinidade_openrouter(pares: List[dict]) -> List[dict]:
 
 
 def analisar_afinidade_local(pares: List[dict]) -> List[dict]:
-    """Cálculo de afinidade via Jaccard (fallback local se a internet/API cair)."""
+    """
+    Fallback local via Jaccard quando a LLM não está disponível.
+    Marca coerente=None para que esses pares sejam excluídos do denominador
+    do score e não contaminem o resultado com dados sem avaliação real.
+    """
     resultados = []
     for p in pares:
-        af = similaridade_jaccard(p.get("discurso", ""), p["ementa"])
         resultados.append({
             "idx": p["idx"],
-            "coerencia_score": 0.0,
-            "status": "Sem Avaliação da IA",
-            "justificativa": f"Calculado via similaridade Jaccard (fallback local). Tem afinidade temática {round(af, 4)}, mas não é possível verificar a coerência do voto sem a IA.",
+            "postura_extraida": "Neutro",
+            "voto_registrado": p.get("voto", "N/A"),
+            "coerente": None,  # null → excluído do denominador do score
+            "justificativa": "Avaliação indisponível: LLM offline. Par excluído do cálculo de coerência.",
         })
     return resultados
 
 
+def analisar_afinidade_ollama(pares: List[dict]) -> List[dict]:
+    """
+    Recebe lista de {idx, ementa, voto, discurso} e envia para o Ollama local (qwen2.5-coder:7b)
+    avaliar a coerência política booleana: o parlamentar votou de acordo com
+    a postura que assumiu no discurso?
+    """
+    system_prompt = (
+        "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+        "Não adicione nenhuma marcação extra, apenas o JSON puro."
+    )
+
+    payload_pares = [
+        {
+            "idx": p["idx"],
+            "ementa": p["ementa"][:400],
+            "voto_oficial": p.get("voto", "N/A"),
+            "discurso": p["discurso"][:600] if p.get("discurso") else "Sem discurso.",
+        }
+        for p in pares
+    ]
+
+    payload = {
+        "model": OLLAMA_MODEL,
+        "response_format": {"type": "json_object"},
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": json.dumps(payload_pares, ensure_ascii=False)},
+        ],
+        "temperature": 0.1,
+    }
+
+    log(f"Enviando lote de {len(payload_pares)} pares para Ollama ({OLLAMA_MODEL})...", "INFO")
+    res = requests.post(OLLAMA_URL, json=payload, timeout=180)
+    if not res.ok:
+        raise RuntimeError(f"Ollama retornou status {res.status_code}: {res.text}")
+
+    content = res.json()["choices"][0]["message"]["content"]
+    if "```" in content:
+        content = content.split("```json")[-1].split("```")[0].strip()
+
+    data = json.loads(content)
+    log(f"Sucesso via Ollama ({OLLAMA_MODEL})!", "OK")
+    return data.get("analises", [])
+
+
 def analisar_pares(pares: List[dict]) -> List[dict]:
-    """Tenta via LLM do OpenRouter; se falhar ou não tiver chave, usa o Jaccard local."""
+    """Tenta via Ollama local (qwen2.5-coder:7b); se falhar, tenta OpenRouter; se falhar, usa fallback local."""
+    try:
+        return analisar_afinidade_ollama(pares)
+    except Exception as e:
+        log(f"Ollama local falhou ({e}). Tentando OpenRouter...", "WARN")
+
     if OPENROUTER_API_KEY:
         try:
             return analisar_afinidade_openrouter(pares)
@@ -607,53 +694,68 @@ def validar_senador(
         log(f"  ERR análise {nome}: {e}", "ERR")
         return None
 
-    # Conta pares coerentes
+    # ── Métricas booleanas de coerência ─────────────────────────────
+    # Votos inválidos para o denominador: abstenção, ausência e similares.
+    VOTOS_INVALIDOS = {"abstenção", "abstencao", "ausente", "obstrução", "obstrucao",
+                       "art. 17", "art.17", "n/a", "none", "null", "não compareceu"}
+
     analises_by_idx = {a["idx"]: a for a in analises}
-    matches_alinhados = sum(
-        1 for idx in range(len(pares_amostra))
-        if analises_by_idx.get(idx, {}).get("status", "") == "Coerente"
-    )
 
-    # ── Métricas consolidadas ────────────────────────────────────────
-    # A porcentagem de coerência global agora é focada APENAS em votos válidos e relacionados.
-    pares_relacionados = sum(
-        1 for idx in range(len(pares_amostra))
-        if analises_by_idx.get(idx, {}).get("status", "") != "Não Relacionado" and analises_by_idx.get(idx, {}).get("status", "") != "Sem Avaliação da IA"
-    )
-
-    if pares_relacionados > 0:
-        score_coerencia = round((matches_alinhados / pares_relacionados) * 100, 2)
-    else:
-        # Se nenhum discurso tem relação com os votos, a coerência é 0 ou fallback.
-        score_coerencia = 0.0
-
+    votos_coerentes = 0
+    total_validos = 0
     contagem_status: Dict[str, int] = {}
-    for a in analises:
-        s = a.get("status", "Não Relacionado")
-        contagem_status[s] = contagem_status.get(s, 0) + 1
 
-    # Amostras dos discursos mais alinhados
-    top_analises = sorted(analises, key=lambda x: x.get("coerencia_score", 0.0), reverse=True)[:5]
+    for idx in range(len(pares_amostra)):
+        a = analises_by_idx.get(idx, {})
+        coerente = a.get("coerente")  # True | False | None
+        voto_str = str(pares_amostra[idx].get("voto", "")).strip().lower()
+
+        # RF27: Ignora abstenções e ausências — não entram no denominador
+        if voto_str in VOTOS_INVALIDOS:
+            contagem_status["Voto Inválido"] = contagem_status.get("Voto Inválido", 0) + 1
+            continue
+
+        # Sem avaliação da LLM (fallback Jaccard) → coerente é None → ignora
+        if coerente is None:
+            contagem_status["Sem Avaliação"] = contagem_status.get("Sem Avaliação", 0) + 1
+            continue
+
+        total_validos += 1
+        if coerente is True:
+            votos_coerentes += 1
+            contagem_status["Coerente"] = contagem_status.get("Coerente", 0) + 1
+        else:
+            contagem_status["Incoerente"] = contagem_status.get("Incoerente", 0) + 1
+
+    # RF15: Mínimo de 3 pares válidos para ter score (evita score espúrio)
+    VOLUME_MINIMO = 3
+    if total_validos >= VOLUME_MINIMO:
+        score_coerencia = round((votos_coerentes / total_validos) * 100, 1)
+    else:
+        score_coerencia = 0.0  # sem dados suficientes → score zerado
+
+    # Detalhes auditáveis: todos os pares com avaliação (excluindo apenas os inválidos)
     detalhes = []
-    for a in top_analises:
+    for a in analises:
         a_idx = a.get("idx", 0)
         if a_idx < len(pares_amostra):
             par = pares_amostra[a_idx]
             orig_idx = par["voto_original_idx"]
+            voto_real = votos[orig_idx]["voto"] if orig_idx < len(votos) else "N/A"
             detalhes.append({
                 "ementa": par["ementa"],
-                "afinidade": a.get("coerencia_score", 0.0),
-                "jaccard_pre_filtro": par["jaccard"],
-                "status": a.get("status", ""),
+                "postura_extraida": a.get("postura_extraida", "Neutro"),
+                "voto": voto_real,
+                "coerente": a.get("coerente"),
                 "justificativa": a.get("justificativa", ""),
-                "voto": votos[orig_idx]["voto"] if orig_idx < len(votos) else "N/A",
+                "jaccard_pre_filtro": par["jaccard"],
                 "data": votos[orig_idx]["data"] if orig_idx < len(votos) else "N/A",
                 "discurso": par["discurso"],
             })
 
     log(
-        f"  ✔ {nome} – {matches_alinhados} pares alinhados | score={score_coerencia:.1f} "
-        f"| pares enviados à LLM: {len(pares_amostra)} (de {len(votos)} votos totais)",
+        f"  ✔ {nome} – {votos_coerentes}/{total_validos} coerentes | "
+        f"score={score_coerencia:.1f}% | pares LLM: {len(pares_amostra)} (de {len(votos)} votos)",
         "OK",
     )
 
@@ -665,9 +767,10 @@ def validar_senador(
         "foto": senador.get("foto", ""),
         "tipo_parlamentar": "senador",
         "score_coerencia": score_coerencia,
-        "media_afinidade": score_coerencia / 100.0 if score_coerencia > 0 else 0.0,
         "total_pares_analisados": len(pares_amostra),
-        "pares_alinhados": matches_alinhados,
+        "total_validos": total_validos,
+        "votos_coerentes": votos_coerentes,
+        "pares_alinhados": votos_coerentes,  # mantido para compatibilidade com o frontend
         "contagem_status": contagem_status,
         "detalhes": detalhes,
         "analisado_em": datetime.utcnow().isoformat() + "Z",
@@ -691,7 +794,7 @@ def conectar_banco():
 
 
 def salvar_no_banco(conn, senador_data: dict):
-    """Upsert do parlamentar e inserção dos scores de coerência."""
+    """Upsert do parlamentar e inserção dos registros de coerência booleana."""
     try:
         cur = conn.cursor()
 
@@ -724,33 +827,43 @@ def salvar_no_banco(conn, senador_data: dict):
 
         if parl_uuid:
             for detalhe in senador_data.get("detalhes", []):
-                # Evita duplicar se a mesma justificativa e score já existem para este parlamentar
+                # Sem avaliação real (fallback Jaccard) → não persiste no banco
+                if detalhe.get("coerente") is None:
+                    continue
+
+                # Evita duplicar pelo par (parlamentar_id, ementa, justificativa)
                 cur.execute(
                     """
-                    SELECT 1 FROM score_coerencia 
-                    WHERE parlamentar_id = %s AND justificativa = %s AND score = %s
+                    SELECT 1 FROM score_coerencia
+                    WHERE parlamentar_id = %s AND justificativa = %s
                     LIMIT 1
                     """,
-                    (parl_uuid, detalhe.get("justificativa", ""), round(detalhe["afinidade"] * 100, 2))
+                    (parl_uuid, detalhe.get("justificativa", ""))
                 )
                 if cur.fetchone():
-                    log(f"  [DB] Score já existente para {senador_data['nome']} (justificativa repetida). Ignorando inserção redundante.", "INFO")
+                    log(f"  [DB] Registro já existente para {senador_data['nome']}. Ignorando.", "INFO")
                     continue
+
+                # score = 100 se coerente, 0 se incoerente (para manter compatibilidade
+                # com a coluna score NUMERIC existente na tabela)
+                score_par = 100.0 if detalhe.get("coerente") is True else 0.0
 
                 cur.execute(
                     """
                     INSERT INTO score_coerencia
-                        (parlamentar_id, score, similaridade_coseno, status_coerencia,
-                         justificativa, modelo_usado, calculado_em)
-                    VALUES (%s, %s, %s, %s, %s, %s, NOW())
+                        (parlamentar_id, score, postura_extraida, voto_registrado,
+                         coerente, status_coerencia, justificativa, modelo_usado, calculado_em)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, NOW())
                     """,
                     (
                         parl_uuid,
-                        round(detalhe["afinidade"] * 100, 2),
-                        detalhe["afinidade"],
-                        detalhe.get("status", "Não Relacionado"),
+                        score_par,
+                        detalhe.get("postura_extraida", "Neutro"),
+                        detalhe.get("voto", "N/A"),
+                        detalhe.get("coerente"),        # BOOLEAN
+                        "Coerente" if detalhe.get("coerente") else "Incoerente",
                         detalhe.get("justificativa", ""),
-                        "Groq/Jaccard (backend2-scan)",
+                        "OpenRouter/Jaccard (scan_senators)",
                     ),
                 )
 

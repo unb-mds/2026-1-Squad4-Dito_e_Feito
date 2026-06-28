@@ -40,12 +40,13 @@ O sistema conta com dois scripts principais para processamento local ou varredur
 
 *   **`backend/scan_senators.py`**:
     *   Orquestrador de produção em lote (batch execution).
+    *   Gerencia a **Carga Histórica e Atualização Incremental** via checkpoints (`backend/utils/config.py`).
     *   Faz uma varredura filtrando senadores por partido de forma dinâmica.
     *   Implementa técnicas de otimização (*Fail Fast*):
-        *   **Camada 1 (Volume)**: Verifica se o senador tem discursos no período (sem fazer scraping).
+        *   **Camada 1 (Volume)**: Verifica se o senador tem discursos no período delta da API (sem fazer scraping).
         *   **Camada 2 (Jaccard)**: Filtra os pares ementa-discurso mais próximos usando a métrica rápida de Jaccard antes de acionar a inteligência artificial complexa.
-    *   Envia os pares com maior similaridade para avaliação semântica contextual usando a LLM Llama-3 (via **OpenRouter** ou **Groq**), com fallback local por Jaccard.
-    *   Salva as métricas no banco de dados PostgreSQL (opcional) e gera o arquivo consolidado `backend/dashboard_metrics.json`.
+    *   **Avaliação de Coerência Política Real**: Envia o trinômio (Discurso, Ementa, Voto Oficial) para avaliação semântica contextual utilizando LLM (**Ollama local `qwen2.5-coder:7b`**, **OpenRouter** ou **Groq**), determinando se a postura assumida no discurso justifica o voto registrado em plenário.
+    *   Salva as métricas no banco de dados PostgreSQL (opcional) com prevenção de duplicidade e gera o arquivo consolidado `backend/dashboard_metrics.json`.
 
 ### 3. API do Backend (`backend/api.py`)
 Servidor Flask independente executado por padrão na porta **5001**.

@@ -68,17 +68,23 @@ CREATE TABLE voto (
     UNIQUE (parlamentar_id, votacao_id)
 );
 
--- Score de coerência
+-- Score de coerência (modelo booleano: postura do discurso vs. voto real)
 CREATE TABLE score_coerencia (
     id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     parlamentar_id      UUID NOT NULL REFERENCES parlamentar(id) ON DELETE CASCADE,
     discurso_id         UUID REFERENCES discurso(id) ON DELETE SET NULL,
     votacao_id          UUID REFERENCES votacao(id) ON DELETE SET NULL,
+    -- Postura extraída do discurso pela LLM
+    postura_extraida    TEXT CHECK (postura_extraida IN ('A Favor', 'Contra', 'Neutro')),
+    -- Voto oficial registrado (Sim, Não, Abstenção, Ausente, etc.)
+    voto_registrado     TEXT,
+    -- Resultado booleano da coerência: TRUE = coerente, FALSE = incoerente, NULL = não avaliável
+    coerente            BOOLEAN,
+    -- Score legacy: 100 se coerente, 0 se incoerente (mantido para compatibilidade com views)
     score               NUMERIC(5,2) CHECK (score >= 0 AND score <= 100),
-    similaridade_coseno FLOAT,
     modelo_usado        TEXT,
     justificativa       TEXT,
-    status_coerencia    TEXT CHECK (status_coerencia IN ('Coerente', 'Parcialmente Alinhado', 'Tema Divergente')),
+    status_coerencia    TEXT CHECK (status_coerencia IN ('Coerente', 'Incoerente', 'Não Relacionado')),
     calculado_em        TIMESTAMPTZ DEFAULT now()
 );
 
