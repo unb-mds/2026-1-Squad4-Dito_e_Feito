@@ -32,3 +32,9 @@
   --font-body: "Inter", system-ui, sans-serif;
   --font-display: "IBM Plex Sans", system-ui, sans-serif;
 }
+
+/* Correção de contraste para dropdowns select/option nativos */
+select option {
+  background-color: #1E293B;
+  color: #F8FAFC;
+}
