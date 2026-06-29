@@ -102,7 +102,7 @@ O backend é organizado em torno de três rotinas funcionais bem definidas:
 ### 1. Servidor HTTP (api.py)
 Expõe os endpoints REST acessados diretamente pelo painel frontend na porta 5001. A api.py implementa um sistema adaptativo de tolerância a falhas (fallbacks):
 - **`/api/dashboard-metrics` (GET):** Tenta consultar o banco de dados PostgreSQL do Supabase para montar as estatísticas agregadas por partido e o ranking geral dos parlamentares. Se o banco estiver fora do ar, o servidor lê automaticamente os dados armazenados em `dashboard_metrics.json`.
-- **`/api/analisar` (POST):** Recebe o identificador externo do parlamentar e executa, em tempo real, a busca de votos, a extração de pronunciamentos de forma assíncrona usando `ThreadPoolExecutor`, o cruzamento e o envio para as LLMs para gerar o score imediato na aba de consulta do frontend.
+- **`/api/analisar` (POST):** Recebe o identificador externo do parlamentar e aplica uma arquitetura **Cache-First**. Primeiro, busca os dados previamente gerados pela rotina de varredura (no `dashboard_metrics.json`) para economizar tokens e tempo de resposta. Caso o parlamentar seja inédito, executa, em tempo real, a busca de votos, a extração de pronunciamentos de forma assíncrona usando `ThreadPoolExecutor`, o cruzamento e o envio para as LLMs para gerar o score imediato na aba de consulta do frontend.
 - **`/api/senadores` (GET):** Rota que atua como proxy direto para obter a listagem em tempo real dos senadores atualmente ativos em exercício parlamentar.
 
 ### 2. Rotina de Varredura Automatizada (scan_senators.py)
