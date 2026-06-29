@@ -43,7 +43,15 @@ METRICS_JSON_PATH = os.path.join(
 )
 
 app = Flask(__name__)
-CORS(app)
+
+# CORS configurado para aceitar o frontend local e o de produção (Vercel)
+# Em produção, defina FRONTEND_URL no painel de variáveis do Render
+_FRONTEND_URL = os.environ.get("FRONTEND_URL", "")
+_CORS_ORIGINS = ["http://localhost:5173", "http://localhost:5174"]
+if _FRONTEND_URL:
+    _CORS_ORIGINS.append(_FRONTEND_URL)
+
+CORS(app, origins=_CORS_ORIGINS)
 
 BASE_SENADO = "https://legis.senado.leg.br/dadosabertos"
 BASE_CAMARA = "https://dadosabertos.camara.leg.br/api/v2"
