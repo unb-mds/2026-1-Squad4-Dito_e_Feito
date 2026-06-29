@@ -173,3 +173,53 @@ SELECT
 FROM parlamentar p
 LEFT JOIN score_coerencia sc ON sc.parlamentar_id = p.id
 GROUP BY tipo_parlamentar;
+
+-- ───────────────────────────────────────────
+-- MIGRATION 005 - Views para endpoints do backend
+-- Data: 2026-06
+-- ───────────────────────────────────────────
+
+-- View de votos por parlamentar (endpoint /api/politico/<id>)
+CREATE OR REPLACE VIEW votos_por_parlamentar AS
+SELECT
+    p.id_externo,
+    p.nome_urna,
+    p.sigla_partido,
+    sc.score,
+    sc.status_coerencia,
+    sc.justificativa,
+    sc.modelo_usado,
+    sc.calculado_em
+FROM score_coerencia sc
+JOIN parlamentar p ON p.id = sc.parlamentar_id
+ORDER BY sc.calculado_em DESC;
+
+-- View de alertas de divergência (RF11)
+CREATE OR REPLACE VIEW alertas_divergencia AS
+SELECT
+    p.id_externo,
+    p.nome_urna,
+    p.sigla_partido,
+    p.sigla_uf,
+    sc.score,
+    sc.justificativa,
+    sc.calculado_em
+FROM score_coerencia sc
+JOIN parlamentar p ON p.id = sc.parlamentar_id
+WHERE sc.status_coerencia = 'Divergente'
+   OR sc.score < 40
+ORDER BY sc.score ASC;
+
+-- View de média por partido (dashboard e gráficos)
+CREATE OR REPLACE VIEW media_por_partido AS
+SELECT
+    p.sigla_partido,
+    p.tipo_parlamentar,
+    COUNT(DISTINCT p.id) AS total_parlamentares,
+    ROUND(AVG(sc.score)::numeric, 2) AS media_score,
+    MAX(sc.score) AS maior_score,
+    MIN(sc.score) AS menor_score
+FROM parlamentar p
+JOIN score_coerencia sc ON sc.parlamentar_id = p.id
+GROUP BY p.sigla_partido, p.tipo_parlamentar
+ORDER BY media_score DESC;
