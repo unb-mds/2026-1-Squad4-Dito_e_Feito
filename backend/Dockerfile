@@ -19,5 +19,6 @@ COPY . .
 # Expõe a porta da API Flask
 EXPOSE 5001
 
-# Comando para rodar a aplicação em desenvolvimento
-CMD ["python", "api.py"]
+# Comando de produção com Gunicorn (WSGI server)
+# Para desenvolvimento local, o docker-compose.yml pode sobrescrever com: command: python api.py
+CMD ["gunicorn", "-b", "0.0.0.0:5001", "--workers", "2", "--timeout", "120", "api:app"]

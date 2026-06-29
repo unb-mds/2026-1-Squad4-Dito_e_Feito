@@ -38,7 +38,8 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 DATABASE_URL       = os.environ.get("DATABASE_URL", "")
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "");
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 BASE_SENADO = "https://legis.senado.leg.br/dadosabertos"
 
 # Substitua os alvos antigos por estes (Todos são Senadores ativos)
@@ -84,6 +85,10 @@ OPENROUTER_HEADERS = {
     "HTTP-Referer": "https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito", # URL do seu projeto MDS
     "X-Title": "Dito e Feito - Monitoramento Legislativo" # Nome do seu app
 }
+# Configuracoes Groq
+GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+GROQ_MODELS = ["llama-3.1-8b-instant", "llama-3.3-70b-versatile"]
+
 # ─────────────────────────────────────────────────────────
 # Utilitários de log
 # ─────────────────────────────────────────────────────────
@@ -369,18 +374,94 @@ def analisar_afinidade_ollama(pares: List[dict]) -> List[dict]:
     return data.get("analises", [])
 
 
+def analisar_afinidade_groq(pares: List[dict]) -> List[dict]:
+    """
+    Envia pares (ementa, voto, discurso) para o Groq (Llama-3) e retorna
+    analises de coerencia booleana.
+    Usa a GROQ_API_KEY do .env.
+    """
+    if not GROQ_API_KEY:
+        raise RuntimeError("GROQ_API_KEY nao configurado no ambiente.")
+
+    system_prompt = (
+        "Voce e um analista politico senior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa e verificar a COERENCIA DE VOTO de um parlamentar.\n"
+        "Para cada item voce recebera: o texto de um discurso, a ementa de uma votacao e o voto oficial registrado.\n\n"
+        "Sua analise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relacao ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso nao tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' -> coerente=true\n"
+        "     - Se postura='Contra' e voto='Nao' -> coerente=true\n"
+        "     - Se postura='A Favor' e voto='Nao' -> coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' -> coerente=false\n"
+        "     - Se postura='Neutro' -> coerente=null (nao e possivel avaliar)\n"
+        "     - Se voto for 'Abstencao', 'Ausente', 'Obstrucao' ou similar -> coerente=null\n"
+        "  3. justificativa: 1 frase curta em portugues explicando sua conclusao.\n\n"
+        "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+        "Nao adicione nenhuma marcacao extra, apenas o JSON puro."
+    )
+
+    payload_pares = [
+        {
+            "idx": p["idx"],
+            "ementa": p["ementa"][:400],
+            "voto_oficial": p.get("voto", "N/A"),
+            "discurso": p["discurso"][:600] if p.get("discurso") else "Sem discurso.",
+        }
+        for p in pares
+    ]
+
+    payload = {
+        "model": GROQ_MODELS[0],
+        "response_format": {"type": "json_object"},
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": json.dumps(payload_pares, ensure_ascii=False)},
+        ],
+        "temperature": 0.1,
+    }
+    headers = {"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"}
+
+    last_err = None
+    for model_name in GROQ_MODELS:
+        try:
+            payload["model"] = model_name
+            log(f"Enviando lote de {len(payload_pares)} pares para Groq ({model_name})...", "INFO")
+            res = requests.post(GROQ_URL, json=payload, headers=headers, timeout=40)
+            if res.status_code == 404 or "model_not_found" in res.text:
+                continue
+            if not res.ok:
+                log(f"[DEBUG GROQ] Status: {res.status_code} | {res.text[:200]}", "WARN")
+                continue
+            content = res.json()["choices"][0]["message"]["content"]
+            if "```" in content:
+                content = content.split("```json")[-1].split("```")[0].strip()
+            data = json.loads(content)
+            log(f"Sucesso via Groq ({model_name})!", "OK")
+            return data.get("analises", [])
+        except Exception as e:
+            last_err = e
+            time.sleep(1)
+            continue
+
+    raise last_err or RuntimeError("Nenhum modelo Groq respondeu adequadamente.")
+
+
 def analisar_pares(pares: List[dict]) -> List[dict]:
-    """Tenta via Ollama local (qwen2.5-coder:7b); se falhar, tenta OpenRouter; se falhar, usa fallback local."""
+    """Tenta via Ollama local; se falhar, tenta Groq; se falhar, usa fallback Jaccard."""
     try:
         return analisar_afinidade_ollama(pares)
     except Exception as e:
-        log(f"Ollama local falhou ({e}). Tentando OpenRouter...", "WARN")
+        log(f"Ollama local falhou ({e}). Tentando Groq...", "WARN")
 
-    if OPENROUTER_API_KEY:
+    if GROQ_API_KEY:
         try:
-            return analisar_afinidade_openrouter(pares)
+            return analisar_afinidade_groq(pares)
         except Exception as e:
-            log(f"OpenRouter falhou ({e}). Usando fallback Jaccard.", "WARN")
+            log(f"Groq falhou ({e}). Usando fallback Jaccard.", "WARN")
     return analisar_afinidade_local(pares)
 # ─────────────────────────────────────────────────────────
 # Coleta de dados do Senado Federal
@@ -682,7 +763,7 @@ def validar_senador(
     pares_amostra = pares_candidatos[:MAX_PARES_LLM]
 
     log(
-        f"  [LLM] {nome} – enviando {len(pares_amostra)} pares ao OpenRouter "
+        f"  [LLM] {nome} – enviando {len(pares_amostra)} pares ao Groq "
         f"(Jaccard top-{MAX_PARES_LLM}).",
         "INFO",
     )
