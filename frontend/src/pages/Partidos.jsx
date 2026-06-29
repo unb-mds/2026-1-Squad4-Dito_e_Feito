@@ -273,67 +273,153 @@ export function Partidos() {
     .filter(p => p.countAnalisados > 0)
     .sort((a, b) => b.media - a.media)
     .slice(0, 15);
+    
+  const totalAnalisados = dataByPartido.reduce((acc, p) => acc + p.countAnalisados, 0);
+  const totalSomaCoerencia = dataByPartido.reduce((acc, p) => acc + (p.somaCoerencia || 0), 0);
+  const mediaGeral = totalAnalisados > 0 ? Math.round(totalSomaCoerencia / totalAnalisados) : 0;
+  
+  const partidosComDados = dataByPartido.filter(p => p.countAnalisados > 0);
+  let partidoMaisCoerente = null;
+  let partidoMenosCoerente = null;
+  
+  if (partidosComDados.length > 0) {
+    const sorted = [...partidosComDados].sort((a, b) => b.media - a.media);
+    partidoMaisCoerente = sorted[0];
+    partidoMenosCoerente = sorted[sorted.length - 1];
+  }
+
+  const sortedAllParties = [...dataByPartido].sort((a, b) => b.media - a.media);
 
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
       <div className="p-4 md:p-[28px_32px] border-b border-border shrink-0 bg-surface">
         <h1 className="text-[24px] font-bold text-text-main">Partidos</h1>
-        <p className="text-[14px] text-text2 mt-1">Análise de coerência e distribuição da bancada por partido.</p>
+        <p className="text-[14px] text-text2 mt-1">Dashboard geral de coerência e distribuição da bancada por partido.</p>
       </div>
 
       <div className="p-4 md:p-[28px_32px] flex-1 overflow-y-auto">
-        {chartData.length > 0 && (
-          <div className="bg-surface border border-border rounded-xl mb-6 flex flex-col">
-            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Top 15 Partidos Analisados (por Coerência)</div></div>
-            <div className="p-5 h-[300px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#30363d" vertical={false} />
-                  <XAxis dataKey="sigla" stroke="#8b949e" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#8b949e" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `${val}%`} />
-                  <Tooltip content={<CustomTooltip />} cursor={{ fill: '#21262d' }} />
-                  <Bar dataKey="media" radius={[4, 4, 0, 0]}>
-                    {chartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.media >= 70 ? '#2ea043' : entry.media >= 50 ? '#d29922' : '#f85149'} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Média Geral</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">
+              {totalAnalisados > 0 ? `${mediaGeral}%` : '--'}
+            </div>
+            {totalAnalisados > 0 && (
+              <div className="mt-4 h-[5px] w-full bg-surface2 rounded-full overflow-hidden">
+                <div className="h-full bg-teal" style={{width: `${mediaGeral}%`}}></div>
+              </div>
+            )}
+          </div>
+          
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Políticos Analisados</div>
+            <div className="text-[40px] font-bold text-text-main leading-none mb-3">{totalAnalisados}</div>
+            <div className="text-[12px] text-text2 mt-2">em {dataByPartido.length} partidos</div>
+          </div>
+
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Mais Coerente</div>
+            <div className="text-[32px] font-bold text-text-main leading-none mb-3 flex items-center gap-2">
+              {partidoMaisCoerente && (
+                <img 
+                  src={getPartidoLogo(partidoMaisCoerente.sigla)} 
+                  alt={partidoMaisCoerente.sigla} 
+                  referrerPolicy="no-referrer"
+                  className="w-8 h-8 object-contain"
+                  onError={(e) => { e.target.onerror = null; e.target.src = `https://ui-avatars.com/api/?name=${partidoMaisCoerente.sigla}&background=1c2128&color=14b8a6`; }}
+                />
+              )}
+              {partidoMaisCoerente ? partidoMaisCoerente.sigla : '--'}
+            </div>
+            {partidoMaisCoerente && (
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-teal-bg text-teal">
+                {partidoMaisCoerente.media}% Coerência
+              </span>
+            )}
+          </div>
+
+          <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Menos Coerente</div>
+            <div className="text-[32px] font-bold text-text-main leading-none mb-3 flex items-center gap-2">
+              {partidoMenosCoerente && (
+                <img 
+                  src={getPartidoLogo(partidoMenosCoerente.sigla)} 
+                  alt={partidoMenosCoerente.sigla}
+                  referrerPolicy="no-referrer"
+                  className="w-8 h-8 object-contain"
+                  onError={(e) => { e.target.onerror = null; e.target.src = `https://ui-avatars.com/api/?name=${partidoMenosCoerente.sigla}&background=1c2128&color=14b8a6`; }}
+                />
+              )}
+              {partidoMenosCoerente ? partidoMenosCoerente.sigla : '--'}
+            </div>
+            {partidoMenosCoerente && (
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-red-500/10 text-red-500">
+                {partidoMenosCoerente.media}% Coerência
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 xl:grid-cols-[1.5fr_1fr] gap-6">
+          <div className="bg-surface border border-border rounded-xl flex flex-col max-h-[600px]">
+            <div className="p-[16px_20px] border-b border-border2">
+              <div className="text-[16px] font-bold text-text-main">Ranking de Todos os Partidos</div>
+            </div>
+            <div className="overflow-y-auto flex-1">
+              {sortedAllParties.map((p, i) => (
+                <div 
+                  key={p.sigla} 
+                  onClick={() => navigate(`/partidos/${p.sigla.toLowerCase()}`)} 
+                  className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0"
+                >
+                  <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
+                  <img 
+                    src={getPartidoLogo(p.sigla)} 
+                    alt={p.sigla} 
+                    referrerPolicy="no-referrer"
+                    className="w-10 h-10 rounded-full border border-border bg-surface2 shrink-0 object-contain p-1.5" 
+                    onError={(e) => { e.target.onerror = null; e.target.src = `https://ui-avatars.com/api/?name=${p.sigla}&background=1c2128&color=14b8a6`; }}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[15px] font-bold text-text-main truncate">{p.sigla}</div>
+                    <div className="text-[12px] text-text2 mt-0.5">{p.politicos.length} membros ({p.countAnalisados} analisados)</div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1.5 min-w-[110px]">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[11px] text-text2">Média</span>
+                      <span className="text-[15px] font-bold text-text-main">{p.countAnalisados > 0 ? `${p.media}%` : '--'}</span>
+                    </div>
+                    {p.countAnalisados > 0 && (
+                      <div className="h-[5px] bg-border rounded w-full overflow-hidden">
+                        <div className={`h-full rounded transition-all duration-600 ${p.media >= 70 ? 'bg-green' : p.media >= 50 ? 'bg-amber-500' : 'bg-red'}`} style={{ width: `${p.media}%` }}></div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        )}
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {dataByPartido.map(p => (
-            <div 
-              key={p.sigla} 
-              onClick={() => navigate(`/partidos/${p.sigla.toLowerCase()}`)}
-              className="bg-surface border border-border rounded-xl p-4 cursor-pointer hover:bg-surface2 hover:border-teal transition-all group flex flex-col items-center text-center"
-            >
-              <img 
-                src={getPartidoLogo(p.sigla)} 
-                alt={p.sigla} 
-                referrerPolicy="no-referrer"
-                className="w-12 h-12 bg-surface2 border border-border rounded-full object-contain p-2 mb-3 group-hover:scale-110 transition-transform"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.sigla)}&background=1c2128&color=14b8a6&size=128&bold=true`;
-                }}
-              />
-              <div className="text-[14px] font-bold text-text-main mb-1">{p.sigla}</div>
-              <div className="text-[11px] text-text2 mb-3">{p.politicos.length} membros</div>
-              
-              {p.countAnalisados > 0 ? (
-                <div className={`w-full text-[12px] font-bold py-1 rounded ${p.media >= 70 ? 'bg-green-bg text-green' : 'bg-amber-500/10 text-amber-400'}`}>
-                  {p.media}% Coerência
-                </div>
-              ) : (
-                <div className="w-full text-[11px] text-text3 py-1 bg-surface2 rounded">
-                  Sem dados
-                </div>
-              )}
+          {chartData.length > 0 && (
+            <div className="bg-surface border border-border rounded-xl flex flex-col max-h-[600px]">
+              <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Top 15 Partidos Analisados</div></div>
+              <div className="p-5 flex-1 min-h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }} layout="vertical">
+                    <CartesianGrid strokeDasharray="3 3" stroke="#30363d" horizontal={true} vertical={false} />
+                    <XAxis type="number" stroke="#8b949e" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `${val}%`} domain={[0, 100]} />
+                    <YAxis dataKey="sigla" type="category" stroke="#8b949e" fontSize={12} tickLine={false} axisLine={false} width={60} />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: '#21262d' }} />
+                    <Bar dataKey="media" radius={[0, 4, 4, 0]}>
+                      {chartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.media >= 70 ? '#2ea043' : entry.media >= 50 ? '#d29922' : '#f85149'} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

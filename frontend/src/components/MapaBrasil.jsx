@@ -157,9 +157,15 @@ export function MapaBrasil({ dataByState = {} }) {
     const stateData = dataByState[uf];
     if (!stateData) return '#2d333b'; // Default surface color for no data
     
-    // Gradient from red (0) to green (100)
-    const hue = (stateData.coerencia / 100) * 120;
-    return `hsl(${hue}, 70%, 45%)`;
+    // Divide o aumento de cor a cada 10% (0, 10, 20... 100)
+    let bucket = Math.floor(stateData.coerencia / 10) * 10;
+    if (bucket > 100) bucket = 100;
+    
+    // Escala de verde: de muito claro/pouco verde (0%) até verde forte (100%)
+    const lightness = 85 - (bucket * 0.45); // Vai de 85% a 40%
+    const saturation = 20 + (bucket * 0.6); // Vai de 20% a 80%
+    
+    return `hsl(140, ${saturation}%, ${lightness}%)`;
   };
 
   return (
