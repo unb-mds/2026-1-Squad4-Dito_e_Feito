@@ -622,6 +622,51 @@ def analisar_parlamentar():
     if not parl_id:
         return jsonify({"status": "erro", "mensagem": "ID não informado"}), 400
 
+    # 1. Tentar ler do cache do processamento em lotes para evitar gastar tokens e limites
+    if os.path.exists(METRICS_JSON_PATH):
+        try:
+            with open(METRICS_JSON_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            for s in data.get("senadores", []):
+                if str(s["id"]) == str(parl_id):
+                    detalhes = s.get("detalhes", [])
+                    if detalhes:
+                        # Mapeia boolean coerente para status e afinidade numerica se necessário (compatibilidade frontend legado)
+                        mapped_detalhes = []
+                        for d in detalhes:
+                            # Se for coerente booleano, mapeamos para as strings legadas
+                            status = "Não Relacionado"
+                            afinidade = d.get("jaccard_pre_filtro", 0.0)
+                            
+                            if "coerente" in d:
+                                if d["coerente"] is True:
+                                    status = "Coerente"
+                                    afinidade = 1.0
+                                elif d["coerente"] is False:
+                                    status = "Divergente"
+                                    afinidade = 0.0
+                            elif "status" in d:
+                                status = d["status"]
+                                afinidade = d.get("afinidade", afinidade)
+
+                            # Preserva as chaves para que o frontend não quebre independentemente do formato
+                            mapped_detalhes.append({
+                                **d,
+                                "status": status,
+                                "afinidade": afinidade,
+                                "coerente": d.get("coerente")
+                            })
+
+                        return jsonify({
+                            "status": "ok",
+                            "modelo_usado": "Cache (Batch Processing)",
+                            "score_coerencia": s.get("score_coerencia", 0.0),
+                            "total_votos_analisados": len(mapped_detalhes),
+                            "dados": mapped_detalhes
+                        })
+        except Exception as e:
+            print(f"[WARN] Erro ao ler cache no /api/analisar: {e}")
+
     try:
         # Mapeamento para identificar se o parlamentar é deputado ou senador
         DEPUTADOS_IDS = {
