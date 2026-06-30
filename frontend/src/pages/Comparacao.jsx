@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { politicosMock } from '../utils/mockData';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { getDashboardMetrics } from '../services/api';
 import { formatTipoParlamentar } from '../utils/formatters';
@@ -8,7 +7,7 @@ export function Comparacao() {
   const [slotA, setSlotA] = useState(null);
   const [slotB, setSlotB] = useState(null);
   const [modalOpen, setModalOpen] = useState(null); // 'A' or 'B'
-  const [politicosList, setPoliticosList] = useState(politicosMock);
+  const [politicosList, setPoliticosList] = useState([]);
   const [metricsData, setMetricsData] = useState(null);
   const [searchFilter, setSearchFilter] = useState('');
 
