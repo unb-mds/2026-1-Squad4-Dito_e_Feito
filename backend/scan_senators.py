@@ -38,7 +38,8 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 DATABASE_URL       = os.environ.get("DATABASE_URL", "")
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "");
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 BASE_SENADO = "https://legis.senado.leg.br/dadosabertos"
 
 # Substitua os alvos antigos por estes (Todos são Senadores ativos)
@@ -191,22 +192,89 @@ def similaridade_jaccard(texto1: str, texto2: str) -> float:
 #             "idx": p["idx"],
 #             "afinidade": round(af, 4),
 #             "status": status,
-#             "justificativa": "Calculado via similaridade Jaccard (fallback local).",
-#         })
-#     return resultados
+# Análise via Gemini (Principal)
+# ─────────────────────────────────────────────────────────
+def analisar_afinidade_gemini(pares: List[dict]) -> List[dict]:
+    """
+    Usa o modelo Gemini 2.0 Flash para avaliar a coerência política.
+    Retorna lista de:
+      {idx, postura_extraida, voto_registrado, coerente (bool), justificativa}
+    """
+    if not GEMINI_API_KEY:
+        raise RuntimeError("GEMINI_API_KEY não configurado no ambiente.")
 
+    GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
 
-# def analisar_pares(pares: List[dict]) -> List[dict]:
-#     """Tenta Groq; cai para Jaccard em caso de falha."""
-#     if GROQ_API_KEY:
-#         try:
-#             return analisar_afinidade_groq(pares)
-#         except Exception as e:
-#             log(f"Groq falhou ({e}). Usando fallback Jaccard.", "WARN")
-#     return analisar_afinidade_local(pares)
+    system_prompt = (
+        "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON válido (sem blocos de código Markdown como ```json) contendo uma chave 'analises' com a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+    )
+
+    payload_pares = [
+        {
+            "idx": p["idx"],
+            "ementa": p["ementa"][:400],
+            "voto_oficial": p.get("voto", "N/A"),
+            "discurso": p["discurso"][:600] if p.get("discurso") else "Sem discurso.",
+        }
+        for p in pares
+    ]
+
+    payload = {
+        "system_instruction": {
+            "parts": [{"text": system_prompt}]
+        },
+        "contents": [
+            {
+                "parts": [{"text": json.dumps(payload_pares, ensure_ascii=False)}]
+            }
+        ],
+        "generationConfig": {
+            "response_mime_type": "application/json",
+            "temperature": 0.1
+        }
+    }
+    headers = {"Content-Type": "application/json"}
+
+    log(f"Enviando lote de {len(payload_pares)} pares para Gemini 2.0...", "INFO")
+    res = requests.post(GEMINI_URL, json=payload, headers=headers, timeout=40)
+    
+    if not res.ok:
+        print(f"[DEBUG GEMINI] Status: {res.status_code} | Response: {res.text}", flush=True)
+        res.raise_for_status()
+
+    resp_json = res.json()
+    text_content = resp_json.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+    
+    text_content = text_content.strip()
+    if text_content.startswith("```json"):
+        text_content = text_content[7:]
+    if text_content.startswith("```"):
+        text_content = text_content[3:]
+    if text_content.endswith("```"):
+        text_content = text_content[:-3]
+
+    data = json.loads(text_content.strip())
+    print(f"[DEBUG GEMINI] Sucesso via modelo Gemini!", flush=True)
+    return data.get("analises", [])
 
 # ─────────────────────────────────────────────────────────
-# Análise via OpenRouter (Substituindo o bloco antigo do Groq)
+# Análise via OpenRouter (Fallback)
 # ─────────────────────────────────────────────────────────
 def analisar_afinidade_openrouter(pares: List[dict]) -> List[dict]:
     """
@@ -370,7 +438,13 @@ def analisar_afinidade_ollama(pares: List[dict]) -> List[dict]:
 
 
 def analisar_pares(pares: List[dict]) -> List[dict]:
-    """Tenta via Ollama local (qwen2.5-coder:7b); se falhar, tenta OpenRouter; se falhar, usa fallback local."""
+    """Tenta via Gemini; se falhar tenta Ollama local; se falhar tenta OpenRouter; se falhar usa Jaccard."""
+    if GEMINI_API_KEY:
+        try:
+            return analisar_afinidade_gemini(pares)
+        except Exception as e:
+            log(f"Gemini 2.0 falhou ({e}). Tentando Ollama...", "WARN")
+
     try:
         return analisar_afinidade_ollama(pares)
     except Exception as e:

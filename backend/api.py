@@ -23,6 +23,7 @@ load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 DATABASE_URL  = os.environ.get("DATABASE_URL", "")
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 # Configurações OpenRouter
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -227,6 +228,79 @@ def extrair_votos_deputado(deputado_id) -> list[dict]:
     except Exception as e:
         print(f"Erro ao extrair votos do deputado {deputado_id}: {e}")
         return []
+
+
+def analisar_coerencia_gemini(votos_com_discurso: list[dict]) -> list[dict]:
+    """Envia pares (ementa, voto, discurso) ao Gemini (Google) e retorna análises de coerência booleana."""
+    if not GEMINI_API_KEY:
+        raise RuntimeError("GEMINI_API_KEY ausente")
+
+    # API Endpoint via REST
+    GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
+
+    system_prompt = (
+        "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON válido (sem blocos de código Markdown como ```json) contendo uma chave 'analises' com a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+    )
+
+    payload_items = [
+        {
+            "idx": i,
+            "ementa": v["ementa"][:300],
+            "voto_oficial": v.get("voto", "N/A"),
+            "discurso": v.get("discurso", "")[:400],
+        }
+        for i, v in enumerate(votos_com_discurso)
+    ]
+
+    payload = {
+        "system_instruction": {
+            "parts": [{"text": system_prompt}]
+        },
+        "contents": [
+            {
+                "parts": [{"text": json.dumps(payload_items, ensure_ascii=False)}]
+            }
+        ],
+        "generationConfig": {
+            "response_mime_type": "application/json",
+            "temperature": 0.1
+        }
+    }
+    headers = {"Content-Type": "application/json"}
+
+    res = requests.post(GEMINI_URL, json=payload, headers=headers, timeout=30)
+    res.raise_for_status()
+    resp_json = res.json()
+    
+    text_content = resp_json.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+    
+    # Limpa possíveis blocos markdown que o Gemini ainda possa enviar
+    text_content = text_content.strip()
+    if text_content.startswith("```json"):
+        text_content = text_content[7:]
+    if text_content.startswith("```"):
+        text_content = text_content[3:]
+    if text_content.endswith("```"):
+        text_content = text_content[:-3]
+        
+    data = json.loads(text_content.strip())
+    return data.get("analises", [])
 
 
 def analisar_coerencia_groq(votos_com_discurso: list[dict]) -> list[dict]:
@@ -497,7 +571,38 @@ def dashboard_metrics():
 
 @app.route("/api/senadores", methods=["GET"])
 def listar_senadores():
-    """Lista senadores em exercício (proxy da API do Senado)."""
+    """Lista senadores em exercício (tenta o BD, senão usa proxy da API)."""
+    if DATABASE_URL:
+        try:
+            import psycopg2
+            conn = psycopg2.connect(DATABASE_URL)
+            cur = conn.cursor()
+            cur.execute(
+                """
+                SELECT id_externo, nome_civil, sigla_partido, sigla_uf, foto_url
+                FROM parlamentar
+                WHERE tipo_parlamentar = 'senador'
+                ORDER BY nome_civil
+                """
+            )
+            rows = cur.fetchall()
+            cur.close()
+            conn.close()
+            if rows:
+                resultado = [
+                    {
+                        "id": str(r[0]),
+                        "nome": r[1],
+                        "partido": r[2],
+                        "uf": r[3],
+                        "foto": r[4] or ""
+                    }
+                    for r in rows
+                ]
+                return jsonify({"status": "ok", "dados": resultado})
+        except Exception as e:
+            print(f"[WARN] Erro ao buscar senadores no BD: {e}")
+
     try:
         url = f"{BASE_SENADO}/senador/lista/atual"
         headers = {"Accept": "application/json"}
@@ -522,7 +627,38 @@ def listar_senadores():
 
 @app.route("/api/deputados", methods=["GET"])
 def listar_deputados():
-    """Lista deputados em exercício (proxy da API da Câmara)."""
+    """Lista deputados em exercício (tenta o BD, senão usa proxy da API)."""
+    if DATABASE_URL:
+        try:
+            import psycopg2
+            conn = psycopg2.connect(DATABASE_URL)
+            cur = conn.cursor()
+            cur.execute(
+                """
+                SELECT id_externo, nome_civil, sigla_partido, sigla_uf, foto_url
+                FROM parlamentar
+                WHERE tipo_parlamentar = 'deputado'
+                ORDER BY nome_civil
+                """
+            )
+            rows = cur.fetchall()
+            cur.close()
+            conn.close()
+            if rows:
+                resultado = [
+                    {
+                        "id": str(r[0]),
+                        "nome": r[1],
+                        "partido": r[2],
+                        "uf": r[3],
+                        "foto": r[4] or ""
+                    }
+                    for r in rows
+                ]
+                return jsonify({"status": "ok", "dados": resultado})
+        except Exception as e:
+            print(f"[WARN] Erro ao buscar deputados no BD: {e}")
+
     try:
         url = f"{BASE_CAMARA}/deputados"
         params = {"itens": 1000}
@@ -757,15 +893,23 @@ def analisar_parlamentar():
         analises_raw = []
         modelo_usado = ""
 
-        # 1. Tentar Groq
-        if GROQ_API_KEY:
+        # 1. Tentar Gemini
+        if GEMINI_API_KEY:
+            try:
+                analises_raw = analisar_coerencia_gemini(votos_com_disc)
+                modelo_usado = "Gemini (Google AI)"
+            except Exception as e:
+                print(f"[WARN] Gemini falhou: {e}")
+
+        # 2. Tentar Groq (Fallback)
+        if not analises_raw and GROQ_API_KEY:
             try:
                 analises_raw = analisar_coerencia_groq(votos_com_disc)
                 modelo_usado = "Groq (Llama-3)"
             except Exception as e:
                 print(f"[WARN] Groq falhou: {e}")
 
-        # 2. Tentar OpenRouter como Fallback
+        # 3. Tentar OpenRouter como Fallback Final
         if not analises_raw and OPENROUTER_API_KEY:
             try:
                 analises_raw = analisar_coerencia_openrouter(votos_com_disc)
