@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getSenadores, getDeputados } from '../services/api';
-import { politicosMock } from '../utils/mockData';
+import { getSenadores, getDeputados, getDashboardMetrics } from '../services/api';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { MapaBrasil } from '../components/MapaBrasil';
 import { GraficoTendencias } from '../components/GraficoTendencias';
-import { getPartidoLogo, getEstadoFlag } from '../utils/formatters';
+import { getPartidoLogo, getEstadoFlag, formatTipoParlamentar } from '../utils/formatters';
+import { obterLinhaDoTempoCoerencia } from '../utils/timeline';
 
 export function Partidos() {
   const { sigla } = useParams();
@@ -17,6 +17,33 @@ export function Partidos() {
     const fetchData = async () => {
       setLoading(true);
       try {
+        // 1. Carrega scores reais do Supabase
+        const metricsData = await getDashboardMetrics();
+        const scoreMap = {};
+        if (metricsData && metricsData.senadores) {
+          metricsData.senadores.forEach(s => {
+            scoreMap[String(s.id)] = {
+              coerencia: Math.round(s.score_coerencia || 0),
+              foto: s.foto || '',
+              tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar),
+              analisado: true,
+              detalhes: s.detalhes || []
+            };
+          });
+        }
+        if (metricsData && metricsData.deputados) {
+          metricsData.deputados.forEach(d => {
+            scoreMap[String(d.id)] = {
+              coerencia: Math.round(d.score_coerencia || 0),
+              foto: d.foto || '',
+              tipo: formatTipoParlamentar(d.tipo || d.tipo_parlamentar),
+              analisado: true,
+              detalhes: d.detalhes || []
+            };
+          });
+        }
+
+        // 2. Carrega lista completa de parlamentares
         const [senadoresRes, deputadosRes] = await Promise.allSettled([
           getSenadores(),
           getDeputados()
@@ -24,21 +51,40 @@ export function Partidos() {
         
         let politicos = [];
 
+        const buildList = (lista, tipoDefault) =>
+          lista.map(p => {
+            const idStr = String(p.id);
+            const extra = scoreMap[idStr] || {};
+            return {
+              ...p,
+              foto: extra.foto || p.foto || '',
+              coerencia: extra.coerencia ?? 0,
+              tipo: extra.tipo || tipoDefault,
+              analisado: extra.analisado || false,
+              detalhes: extra.detalhes || []
+            };
+          });
+
         if (senadoresRes.status === 'fulfilled' && senadoresRes.value?.status === 'ok') {
-          politicos = [...politicos, ...senadoresRes.value.dados.map(s => {
-            const mock = politicosMock.find(m => String(m.id) === String(s.id));
-            return { ...s, coerencia: mock ? mock.coerencia : null, analisado: !!mock };
-          })];
+          politicos = [...politicos, ...buildList(senadoresRes.value.dados, 'Senador')];
         }
         if (deputadosRes.status === 'fulfilled' && deputadosRes.value?.status === 'ok') {
-          politicos = [...politicos, ...deputadosRes.value.dados.map(d => {
-            const mock = politicosMock.find(m => String(m.id) === String(d.id));
-            return { ...d, coerencia: mock ? mock.coerencia : null, analisado: !!mock };
-          })];
+          politicos = [...politicos, ...buildList(deputadosRes.value.dados, 'Deputado')];
         }
 
-        if (politicos.length === 0) {
-          politicos = politicosMock.map(p => ({ ...p, analisado: true }));
+        // Fallback: usa as métricas direto se não carregou nada
+        if (politicos.length === 0 && metricsData && metricsData.senadores) {
+          politicos = metricsData.senadores.map(s => ({
+            id: s.id,
+            nome: s.nome,
+            partido: s.partido,
+            uf: s.uf,
+            foto: s.foto || '',
+            coerencia: Math.round(s.score_coerencia || 0),
+            tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar),
+            analisado: true,
+            detalhes: s.detalhes || []
+          }));
         }
 
         const partidoMap = {};
@@ -133,6 +179,8 @@ export function Partidos() {
 
     const mostCoherentPolitician = topPoliticos.length > 0 ? topPoliticos[0] : null;
 
+    const timelineData = obterLinhaDoTempoCoerencia(partido.politicos);
+
     return (
       <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
         <div className="p-4 md:p-[28px_32px] border-b border-border shrink-0 bg-surface">
@@ -217,7 +265,7 @@ export function Partidos() {
                 <div className="text-[16px] font-bold text-text-main">Evolução da Coerência</div>
               </div>
               <div className="p-5 flex-1 flex flex-col items-center justify-center relative min-h-[260px]">
-                 <GraficoTendencias />
+                 <GraficoTendencias data={timelineData} />
               </div>
             </div>
           </div>

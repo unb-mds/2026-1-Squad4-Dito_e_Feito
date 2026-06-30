@@ -4,28 +4,28 @@ import { GraficoTendencias } from '../components/GraficoTendencias';
 import { GraficoPartidos } from '../components/GraficoPartidos';
 import { GraficoBarras } from '../components/GraficoBarras';
 import { MapaBrasil } from '../components/MapaBrasil';
-import { politicosMock } from '../utils/mockData';
 import { getDashboardMetrics, getSenadores, getDeputados } from '../services/api';
 import { formatTipoParlamentar, getPartidoLogo, getEstadoFlag } from '../utils/formatters';
+import { obterLinhaDoTempoCoerencia } from '../utils/timeline';
 
 export function VisaoGeral() {
   const navigate = useNavigate();
-  const top4Mock = [...politicosMock].sort((a,b) => b.coerencia - a.coerencia).slice(0, 4);
-  const [top4, setTop4] = useState(top4Mock);
+  const [top4, setTop4] = useState([]);
   const [topPartidos, setTopPartidos] = useState([]);
   const [topEstados, setTopEstados] = useState([]);
 
   const [metrics, setMetrics] = useState({
-    totalAnalisados: '2.847',
-    mediaGlobalCoerencia: '73.2%',
-    incoerenciasDetectadas: '142',
-    partidoMaisCoerente: { partido: 'PSB', media_coerencia: 77.9 }
+    totalAnalisados: '--',
+    mediaGlobalCoerencia: '--%',
+    incoerenciasDetectadas: '--',
+    partidoMaisCoerente: { partido: '--', media_coerencia: 0 }
   });
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [allPoliticos, setAllPoliticos] = useState(politicosMock);
+  const [allPoliticos, setAllPoliticos] = useState([]);
   const [dataByState, setDataByState] = useState({});
+  const [timelineData, setTimelineData] = useState(null);
 
   useEffect(() => {
     const fetchMetrics = async () => {
@@ -33,10 +33,10 @@ export function VisaoGeral() {
         let analyzedMap = {};
         let analyzedList = [];
         let totalDivergentes = 0;
-        let totalAnalisados = '8';
-        let mediaGlobalCoerencia = '69.8%';
-        let partidoMaisCoerente = { partido: 'PSB', media_coerencia: 77.9 };
-        let top4List = top4Mock;
+        let totalAnalisados = '--';
+        let mediaGlobalCoerencia = '--%';
+        let partidoMaisCoerente = { partido: '--', media_coerencia: 0 };
+        let top4List = [];
 
         // 1. Carrega métricas consolidadas
         const data = await getDashboardMetrics();
@@ -60,7 +60,8 @@ export function VisaoGeral() {
                 foto: s.foto || '',
                 coerencia: Math.round(s.score_coerencia || 0),
                 tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar),
-                analisado: true
+                analisado: true,
+                detalhes: s.detalhes || []
               });
             });
           }
@@ -79,21 +80,28 @@ export function VisaoGeral() {
                 foto: d.foto || '',
                 coerencia: Math.round(d.score_coerencia || 0),
                 tipo: formatTipoParlamentar(d.tipo || d.tipo_parlamentar),
-                analisado: true
+                analisado: true,
+                detalhes: d.detalhes || []
               });
             });
           }
           
-          if (analyzedList.length === 0) {
-            analyzedList = politicosMock;
+          if (analyzedList.length === 0 && data.senadores) {
+            analyzedList = data.senadores.map(s => ({
+              id: s.id, nome: s.nome, partido: s.partido, uf: s.uf,
+              foto: s.foto || '', coerencia: Math.round(s.score_coerencia || 0),
+              tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar), analisado: true,
+              detalhes: s.detalhes || []
+            }));
           }
 
           if (analyzedList.length > 0) {
             top4List = [...analyzedList].sort((a, b) => b.coerencia - a.coerencia).slice(0, 4);
           }
-        } else {
-            analyzedList = politicosMock;
         }
+
+        const timeline = obterLinhaDoTempoCoerencia(analyzedList);
+        setTimelineData(timeline);
 
         // Group analyzed list by state to pass to Map
         const ufMap = {};
@@ -299,7 +307,7 @@ export function VisaoGeral() {
         <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 mb-4">
           <div className="bg-surface border border-border rounded-xl flex flex-col">
             <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Tendências de Coerência</div></div>
-            <div className="p-5 h-[260px] w-full"><GraficoTendencias /></div>
+            <div className="p-5 h-[260px] w-full"><GraficoTendencias data={timelineData} /></div>
           </div>
         </div>
 

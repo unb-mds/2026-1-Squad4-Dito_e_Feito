@@ -9,6 +9,8 @@ const defaultData = [
 ];
 
 export function GraficoTendencias({ data }) {
+  // Se não vier data, ou vier nulo, mostra um array vazio para não quebrar o gráfico.
+  // connectNulls=true vai conectar as linhas pulando os meses sem dados
   const chartData = data || defaultData;
   return (
     <div className="w-full h-full">
@@ -21,7 +23,7 @@ export function GraficoTendencias({ data }) {
             contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d', borderRadius: '6px', color: '#e6edf3' }}
             itemStyle={{ color: '#14b8a6', fontWeight: 'bold' }}
           />
-          <Line type="monotone" dataKey="value" name="Coerência" stroke="#14b8a6" strokeWidth={2} dot={{ r: 4, fill: '#14b8a6' }} activeDot={{ r: 6 }} />
+          <Line type="monotone" dataKey="value" name="Coerência" stroke="#14b8a6" strokeWidth={2} dot={{ r: 4, fill: '#14b8a6' }} activeDot={{ r: 6 }} connectNulls />
         </LineChart>
       </ResponsiveContainer>
     </div>

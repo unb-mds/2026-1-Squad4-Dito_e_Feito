@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { politicosMock } from '../utils/mockData';
-import { getDashboardMetrics } from '../services/api';
+import { getDashboardMetrics, getSenadores, getDeputados } from '../services/api';
 import { formatTipoParlamentar } from '../utils/formatters';
 
 export function Politicos() {
@@ -9,26 +8,83 @@ export function Politicos() {
   const [filtroPartido, setFiltroPartido] = useState('Todos');
   const [filtroUF, setFiltroUF] = useState('Todos');
   const [sortAsc, setSortAsc] = useState(false);
-  const [politicosList, setPoliticosList] = useState(politicosMock);
+  const [politicosList, setPoliticosList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadRealPoliticos = async () => {
+      setLoading(true);
       try {
-        const data = await getDashboardMetrics();
-        if (data && data.senadores && data.senadores.length > 0) {
-          const mapped = data.senadores.map(s => ({
-            id: s.id,
-            nome: s.nome,
-            partido: s.partido,
-            uf: s.uf,
-            foto: s.foto || '',
-            coerencia: Math.round(s.score_coerencia || 0),
-            tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar)
-          }));
-          setPoliticosList(mapped);
+        // 1. Carrega scores do Supabase
+        const metricsData = await getDashboardMetrics();
+        const scoreMap = {};
+        if (metricsData && metricsData.senadores) {
+          metricsData.senadores.forEach(s => {
+            scoreMap[String(s.id)] = {
+              coerencia: Math.round(s.score_coerencia || 0),
+              foto: s.foto || '',
+              tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar),
+              analisado: true
+            };
+          });
         }
+
+        // 2. Carrega todos os parlamentares em paralelo
+        const [senadoresRes, deputadosRes] = await Promise.allSettled([
+          getSenadores(),
+          getDeputados()
+        ]);
+
+        const combined = [];
+        const seen = new Set();
+
+        const addPoliticos = (lista, tipoDefault) => {
+          lista.forEach(p => {
+            const idStr = String(p.id);
+            if (seen.has(idStr)) return;
+            seen.add(idStr);
+            const extra = scoreMap[idStr] || {};
+            combined.push({
+              id: p.id,
+              nome: p.nome,
+              partido: p.partido,
+              uf: p.uf,
+              foto: extra.foto || p.foto || '',
+              coerencia: extra.coerencia ?? 0,
+              tipo: extra.tipo || tipoDefault,
+              analisado: extra.analisado || false
+            });
+          });
+        };
+
+        if (senadoresRes.status === 'fulfilled' && senadoresRes.value?.status === 'ok') {
+          addPoliticos(senadoresRes.value.dados, 'Senador');
+        }
+        if (deputadosRes.status === 'fulfilled' && deputadosRes.value?.status === 'ok') {
+          addPoliticos(deputadosRes.value.dados, 'Deputado');
+        }
+
+        // Fallback: se nem senadores nem deputados carregaram, usa direto as métricas
+        if (combined.length === 0 && metricsData && metricsData.senadores) {
+          metricsData.senadores.forEach(s => {
+            combined.push({
+              id: s.id,
+              nome: s.nome,
+              partido: s.partido,
+              uf: s.uf,
+              foto: s.foto || '',
+              coerencia: Math.round(s.score_coerencia || 0),
+              tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar),
+              analisado: true
+            });
+          });
+        }
+
+        setPoliticosList(combined);
       } catch (err) {
-        console.error("Erro ao carregar políticos da API, usando fallbacks mockados:", err);
+        console.error('Erro ao carregar políticos:', err);
+      } finally {
+        setLoading(false);
       }
     };
     loadRealPoliticos();
@@ -52,6 +108,10 @@ export function Politicos() {
 
     return result.sort((a, b) => sortAsc ? a.coerencia - b.coerencia : b.coerencia - a.coerencia);
   }, [busca, filtroPartido, filtroUF, sortAsc, politicosList]);
+
+  if (loading) {
+    return <div className="flex-1 flex items-center justify-center text-text2">Carregando parlamentares...</div>;
+  }
 
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
