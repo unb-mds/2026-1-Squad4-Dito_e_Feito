@@ -30,7 +30,7 @@ describe('VisaoGeral Page', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Votos Analisados')).toBeInTheDocument();
+    expect(screen.getByText('Parlamentares Analisados')).toBeInTheDocument();
     // A string inicial de total analisados e outros é '--' ou '--%'
     expect(screen.getAllByText('--').length).toBeGreaterThan(0);
   });
