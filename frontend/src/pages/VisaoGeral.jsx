@@ -304,13 +304,6 @@ export function VisaoGeral() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 mb-4">
-          <div className="bg-surface border border-border rounded-xl flex flex-col">
-            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Tendências de Coerência</div></div>
-            <div className="p-5 h-[260px] w-full"><GraficoTendencias data={timelineData} /></div>
-          </div>
-        </div>
-
         <div className="bg-surface border border-border rounded-xl mb-4 flex flex-col">
           <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Coerência Média por Partido</div></div>
           <div className="p-5 h-[240px] w-full"><GraficoBarras /></div>
