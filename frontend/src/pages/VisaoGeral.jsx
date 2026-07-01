@@ -65,7 +65,7 @@ export function VisaoGeral() {
               });
             });
           }
-          
+
           if (data.deputados) {
             data.deputados.forEach(d => {
               if (d.contagem_status && d.contagem_status.Divergente) {
@@ -85,7 +85,7 @@ export function VisaoGeral() {
               });
             });
           }
-          
+
           if (analyzedList.length === 0 && data.senadores) {
             analyzedList = data.senadores.map(s => ({
               id: s.id, nome: s.nome, partido: s.partido, uf: s.uf,
@@ -109,20 +109,20 @@ export function VisaoGeral() {
           if (p.uf) {
             if (!ufMap[p.uf]) ufMap[p.uf] = { soma: 0, count: 0 };
             if (p.analisado !== false) {
-                ufMap[p.uf].soma += p.coerencia;
-                ufMap[p.uf].count += 1;
+              ufMap[p.uf].soma += p.coerencia;
+              ufMap[p.uf].count += 1;
             }
           }
         });
-        
+
         const finalMapData = {};
         const topEstadosList = [];
         for (const [uf, data] of Object.entries(ufMap)) {
-            if (data.count > 0) {
-                const coerencia = Math.round(data.soma / data.count);
-                finalMapData[uf] = { coerencia, total: data.count };
-                topEstadosList.push({ uf, coerencia, total: data.count });
-            }
+          if (data.count > 0) {
+            const coerencia = Math.round(data.soma / data.count);
+            finalMapData[uf] = { coerencia, total: data.count };
+            topEstadosList.push({ uf, coerencia, total: data.count });
+          }
         }
         setDataByState(finalMapData);
         setTopEstados(topEstadosList.sort((a, b) => b.coerencia - a.coerencia).slice(0, 4));
@@ -138,10 +138,10 @@ export function VisaoGeral() {
           }
         });
         const topPartidosList = Object.entries(partidoMap)
-            .filter(([_, d]) => d.count > 0)
-            .map(([partido, d]) => ({ partido, coerencia: Math.round(d.soma / d.count), total: d.count }))
-            .sort((a,b) => b.coerencia - a.coerencia)
-            .slice(0, 4);
+          .filter(([_, d]) => d.count > 0)
+          .map(([partido, d]) => ({ partido, coerencia: Math.round(d.soma / d.count), total: d.count }))
+          .sort((a, b) => b.coerencia - a.coerencia)
+          .slice(0, 4);
         setTopPartidos(topPartidosList);
 
         setMetrics({
@@ -226,35 +226,35 @@ export function VisaoGeral() {
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
       <div className="p-4 md:p-[16px_32px] border-b border-border shrink-0">
         <div className="relative max-w-[600px] mx-auto">
-          <svg className="absolute left-[15px] top-1/2 -translate-y-1/2 text-text3 pointer-events-none" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input 
-            className="w-full bg-surface2 border border-border rounded-full p-[10px_18px_10px_42px] text-[14px] text-text-main outline-none focus:border-teal transition-colors" 
-            type="text" 
-            placeholder="Buscar político por nome ou partido..." 
+          <svg className="absolute left-[15px] top-1/2 -translate-y-1/2 text-text3 pointer-events-none" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+          <input
+            className="w-full bg-surface2 border border-border rounded-full p-[10px_18px_10px_42px] text-[14px] text-text-main outline-none focus:border-teal transition-colors"
+            type="text"
+            placeholder="Buscar político por nome ou partido..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           {searchResults.length > 0 && (
             <div className="absolute top-[48px] left-0 right-0 bg-surface border border-border rounded-xl shadow-2xl z-50 max-h-[300px] overflow-y-auto">
               {searchResults.map((p) => (
-                <div 
+                <div
                   key={p.id}
                   onClick={() => navigate(`/politicos/${p.id}`, { state: { politico: p } })}
                   className="flex items-center gap-3 p-[12px_20px] border-b border-border2 hover:bg-surface2 cursor-pointer last:border-0"
                 >
-                  <img 
-                    src={p.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`} 
+                  <img
+                    src={p.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`}
                     onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`; }}
-                    className="w-8 h-8 rounded-full object-cover border border-border shrink-0" 
+                    className="w-8 h-8 rounded-full object-cover border border-border shrink-0"
                     alt={p.nome}
                   />
                   <div className="flex-1 min-w-0">
                     <div className="text-[14px] font-semibold text-text-main truncate">{p.nome}</div>
                     <div className="text-[12px] text-teal flex gap-1 items-center">
-                       <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer">{p.partido}</span> 
-                       · 
-                       <span onClick={(e) => { e.stopPropagation(); navigate(`/estados/${p.uf.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer">{p.uf}</span> 
-                       · {p.tipo}
+                      <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer">{p.partido}</span>
+                      ·
+                      <span onClick={(e) => { e.stopPropagation(); navigate(`/estados/${p.uf.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer">{p.uf}</span>
+                      · {p.tipo}
                     </div>
                   </div>
                   <div className="text-[13px] font-bold text-teal">
@@ -270,7 +270,7 @@ export function VisaoGeral() {
       <div className="p-4 md:p-[28px_32px] flex-1 overflow-y-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
           <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
-            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Votos Analisados</div>
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Parlamentares Analisados</div>
             <div className="text-[40px] font-bold text-text-main leading-none mb-3">{metrics.totalAnalisados}</div>
             <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-green-bg text-green">↑ 12%</span>
           </div>
@@ -282,7 +282,7 @@ export function VisaoGeral() {
           <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
             <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5 flex justify-between items-center">
               Incoerências Detectadas
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
             </div>
             <div className="text-[40px] font-bold text-text-main leading-none mb-3">{metrics.incoerenciasDetectadas}</div>
           </div>
@@ -380,18 +380,17 @@ export function VisaoGeral() {
                   <div className="flex-1 min-w-0">
                     <div className="text-[14px] font-semibold text-text-main truncate flex items-center gap-2">
                       {p.nome}
-                      <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold border shrink-0 ${
-                        p.tipo && p.tipo.toLowerCase().includes('senad')
+                      <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold border shrink-0 ${p.tipo && p.tipo.toLowerCase().includes('senad')
                           ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
                           : 'bg-amber-500/10 text-amber-400 border-amber-500/20'
-                      }`}>
+                        }`}>
                         {p.tipo && p.tipo.toLowerCase().includes('senad') ? 'Senador' : 'Deputado'}
                       </span>
                     </div>
                     <div className="text-[12px] text-teal mt-0.5 flex gap-1 items-center">
-                       <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white">{p.partido}</span>
-                       -
-                       <span onClick={(e) => { e.stopPropagation(); navigate(`/estados/${p.uf.toLowerCase()}`); }} className="hover:underline hover:text-white">{p.uf}</span>
+                      <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white">{p.partido}</span>
+                      -
+                      <span onClick={(e) => { e.stopPropagation(); navigate(`/estados/${p.uf.toLowerCase()}`); }} className="hover:underline hover:text-white">{p.uf}</span>
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-1.5 min-w-[110px]">

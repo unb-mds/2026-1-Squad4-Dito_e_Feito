@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, BarChart3, Info, Users, FileText, Map, Flag } from 'lucide-react';
+import ditoLogo from '../assets/dito_logo.png';
 
 export function Sidebar({ isOpen, onClose }) {
   const location = useLocation();
@@ -11,12 +12,19 @@ export function Sidebar({ isOpen, onClose }) {
   return (
     <aside className={`w-[260px] shrink-0 bg-surface border-r border-border flex flex-col h-screen fixed md:static inset-y-0 left-0 z-50 transition-transform duration-300 md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       <div className="p-[20px_20px_16px] border-b border-border flex justify-between items-center shrink-0">
-        <div>
-          <div className="text-[18px] font-bold text-text-main tracking-[-0.3px]">
-            Dito e Feito
-          </div>
-          <div className="text-[12px] text-text2 mt-0.5">
-            Análise Política com IA
+        <div className="flex items-center gap-3">
+          <img 
+            src={ditoLogo} 
+            alt="Dito e Feito Logo" 
+            className="w-10 h-10 rounded-xl shadow-sm object-cover" 
+          />
+          <div>
+            <div className="text-[18px] font-bold text-text-main tracking-[-0.3px]">
+              Dito e Feito
+            </div>
+            <div className="text-[12px] text-text2 mt-0.5">
+              Análise Política com IA
+            </div>
           </div>
         </div>
         
