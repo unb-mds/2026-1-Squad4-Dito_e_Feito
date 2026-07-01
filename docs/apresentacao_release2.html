@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <title>Dito e Feito - Apresentação Release 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css" id="theme">
+
+  <!-- Tailwind CSS via CDN para utilitários -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Customizações para combinar com a identidade do Dito e Feito (Teal/Escuro) */
+    .reveal {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal h4,
+    .reveal h5,
+    .reveal h6 {
+      text-transform: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: #14b8a6;
+      /* Teal-500 */
+    }
+
+    .reveal .progress span {
+      background-color: #14b8a6;
+    }
+
+    .reveal .controls {
+      color: #14b8a6;
+    }
+
+    .speaker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.4em;
+      color: #14b8a6;
+      background: rgba(20, 184, 166, 0.1);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 30px !important;
+    }
+
+    .svg-icon {
+      width: 1.2em;
+      height: 1.2em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .svg-large {
+      width: 2.2em;
+      height: 2.2em;
+      color: #14b8a6;
+      margin-bottom: 15px;
+    }
+
+    .highlight {
+      color: #14b8a6;
+      font-weight: bold;
+    }
+
+    .card {
+      background: rgba(31, 41, 55, 0.8);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .qr-placeholder {
+      width: 200px;
+      height: 200px;
+      background: white;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Slide 1: Abertura -->
+      <section data-transition="zoom">
+        <span class="speaker-pill">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+          Gabriel
+        </span>
+        <h1 style="font-size: 3.5em; margin-bottom: 0;">Dito e Feito</h1>
+        <h3 style="color: white; font-weight: 300; font-size: 1.2em; margin-top: 10px;">Auditoria e Monitoramento de
+          Coerência Parlamentar por IA</h3>
+
+        <div style="margin-top: 50px;" class="flex justify-center gap-8 text-xl">
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-gray-700 mx-auto mb-2 overflow-hidden"><img
+                src="https://github.com/Velho008.png" /></div>Gabriel
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-gray-700 mx-auto mb-2 overflow-hidden"><img
+                src="https://github.com/gus-ant.png" /></div>Gustavo
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-gray-700 mx-auto mb-2 overflow-hidden"><img
+                src="https://github.com/IndianoDev.png" /></div>Juan
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-gray-700 mx-auto mb-2 overflow-hidden"><img
+                src="https://github.com/SUDOTMOX.png" /></div>Sauhan
+          </div>
+        </div>
+
+        <p style="font-size: 0.6em; margin-top: 40px; color: #6b7280;">Release 2 — MVP Funcional</p>
+      </section>
+
+      <!-- Slide 2: Problema -->
+      <section data-transition="fade">
+        <span class="speaker-pill">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+          Gustavo
+        </span>
+        <h2>O Problema</h2>
+        <div class="card fragment fade-up">
+          <p style="font-size: 1.2em; font-style: italic; color: white;">
+            "O político vai à tribuna defender uma pauta para os eleitores, mas na hora de votar no plenário, de forma
+            silenciosa, <span class="highlight">vota o exato oposto.</span>"
+          </p>
+        </div>
+        <ul style="margin-top: 10px; font-size: 0.6em; color: #d1d5db;" class="fragment fade-in">
+          <li><strong>Escala impossível:</strong> 513 deputados e 81 senadores para o cidadão comum acompanhar.</li>
+          <li><strong>Impacto:</strong> Falta de transparência e rastreabilidade na democracia.</li>
+        </ul>
+      </section>
+
+      <!-- Slide 3: Solução -->
+      <section data-transition="slide">
+        <span class="speaker-pill">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+          Juan
+        </span>
+        <h2>A Nossa Solução</h2>
+        
+        <div class="flex gap-8 items-center mt-6">
+          <div class="flex-1 flex flex-col gap-4 text-left text-[0.55em]">
+            <div class="card p-5 flex items-start gap-4 fragment fade-right">
+              <svg class="w-10 h-10 text-teal-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+              <div>
+                <h4 class="text-white mb-1">Inteligência Artificial</h4>
+                <p class="m-0 leading-normal text-gray-300">Cruzamento de discursos e votos literais para gerar um score de coerência.</p>
+              </div>
+            </div>
+            <div class="card p-5 flex items-start gap-4 fragment fade-right" data-fragment-index="1">
+              <svg class="w-10 h-10 text-teal-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+              <div>
+                <h4 class="text-white mb-1">Dashboards Interativas</h4>
+                <p class="m-0 leading-normal text-gray-300">Rankings por Estados, Partidos e Senadores/Deputados em tempo real.</p>
+              </div>
+            </div>
+            <div class="card p-5 flex items-start gap-4 fragment fade-right" data-fragment-index="2">
+              <svg class="w-10 h-10 text-teal-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+              <div>
+                <h4 class="text-white mb-1">Transparência Total</h4>
+                <p class="m-0 leading-normal text-gray-300">Justificativas explicativas geradas por LLMs de forma auditável.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex-1 fragment fade-left" data-fragment-index="1">
+            <img src="dashboard_screenshot.png" class="rounded-xl border border-teal-500/30 shadow-2xl w-full max-h-[450px] object-cover object-left" alt="Dashboard Mockup" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: Arquitetura -->
+      <section data-transition="convex">
+        <span class="speaker-pill">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+          Sauhan
+        </span>
+        <h2>Arquitetura & Engenharia</h2>
+        <div class="card mx-auto max-w-4xl p-8" style="background: rgba(17, 24, 39, 0.9);">
+          <div class="flex justify-between items-center text-[0.6em] font-bold">
+            <!-- APIs -->
+            <div class="text-center flex flex-col items-center">
+              <div class="bg-gray-800 p-4 rounded-xl border border-gray-600 mb-2 w-28 h-24 flex flex-col justify-center items-center">
+                <svg class="w-8 h-8 text-teal-400 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011-1v5m-4 0h4"></path></svg>
+                <span class="text-[10px]">APIs Gov</span>
+              </div>
+              Dados Brutos
+            </div>
+            <div>
+              <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </div>
+            <!-- Backend -->
+            <div class="text-center flex flex-col items-center">
+              <div class="bg-blue-900/50 p-4 rounded-xl border border-blue-500 mb-2 w-28 h-24 flex flex-col justify-center items-center">
+                <svg class="w-8 h-8 text-blue-400 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <span class="text-[10px]">Python Flask</span>
+              </div>
+              Scraping & Rotas
+            </div>
+            <div>
+              <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </div>
+            <!-- IA / DB -->
+            <div class="text-center flex flex-col items-center">
+              <div class="bg-purple-900/50 p-4 rounded-xl border border-purple-500 mb-2 w-28 h-24 flex flex-col justify-center items-center">
+                <svg class="w-8 h-8 text-purple-400 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                <span class="text-[10px] leading-tight">Llama-3 + DB</span>
+              </div>
+              Inferência & DB
+            </div>
+            <div>
+              <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </div>
+            <!-- Frontend -->
+            <div class="text-center flex flex-col items-center">
+              <div class="bg-teal-900/50 p-4 rounded-xl border border-teal-500 mb-2 w-28 h-24 flex flex-col justify-center items-center">
+                <svg class="w-8 h-8 text-teal-400 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <span class="text-[10px]">React + Vercel</span>
+              </div>
+              UI & Deploy
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5: Qualidade e DevOps -->
+      <section data-transition="slide">
+        <span class="speaker-pill">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+          Gabriel
+        </span>
+        <h2>Qualidade e DevOps</h2>
+
+        <div class="flex flex-col gap-6 mt-8 text-left max-w-3xl mx-auto">
+          <div class="bg-green-900/30 border border-green-500 rounded-xl p-5 flex items-center justify-between fragment fade-in text-[0.7em]">
+            <span class="text-white font-bold flex items-center">
+              <svg class="w-6 h-6 mr-3 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Integração Contínua (CI/CD)
+            </span>
+            <span class="text-gray-300">GitHub Actions para Pull Requests</span>
+          </div>
+          <div class="bg-teal-900/30 border border-teal-500 rounded-xl p-5 flex items-center justify-between fragment fade-in text-[0.7em]">
+            <span class="text-white font-bold flex items-center">
+              <svg class="w-6 h-6 mr-3 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+              Testes Automatizados (Vitest)
+            </span>
+            <span class="bg-teal-500 text-gray-900 px-3 py-1 rounded-full font-bold">90%+ Cobertura Frontend</span>
+          </div>
+          <div class="bg-blue-900/30 border border-blue-500 rounded-xl p-5 flex items-center justify-between fragment fade-in text-[0.7em]">
+            <span class="text-white font-bold flex items-center">
+              <svg class="w-6 h-6 mr-3 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+              Gestão Ágil Integrada
+            </span>
+            <span class="text-gray-300">Rastreabilidade: Issue ➔ PR ➔ Deploy</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6: Demo -->
+      <section data-transition="zoom" data-background-color="#111827">
+        <span class="speaker-pill">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+          Gustavo e Juan
+        </span>
+        <h1 style="font-size: 4em;">Showtime</h1>
+        <p style="font-size: 1.2em; color: #14b8a6;">Demonstração ao Vivo</p>
+
+        <div style="margin-top: 40px;">
+          <a href="https://frontend-mu-lyart-68.vercel.app/politicos/220603" target="_blank"
+            class="inline-block px-8 py-4 bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-full transition-colors text-xl">
+            Acessar Plataforma Dito e Feito
+          </a>
+        </div>
+        <p style="font-size: 0.5em; margin-top: 20px; color: #6b7280;">(Alternem a tela para o navegador agora)</p>
+      </section>
+
+      <!-- Slide 7: Encerramento -->
+      <section data-transition="fade">
+        <span class="speaker-pill">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+          Sauhan
+        </span>
+        <h2>Resultados & Próximos Passos</h2>
+        <div class="flex gap-8 items-center mt-10">
+          <div class="flex-1 text-left">
+            <ul style="font-size: 0.7em; color: #d1d5db; line-height: 1.8;" class="space-y-4">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 mr-3 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                <span>De uma arquitetura R1 a um MVP <strong class="text-teal-400">totalmente em produção</strong>.</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 mr-3 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                <span>Pipeline de dados maduro unificando <strong class="text-teal-400">Câmara e Senado</strong>.</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 mr-3 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <span>Próximos Passos: <strong class="text-teal-400">Escala de Dados</strong> (scraping massivo) & IA refinada.</span>
+              </li>
+            </ul>
+            <h4 style="margin-top: 40px; color: white;">Muito Obrigado!</h4>
+          </div>
+          <div class="w-1/3 text-center">
+            <img
+              src="qrcode_github.png"
+              class="mx-auto rounded-xl border-4 border-teal-500 shadow-2xl" alt="QR Code Github" />
+            <p style="font-size: 0.5em; margin-top: 10px; color: #9ca3af;">Repositório Oficial</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,          // Permite links para slides específicos
+      controls: true,      // Mostra as setas de navegação
+      progress: true,      // Barra de progresso no rodapé
+      center: true,        // Centraliza os slides verticalmente
+      transition: 'slide', // Animação padrão (fade, slide, convex, concave, zoom)
+    });
+  </script>
+</body>
+
+</html>
