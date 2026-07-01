@@ -281,7 +281,7 @@ export function Estados() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-4 mb-4">
+          <div className="grid grid-cols-1 gap-4 mb-4">
             <div className="bg-surface border border-border rounded-xl flex flex-col">
               <div className="p-[16px_20px] border-b border-border2">
                 <div className="text-[16px] font-bold text-text-main">Distribuição Partidária</div>
@@ -292,14 +292,6 @@ export function Estados() {
                 ) : (
                   <div className="text-[14px] text-text2 italic">Sem dados analisados</div>
                 )}
-              </div>
-            </div>
-            <div className="bg-surface border border-border rounded-xl flex flex-col">
-              <div className="p-[16px_20px] border-b border-border2">
-                <div className="text-[16px] font-bold text-text-main">Evolução da Coerência ({estado.sigla})</div>
-              </div>
-              <div className="p-5 flex-1 flex items-center justify-center relative min-h-[300px]">
-                <GraficoTendencias data={timelineData} />
               </div>
             </div>
           </div>
