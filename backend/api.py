@@ -23,6 +23,7 @@ load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 DATABASE_URL  = os.environ.get("DATABASE_URL", "")
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 # Configurações OpenRouter
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -43,7 +44,15 @@ METRICS_JSON_PATH = os.path.join(
 )
 
 app = Flask(__name__)
-CORS(app)
+
+# CORS configurado para aceitar o frontend local e o de produção (Vercel)
+# Em produção, defina FRONTEND_URL no painel de variáveis do Render
+_FRONTEND_URL = os.environ.get("FRONTEND_URL", "")
+_CORS_ORIGINS = ["http://localhost:5173", "http://localhost:5174"]
+if _FRONTEND_URL:
+    _CORS_ORIGINS.append(_FRONTEND_URL)
+
+CORS(app, origins=_CORS_ORIGINS)
 
 BASE_SENADO = "https://legis.senado.leg.br/dadosabertos"
 BASE_CAMARA = "https://dadosabertos.camara.leg.br/api/v2"
@@ -221,8 +230,81 @@ def extrair_votos_deputado(deputado_id) -> list[dict]:
         return []
 
 
+def analisar_coerencia_gemini(votos_com_discurso: list[dict]) -> list[dict]:
+    """Envia pares (ementa, voto, discurso) ao Gemini (Google) e retorna análises de coerência booleana."""
+    if not GEMINI_API_KEY:
+        raise RuntimeError("GEMINI_API_KEY ausente")
+
+    # API Endpoint via REST
+    GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
+
+    system_prompt = (
+        "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON válido (sem blocos de código Markdown como ```json) contendo uma chave 'analises' com a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+    )
+
+    payload_items = [
+        {
+            "idx": i,
+            "ementa": v["ementa"][:300],
+            "voto_oficial": v.get("voto", "N/A"),
+            "discurso": v.get("discurso", "")[:400],
+        }
+        for i, v in enumerate(votos_com_discurso)
+    ]
+
+    payload = {
+        "system_instruction": {
+            "parts": [{"text": system_prompt}]
+        },
+        "contents": [
+            {
+                "parts": [{"text": json.dumps(payload_items, ensure_ascii=False)}]
+            }
+        ],
+        "generationConfig": {
+            "response_mime_type": "application/json",
+            "temperature": 0.1
+        }
+    }
+    headers = {"Content-Type": "application/json"}
+
+    res = requests.post(GEMINI_URL, json=payload, headers=headers, timeout=30)
+    res.raise_for_status()
+    resp_json = res.json()
+    
+    text_content = resp_json.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+    
+    # Limpa possíveis blocos markdown que o Gemini ainda possa enviar
+    text_content = text_content.strip()
+    if text_content.startswith("```json"):
+        text_content = text_content[7:]
+    if text_content.startswith("```"):
+        text_content = text_content[3:]
+    if text_content.endswith("```"):
+        text_content = text_content[:-3]
+        
+    data = json.loads(text_content.strip())
+    return data.get("analises", [])
+
+
 def analisar_coerencia_groq(votos_com_discurso: list[dict]) -> list[dict]:
-    """Envia pares (ementa, discurso) ao Groq e retorna análises."""
+    """Envia pares (ementa, voto, discurso) ao Groq e retorna análises de coerência booleana."""
     if not GROQ_API_KEY:
         raise RuntimeError("GROQ_API_KEY ausente")
 
@@ -230,16 +312,31 @@ def analisar_coerencia_groq(votos_com_discurso: list[dict]) -> list[dict]:
     MODELS   = ["llama-3.1-8b-instant", "llama-3.3-70b-versatile"]
 
     system_prompt = (
-        "Você é analista político sênior. Para cada item, compare ementa e discurso e retorne:\n"
-        "  afinidade (0.0-1.0), status ('Coerente','Parcialmente Alinhado','Divergente','Não Relacionado'), justificativa (1 frase).\n"
-        "Se temas distintos ou discurso vazio: status='Não Relacionado', afinidade < 0.6.\n"
-        "Retorne APENAS JSON com chave 'analises'."
+        "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+        "Não adicione nenhuma marcação extra, apenas o JSON puro."
     )
 
     payload_items = [
         {
             "idx": i,
             "ementa": v["ementa"][:300],
+            "voto_oficial": v.get("voto", "N/A"),
             "discurso": v.get("discurso", "")[:400],
         }
         for i, v in enumerate(votos_com_discurso)
@@ -275,21 +372,36 @@ def analisar_coerencia_groq(votos_com_discurso: list[dict]) -> list[dict]:
 
 
 def analisar_coerencia_openrouter(votos_com_discurso: list[dict]) -> list[dict]:
-    """Envia pares (ementa, discurso) ao OpenRouter e retorna análises."""
+    """Envia pares (ementa, voto, discurso) ao OpenRouter e retorna análises de coerência booleana."""
     if not OPENROUTER_API_KEY:
         raise RuntimeError("OPENROUTER_API_KEY ausente")
 
     system_prompt = (
-        "Você é analista político sênior. Para cada item, compare ementa e discurso e retorne:\n"
-        "  afinidade (0.0-1.0), status ('Coerente','Parcialmente Alinhado','Divergente','Não Relacionado'), justificativa (1 frase).\n"
-        "Se temas distintos ou discurso vazio: status='Não Relacionado', afinidade < 0.6.\n"
-        "Retorne APENAS JSON com chave 'analises'."
+        "Você é um analista político sênior especializado em monitoramento legislativo brasileiro.\n"
+        "Sua tarefa é verificar a COERÊNCIA DE VOTO de um parlamentar.\n"
+        "Para cada item você receberá: o texto de um discurso, a ementa de uma votação e o voto oficial registrado.\n\n"
+        "Sua análise deve seguir EXATAMENTE estas etapas:\n"
+        "  1. postura_extraida: leia o discurso e classifique a postura do parlamentar em relação ao tema da ementa.\n"
+        "     Use APENAS um destes valores: 'A Favor', 'Contra', 'Neutro'.\n"
+        "     Se o discurso não tratar do mesmo tema da ementa, use 'Neutro'.\n"
+        "  2. coerente: compare a postura com o voto oficial:\n"
+        "     - Se postura='A Favor' e voto='Sim' → coerente=true\n"
+        "     - Se postura='Contra' e voto='Não' → coerente=true\n"
+        "     - Se postura='A Favor' e voto='Não' → coerente=false\n"
+        "     - Se postura='Contra' e voto='Sim' → coerente=false\n"
+        "     - Se postura='Neutro' → coerente=null (não é possível avaliar)\n"
+        "     - Se voto for 'Abstenção', 'Ausente', 'Obstrução' ou similar → coerente=null\n"
+        "  3. justificativa: 1 frase curta em português explicando sua conclusão.\n\n"
+        "Retorne APENAS um objeto JSON com a chave 'analises' contendo a lista de objetos:\n"
+        "{idx, postura_extraida, voto_registrado, coerente, justificativa}\n"
+        "Não adicione nenhuma marcação extra, apenas o JSON puro."
     )
 
     payload_items = [
         {
             "idx": i,
             "ementa": v["ementa"][:300],
+            "voto_oficial": v.get("voto", "N/A"),
             "discurso": v.get("discurso", "")[:400],
         }
         for i, v in enumerate(votos_com_discurso)
@@ -358,7 +470,8 @@ def dashboard_metrics():
                     p.id_externo, p.nome_civil, p.sigla_partido, p.sigla_uf,
                     p.foto_url,
                     ROUND(AVG(sc.score)::numeric, 2) as avg_score,
-                    COUNT(sc.id) as total_scores
+                    COUNT(sc.id) as total_scores,
+                    p.tipo_parlamentar
                 FROM parlamentar p
                 JOIN score_coerencia sc ON sc.parlamentar_id = p.id
                 WHERE p.tipo_parlamentar IN ('senador', 'deputado')
@@ -399,6 +512,7 @@ def dashboard_metrics():
                             "total_pares": s_local.get("total_pares", r[6]),
                             "contagem_status": s_local.get("contagem_status", {}),
                             "detalhes": s_local.get("detalhes", []),
+                            "tipo": r[7].capitalize() if r[7] else "Senador",
                         }
                     )
 
@@ -457,7 +571,38 @@ def dashboard_metrics():
 
 @app.route("/api/senadores", methods=["GET"])
 def listar_senadores():
-    """Lista senadores em exercício (proxy da API do Senado)."""
+    """Lista senadores em exercício (tenta o BD, senão usa proxy da API)."""
+    if DATABASE_URL:
+        try:
+            import psycopg2
+            conn = psycopg2.connect(DATABASE_URL)
+            cur = conn.cursor()
+            cur.execute(
+                """
+                SELECT id_externo, nome_civil, sigla_partido, sigla_uf, foto_url
+                FROM parlamentar
+                WHERE tipo_parlamentar = 'senador'
+                ORDER BY nome_civil
+                """
+            )
+            rows = cur.fetchall()
+            cur.close()
+            conn.close()
+            if rows:
+                resultado = [
+                    {
+                        "id": str(r[0]),
+                        "nome": r[1],
+                        "partido": r[2],
+                        "uf": r[3],
+                        "foto": r[4] or ""
+                    }
+                    for r in rows
+                ]
+                return jsonify({"status": "ok", "dados": resultado})
+        except Exception as e:
+            print(f"[WARN] Erro ao buscar senadores no BD: {e}")
+
     try:
         url = f"{BASE_SENADO}/senador/lista/atual"
         headers = {"Accept": "application/json"}
@@ -482,7 +627,38 @@ def listar_senadores():
 
 @app.route("/api/deputados", methods=["GET"])
 def listar_deputados():
-    """Lista deputados em exercício (proxy da API da Câmara)."""
+    """Lista deputados em exercício (tenta o BD, senão usa proxy da API)."""
+    if DATABASE_URL:
+        try:
+            import psycopg2
+            conn = psycopg2.connect(DATABASE_URL)
+            cur = conn.cursor()
+            cur.execute(
+                """
+                SELECT id_externo, nome_civil, sigla_partido, sigla_uf, foto_url
+                FROM parlamentar
+                WHERE tipo_parlamentar = 'deputado'
+                ORDER BY nome_civil
+                """
+            )
+            rows = cur.fetchall()
+            cur.close()
+            conn.close()
+            if rows:
+                resultado = [
+                    {
+                        "id": str(r[0]),
+                        "nome": r[1],
+                        "partido": r[2],
+                        "uf": r[3],
+                        "foto": r[4] or ""
+                    }
+                    for r in rows
+                ]
+                return jsonify({"status": "ok", "dados": resultado})
+        except Exception as e:
+            print(f"[WARN] Erro ao buscar deputados no BD: {e}")
+
     try:
         url = f"{BASE_CAMARA}/deputados"
         params = {"itens": 1000}
@@ -622,6 +798,51 @@ def analisar_parlamentar():
     if not parl_id:
         return jsonify({"status": "erro", "mensagem": "ID não informado"}), 400
 
+    # 1. Tentar ler do cache do processamento em lotes para evitar gastar tokens e limites
+    if os.path.exists(METRICS_JSON_PATH):
+        try:
+            with open(METRICS_JSON_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            for s in data.get("senadores", []):
+                if str(s["id"]) == str(parl_id):
+                    detalhes = s.get("detalhes", [])
+                    if detalhes:
+                        # Mapeia boolean coerente para status e afinidade numerica se necessário (compatibilidade frontend legado)
+                        mapped_detalhes = []
+                        for d in detalhes:
+                            # Se for coerente booleano, mapeamos para as strings legadas
+                            status = "Não Relacionado"
+                            afinidade = d.get("jaccard_pre_filtro", 0.0)
+                            
+                            if "coerente" in d:
+                                if d["coerente"] is True:
+                                    status = "Coerente"
+                                    afinidade = 1.0
+                                elif d["coerente"] is False:
+                                    status = "Divergente"
+                                    afinidade = 0.0
+                            elif "status" in d:
+                                status = d["status"]
+                                afinidade = d.get("afinidade", afinidade)
+
+                            # Preserva as chaves para que o frontend não quebre independentemente do formato
+                            mapped_detalhes.append({
+                                **d,
+                                "status": status,
+                                "afinidade": afinidade,
+                                "coerente": d.get("coerente")
+                            })
+
+                        return jsonify({
+                            "status": "ok",
+                            "modelo_usado": "Cache (Batch Processing)",
+                            "score_coerencia": s.get("score_coerencia", 0.0),
+                            "total_votos_analisados": len(mapped_detalhes),
+                            "dados": mapped_detalhes
+                        })
+        except Exception as e:
+            print(f"[WARN] Erro ao ler cache no /api/analisar: {e}")
+
     try:
         # Mapeamento para identificar se o parlamentar é deputado ou senador
         DEPUTADOS_IDS = {
@@ -668,83 +889,103 @@ def analisar_parlamentar():
             melhor = max(discursos, key=lambda d: similaridade_jaccard(d, v["ementa"]))
             votos_com_disc.append({**v, "discurso": melhor})
 
-        # Análise
-        resultados = []
+        # ── Análise via LLM ────────────────────────────────────────
+        analises_raw = []
         modelo_usado = ""
-        
-        # 1. Tentar Groq
-        if GROQ_API_KEY:
+
+        # 1. Tentar Gemini
+        if GEMINI_API_KEY:
             try:
-                analises = analisar_coerencia_groq(votos_com_disc)
+                analises_raw = analisar_coerencia_gemini(votos_com_disc)
+                modelo_usado = "Gemini (Google AI)"
+            except Exception as e:
+                print(f"[WARN] Gemini falhou: {e}")
+
+        # 2. Tentar Groq (Fallback)
+        if not analises_raw and GROQ_API_KEY:
+            try:
+                analises_raw = analisar_coerencia_groq(votos_com_disc)
                 modelo_usado = "Groq (Llama-3)"
-                for i, a in enumerate(analises):
-                    idx = a.get("idx", i)
-                    v = votos_com_disc[idx] if idx < len(votos_com_disc) else votos_com_disc[i]
-                    resultados.append(
-                        {
-                            "data": v["data"],
-                            "ementa": v["ementa"],
-                            "voto": v["voto"],
-                            "afinidade": float(a.get("afinidade", 0.0)),
-                            "status": a.get("status", "Não Relacionado"),
-                            "justificativa": a.get("justificativa", ""),
-                            "discurso": v.get("discurso", ""),
-                        }
-                    )
             except Exception as e:
                 print(f"[WARN] Groq falhou: {e}")
 
-        # 2. Tentar OpenRouter como Fallback
-        if not resultados and OPENROUTER_API_KEY:
+        # 3. Tentar OpenRouter como Fallback Final
+        if not analises_raw and OPENROUTER_API_KEY:
             try:
-                analises = analisar_coerencia_openrouter(votos_com_disc)
+                analises_raw = analisar_coerencia_openrouter(votos_com_disc)
                 modelo_usado = "OpenRouter"
-                for i, a in enumerate(analises):
-                    idx = a.get("idx", i)
-                    v = votos_com_disc[idx] if idx < len(votos_com_disc) else votos_com_disc[i]
-                    resultados.append(
-                        {
-                            "data": v["data"],
-                            "ementa": v["ementa"],
-                            "voto": v["voto"],
-                            "afinidade": float(a.get("afinidade", 0.0)),
-                            "status": a.get("status", "Não Relacionado"),
-                            "justificativa": a.get("justificativa", ""),
-                            "discurso": v.get("discurso", ""),
-                        }
-                    )
             except Exception as e:
                 print(f"[WARN] OpenRouter falhou: {e}")
 
-        # 3. Fallback Jaccard
-        if not resultados:
-            modelo_usado = "Jaccard (fallback)"
+        # ── Cálculo do score booleano ───────────────────────────────
+        # Votos que não devem entrar no denominador
+        VOTOS_INVALIDOS = {
+            "abstenção", "abstencao", "ausente", "obstrução", "obstrucao",
+            "art. 17", "art.17", "n/a", "none", "null", "não compareceu"
+        }
+
+        resultados = []
+        votos_coerentes = 0
+        total_validos = 0
+
+        if analises_raw:
+            # Monta dict por idx para lookup rápido
+            analises_map = {a.get("idx", i): a for i, a in enumerate(analises_raw)}
+
+            for i, v in enumerate(votos_com_disc):
+                a = analises_map.get(i, {})
+                coerente = a.get("coerente")   # True | False | None
+                voto_str = str(v.get("voto", "")).strip().lower()
+
+                # RF27: Abstenções e ausências não entram no denominador
+                if voto_str in VOTOS_INVALIDOS:
+                    coerente = None
+
+                if coerente is True:
+                    votos_coerentes += 1
+                    total_validos += 1
+                elif coerente is False:
+                    total_validos += 1
+
+                resultados.append({
+                    "data": v["data"],
+                    "ementa": v["ementa"],
+                    "voto": v["voto"],
+                    "postura_extraida": a.get("postura_extraida", "Neutro"),
+                    "coerente": coerente,
+                    "justificativa": a.get("justificativa", ""),
+                    "discurso": v.get("discurso", ""),
+                })
+        else:
+            # Fallback Jaccard: não temos avaliação real — marca coerente=null
+            modelo_usado = "Jaccard (fallback — sem avaliação de coerência)"
             for v in votos_com_disc:
-                af = similaridade_jaccard(v.get("discurso", ""), v["ementa"])
-                status = "Coerente" if af >= 0.6 else "Parcialmente Alinhado" if af >= 0.4 else "Não Relacionado"
-                resultados.append(
-                    {
-                        "data": v["data"],
-                        "ementa": v["ementa"],
-                        "voto": v["voto"],
-                        "afinidade": round(af, 4),
-                        "status": status,
-                        "justificativa": "",
-                        "discurso": v.get("discurso", ""),
-                    }
-                )
+                resultados.append({
+                    "data": v["data"],
+                    "ementa": v["ementa"],
+                    "voto": v["voto"],
+                    "postura_extraida": "Neutro",
+                    "coerente": None,
+                    "justificativa": "LLM indisponível. Sem avaliação de coerência.",
+                    "discurso": v.get("discurso", ""),
+                })
 
-        resultados.sort(key=lambda x: x["afinidade"], reverse=True)
-        top10 = resultados[:10]
+        # RF15: score só é calculado com mínimo de 3 pares válidos
+        VOLUME_MINIMO = 3
+        if total_validos >= VOLUME_MINIMO:
+            score_coerencia = round((votos_coerentes / total_validos) * 100, 1)
+        else:
+            score_coerencia = None  # dados insuficientes
 
-        return jsonify(
-            {
-                "status": "ok",
-                "modelo_usado": modelo_usado,
-                "total_votos_analisados": len(resultados),
-                "dados": top10,
-            }
-        )
+        return jsonify({
+            "status": "ok",
+            "modelo_usado": modelo_usado,
+            "score_coerencia": score_coerencia,
+            "total_validos": total_validos,
+            "votos_coerentes": votos_coerentes,
+            "total_votos_analisados": len(resultados),
+            "dados": resultados,
+        })
 
     except Exception as e:
         traceback.print_exc()
@@ -765,4 +1006,5 @@ def serve_metrics_json():
 
 if __name__ == "__main__":
     print("[backend] Iniciando na porta 5001...")
-    app.run(debug=True, port=5001)
+    app.run(debug=True, host="0.0.0.0", port=5001)
+

@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+// Em produção: VITE_API_URL deve apontar para o Render (ex: https://dito-e-feito-backend.onrender.com)
+// Em desenvolvimento local: cai para localhost:5001 automaticamente
+const BASE_URL = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : 'http://localhost:5001/api';
+
 export const api = axios.create({
-  baseURL: 'http://localhost:5001/api', // Servidor Flask roda na porta 5001
+  baseURL: BASE_URL,
   
   // Timeout de 90 segundos (90000ms). O BERT pode ser lento sem GPU.
   timeout: 90000, 
@@ -56,6 +62,16 @@ export const getDashboardMetrics = async () => {
     return response.data;
   } catch (error) {
     console.error("Erro ao obter métricas do dashboard:", error);
+    return null;
+  }
+};
+
+export const getMetricsJson = async () => {
+  try {
+    const response = await api.get('/dashboard-metrics');
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar JSON de métricas do banco:', error);
     return null;
   }
 };

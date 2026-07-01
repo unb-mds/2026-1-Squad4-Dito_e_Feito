@@ -258,5 +258,5 @@ if __name__ == "__main__":
     with open(caminho_arquivo, "w", encoding="utf-8") as f:
         json.dump(resultado_json, f, ensure_ascii=False, indent=2)
         
-    print(f"\n✔ Pipeline finalizado com sucesso!")
+    print(f"\n[OK] Pipeline finalizado com sucesso!")
     print(f"💾 O arquivo compactado foi gravado localmente em: {os.path.abspath(caminho_arquivo)}")

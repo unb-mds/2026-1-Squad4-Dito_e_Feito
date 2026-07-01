@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { politicosMock } from '../utils/mockData';
 
 export function Perfil() {
   const { id } = useParams();
   const navigate = useNavigate();
   
-  const politico = useMemo(() => politicosMock.find(p => p.id === parseInt(id)), [id]);
+  // Perfil.jsx é uma página legada. A navegação real usa PerfilPolitico.jsx.
+  // Este componente não possui mais dados mockados; sempre exibirá "não encontrado".
+  const politico = null;
 
   if (!politico) {
     return (

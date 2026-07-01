@@ -3,24 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import { GraficoTendencias } from '../components/GraficoTendencias';
 import { GraficoPartidos } from '../components/GraficoPartidos';
 import { GraficoBarras } from '../components/GraficoBarras';
-import { politicosMock, alertas } from '../utils/mockData';
+import { MapaBrasil } from '../components/MapaBrasil';
 import { getDashboardMetrics, getSenadores, getDeputados } from '../services/api';
+import { formatTipoParlamentar, getPartidoLogo, getEstadoFlag } from '../utils/formatters';
+import { obterLinhaDoTempoCoerencia } from '../utils/timeline';
 
 export function VisaoGeral() {
   const navigate = useNavigate();
-  const top4Mock = [...politicosMock].sort((a,b) => b.coerencia - a.coerencia).slice(0, 4);
-  const [top4, setTop4] = useState(top4Mock);
+  const [top4, setTop4] = useState([]);
+  const [topPartidos, setTopPartidos] = useState([]);
+  const [topEstados, setTopEstados] = useState([]);
 
   const [metrics, setMetrics] = useState({
-    totalAnalisados: '2.847',
-    mediaGlobalCoerencia: '73.2%',
-    incoerenciasDetectadas: '142',
-    partidoMaisCoerente: { partido: 'PSB', media_coerencia: 77.9 }
+    totalAnalisados: '--',
+    mediaGlobalCoerencia: '--%',
+    incoerenciasDetectadas: '--',
+    partidoMaisCoerente: { partido: '--', media_coerencia: 0 }
   });
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [allPoliticos, setAllPoliticos] = useState(politicosMock);
+  const [allPoliticos, setAllPoliticos] = useState([]);
+  const [dataByState, setDataByState] = useState({});
+  const [timelineData, setTimelineData] = useState(null);
 
   useEffect(() => {
     const fetchMetrics = async () => {
@@ -28,10 +33,10 @@ export function VisaoGeral() {
         let analyzedMap = {};
         let analyzedList = [];
         let totalDivergentes = 0;
-        let totalAnalisados = '8';
-        let mediaGlobalCoerencia = '69.8%';
-        let partidoMaisCoerente = { partido: 'PSB', media_coerencia: 77.9 };
-        let top4List = top4Mock;
+        let totalAnalisados = '--';
+        let mediaGlobalCoerencia = '--%';
+        let partidoMaisCoerente = { partido: '--', media_coerencia: 0 };
+        let top4List = [];
 
         // 1. Carrega métricas consolidadas
         const data = await getDashboardMetrics();
@@ -42,8 +47,9 @@ export function VisaoGeral() {
 
           if (data.senadores) {
             data.senadores.forEach(s => {
-              if (s.contagem_status && s.contagem_status.Divergente) {
-                totalDivergentes += s.contagem_status.Divergente;
+              if (s.contagem_status) {
+                if (s.contagem_status.Incoerente) totalDivergentes += s.contagem_status.Incoerente;
+                if (s.contagem_status.Divergente) totalDivergentes += s.contagem_status.Divergente; // fallback pra dados legados
               }
               analyzedMap[s.id] = Math.round(s.score_coerencia || 0);
               analyzedList.push({
@@ -53,15 +59,90 @@ export function VisaoGeral() {
                 uf: s.uf,
                 foto: s.foto || '',
                 coerencia: Math.round(s.score_coerencia || 0),
-                tipo: 'Senador',
-                analisado: true
+                tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar),
+                analisado: true,
+                detalhes: s.detalhes || []
               });
             });
           }
+
+          if (data.deputados) {
+            data.deputados.forEach(d => {
+              if (d.contagem_status && d.contagem_status.Divergente) {
+                totalDivergentes += d.contagem_status.Divergente;
+              }
+              analyzedMap[d.id] = Math.round(d.score_coerencia || 0);
+              analyzedList.push({
+                id: d.id,
+                nome: d.nome,
+                partido: d.partido,
+                uf: d.uf,
+                foto: d.foto || '',
+                coerencia: Math.round(d.score_coerencia || 0),
+                tipo: formatTipoParlamentar(d.tipo || d.tipo_parlamentar),
+                analisado: true,
+                detalhes: d.detalhes || []
+              });
+            });
+          }
+
+          if (analyzedList.length === 0 && data.senadores) {
+            analyzedList = data.senadores.map(s => ({
+              id: s.id, nome: s.nome, partido: s.partido, uf: s.uf,
+              foto: s.foto || '', coerencia: Math.round(s.score_coerencia || 0),
+              tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar), analisado: true,
+              detalhes: s.detalhes || []
+            }));
+          }
+
           if (analyzedList.length > 0) {
             top4List = [...analyzedList].sort((a, b) => b.coerencia - a.coerencia).slice(0, 4);
           }
         }
+
+        const timeline = obterLinhaDoTempoCoerencia(analyzedList);
+        setTimelineData(timeline);
+
+        // Group analyzed list by state to pass to Map
+        const ufMap = {};
+        analyzedList.forEach(p => {
+          if (p.uf) {
+            if (!ufMap[p.uf]) ufMap[p.uf] = { soma: 0, count: 0 };
+            if (p.analisado !== false) {
+              ufMap[p.uf].soma += p.coerencia;
+              ufMap[p.uf].count += 1;
+            }
+          }
+        });
+
+        const finalMapData = {};
+        const topEstadosList = [];
+        for (const [uf, data] of Object.entries(ufMap)) {
+          if (data.count > 0) {
+            const coerencia = Math.round(data.soma / data.count);
+            finalMapData[uf] = { coerencia, total: data.count };
+            topEstadosList.push({ uf, coerencia, total: data.count });
+          }
+        }
+        setDataByState(finalMapData);
+        setTopEstados(topEstadosList.sort((a, b) => b.coerencia - a.coerencia).slice(0, 4));
+
+        const partidoMap = {};
+        analyzedList.forEach(p => {
+          if (p.partido) {
+            if (!partidoMap[p.partido]) partidoMap[p.partido] = { soma: 0, count: 0 };
+            if (p.analisado !== false) {
+              partidoMap[p.partido].soma += p.coerencia;
+              partidoMap[p.partido].count += 1;
+            }
+          }
+        });
+        const topPartidosList = Object.entries(partidoMap)
+          .filter(([_, d]) => d.count > 0)
+          .map(([partido, d]) => ({ partido, coerencia: Math.round(d.soma / d.count), total: d.count }))
+          .sort((a, b) => b.coerencia - a.coerencia)
+          .slice(0, 4);
+        setTopPartidos(topPartidosList);
 
         setMetrics({
           totalAnalisados,
@@ -143,32 +224,38 @@ export function VisaoGeral() {
 
   return (
     <div className="flex flex-col flex-1 animate-[fadeIn_0.2s_ease]">
-      <div className="p-[16px_32px] border-b border-border shrink-0">
+      <div className="p-4 md:p-[16px_32px] border-b border-border shrink-0">
         <div className="relative max-w-[600px] mx-auto">
-          <svg className="absolute left-[15px] top-1/2 -translate-y-1/2 text-text3 pointer-events-none" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input 
-            className="w-full bg-surface2 border border-border rounded-full p-[10px_18px_10px_42px] text-[14px] text-text-main outline-none focus:border-teal transition-colors" 
-            type="text" 
-            placeholder="Buscar político por nome ou partido..." 
+          <svg className="absolute left-[15px] top-1/2 -translate-y-1/2 text-text3 pointer-events-none" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+          <input
+            className="w-full bg-surface2 border border-border rounded-full p-[10px_18px_10px_42px] text-[14px] text-text-main outline-none focus:border-teal transition-colors"
+            type="text"
+            placeholder="Buscar político por nome ou partido..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           {searchResults.length > 0 && (
             <div className="absolute top-[48px] left-0 right-0 bg-surface border border-border rounded-xl shadow-2xl z-50 max-h-[300px] overflow-y-auto">
               {searchResults.map((p) => (
-                <div 
+                <div
                   key={p.id}
                   onClick={() => navigate(`/politicos/${p.id}`, { state: { politico: p } })}
                   className="flex items-center gap-3 p-[12px_20px] border-b border-border2 hover:bg-surface2 cursor-pointer last:border-0"
                 >
-                  <img 
-                    src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} 
-                    onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`; }}
-                    className="w-8 h-8 rounded-full object-cover border border-border" 
+                  <img
+                    src={p.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`}
+                    onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`; }}
+                    className="w-8 h-8 rounded-full object-cover border border-border shrink-0"
+                    alt={p.nome}
                   />
                   <div className="flex-1 min-w-0">
                     <div className="text-[14px] font-semibold text-text-main truncate">{p.nome}</div>
-                    <div className="text-[12px] text-teal">{p.partido} · {p.uf} · {p.tipo}</div>
+                    <div className="text-[12px] text-teal flex gap-1 items-center">
+                      <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer">{p.partido}</span>
+                      ·
+                      <span onClick={(e) => { e.stopPropagation(); navigate(`/estados/${p.uf.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer">{p.uf}</span>
+                      · {p.tipo}
+                    </div>
                   </div>
                   <div className="text-[13px] font-bold text-teal">
                     {p.analisado ? `${p.coerencia}%` : 'Não analisado'}
@@ -180,10 +267,10 @@ export function VisaoGeral() {
         </div>
       </div>
 
-      <div className="p-[28px_32px] flex-1 overflow-y-auto">
+      <div className="p-4 md:p-[28px_32px] flex-1 overflow-y-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
           <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
-            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Votos Analisados</div>
+            <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Parlamentares Analisados</div>
             <div className="text-[40px] font-bold text-text-main leading-none mb-3">{metrics.totalAnalisados}</div>
             <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded bg-green-bg text-green">↑ 12%</span>
           </div>
@@ -195,7 +282,7 @@ export function VisaoGeral() {
           <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
             <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5 flex justify-between items-center">
               Incoerências Detectadas
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
             </div>
             <div className="text-[40px] font-bold text-text-main leading-none mb-3">{metrics.incoerenciasDetectadas}</div>
           </div>
@@ -206,14 +293,21 @@ export function VisaoGeral() {
           </div>
         </div>
 
-        <div className="grid grid-cols-[1.8fr_1fr] gap-4 mb-4">
-          <div className="bg-surface border border-border rounded-xl flex flex-col">
-            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Tendências de Coerência</div></div>
-            <div className="p-5 h-[260px] w-full"><GraficoTendencias /></div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr] gap-4 mb-4">
+          <div className="bg-surface border border-border rounded-xl flex flex-col min-h-[400px]">
+            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Mapeamento de Coerência</div></div>
+            <div className="p-5 flex-1 flex items-center justify-center relative"><MapaBrasil dataByState={dataByState} /></div>
           </div>
           <div className="bg-surface border border-border rounded-xl flex flex-col">
             <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Comparação por Partido</div></div>
-            <div className="p-5 h-[260px] w-full flex items-center justify-center"><GraficoPartidos /></div>
+            <div className="p-5 h-[360px] w-full flex items-center justify-center"><GraficoPartidos /></div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 mb-4">
+          <div className="bg-surface border border-border rounded-xl flex flex-col">
+            <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Tendências de Coerência</div></div>
+            <div className="p-5 h-[260px] w-full"><GraficoTendencias data={timelineData} /></div>
           </div>
         </div>
 
@@ -222,23 +316,50 @@ export function VisaoGeral() {
           <div className="p-5 h-[240px] w-full"><GraficoBarras /></div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="bg-surface border border-border rounded-xl">
             <div className="flex justify-between items-center p-[16px_20px] border-b border-border2">
-              <div className="text-[16px] font-bold text-text-main flex items-center gap-2">
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
-                Alertas de Divergência
-              </div>
-              <span className="text-[11px] font-semibold text-red bg-red-bg border border-red/25 px-2 py-1 rounded-md">3 casos graves</span>
+              <div className="text-[16px] font-bold text-text-main">Ranking de Partidos</div>
+              <span onClick={() => navigate('/partidos')} className="text-[13px] font-medium text-teal cursor-pointer hover:underline">Ver Todos</span>
             </div>
             <div>
-              {alertas.map((a, i) => (
-                <div key={i} className="flex justify-between items-center p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
-                  <div className={`border-l-3 pl-3 ${a.grave ? 'border-teal' : 'border-red'}`}>
-                    <div className="text-[14px] font-semibold text-text-main flex items-center gap-2 mb-1">{a.nome} <span className="text-[11px] text-teal bg-teal-bg px-1.5 py-0.5 rounded">{a.partido}</span></div>
-                    <div className="text-[12px] text-text2 flex items-center gap-1.5">
-                      <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="text-red"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
-                      {a.tema} · {a.data}
+              {topPartidos.map((p, i) => (
+                <div key={i} onClick={() => navigate(`/partidos/${p.partido.toLowerCase()}`)} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+                  <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
+                  <img src={getPartidoLogo(p.partido)} alt={p.partido} className="w-9 h-9 rounded-full border border-border shrink-0 object-contain p-1 bg-white" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[14px] font-semibold text-text-main truncate">{p.partido}</div>
+                    <div className="text-[11px] text-text2 mt-0.5">{p.total} analisados</div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1.5 min-w-[70px]">
+                    <div className="text-[14px] font-bold text-text-main">{p.coerencia}%</div>
+                    <div className="h-[4px] bg-border rounded w-full overflow-hidden">
+                      <div className={`h-full rounded transition-all duration-600 ${p.coerencia >= 70 ? 'bg-green' : p.coerencia >= 50 ? 'bg-amber-500' : 'bg-red'}`} style={{ width: `${p.coerencia}%` }}></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-surface border border-border rounded-xl">
+            <div className="flex justify-between items-center p-[16px_20px] border-b border-border2">
+              <div className="text-[16px] font-bold text-text-main">Ranking de Estados</div>
+              <span onClick={() => navigate('/estados')} className="text-[13px] font-medium text-teal cursor-pointer hover:underline">Ver Todos</span>
+            </div>
+            <div>
+              {topEstados.map((e, i) => (
+                <div key={i} onClick={() => navigate(`/estados/${e.uf.toLowerCase()}`)} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
+                  <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
+                  <img src={getEstadoFlag(e.uf)} alt={e.uf} className="w-9 h-9 rounded-full border border-border shrink-0 object-cover" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[14px] font-semibold text-text-main truncate">{e.uf}</div>
+                    <div className="text-[11px] text-text2 mt-0.5">{e.total} analisados</div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1.5 min-w-[70px]">
+                    <div className="text-[14px] font-bold text-text-main">{e.coerencia}%</div>
+                    <div className="h-[4px] bg-border rounded w-full overflow-hidden">
+                      <div className={`h-full rounded transition-all duration-600 ${e.coerencia >= 70 ? 'bg-green' : e.coerencia >= 50 ? 'bg-amber-500' : 'bg-red'}`} style={{ width: `${e.coerencia}%` }}></div>
                     </div>
                   </div>
                 </div>
@@ -255,10 +376,22 @@ export function VisaoGeral() {
               {top4.map((p, i) => (
                 <div key={i} onClick={() => navigate(`/politicos/${p.id}`, { state: { politico: p } })} className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0">
                   <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
-                  <img src={p.foto || `https://ui-avatars.com/api/?name=${p.nome}&background=1c2128&color=14b8a6`} alt={p.nome} className="w-9 h-9 rounded-full border border-border shrink-0 object-cover" />
+                  <img src={p.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`} alt={p.nome} className="w-9 h-9 rounded-full border border-border shrink-0 object-cover" onError={(ev) => { ev.currentTarget.onerror = null; ev.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.nome)}&background=1c2128&color=14b8a6`; }} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-[14px] font-semibold text-text-main truncate">{p.nome}</div>
-                    <div className="text-[12px] text-teal mt-0.5">{p.partido} - {p.uf}</div>
+                    <div className="text-[14px] font-semibold text-text-main truncate flex items-center gap-2">
+                      {p.nome}
+                      <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold border shrink-0 ${p.tipo && p.tipo.toLowerCase().includes('senad')
+                          ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                          : 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+                        }`}>
+                        {p.tipo && p.tipo.toLowerCase().includes('senad') ? 'Senador' : 'Deputado'}
+                      </span>
+                    </div>
+                    <div className="text-[12px] text-teal mt-0.5 flex gap-1 items-center">
+                      <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white">{p.partido}</span>
+                      -
+                      <span onClick={(e) => { e.stopPropagation(); navigate(`/estados/${p.uf.toLowerCase()}`); }} className="hover:underline hover:text-white">{p.uf}</span>
+                    </div>
                   </div>
                   <div className="flex flex-col items-end gap-1.5 min-w-[110px]">
                     <div className="flex items-center gap-1.5">

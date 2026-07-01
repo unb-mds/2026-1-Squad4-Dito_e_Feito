@@ -1,0 +1,66 @@
+name: Integration Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  backend-tests:
+    name: Backend Tests (Pytest)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest mock
+
+      - name: Run Pytest
+        run: |
+          cd backend
+          pytest
+
+  frontend-tests:
+    name: Frontend Tests (Vitest & E2E)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run Vitest (Unit Tests)
+        run: |
+          cd frontend
+          npm run test
+
+      - name: Install Playwright Browsers
+        run: |
+          cd frontend
+          npx playwright install --with-deps
+
+      - name: Run Playwright (E2E Integration Tests)
+        run: |
+          cd frontend
+          npm run test:e2e

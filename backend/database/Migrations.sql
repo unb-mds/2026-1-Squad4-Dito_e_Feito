@@ -115,4 +115,111 @@ BEGIN
     END IF;
 END;
 $$;
-ORDER BY p.sigla_partido, p.sigla_uf;
+
+-- ───────────────────────────────────────────
+-- MIGRATION 004 - Views e índices adicionais
+-- Data: 2026-05
+-- ───────────────────────────────────────────
+
+-- Índices de performance no score_coerencia
+CREATE INDEX IF NOT EXISTS idx_score_calculado_em 
+ON score_coerencia(calculado_em);
+
+CREATE INDEX IF NOT EXISTS idx_score_modelo 
+ON score_coerencia(modelo_usado);
+
+-- View de evolução temporal (RF08)
+CREATE OR REPLACE VIEW evolucao_coerencia AS
+SELECT
+    p.nome_urna,
+    p.sigla_partido,
+    DATE_TRUNC('month', sc.calculado_em) AS mes,
+    ROUND(AVG(sc.score)::numeric, 2) AS media_mensal,
+    COUNT(sc.id) AS total_analises
+FROM score_coerencia sc
+JOIN parlamentar p ON p.id = sc.parlamentar_id
+GROUP BY p.nome_urna, p.sigla_partido, mes
+ORDER BY p.nome_urna, mes;
+
+-- View de comparação entre parlamentares (RF10 e RF13)
+CREATE OR REPLACE VIEW comparacao_parlamentares AS
+SELECT
+    p.id_externo,
+    p.nome_urna,
+    p.sigla_partido,
+    p.sigla_uf,
+    p.tipo_parlamentar,
+    ROUND(AVG(sc.score)::numeric, 2) AS media_score,
+    MAX(sc.score) AS maior_score,
+    MIN(sc.score) AS menor_score,
+    COUNT(sc.id) AS total_analises
+FROM parlamentar p
+JOIN score_coerencia sc ON sc.parlamentar_id = p.id
+GROUP BY 
+    p.id_externo, 
+    p.nome_urna, 
+    p.sigla_partido, 
+    p.sigla_uf, 
+    p.tipo_parlamentar;
+
+-- View de cobertura do banco
+CREATE OR REPLACE VIEW cobertura_banco AS
+SELECT
+    tipo_parlamentar,
+    COUNT(DISTINCT p.id) AS total,
+    COUNT(DISTINCT sc.parlamentar_id) AS com_score,
+    ROUND(COUNT(DISTINCT sc.parlamentar_id)::numeric / 
+          COUNT(DISTINCT p.id) * 100, 1) AS cobertura_pct
+FROM parlamentar p
+LEFT JOIN score_coerencia sc ON sc.parlamentar_id = p.id
+GROUP BY tipo_parlamentar;
+
+-- ───────────────────────────────────────────
+-- MIGRATION 005 - Views para endpoints do backend
+-- Data: 2026-06
+-- ───────────────────────────────────────────
+
+-- View de votos por parlamentar (endpoint /api/politico/<id>)
+CREATE OR REPLACE VIEW votos_por_parlamentar AS
+SELECT
+    p.id_externo,
+    p.nome_urna,
+    p.sigla_partido,
+    sc.score,
+    sc.status_coerencia,
+    sc.justificativa,
+    sc.modelo_usado,
+    sc.calculado_em
+FROM score_coerencia sc
+JOIN parlamentar p ON p.id = sc.parlamentar_id
+ORDER BY sc.calculado_em DESC;
+
+-- View de alertas de divergência (RF11)
+CREATE OR REPLACE VIEW alertas_divergencia AS
+SELECT
+    p.id_externo,
+    p.nome_urna,
+    p.sigla_partido,
+    p.sigla_uf,
+    sc.score,
+    sc.justificativa,
+    sc.calculado_em
+FROM score_coerencia sc
+JOIN parlamentar p ON p.id = sc.parlamentar_id
+WHERE sc.status_coerencia = 'Divergente'
+   OR sc.score < 40
+ORDER BY sc.score ASC;
+
+-- View de média por partido (dashboard e gráficos)
+CREATE OR REPLACE VIEW media_por_partido AS
+SELECT
+    p.sigla_partido,
+    p.tipo_parlamentar,
+    COUNT(DISTINCT p.id) AS total_parlamentares,
+    ROUND(AVG(sc.score)::numeric, 2) AS media_score,
+    MAX(sc.score) AS maior_score,
+    MIN(sc.score) AS menor_score
+FROM parlamentar p
+JOIN score_coerencia sc ON sc.parlamentar_id = p.id
+GROUP BY p.sigla_partido, p.tipo_parlamentar
+ORDER BY media_score DESC;

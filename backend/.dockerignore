@@ -1,0 +1,12 @@
+venv/
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.db
+# Exclui apenas o arquivo de configuração local (checkpoint), não os dados de fallback
+config_data.json
+.git
+.gitignore
+tests/
