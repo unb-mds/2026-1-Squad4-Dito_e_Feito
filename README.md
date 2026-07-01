@@ -13,6 +13,11 @@ Auditoria e Monitoramento de Coerência Parlamentar por Inteligência Artificial
 [![OpenRouter](https://img.shields.io/badge/OpenRouter-7C3AED?style=for-the-badge)](https://openrouter.ai/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
 
+### 🔗 Links Importantes do Projeto
+- **🚀 Deploy da Aplicação (Exemplo de Perfil):** [https://frontend-mu-lyart-68.vercel.app/politicos/220603](https://frontend-mu-lyart-68.vercel.app/politicos/220603)
+- **📊 Analytics Dashboard:** [https://unb-mds.github.io/2026-1-Squad4-Dito_e_Feito/analytics/](https://unb-mds.github.io/2026-1-Squad4-Dito_e_Feito/analytics/)
+- **📖 Documentação Completa (MKDocs):** [https://unb-mds.github.io/2026-1-Squad4-Dito_e_Feito/](https://unb-mds.github.io/2026-1-Squad4-Dito_e_Feito/)
+
 ---
 
 ## Visão Geral e Arquitetura

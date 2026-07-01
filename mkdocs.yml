@@ -79,6 +79,7 @@ nav:
   - Requisitos:
       - Levantamento Inicial: requisitos/levantamento_inicial.md
       - Requisitos Gerais Oficiais: requisitos/requisitos.md
+      - Cobertura de Testes (Release 2): requisitos/cobertura_testes.md
 
   - Frontend:
       - Visão Geral: frontend/index.md
