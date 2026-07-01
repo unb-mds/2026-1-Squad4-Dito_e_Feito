@@ -790,15 +790,107 @@ def obter_politico(id_externo):
 @app.route("/api/analisar", methods=["POST"])
 def analisar_parlamentar():
     """
-    Analisa a coerência de um senador em tempo real.
-    Body JSON: { "id": <id_senador> }
+    Analisa a coerência de um parlamentar, priorizando o Banco de Dados (Cache Rápido).
+    Body JSON: { "id": <id_externo> }
     """
     body = request.get_json()
     parl_id = body.get("id")
     if not parl_id:
         return jsonify({"status": "erro", "mensagem": "ID não informado"}), 400
 
-    # 1. Tentar ler do cache do processamento em lotes para evitar gastar tokens e limites
+    # 1. Tentar ler do Banco de Dados (Cache Definitivo - Supabase)
+    if DATABASE_URL:
+        try:
+            import psycopg2
+            conn = psycopg2.connect(DATABASE_URL)
+            cur = conn.cursor()
+            cur.execute(
+                """
+                SELECT 
+                    v.ementa,
+                    sc.postura_extraida,
+                    sc.voto_registrado,
+                    sc.coerente,
+                    sc.status_coerencia,
+                    sc.justificativa,
+                    sc.score,
+                    d.sumario,
+                    d.transcricao,
+                    sc.modelo_usado
+                FROM score_coerencia sc
+                JOIN parlamentar p ON sc.parlamentar_id = p.id
+                LEFT JOIN votacao v ON sc.votacao_id = v.id
+                LEFT JOIN discurso d ON sc.discurso_id = d.id
+                WHERE p.id_externo = %s
+                ORDER BY sc.calculado_em DESC
+                LIMIT 20
+                """,
+                (str(parl_id),)
+            )
+            rows = cur.fetchall()
+            cur.close()
+            conn.close()
+
+            if rows:
+                mapped_detalhes = []
+                soma_score = 0.0
+                total_validos = 0
+                modelo_usado = "Desconhecido"
+
+                for r in rows:
+                    ementa = r[0] or "Sem ementa"
+                    postura = r[1]
+                    voto_reg = r[2]
+                    coerente = r[3]
+                    status = r[4] or "Não Relacionado"
+                    justificativa = r[5] or ""
+                    score = float(r[6]) if r[6] is not None else 0.0
+                    sumario = r[7] or ""
+                    transcricao = r[8] or ""
+                    if r[9]:
+                        modelo_usado = r[9]
+
+                    # Adaptação para o Frontend: afinidade e status legado
+                    afinidade = 0.0
+                    if status == "Coerente" or coerente is True:
+                        afinidade = 1.0
+                        status = "Coerente"
+                    elif status == "Incoerente" or status == "Divergente" or coerente is False:
+                        afinidade = 0.0
+                        status = "Divergente"
+
+                    discurso_texto = transcricao if transcricao else sumario
+                    
+                    mapped_detalhes.append({
+                        "ementa": ementa,
+                        "voto_oficial": voto_reg,
+                        "discurso": discurso_texto[:500] if discurso_texto else "",
+                        "postura_extraida": postura,
+                        "voto_registrado": voto_reg,
+                        "justificativa": justificativa,
+                        "status": status,
+                        "afinidade": afinidade,
+                        "coerente": coerente
+                    })
+                    
+                    if coerente is not None:
+                        total_validos += 1
+                        if coerente is True:
+                            soma_score += 100.0
+
+                score_coerencia = round(soma_score / total_validos, 2) if total_validos > 0 else 0.0
+
+                return jsonify({
+                    "status": "ok",
+                    "modelo_usado": f"Cache SQL ({modelo_usado})",
+                    "score_coerencia": score_coerencia,
+                    "total_votos_analisados": len(mapped_detalhes),
+                    "dados": mapped_detalhes
+                })
+        except Exception as e:
+            print(f"[WARN] Erro ao buscar cache do Supabase para o ID {parl_id}: {e}")
+
+    # 2. Tentar ler do cache de arquivo local (Falllback caso BD falhe)
     if os.path.exists(METRICS_JSON_PATH):
         try:
             with open(METRICS_JSON_PATH, "r", encoding="utf-8") as f:
