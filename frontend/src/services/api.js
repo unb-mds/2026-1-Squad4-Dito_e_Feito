@@ -67,16 +67,11 @@ export const getDashboardMetrics = async () => {
 };
 
 export const getMetricsJson = async () => {
-  const metricsUrl = import.meta.env.VITE_API_URL
-    ? `${import.meta.env.VITE_API_URL}/dashboard_metrics.json`
-    : 'http://localhost:5001/dashboard_metrics.json';
   try {
-    const response = await axios.get(metricsUrl, {
-      timeout: 30000,
-    });
+    const response = await api.get('/dashboard-metrics');
     return response.data;
   } catch (error) {
-    console.error('Erro ao buscar JSON de métricas:', error);
+    console.error('Erro ao buscar JSON de métricas do banco:', error);
     return null;
   }
 };
