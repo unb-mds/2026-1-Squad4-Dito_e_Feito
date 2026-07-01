@@ -17,19 +17,25 @@ export function Comparacao() {
         const data = await getDashboardMetrics();
         if (data) {
           setMetricsData(data);
+          let allPoliticos = [];
+          const mapPolitico = (p, defaultTipo) => ({
+            id: p.id,
+            nome: p.nome,
+            partido: p.partido,
+            uf: p.uf,
+            foto: p.foto || '',
+            coerencia: Math.round(p.score_coerencia || 0),
+            tipo: formatTipoParlamentar(p.tipo || p.tipo_parlamentar || defaultTipo),
+            detalhes: p.detalhes || []
+          });
+
           if (data.senadores && data.senadores.length > 0) {
-            const mapped = data.senadores.map(s => ({
-              id: s.id,
-              nome: s.nome,
-              partido: s.partido,
-              uf: s.uf,
-              foto: s.foto || '',
-              coerencia: Math.round(s.score_coerencia || 0),
-              tipo: formatTipoParlamentar(s.tipo || s.tipo_parlamentar),
-              detalhes: s.detalhes || []
-            }));
-            setPoliticosList(mapped);
+            allPoliticos = [...allPoliticos, ...data.senadores.map(s => mapPolitico(s, 'Senador'))];
           }
+          if (data.deputados && data.deputados.length > 0) {
+            allPoliticos = [...allPoliticos, ...data.deputados.map(d => mapPolitico(d, 'Deputado'))];
+          }
+          setPoliticosList(allPoliticos);
         }
       } catch (err) {
         console.error("Erro ao carregar políticos para comparação:", err);

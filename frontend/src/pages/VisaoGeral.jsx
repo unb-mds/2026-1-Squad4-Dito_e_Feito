@@ -300,13 +300,21 @@ export function VisaoGeral() {
           </div>
           <div className="bg-surface border border-border rounded-xl flex flex-col">
             <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Comparação por Partido</div></div>
-            <div className="p-5 h-[360px] w-full flex items-center justify-center"><GraficoPartidos /></div>
+            <div className="p-5 h-[360px] w-full flex items-center justify-center">
+              <GraficoPartidos 
+                data={topPartidos.map(p => ({
+                  name: p.partido, 
+                  value: p.total, 
+                  color: getPartidoLogo(p.partido) ? (p.coerencia >= 70 ? '#2ea043' : p.coerencia >= 50 ? '#d29922' : '#f85149') : '#8b949e' 
+                }))} 
+              />
+            </div>
           </div>
         </div>
 
         <div className="bg-surface border border-border rounded-xl mb-4 flex flex-col">
           <div className="p-[16px_20px] border-b border-border2"><div className="text-[16px] font-bold text-text-main">Coerência Média por Partido</div></div>
-          <div className="p-5 h-[240px] w-full"><GraficoBarras /></div>
+          <div className="p-5 h-[240px] w-full"><GraficoBarras data={topPartidos} /></div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">

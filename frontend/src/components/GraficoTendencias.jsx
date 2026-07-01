@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 const defaultData = [
   { name: 'Jan', value: 68 }, { name: 'Fev', value: 71 }, { name: 'Mar', value: 69 },
@@ -23,7 +23,8 @@ export function GraficoTendencias({ data }) {
             contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d', borderRadius: '6px', color: '#e6edf3' }}
             itemStyle={{ color: '#14b8a6', fontWeight: 'bold' }}
           />
-          <Line type="monotone" dataKey="value" name="Coerência" stroke="#14b8a6" strokeWidth={2} dot={{ r: 4, fill: '#14b8a6' }} activeDot={{ r: 6 }} connectNulls />
+          <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '12px', color: '#8b949e' }} />
+          <Line type="monotone" dataKey="value" name="Coerência (%)" stroke="#14b8a6" strokeWidth={2} dot={{ r: 4, fill: '#14b8a6' }} activeDot={{ r: 6 }} connectNulls />
         </LineChart>
       </ResponsiveContainer>
     </div>

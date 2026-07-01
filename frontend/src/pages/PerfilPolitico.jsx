@@ -4,6 +4,8 @@ import { ArrowLeft, Users, AlertTriangle, CheckCircle, FileQuestion } from 'luci
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, LineChart, Line, BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { analisarParlamentar, getDashboardMetrics, getPoliticoById } from '../services/api';
 import { SkeletonPerfil } from '../components/Skeleton';
+import { getEstadoFlag } from '../utils/formatters';
+import { parseDateRobust } from '../utils/timeline';
 
 export function PerfilPolitico() {
   const { id } = useParams();
@@ -42,14 +44,14 @@ export function PerfilPolitico() {
   const gerarHistorico = (dadosApi) => {
     const sortedVotes = [...dadosApi]
       .filter(v => v.coerente !== null && v.coerente !== undefined)
-      .sort((a, b) => new Date(a.data) - new Date(b.data));
+      .sort((a, b) => parseDateRobust(a.data) - parseDateRobust(b.data));
 
     const mesesAbreviados = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
     const mesesMap = {};
 
     sortedVotes.forEach(v => {
       if (!v.data || v.data === 'N/A') return;
-      const dataObj = new Date(v.data);
+      const dataObj = parseDateRobust(v.data);
       if (isNaN(dataObj)) return;
       const chave = `${dataObj.getFullYear()}-${String(dataObj.getMonth() + 1).padStart(2, '0')}`;
       if (!mesesMap[chave]) {
@@ -210,7 +212,14 @@ export function PerfilPolitico() {
             <p className="text-texto-secundario mt-1 uppercase tracking-wider flex items-center justify-center sm:justify-start gap-2">
               <span onClick={() => navigate(`/partidos/${dadosPolitico.partido.toLowerCase()}`)} className="hover:text-white cursor-pointer hover:underline">{dadosPolitico.partido}</span>
               •
-              <span onClick={() => navigate(`/estados/${dadosPolitico.uf.toLowerCase()}`)} className="hover:text-white cursor-pointer hover:underline">{dadosPolitico.uf}</span>
+              <div onClick={() => navigate(`/estados/${dadosPolitico.uf.toLowerCase()}`)} className="flex items-center gap-1.5 hover:text-white cursor-pointer hover:underline">
+                <img 
+                  src={getEstadoFlag(dadosPolitico.uf)} 
+                  alt={dadosPolitico.uf}
+                  className="w-4 h-4 rounded-full object-cover"
+                />
+                <span>{dadosPolitico.uf}</span>
+              </div>
             </p>
           </div>
         </div>
