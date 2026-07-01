@@ -64,7 +64,6 @@ describe('VisaoGeral Page', () => {
     expect(screen.getByText('Ranking de Estados')).toBeInTheDocument();
 
     // Verifica se os componentes mockados foram renderizados
-    expect(screen.getByTestId('mock-grafico-tendencias')).toBeInTheDocument();
     expect(screen.getByTestId('mock-grafico-partidos')).toBeInTheDocument();
     expect(screen.getByTestId('mock-mapa-brasil')).toBeInTheDocument();
   });

@@ -13,7 +13,7 @@ const getPartyColor = (sigla) => {
     'PSDB': '#b0bec5', 'MDB': '#4f46e5', 'PSD': '#22c55e', 'REP': '#ef4444',
     'PSB': '#d97706', 'PDT': '#0ea5e9', 'PODE': '#f59e0b', 'PSOL': '#f43f5e'
   };
-  return colors[sigla] || `#${Math.floor(Math.random()*16777215).toString(16).padStart(6, '0')}`;
+  return colors[sigla] || `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
 };
 
 export function Estados() {
@@ -69,7 +69,7 @@ export function Estados() {
           getSenadores(),
           getDeputados()
         ]);
-        
+
         let politicos = [];
 
         const buildList = (lista, tipoDefault) =>
@@ -135,7 +135,7 @@ export function Estados() {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, []);
 
@@ -144,9 +144,9 @@ export function Estados() {
       return (
         <div className="bg-surface border border-border p-3 rounded-lg shadow-xl">
           <div className="flex items-center gap-2 mb-1.5">
-            <img 
-              src={getEstadoFlag(payload[0].payload.sigla)} 
-              alt={payload[0].payload.sigla} 
+            <img
+              src={getEstadoFlag(payload[0].payload.sigla)}
+              alt={payload[0].payload.sigla}
               className="w-5 h-5 rounded-full object-cover"
             />
             <p className="text-[14px] font-bold text-text-main">{payload[0].payload.nome} ({payload[0].payload.sigla})</p>
@@ -166,15 +166,15 @@ export function Estados() {
   if (uf) {
     const selectedUf = uf.toUpperCase();
     const estado = dataByUf.find(e => e.sigla === selectedUf);
-    
+
     if (!estado) return <div className="p-8 text-text-main">Estado não encontrado.</div>;
 
     const topPoliticos = [...estado.politicos]
       .filter(p => p.analisado)
       .sort((a, b) => b.coerencia - a.coerencia);
-      
+
     const timelineData = obterLinhaDoTempoCoerencia(estado.politicos);
-      
+
     const partidoMap = {};
     topPoliticos.forEach(p => {
       if (p.partido) {
@@ -183,11 +183,11 @@ export function Estados() {
         partidoMap[p.partido].count += 1;
       }
     });
-    
+
     let mostCoherentParty = null;
     let maxPartyCoherence = -1;
     const chartPartidosData = [];
-    
+
     for (const [sigla, data] of Object.entries(partidoMap)) {
       const coerencia = Math.round(data.soma / data.count);
       if (coerencia > maxPartyCoherence) {
@@ -202,7 +202,7 @@ export function Estados() {
     }
 
     chartPartidosData.sort((a, b) => b.value - a.value);
-    
+
     const mostCoherentPolitician = topPoliticos.length > 0 ? topPoliticos[0] : null;
 
     return (
@@ -213,9 +213,9 @@ export function Estados() {
             Voltar para todos os estados
           </button>
           <div className="flex items-center gap-4">
-            <img 
-              src={getEstadoFlag(estado.sigla)} 
-              alt={estado.sigla} 
+            <img
+              src={getEstadoFlag(estado.sigla)}
+              alt={estado.sigla}
               className="w-16 h-16 rounded-full border border-border object-cover"
             />
             <div>
@@ -236,7 +236,7 @@ export function Estados() {
               </div>
               {estado.countAnalisados > 0 && (
                 <div className="mt-4 h-[5px] w-full bg-surface2 rounded-full overflow-hidden">
-                  <div className="h-full bg-teal" style={{width: `${estado.media}%`}}></div>
+                  <div className="h-full bg-teal" style={{ width: `${estado.media}%` }}></div>
                 </div>
               )}
             </div>
@@ -260,9 +260,9 @@ export function Estados() {
               <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Partido Mais Coerente</div>
               <div className="text-[40px] font-bold text-text-main leading-none mb-3 flex items-center gap-2">
                 {mostCoherentParty && (
-                  <img 
-                    src={getPartidoLogo(mostCoherentParty)} 
-                    alt={mostCoherentParty} 
+                  <img
+                    src={getPartidoLogo(mostCoherentParty)}
+                    alt={mostCoherentParty}
                     referrerPolicy="no-referrer"
                     className="w-10 h-10 object-contain"
                     onError={(e) => {
@@ -281,7 +281,7 @@ export function Estados() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-4 mb-4">
+          <div className="grid grid-cols-1 gap-4 mb-4">
             <div className="bg-surface border border-border rounded-xl flex flex-col">
               <div className="p-[16px_20px] border-b border-border2">
                 <div className="text-[16px] font-bold text-text-main">Distribuição Partidária</div>
@@ -292,14 +292,6 @@ export function Estados() {
                 ) : (
                   <div className="text-[14px] text-text2 italic">Sem dados analisados</div>
                 )}
-              </div>
-            </div>
-            <div className="bg-surface border border-border rounded-xl flex flex-col">
-              <div className="p-[16px_20px] border-b border-border2">
-                <div className="text-[16px] font-bold text-text-main">Evolução da Coerência ({estado.sigla})</div>
-              </div>
-              <div className="p-5 flex-1 flex items-center justify-center relative min-h-[300px]">
-                 <GraficoTendencias data={timelineData} />
               </div>
             </div>
           </div>
@@ -317,26 +309,25 @@ export function Estados() {
                     <div className="flex-1 min-w-0">
                       <div className="text-[14px] font-semibold text-text-main truncate flex items-center gap-2">
                         {p.nome}
-                        <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold border shrink-0 ${
-                          p.tipo && p.tipo.toLowerCase().includes('senad')
+                        <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold border shrink-0 ${p.tipo && p.tipo.toLowerCase().includes('senad')
                             ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
                             : 'bg-amber-500/10 text-amber-400 border-amber-500/20'
-                        }`}>
+                          }`}>
                           {p.tipo && p.tipo.toLowerCase().includes('senad') ? 'Senador' : 'Deputado'}
                         </span>
                       </div>
                       <div className="text-[12px] text-teal mt-0.5 flex gap-1.5 items-center">
-                         <img 
-                           src={getPartidoLogo(p.partido)} 
-                           alt={p.partido} 
-                           referrerPolicy="no-referrer"
-                           className="w-4 h-4 object-contain"
-                           onError={(e) => {
-                             e.target.onerror = null;
-                             e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.partido)}&background=1c2128&color=14b8a6`;
-                           }}
-                         />
-                         <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer font-medium">{p.partido}</span>
+                        <img
+                          src={getPartidoLogo(p.partido)}
+                          alt={p.partido}
+                          referrerPolicy="no-referrer"
+                          className="w-4 h-4 object-contain"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.partido)}&background=1c2128&color=14b8a6`;
+                          }}
+                        />
+                        <span onClick={(e) => { e.stopPropagation(); navigate(`/partidos/${p.partido.toLowerCase()}`); }} className="hover:underline hover:text-white cursor-pointer font-medium">{p.partido}</span>
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-1.5 min-w-[110px]">
@@ -365,11 +356,11 @@ export function Estados() {
   const totalAnalisados = dataByUf.reduce((acc, e) => acc + e.countAnalisados, 0);
   const totalSomaCoerencia = dataByUf.reduce((acc, e) => acc + (e.somaCoerencia || 0), 0);
   const mediaGeral = totalAnalisados > 0 ? Math.round(totalSomaCoerencia / totalAnalisados) : 0;
-  
+
   const estadosComDados = dataByUf.filter(e => e.countAnalisados > 0);
   let estadoMaisCoerente = null;
   let estadoMenosCoerente = null;
-  
+
   if (estadosComDados.length > 0) {
     const sorted = [...estadosComDados].sort((a, b) => b.media - a.media);
     estadoMaisCoerente = sorted[0];
@@ -394,11 +385,11 @@ export function Estados() {
             </div>
             {totalAnalisados > 0 && (
               <div className="mt-4 h-[5px] w-full bg-surface2 rounded-full overflow-hidden">
-                <div className="h-full bg-teal" style={{width: `${mediaGeral}%`}}></div>
+                <div className="h-full bg-teal" style={{ width: `${mediaGeral}%` }}></div>
               </div>
             )}
           </div>
-          
+
           <div className="bg-surface border border-border rounded-xl p-[20px_24px]">
             <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Políticos Analisados</div>
             <div className="text-[40px] font-bold text-text-main leading-none mb-3">{totalAnalisados}</div>
@@ -409,9 +400,9 @@ export function Estados() {
             <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Mais Coerente</div>
             <div className="text-[32px] font-bold text-text-main leading-none mb-3 flex items-center gap-2">
               {estadoMaisCoerente && (
-                <img 
-                  src={getEstadoFlag(estadoMaisCoerente.sigla)} 
-                  alt={estadoMaisCoerente.sigla} 
+                <img
+                  src={getEstadoFlag(estadoMaisCoerente.sigla)}
+                  alt={estadoMaisCoerente.sigla}
                   className="w-8 h-8 rounded-full object-cover"
                 />
               )}
@@ -428,9 +419,9 @@ export function Estados() {
             <div className="text-[12px] font-semibold text-teal uppercase tracking-[0.06em] mb-2.5">Menos Coerente</div>
             <div className="text-[32px] font-bold text-text-main leading-none mb-3 flex items-center gap-2">
               {estadoMenosCoerente && (
-                <img 
-                  src={getEstadoFlag(estadoMenosCoerente.sigla)} 
-                  alt={estadoMenosCoerente.sigla} 
+                <img
+                  src={getEstadoFlag(estadoMenosCoerente.sigla)}
+                  alt={estadoMenosCoerente.sigla}
                   className="w-8 h-8 rounded-full object-cover"
                 />
               )}
@@ -451,16 +442,16 @@ export function Estados() {
             </div>
             <div className="overflow-y-auto flex-1">
               {sortedAllStates.map((e, i) => (
-                <div 
-                  key={e.sigla} 
-                  onClick={() => navigate(`/estados/${e.sigla.toLowerCase()}`)} 
+                <div
+                  key={e.sigla}
+                  onClick={() => navigate(`/estados/${e.sigla.toLowerCase()}`)}
                   className="flex items-center gap-3.5 p-[14px_20px] border-b border-border2 hover:bg-surface2 transition-colors cursor-pointer last:border-0"
                 >
                   <div className="text-[14px] font-bold text-teal w-7 shrink-0">#{i + 1}</div>
-                  <img 
-                    src={getEstadoFlag(e.sigla)} 
-                    alt={e.sigla} 
-                    className="w-10 h-10 rounded-full border border-border shrink-0 object-cover" 
+                  <img
+                    src={getEstadoFlag(e.sigla)}
+                    alt={e.sigla}
+                    className="w-10 h-10 rounded-full border border-border shrink-0 object-cover"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="text-[15px] font-bold text-text-main truncate">{e.nome}</div>
