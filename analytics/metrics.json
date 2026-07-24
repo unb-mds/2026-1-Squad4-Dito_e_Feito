@@ -1,0 +1,350 @@
+{
+  "generatedAt": "2026-07-24T18:05:30.743Z",
+  "team": {
+    "weekly_velocity": "N/A"
+  },
+  "totalCommits": 100,
+  "commitsPerAuthor": {
+    "Sauhan": 15,
+    "Gustavo Rodrigues": 39,
+    "Juan Costa": 28,
+    "Gabriel Velho de Souza": 18
+  },
+  "detailedContributors": {
+    "nerylucas": {
+      "commits": 20,
+      "additions": 480,
+      "deletions": 434
+    },
+    "Sauhan": {
+      "commits": 27,
+      "additions": 22779,
+      "deletions": 3250
+    },
+    "Juan Costa": {
+      "commits": 44,
+      "additions": 14357,
+      "deletions": 2242
+    },
+    "Gabriel Velho de Souza": {
+      "commits": 63,
+      "additions": 7937,
+      "deletions": 87332
+    },
+    "Gustavo Rodrigues": {
+      "commits": 92,
+      "additions": 313328,
+      "deletions": 217473
+    }
+  },
+  "avgCommitIntervalHours": 13.463594276094277,
+  "totalIssues": 42,
+  "avgIssueCloseHours": 146.07864417989418,
+  "totalPRs": 59,
+  "recent_commits": [
+    {
+      "sha": "aa2ae88dc480995a779d44c0e41f37c9d6596912",
+      "message": "fix: correção nos gráficos (parse de data robusto, bindings de dados em VisaoGeral e adição de legendas)",
+      "author": "Sauhan",
+      "date": "2026-07-01T23:22:50Z",
+      "verified": false
+    },
+    {
+      "sha": "bd176b980a285b2f941d03b0d1f02dc170ef78ee",
+      "message": "Merge pull request #119 from unb-mds/fix/release-2-adjustments\n\nEste Pull Request reúne uma série de refinamentos visuais, remoções de gráficos específicos solicitados e atualizações cruciais na documentação da plataforma para a apresentação da **Release 2**.",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T14:44:16Z",
+      "verified": true
+    },
+    {
+      "sha": "e1e7d67c902570007850c966e355aff1f46e5346",
+      "message": "feat(backend): implementar cache via Supabase para rota /api/analisar",
+      "author": "Juan Costa",
+      "date": "2026-07-01T14:43:32Z",
+      "verified": false
+    },
+    {
+      "sha": "6961a18332f58cab1643569f23074d6d9198f273",
+      "message": "docs: update README and presentation adjustments",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T14:41:56Z",
+      "verified": false
+    },
+    {
+      "sha": "42bc3571d2c7db25e5af630d05ff3a453d68be0f",
+      "message": "fix(frontend): remove coherence evolution chart from state pages",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T14:36:21Z",
+      "verified": false
+    },
+    {
+      "sha": "a415d38cd84f7eee8afa4900d916a07f7632866c",
+      "message": "fix(frontend): remove coherence evolution chart from state pages",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T14:27:34Z",
+      "verified": false
+    },
+    {
+      "sha": "5d18606a988b090360ee74f9ba5821a90763c5f5",
+      "message": "docs: adjust slide 3 layout (screenshot on top, cards side-by-side)",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T14:12:54Z",
+      "verified": false
+    },
+    {
+      "sha": "ef7fbac0eeaa97b1913fd3f07b691f2386355bab",
+      "message": "fix(frontend): remove Tendencias de Coerencia chart from main page and test",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T14:08:55Z",
+      "verified": false
+    },
+    {
+      "sha": "c379e2f9713a41e5e957747bd3a9f0e346924a68",
+      "message": "docs: embed local dashboard mockup and offline QR code into presentation HTML",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T14:01:48Z",
+      "verified": false
+    },
+    {
+      "sha": "ef6eab1a98a8e0ab52ddb4921ae54d49c8306429",
+      "message": "Merge branch 'main' of https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito",
+      "author": "Juan Costa",
+      "date": "2026-07-01T13:44:30Z",
+      "verified": false
+    },
+    {
+      "sha": "11d32b33ac426033b8c4c6d695110ccd6892fe54",
+      "message": "docs: adicionar relatório da Sprint 09 e links na navegação",
+      "author": "Juan Costa",
+      "date": "2026-07-01T13:39:26Z",
+      "verified": false
+    },
+    {
+      "sha": "8d2545bbd97a88f9d1ae51f8252b9b417c88a881",
+      "message": "Merge pull request #118 from unb-mds/dev\n\nfeat: implementar testes unitários/integração no frontend e documentação de cobertura",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T12:59:35Z",
+      "verified": true
+    },
+    {
+      "sha": "2dbcf369dd3d0e474859b1cb5895ef088c49a20c",
+      "message": "fix(frontend): resolve test matchers error after pulling main",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T12:55:19Z",
+      "verified": false
+    },
+    {
+      "sha": "0b39466e5e31c4b6265c0ed73d2fb4e5b7faf880",
+      "message": "Merge branch 'main' of https://github.com/unb-mds/2026-1-Squad4-Dito_e_Feito into dev",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T12:53:48Z",
+      "verified": false
+    },
+    {
+      "sha": "5cc4e82a2e1fb649a2286021dd516f997da3d3a3",
+      "message": "test(frontend): implement unit and integration tests with vitest and update docs",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T12:49:35Z",
+      "verified": false
+    },
+    {
+      "sha": "ccf01ce301f90d9fa7a462134988a165564ca2dd",
+      "message": "Merge pull request #116 from unb-mds/dev\n\nRelease 2 Pronta",
+      "author": "Gabriel Velho de Souza",
+      "date": "2026-07-01T03:08:36Z",
+      "verified": true
+    },
+    {
+      "sha": "36c46b91c3d2d9b52aa13b82041a600afab95c30",
+      "message": "Merge pull request #115 from unb-mds/docs/release-2-notes\n\ndocs: adicionar notas de lançamento da Release 2 e atualizar perfis da equipe",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T02:50:52Z",
+      "verified": true
+    },
+    {
+      "sha": "afddb1f6c54bcc84dbca19c26e07b1684760c333",
+      "message": "feat: resgata o JSON com 592 politicos da branch deploy antes dela ser apagada",
+      "author": "Juan Costa",
+      "date": "2026-07-01T02:47:02Z",
+      "verified": false
+    },
+    {
+      "sha": "6dd764946367ceaa1294927e6aa4db1bd4d0b13e",
+      "message": "docs: add release 2 notes and update team profiles with enrollment numbers",
+      "author": "Gustavo Rodrigues",
+      "date": "2026-07-01T02:42:29Z",
+      "verified": false
+    },
+    {
+      "sha": "c322a76b9904907ebbf6e909d65540ad70a6ff86",
+      "message": "fix: corrige botão de download para puxar da api do backend",
+      "author": "Juan Costa",
+      "date": "2026-07-01T02:36:42Z",
+      "verified": false
+    }
+  ],
+  "temporal": {
+    "commits_by_hour": [
+      {
+        "hour": 0,
+        "commits": 6
+      },
+      {
+        "hour": 1,
+        "commits": 0
+      },
+      {
+        "hour": 2,
+        "commits": 8
+      },
+      {
+        "hour": 3,
+        "commits": 4
+      },
+      {
+        "hour": 4,
+        "commits": 4
+      },
+      {
+        "hour": 5,
+        "commits": 0
+      },
+      {
+        "hour": 6,
+        "commits": 0
+      },
+      {
+        "hour": 7,
+        "commits": 0
+      },
+      {
+        "hour": 8,
+        "commits": 0
+      },
+      {
+        "hour": 9,
+        "commits": 0
+      },
+      {
+        "hour": 10,
+        "commits": 0
+      },
+      {
+        "hour": 11,
+        "commits": 0
+      },
+      {
+        "hour": 12,
+        "commits": 5
+      },
+      {
+        "hour": 13,
+        "commits": 4
+      },
+      {
+        "hour": 14,
+        "commits": 14
+      },
+      {
+        "hour": 15,
+        "commits": 16
+      },
+      {
+        "hour": 16,
+        "commits": 18
+      },
+      {
+        "hour": 17,
+        "commits": 3
+      },
+      {
+        "hour": 18,
+        "commits": 4
+      },
+      {
+        "hour": 19,
+        "commits": 2
+      },
+      {
+        "hour": 20,
+        "commits": 2
+      },
+      {
+        "hour": 21,
+        "commits": 3
+      },
+      {
+        "hour": 22,
+        "commits": 1
+      },
+      {
+        "hour": 23,
+        "commits": 6
+      }
+    ],
+    "commits_by_day": [
+      {
+        "day": "Dom",
+        "commits": 7
+      },
+      {
+        "day": "Seg",
+        "commits": 9
+      },
+      {
+        "day": "Ter",
+        "commits": 20
+      },
+      {
+        "day": "Qua",
+        "commits": 36
+      },
+      {
+        "day": "Qui",
+        "commits": 10
+      },
+      {
+        "day": "Sex",
+        "commits": 6
+      },
+      {
+        "day": "Sáb",
+        "commits": 12
+      }
+    ],
+    "issues_by_week": [
+      {
+        "week": "2026-05-11",
+        "count": 2
+      },
+      {
+        "week": "2026-05-18",
+        "count": 5
+      },
+      {
+        "week": "2026-05-25",
+        "count": 8
+      },
+      {
+        "week": "2026-06-01",
+        "count": 4
+      },
+      {
+        "week": "2026-06-08",
+        "count": 2
+      },
+      {
+        "week": "2026-06-15",
+        "count": 2
+      },
+      {
+        "week": "2026-06-22",
+        "count": 10
+      },
+      {
+        "week": "2026-06-29",
+        "count": 9
+      }
+    ]
+  }
+}
