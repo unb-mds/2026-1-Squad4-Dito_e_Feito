@@ -4,7 +4,7 @@ Este documento detalha as duas evoluções arquiteturais fundamentais implementa
 
 ---
 
-## 🎯 1. Mudança de Paradigma: Coerência Política Real
+## 1. Mudança de Paradigma: Coerência Política Real
 
 ### O Problema Conhecido (Afinidade Temática)
 Nas versões iniciais do sistema, a inteligência artificial (LLM/embeddings) avaliava apenas a **Afinidade Temática** entre o discurso de um parlamentar e a ementa da votação (medindo de 0.0 a 1.0 se tratavam do mesmo assunto). 
@@ -41,7 +41,7 @@ $$\text{Score Global (\%)} = \left( \frac{\text{Qtd. de Votos Coerentes (true)}}
 
 ---
 
-## ⏱️ 2. Carga Histórica Inicial e Atualização Incremental (Checkpoints)
+## ️ 2. Carga Histórica Inicial e Atualização Incremental (Checkpoints)
 
 Para otimizar o consumo de APIs do governo, limites de requisições HTTP e custos/tempo de inferência da LLM, o sistema implementou um controle de **Checkpoints por Data**.
 
@@ -78,7 +78,7 @@ LIMIT 1;
 
 ---
 
-## 🚀 Como Executar o Pipeline Localmente com Ollama
+## Como Executar o Pipeline Localmente com Ollama
 
 Caso deseje executar a varredura completa utilizando o modelo local `qwen2.5-coder:7b`:
 

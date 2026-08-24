@@ -11,18 +11,18 @@ Armazena strings de tamanho ilimitado. Ideal para conteúdo de discursos.
 
 ```sql
 texto_discurso TEXT NOT NULL,
-ementa         TEXT,
-justificativa  TEXT
+ementa TEXT,
+justificativa TEXT
 ```
 
-> ✅ No Postgres, `TEXT` é tão eficiente quanto `VARCHAR(n)`. Prefira `TEXT` quando não há limite fixo de caracteres.
+> No Postgres, `TEXT` é tão eficiente quanto `VARCHAR(n)`. Prefira `TEXT` quando não há limite fixo de caracteres.
 
 ### `VARCHAR(n)`
 Texto com limite máximo de `n` caracteres. Use quando o limite for uma regra de negócio.
 
 ```sql
-sigla_partido  VARCHAR(10),  -- ex: "PT", "PL", "PSDB"
-sigla_uf       VARCHAR(2)    -- ex: "SP", "RJ"
+sigla_partido VARCHAR(10), -- ex: "PT", "PL", "PSDB"
+sigla_uf VARCHAR(2) -- ex: "SP", "RJ"
 ```
 
 ---
@@ -54,13 +54,13 @@ similaridade FLOAT
 | `TIMESTAMP` | Data + hora, sem fuso | `2024-03-15 14:30:00` |
 | `TIMESTAMPTZ` | Data + hora **com fuso** (recomendado) | `2024-03-15 14:30:00-03` |
 
-> 💡 **Sempre use `TIMESTAMPTZ`** em sistemas que podem ter usuários em fusos diferentes ou que consomem APIs com timestamps internacionais. O Postgres armazena internamente em UTC e converte para o fuso configurado na sessão.
+> **Sempre use `TIMESTAMPTZ`** em sistemas que podem ter usuários em fusos diferentes ou que consomem APIs com timestamps internacionais. O Postgres armazena internamente em UTC e converte para o fuso configurado na sessão.
 
 ```sql
-data_discurso   TIMESTAMPTZ NOT NULL,
-data_votacao    TIMESTAMPTZ NOT NULL,
-criado_em       TIMESTAMPTZ DEFAULT now(),
-atualizado_em   TIMESTAMPTZ DEFAULT now()
+data_discurso TIMESTAMPTZ NOT NULL,
+data_votacao TIMESTAMPTZ NOT NULL,
+criado_em TIMESTAMPTZ DEFAULT now(),
+atualizado_em TIMESTAMPTZ DEFAULT now()
 ```
 
 ---
@@ -90,10 +90,10 @@ Tipo nativo do Postgres para armazenar JSON de forma **binária e indexável**. 
 
 | Tipo | Armazenamento | Indexável | Performance de leitura |
 |---|---|---|---|
-| `JSON` | Texto puro | ❌ | Mais lento (re-parseia) |
-| `JSONB` | Binário | ✅ | Mais rápido |
+| `JSON` | Texto puro | | Mais lento (re-parseia) |
+| `JSONB` | Binário | | Mais rápido |
 
-> ✅ **Use sempre `JSONB`**, exceto quando precisar preservar a ordem das chaves ou espaços em branco do JSON original.
+> **Use sempre `JSONB`**, exceto quando precisar preservar a ordem das chaves ou espaços em branco do JSON original.
 
 ### Por que é útil no Dito e Feito?
 
@@ -134,7 +134,7 @@ resultado resultado_voto NOT NULL
 ## BOOLEAN
 
 ```sql
-ativo    BOOLEAN DEFAULT true,
+ativo BOOLEAN DEFAULT true,
 validado BOOLEAN DEFAULT false
 ```
 

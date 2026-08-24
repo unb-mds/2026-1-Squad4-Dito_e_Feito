@@ -178,20 +178,20 @@ As colunas vetoriais estão declaradas em duas tabelas estratégicas do `schema.
 ```sql
 -- Tabela discurso: embedding do texto do pronunciamento
 CREATE TABLE discurso (
-    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    parlamentar_id    UUID NOT NULL REFERENCES parlamentar(id) ON DELETE CASCADE,
-    transcricao       TEXT,
-    embedding         vector(768),                                    -- ← vetor semântico do discurso
-    modelo_embedding  TEXT DEFAULT 'neuralmind/bert-base-portuguese-cased',
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    parlamentar_id UUID NOT NULL REFERENCES parlamentar(id) ON DELETE CASCADE,
+    transcricao TEXT,
+    embedding vector(768), -- ← vetor semântico do discurso
+    modelo_embedding TEXT DEFAULT 'neuralmind/bert-base-portuguese-cased',
     -- ... demais colunas
 );
 
 -- Tabela votacao: embedding semântico da ementa da votação
 CREATE TABLE votacao (
-    id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    proposicao_id       UUID REFERENCES proposicao(id) ON DELETE SET NULL,
-    descricao           TEXT,
-    embedding_ementa    vector(768),                                  -- ← vetor semântico da ementa
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    proposicao_id UUID REFERENCES proposicao(id) ON DELETE SET NULL,
+    descricao TEXT,
+    embedding_ementa vector(768), -- ← vetor semântico da ementa
     -- ... demais colunas
 );
 ```

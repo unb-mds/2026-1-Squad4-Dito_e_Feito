@@ -21,36 +21,36 @@ Abaixo está o mapeamento do fluxo lógico implementado para a extração, trata
 
 ```
                   ┌──────────────────────────────┐
-                  │   MonitoramentoLegislativo   │
+                  │ MonitoramentoLegislativo │
                   └──────────────┬───────────────┘
                                  │
          ┌───────────────────────┴───────────────────────┐
-         ▼                                               ▼
-┌──────────────────┐                            ┌──────────────────┐
-│  Câmara dos Dep. │                            │  Senado Federal  │
-│  - API REST JSON │                            │  - JSON / XML    │
-└────────┬─────────┘                            └────────┬─────────┘
-         │ (Get Discursos/IDs)                           │ (Get Discursos/IDs)
+         ▼ ▼
+┌──────────────────┐ ┌──────────────────┐
+│ Câmara dos Dep. │ │ Senado Federal │
+│ - API REST JSON │ │ - JSON / XML │
+└────────┬─────────┘ └────────┬─────────┘
+         │ (Get Discursos/IDs) │ (Get Discursos/IDs)
          └───────────────────────┬───────────────────────┘
                                  ▼
                 ┌──────────────────────────────────┐
-                │   Filtro & Normalização Pandas   │
-                │   - Criação da ementa sintética  │
+                │ Filtro & Normalização Pandas │
+                │ - Criação da ementa sintética │
                 └─────────────────┬────────────────┘
                                   ▼
                 ┌──────────────────────────────────┐
-                │        Pipeline de IA local      │
-                │        - BERTimbau (PyTorch)     │
-                │        - Extração de Embeddings  │
+                │ Pipeline de IA local │
+                │ - BERTimbau (PyTorch) │
+                │ - Extração de Embeddings │
                 └─────────────────┬────────────────┘
                                   ▼
                 ┌──────────────────────────────────┐
-                │      Mapeamento de Afinidade     │
-                │      - Cosine Similarity        │
+                │ Mapeamento de Afinidade │
+                │ - Cosine Similarity │
                 └─────────────────┬────────────────┘
                                   ▼
                 ┌──────────────────────────────────┐
-                │      Geração do Ranking Final    │
+                │ Geração do Ranking Final │
                 └──────────────────────────────────┘
 ```
 

@@ -8,7 +8,7 @@ Sistema para **análise de coerência entre discursos e votos de parlamentares**
 
 | Símbolo | Prioridade |
 |---|---|
-| 🔴 | Alta |
+| | Alta |
 | 🟠 | Média |
 | 🟢 | Baixa |
 
@@ -18,15 +18,15 @@ Sistema para **análise de coerência entre discursos e votos de parlamentares**
 
 | ID | Título | Prioridade | Descrição / Finalidade de Interpretação |
 |----|--------|------------|-----------|
-| RF01 | Coleta de dados legislativos | 🔴 Alta | Importar discursos, ementas e justificativas via APIs (Câmara, Senado) ou scraping estruturado. |
-| RF02 | Coleta de registros de votação | 🔴 Alta | Capturar votos nominais por parlamentar, sessão e projeto de lei, associados ao texto debatido. |
-| RF03 | Análise de coerência discurso–voto | 🔴 Alta | Comparar semanticamente o texto de um discurso/justificativa com o sentido do voto. |
-| RF04 | Score de coerência por parlamentar | 🔴 Alta | Calcular e exibir índice individual de alinhamento entre posição discursiva e votação. [Componentes: `Perfil.jsx` / `PerfilPolitico.jsx`] |
-| RF05 | Filtro por partido | 🔴 Alta | Permitir filtrar políticos por partido na aba principal. [Páginas: `Politicos.jsx`, `Partidos.jsx`] |
-| RF06 | Filtro por estado | 🔴 Alta | Permitir filtrar políticos por estado na aba principal. [Páginas: `Politicos.jsx`, `Estados.jsx`] |
-| RF07 | Aba visão geral com busca | 🔴 Alta | Ferramenta de busca e visão geral na tela principal. [Página: `VisaoGeral.jsx`] |
-| RF07.1 | Tema Dark | 🔴 Alta | Modo escuro (dark mode) obrigatório na interface. |
-| **RF07.2** | **Mapeamento Geográfico de Coerência** | 🔴 Alta | **Descrição:** Mapa interativo do Brasil colorido dinamicamente com base na coerência média de cada estado.<br>*Finalidade:* Identificar de forma visual e regionalizada quais unidades federativas apresentam bancadas mais ou menos coerentes. [Componente: `MapaBrasil.jsx`] |
+| RF01 | Coleta de dados legislativos | Alta | Importar discursos, ementas e justificativas via APIs (Câmara, Senado) ou scraping estruturado. |
+| RF02 | Coleta de registros de votação | Alta | Capturar votos nominais por parlamentar, sessão e projeto de lei, associados ao texto debatido. |
+| RF03 | Análise de coerência discurso–voto | Alta | Comparar semanticamente o texto de um discurso/justificativa com o sentido do voto. |
+| RF04 | Score de coerência por parlamentar | Alta | Calcular e exibir índice individual de alinhamento entre posição discursiva e votação. [Componentes: `Perfil.jsx` / `PerfilPolitico.jsx`] |
+| RF05 | Filtro por partido | Alta | Permitir filtrar políticos por partido na aba principal. [Páginas: `Politicos.jsx`, `Partidos.jsx`] |
+| RF06 | Filtro por estado | Alta | Permitir filtrar políticos por estado na aba principal. [Páginas: `Politicos.jsx`, `Estados.jsx`] |
+| RF07 | Aba visão geral com busca | Alta | Ferramenta de busca e visão geral na tela principal. [Página: `VisaoGeral.jsx`] |
+| RF07.1 | Tema Dark | Alta | Modo escuro (dark mode) obrigatório na interface. |
+| **RF07.2** | **Mapeamento Geográfico de Coerência** | Alta | **Descrição:** Mapa interativo do Brasil colorido dinamicamente com base na coerência média de cada estado.<br>*Finalidade:* Identificar de forma visual e regionalizada quais unidades federativas apresentam bancadas mais ou menos coerentes. [Componente: `MapaBrasil.jsx`] |
 | **RF08** | **Gráfico de Evolução Temporal do Parlamentar** | 🟠 Média | **Descrição:** Linha do tempo interativa (LineChart) mapeando a flutuação do score de coerência do senador/deputado ao longo dos meses da legislatura.<br>*Finalidade:* Permitir que o usuário identifique se a consistência do político é estável ou se ele oscila e muda de postura em períodos específicos. [Componente: `GraficoTendencias.jsx`] |
 | RF09 | Filtros e busca avançada | 🟠 Média | Filtrar por parlamentar, partido, tema, período, UF e tipo de votação. |
 | RF10 | Comparação entre parlamentares | 🟠 Média | Comparação lado a lado de scores de coerência entre dois ou mais parlamentares. [Página: `Comparacao.jsx`] |
@@ -45,9 +45,9 @@ Sistema para **análise de coerência entre discursos e votos de parlamentares**
 
 | ID | Título | Prioridade | Descrição |
 |----|--------|------------|-----------|
-| RI01 | Embeddings semânticos de texto | 🔴 Alta | Vetorizar discursos com modelos como BERTimbau ou multilingual-e5. |
-| RI02 | Classificação de posição no texto | 🔴 Alta | Detectar se o discurso expressa apoio, oposição ou neutralidade. |
-| RI03 | Detecção de mudança de posição | 🔴 Alta | Identificar virada discursiva comparando embeddings ao longo do tempo. |
+| RI01 | Embeddings semânticos de texto | Alta | Vetorizar discursos com modelos como BERTimbau ou multilingual-e5. |
+| RI02 | Classificação de posição no texto | Alta | Detectar se o discurso expressa apoio, oposição ou neutralidade. |
+| RI03 | Detecção de mudança de posição | Alta | Identificar virada discursiva comparando embeddings ao longo do tempo. |
 | RI04 | Rotulagem temática automática | 🟠 Média | Classificar textos por área temática (saúde, educação, segurança etc.). |
 | RI05 | Sumarização de discursos | 🟠 Média | Gerar resumo curto de discursos longos para exibição no painel. |
 | RI06 | Explicabilidade do score | 🟢 Baixa | Destacar trechos do discurso que mais contribuíram para a divergência. |
@@ -58,8 +58,8 @@ Sistema para **análise de coerência entre discursos e votos de parlamentares**
 
 | ID | Título | Prioridade | Descrição |
 |----|--------|------------|-----------|
-| RD01 | Normalização de entidades | 🔴 Alta | Resolver e unificar nomes de parlamentares, partidos e proposições. |
-| RD02 | Versionamento e rastreabilidade | 🔴 Alta | Registrar data/hora e fonte de cada dado coletado. |
+| RD01 | Normalização de entidades | Alta | Resolver e unificar nomes de parlamentares, partidos e proposições. |
+| RD02 | Versionamento e rastreabilidade | Alta | Registrar data/hora e fonte de cada dado coletado. |
 | RD03 | Atualização incremental | 🟠 Média | Coleta incremental sem reprocessar todo o histórico. |
 | RD04 | Cobertura histórica | 🟢 Baixa | Definir escopo mínimo de cobertura (ex: últimas 2 legislaturas). |
 
@@ -69,9 +69,9 @@ Sistema para **análise de coerência entre discursos e votos de parlamentares**
 
 | ID | Título | Prioridade | Descrição |
 |----|--------|------------|-----------|
-| RNF01 | Desempenho de consultas | 🔴 Alta | Consultas devem retornar em menos de 3s para datasets de até 500 mil registros. |
-| RNF02 | Reprodutibilidade do pipeline | 🔴 Alta | Todo o pipeline deve ser reprodutível via script documentado. |
-| RNF03 | Transparência metodológica | 🔴 Alta | Cada score exibido deve ter documentação explicando como foi calculado. |
+| RNF01 | Desempenho de consultas | Alta | Consultas devem retornar em menos de 3s para datasets de até 500 mil registros. |
+| RNF02 | Reprodutibilidade do pipeline | Alta | Todo o pipeline deve ser reprodutível via script documentado. |
+| RNF03 | Transparência metodológica | Alta | Cada score exibido deve ter documentação explicando como foi calculado. |
 | RNF04 | Escalabilidade do NLP | 🟠 Média | Pipeline de inferência deve processar ≥ 10 mil textos/hora. |
 | RNF05 | Usabilidade do painel | 🟠 Média | Interface navegável sem treinamento por jornalistas e pesquisadores. |
 | RNF06 | Manutenibilidade do código | 🟠 Média | Código com testes unitários e documentação inline. |
@@ -114,7 +114,7 @@ Esta seção descreve a estrutura do frontend (páginas e componentes) e detalha
 
 ## Resumo Estatístico
 
-| Tipo | Total | 🔴 Alta | 🟠 Média | 🟢 Baixa |
+| Tipo | Total | Alta | 🟠 Média | 🟢 Baixa |
 |------|-------|---------|---------|---------|
 | RF (Funcionais) | 17 | 7 | 7 | 3 |
 | RI (IA/NLP) | 6 | 3 | 2 | 1 |
@@ -126,15 +126,15 @@ Esta seção descreve a estrutura do frontend (páginas e componentes) e detalha
 
 ## Entregáveis de Alta Prioridade
 
-1. RF01 — Coleta de dados legislativos  
-2. RF02 — Coleta de registros de votação  
-3. RF03 — Análise de coerência discurso–voto  
-4. RF04 — Score de coerência por parlamentar  
-5. RI01 — Embeddings semânticos de texto  
-6. RI02 — Classificação de posição no texto  
-7. RI03 — Detecção de mudança de posição  
-8. RD01 — Normalização de entidades  
-9. RD02 — Versionamento e rastreabilidade  
-10. RNF01 — Desempenho de consultas  
-11. RNF02 — Reprodutibilidade do pipeline  
+1. RF01 — Coleta de dados legislativos 
+2. RF02 — Coleta de registros de votação 
+3. RF03 — Análise de coerência discurso–voto 
+4. RF04 — Score de coerência por parlamentar 
+5. RI01 — Embeddings semânticos de texto 
+6. RI02 — Classificação de posição no texto 
+7. RI03 — Detecção de mudança de posição 
+8. RD01 — Normalização de entidades 
+9. RD02 — Versionamento e rastreabilidade 
+10. RNF01 — Desempenho de consultas 
+11. RNF02 — Reprodutibilidade do pipeline 
 12. RNF03 — Transparência metodológica

@@ -42,7 +42,7 @@ SELECT
     vo.data_hora
 FROM voto v
 JOIN parlamentar p ON p.id = v.parlamentar_id
-JOIN votacao vo    ON vo.id = v.votacao_id
+JOIN votacao vo ON vo.id = v.votacao_id
 WHERE p.sigla_uf = 'SP'
 ORDER BY vo.data_hora DESC;
 ```
@@ -83,20 +83,20 @@ ORDER BY media_score DESC;
 
 ```sql
 -- Chaves estrangeiras (sempre indexar)
-CREATE INDEX idx_discurso_parlamentar  ON discurso(parlamentar_id);
-CREATE INDEX idx_voto_parlamentar      ON voto(parlamentar_id);
-CREATE INDEX idx_voto_votacao          ON voto(votacao_id);
-CREATE INDEX idx_score_parlamentar     ON score_coerencia(parlamentar_id);
-CREATE INDEX idx_votacao_proposicao    ON votacao(proposicao_id);
+CREATE INDEX idx_discurso_parlamentar ON discurso(parlamentar_id);
+CREATE INDEX idx_voto_parlamentar ON voto(parlamentar_id);
+CREATE INDEX idx_voto_votacao ON voto(votacao_id);
+CREATE INDEX idx_score_parlamentar ON score_coerencia(parlamentar_id);
+CREATE INDEX idx_votacao_proposicao ON votacao(proposicao_id);
 
 -- Filtros comuns
-CREATE INDEX idx_parlamentar_partido   ON parlamentar(sigla_partido);
-CREATE INDEX idx_parlamentar_uf        ON parlamentar(sigla_uf);
-CREATE INDEX idx_discurso_data         ON discurso(data_hora);
-CREATE INDEX idx_votacao_data          ON votacao(data_hora);
+CREATE INDEX idx_parlamentar_partido ON parlamentar(sigla_partido);
+CREATE INDEX idx_parlamentar_uf ON parlamentar(sigla_uf);
+CREATE INDEX idx_discurso_data ON discurso(data_hora);
+CREATE INDEX idx_votacao_data ON votacao(data_hora);
 
 -- Índice em JSONB (para campos consultados com frequência)
-CREATE INDEX idx_parlamentar_api_nome  ON parlamentar USING gin(dados_api);
+CREATE INDEX idx_parlamentar_api_nome ON parlamentar USING gin(dados_api);
 ```
 
 ### Índice de texto completo (Full-Text Search)
@@ -138,7 +138,7 @@ BEGIN;
     INSERT INTO score_coerencia (parlamentar_id, score, modelo_usado)
     VALUES ('uuid-parlamentar', 87.5, 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2');
 
-COMMIT;  -- confirma tudo
+COMMIT; -- confirma tudo
 -- ou ROLLBACK; para desfazer tudo em caso de erro
 ```
 
@@ -151,14 +151,14 @@ def salvar_analise(db: Session, discurso_data, score_data):
     try:
         discurso = Discurso(**discurso_data)
         db.add(discurso)
-        db.flush()  # envia ao banco sem commitar (obtém o ID)
+        db.flush() # envia ao banco sem commitar (obtém o ID)
 
         score = ScoreCoerencia(discurso_id=discurso.id, **score_data)
         db.add(score)
 
-        db.commit()  # confirma tudo
+        db.commit() # confirma tudo
     except Exception as e:
-        db.rollback()  # desfaz em caso de erro
+        db.rollback() # desfaz em caso de erro
         raise e
 ```
 
@@ -169,11 +169,11 @@ def salvar_analise(db: Session, discurso_data, score_data):
 ### Nomenclatura
 
 ```sql
--- ✅ Recomendado: snake_case, nomes em português ou inglês (consistente)
+-- Recomendado: snake_case, nomes em português ou inglês (consistente)
 CREATE TABLE score_coerencia (...)
 CREATE INDEX idx_voto_parlamentar ON voto(parlamentar_id);
 
--- ❌ Evitar: camelCase, nomes genéricos
+-- Evitar: camelCase, nomes genéricos
 CREATE TABLE ScoreCoerencia (...)
 CREATE TABLE tabela1 (...)
 ```
@@ -181,27 +181,27 @@ CREATE TABLE tabela1 (...)
 ### Sempre use `NOT NULL` quando o campo for obrigatório
 
 ```sql
--- ✅
+-- 
 nome_civil TEXT NOT NULL,
 
--- ❌ Permite nulos acidentais
+-- Permite nulos acidentais
 nome_civil TEXT,
 ```
 
 ### Use `DEFAULT now()` para timestamps de auditoria
 
 ```sql
-criado_em    TIMESTAMPTZ DEFAULT now(),
+criado_em TIMESTAMPTZ DEFAULT now(),
 atualizado_em TIMESTAMPTZ DEFAULT now()
 ```
 
 ### Evite `SELECT *` em produção
 
 ```sql
--- ❌ Seleciona tudo, pode trazer dados desnecessários
+-- Seleciona tudo, pode trazer dados desnecessários
 SELECT * FROM parlamentar;
 
--- ✅ Seleciona apenas o necessário
+-- Seleciona apenas o necessário
 SELECT id, nome_civil, sigla_partido FROM parlamentar;
 ```
 
@@ -243,7 +243,7 @@ alembic history
 alembic downgrade -1
 ```
 
-> 💡 Nunca altere o banco manualmente em produção. Use sempre migrations para manter o histórico de mudanças no schema versionado junto ao código.
+> Nunca altere o banco manualmente em produção. Use sempre migrations para manter o histórico de mudanças no schema versionado junto ao código.
 
 ---
 

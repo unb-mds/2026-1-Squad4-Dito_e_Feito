@@ -35,8 +35,8 @@ Next.js é a escolha mais sólida para um painel navegável por jornalistas e pe
 O pipeline natural é:
 
 ```
-spaCy  →  HuggingFace (BERTimbau)  →  Classificador customizado
-(pré-processamento)  (embeddings semânticos)  (apoio / oposição / neutro)
+spaCy → HuggingFace (BERTimbau) → Classificador customizado
+(pré-processamento) (embeddings semânticos) (apoio / oposição / neutro)
 ```
 
 !!! important "Por que BERTimbau?"

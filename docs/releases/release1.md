@@ -41,37 +41,37 @@ A arvore simplificada do repositorio na R1 e:
 ```text
 2026-1-Squad4-Dito_e_Feito/
 ├── .github/
-│   └── workflows/
-│       ├── main.yml          # CI/CD: build, MkDocs, GitHub Pages
-│       └── metrics.yml       # CI/CD: coleta metricas do repositorio
+│ └── workflows/
+│ ├── main.yml # CI/CD: build, MkDocs, GitHub Pages
+│ └── metrics.yml # CI/CD: coleta metricas do repositorio
 ├── analytics/
-│   └── index.html            # Dashboard de metricas do repositorio
+│ └── index.html # Dashboard de metricas do repositorio
 ├── backend/
-│   ├── api.py                # Servidor Flask (porta 5001) - Core da API
-│   ├── pipe.py               # Pipeline local com BERTimbau
-│   ├── scan_senators.py      # Orquestrador de varredura em lote
-│   ├── dashboard.html        # Dashboard Vanilla JS servido pela API
-│   ├── dashboard_metrics.json # Cache local dos dados analisados
-│   ├── requirements.txt      # Dependencias Python
-│   └── database/
-│       ├── schema.sql        # DDL do banco de dados
-│       ├── Migrations.sql    # Historico de migracoes
-│       └── Conexao.md        # Guia de conexao ao Supabase
+│ ├── api.py # Servidor Flask (porta 5001) - Core da API
+│ ├── pipe.py # Pipeline local com BERTimbau
+│ ├── scan_senators.py # Orquestrador de varredura em lote
+│ ├── dashboard.html # Dashboard Vanilla JS servido pela API
+│ ├── dashboard_metrics.json # Cache local dos dados analisados
+│ ├── requirements.txt # Dependencias Python
+│ └── database/
+│ ├── schema.sql # DDL do banco de dados
+│ ├── Migrations.sql # Historico de migracoes
+│ └── Conexao.md # Guia de conexao ao Supabase
 ├── frontend/
-│   ├── package.json          # Dependencias Node.js
-│   ├── vite.config.js        # Configuracao do bundler
-│   └── src/
-│       ├── App.jsx           # Roteamento principal (React Router DOM)
-│       ├── main.jsx          # Entry point da SPA
-│       ├── pages/            # Paginas da aplicacao (7 paginas)
-│       ├── components/       # Componentes reutilizaveis (9 componentes)
-│       └── services/
-│           └── api.js        # Camada de servico Axios
-├── docs/                     # Fonte da documentacao MkDocs
+│ ├── package.json # Dependencias Node.js
+│ ├── vite.config.js # Configuracao do bundler
+│ └── src/
+│ ├── App.jsx # Roteamento principal (React Router DOM)
+│ ├── main.jsx # Entry point da SPA
+│ ├── pages/ # Paginas da aplicacao (7 paginas)
+│ ├── components/ # Componentes reutilizaveis (9 componentes)
+│ └── services/
+│ └── api.js # Camada de servico Axios
+├── docs/ # Fonte da documentacao MkDocs
 ├── scripts/
-│   └── collect.js            # Script de coleta de metricas do GitHub
-├── mkdocs.yml                # Configuracao do site de documentacao
-└── README.md                 # Apresentacao geral do projeto
+│ └── collect.js # Script de coleta de metricas do GitHub
+├── mkdocs.yml # Configuracao do site de documentacao
+└── README.md # Apresentacao geral do projeto
 ```
 
 ---
@@ -107,7 +107,7 @@ A arvore simplificada do repositorio na R1 e:
 2. Crie e ative o ambiente virtual:
    ```bash
    python -m venv venv
-   source venv/bin/activate  # No Windows: venv\Scripts\activate
+   source venv/bin/activate # No Windows: venv\Scripts\activate
    ```
 3. Instale as dependencias necessarias:
    ```bash

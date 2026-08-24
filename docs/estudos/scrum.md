@@ -1,4 +1,4 @@
-# Relatório Técnico  
+# Relatório Técnico 
 ## Aplicação do Método Scrum em Projeto de Monitoramento de Coerência entre Discurso e Votação
 
 ---

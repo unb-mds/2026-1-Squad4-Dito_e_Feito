@@ -1,7 +1,7 @@
 # Sprint 01 — Reunião de Abertura
 
-**Data:** 03/04/2026  
-**Horário:** 22:00  
+**Data:** 03/04/2026 
+**Horário:** 22:00 
 **Plataforma:** Google Meet
 
 ---

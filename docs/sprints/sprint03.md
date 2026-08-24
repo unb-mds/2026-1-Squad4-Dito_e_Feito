@@ -1,6 +1,6 @@
 # Sprint 03 — Refinamento de Requisitos e Estudos Técnicos
 
-**Data:** 19/04/2026  
+**Data:** 19/04/2026 
 **Plataforma:** Google Meet
 
 ---

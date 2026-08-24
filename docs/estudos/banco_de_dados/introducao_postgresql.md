@@ -12,12 +12,12 @@ Diferente de bancos mais simples como o SQLite, o PostgreSQL é projetado para a
 
 | Característica | PostgreSQL | MySQL | SQLite |
 |---|---|---|---|
-| Open source | ✅ | ✅ (parcial) | ✅ |
-| Multiusuário | ✅ | ✅ | ❌ |
-| Suporte a JSONB | ✅ nativo | Limitado | ❌ |
-| Extensível (funções, tipos) | ✅ muito | Moderado | ❌ |
-| Transações ACID | ✅ completo | ✅ | ✅ |
-| Ideal para produção | ✅ | ✅ | ❌ (local/dev) |
+| Open source | | (parcial) | |
+| Multiusuário | | | |
+| Suporte a JSONB | nativo | Limitado | |
+| Extensível (funções, tipos) | muito | Moderado | |
+| Transações ACID | completo | | |
+| Ideal para produção | | | (local/dev) |
 | Curva de aprendizado | Média | Baixa | Muito baixa |
 
 ### Por que usamos PostgreSQL no Dito e Feito?
@@ -37,7 +37,7 @@ Diferente de bancos mais simples como o SQLite, o PostgreSQL é projetado para a
 ```
 Servidor PostgreSQL
 └── Banco de dados: dito_e_feito
-    └── Schema: public  (padrão)
+    └── Schema: public (padrão)
         ├── Tabela: parlamentar
         ├── Tabela: discurso
         ├── Tabela: votacao
@@ -110,7 +110,7 @@ docker run --name dito-e-feito-db \
   -d postgres:15
 ```
 
-> 💡 **Dica**: usar Docker evita conflitos de versão e facilita o setup para toda a equipe.
+> **Dica**: usar Docker evita conflitos de versão e facilita o setup para toda a equipe.
 
 ---
 
@@ -124,11 +124,11 @@ psql -U postgres
 psql -U postgres -d dito_e_feito
 
 # Comandos úteis dentro do psql
-\l          -- listar bancos de dados
-\c nome_db  -- conectar em um banco
-\dt         -- listar tabelas
-\d tabela   -- descrever estrutura de uma tabela
-\q          -- sair
+\l -- listar bancos de dados
+\c nome_db -- conectar em um banco
+\dt -- listar tabelas
+\d tabela -- descrever estrutura de uma tabela
+\q -- sair
 ```
 
 ---

@@ -57,32 +57,32 @@ A persistência dos dados estruturados ocorre em uma base PostgreSQL. A modelage
 O cálculo da coerência de um parlamentar ocorre por meio de uma comparação sistemática entre o que o político discursa na tribuna e como ele vota nas sessões ordinárias.
 
 ```
-+------------------+     +------------------+
-| API do Senado /  |     | Scraping de      |
-| API da Câmara    |     | Pronunciamentos  |
-+--------+---------+     +--------+---------+
-         |                        |
-         | Votos Nominais         | Transcrições de Discursos
++------------------+ +------------------+
+| API do Senado / | | Scraping de |
+| API da Câmara | | Pronunciamentos |
++--------+---------+ +--------+---------+
+         | |
+         | Votos Nominais | Transcrições de Discursos
          +------------+-----------+
                       |
                       v
       +---------------+---------------+
-      | Mapeador de Similaridade      |
-      | (Jaccard ou Cosseno)          |
+      | Mapeador de Similaridade |
+      | (Jaccard ou Cosseno) |
       +---------------+---------------+
                       |
                       | Melhores Pares Candidatos
                       v
       +---------------+---------------+
-      | Avaliação Cognitiva por LLM   |
-      | (Llama via Groq/OpenRouter)   |
+      | Avaliação Cognitiva por LLM |
+      | (Llama via Groq/OpenRouter) |
       +---------------+---------------+
                       |
                       | Scores de Coerência + Justificativa
                       v
       +---------------+---------------+
-      | Persistência no Banco /       |
-      | Geração de dashboard_metrics  |
+      | Persistência no Banco / |
+      | Geração de dashboard_metrics |
       +-------------------------------+
 ```
 

@@ -1,7 +1,7 @@
 # Sprint 02 — Definições e Requisitos
 
-**Data:** 10/04/2026  
-**Horário:** 21:00  
+**Data:** 10/04/2026 
+**Horário:** 21:00 
 **Plataforma:** Discord
 
 ---

@@ -19,9 +19,9 @@ O **Frontend** é a camada de apresentação de uma aplicação. É a interface 
 
 Independente do framework escolhido, todo frontend moderno é construído sobre três pilares:
 
-1.  **HTML5 (Estrutura):** Define o esqueleto da página (títulos, parágrafos, seções).
-2.  **CSS3 (Estilo):** Define a estética (cores, fontes, espaçamentos, animações).
-3.  **JavaScript/TypeScript (Comportamento):** Define a inteligência e interatividade da página.
+1. **HTML5 (Estrutura):** Define o esqueleto da página (títulos, parágrafos, seções).
+2. **CSS3 (Estilo):** Define a estética (cores, fontes, espaçamentos, animações).
+3. **JavaScript/TypeScript (Comportamento):** Define a inteligência e interatividade da página.
 
 ---
 
@@ -43,16 +43,16 @@ Atualmente, não se constrói frontends complexos apenas com JS puro. Utilizamos
 
 Para dominar o desenvolvimento desta camada, a equipe deve focar nos seguintes conceitos:
 
-### 🌐 Consumo de APIs (REST)
+### Consumo de APIs (REST)
 O frontend não possui os dados; ele os solicita. É necessário dominar o uso de ferramentas como `Fetch API` ou bibliotecas como `Axios` para trazer os dados do Backend (votos e discursos) para a tela.
 
-### 🧩 Componentização
+### Componentização
 A prática de quebrar a interface em pedaços pequenos e independentes (Ex: um botão, um card de parlamentar, um gráfico). Isso facilita a manutenção e evita repetição de código.
 
-### 🎨 Design Systems e Tokens
+### Design Systems e Tokens
 A tradução do design (Figma) para o código. No nosso caso, o uso de variáveis (Tokens) para o **Azul Petróleo** e o **Bordô** garante que o site seja visualmente consistente em todas as telas.
 
-### 📊 Visualização de Dados (DataViz)
+### Visualização de Dados (DataViz)
 Para projetos analíticos, o frontend deve saber manipular bibliotecas de gráficos (como **Recharts** ou **Chart.js**), garantindo que as tendências de coerência sejam fáceis de interpretar.
 
 ---

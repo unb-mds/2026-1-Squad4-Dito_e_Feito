@@ -5,7 +5,7 @@
 
 ---
 
-## 🎯 Objetivos da Sprint
+## Objetivos da Sprint
 
 1. **Alinhamento com Protótipo:** Garantir que os requisitos levantados coincidam com a proposta visual do Figma.
 2. **Revisão de Progresso:** Discussão coletiva sobre o que foi realizado individualmente até o momento.
@@ -13,7 +13,7 @@
 
 ---
 
-## 👥 Participantes da Reunião (06/05)
+## Participantes da Reunião (06/05)
 
 - Lucas Abdalla Nery
 - Juan Costa Indiano
@@ -22,7 +22,7 @@
 
 ---
 
-## 📝 Definições Finais
+## Definições Finais
 
 ### Requisitos e Protótipo
 Houve um esforço concentrado para alinhar os requisitos funcionais com o protótipo de alta fidelidade no Figma. Isso garante que a implementação não divirja do que foi planejado visualmente.
@@ -32,7 +32,7 @@ A equipe discutiu e refinou a escolha de ferramentas de desenvolvimento para oti
 
 ---
 
-## 🚀 Próximos Passos
+## Próximos Passos
 
 - **Estudo de Requisitos:** Os membros devem realizar uma leitura minuciosa dos requisitos para validar a viabilidade técnica.
 - **Correção de Rota:** Reunião agendada para 08/05 visando realizar ajustes finos no escopo do projeto, caso necessário.

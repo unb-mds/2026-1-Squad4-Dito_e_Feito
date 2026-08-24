@@ -1,4 +1,4 @@
-# 🔌 Guia de Conexão ao Banco de Dados
+# Guia de Conexão ao Banco de Dados
 
 > Este documento explica como qualquer membro do time **Dito e Feito** pode se conectar ao banco de dados PostgreSQL hospedado no Supabase.
 
@@ -14,9 +14,9 @@
 | **Porta** | `5432` |
 | **Database** | `postgres` |
 | **Usuário** | `postgres` |
-| **Senha** | ⚠️ Solicitar ao responsável do banco |
+| **Senha** | ️ Solicitar ao responsável do banco |
 
-> 🔒 **Nunca compartilhe a senha em arquivos commitados no repositório. Use sempre variáveis de ambiente.**
+> **Nunca compartilhe a senha em arquivos commitados no repositório. Use sempre variáveis de ambiente.**
 
 ---
 
@@ -32,7 +32,7 @@ Substitua `[SENHA]` pela senha fornecida pelo responsável do banco de dados.
 
 ## Como conectar por contexto
 
-### 🐍 Python puro (psycopg2)
+### Python puro (psycopg2)
 
 Usado pelo Gustavo no Colab para salvar resultados da IA.
 
@@ -57,7 +57,7 @@ conn.close()
 
 ---
 
-### ⚡ FastAPI com SQLAlchemy
+### FastAPI com SQLAlchemy
 
 Usado pelo Gustavo no backend.
 
@@ -93,7 +93,7 @@ def get_db():
 
 ---
 
-### 📓 Google Colab (IA/NLP)
+### Google Colab (IA/NLP)
 
 Usado pelo Gustavo para conectar os experimentos de NLP ao banco.
 
@@ -109,11 +109,11 @@ conn = psycopg2.connect(DATABASE_URL)
 print("Conexão estabelecida com sucesso!")
 ```
 
-> 💡 No Google Colab use a aba **Secrets** (ícone de chave 🔑 no menu esquerdo) para guardar a URL de conexão com segurança, sem expor no código.
+> No Google Colab use a aba **Secrets** (ícone de chave no menu esquerdo) para guardar a URL de conexão com segurança, sem expor no código.
 
 ---
 
-### 🖥️ pgAdmin 4 (local)
+### ️ pgAdmin 4 (local)
 
 Para visualizar e gerenciar o banco graficamente.
 
@@ -149,11 +149,11 @@ Para visualizar e gerenciar o banco graficamente.
 
 ## Boas práticas de segurança
 
-- ✅ Sempre use variáveis de ambiente para a senha
-- ✅ Adicione `.env` no `.gitignore` do projeto
-- ✅ No Colab use a aba **Secrets** para guardar credenciais
-- ❌ Nunca commite senha, token ou string de conexão no código
-- ❌ Nunca compartilhe a string de conexão em canais públicos (issues, PRs, Discord)
+- Sempre use variáveis de ambiente para a senha
+- Adicione `.env` no `.gitignore` do projeto
+- No Colab use a aba **Secrets** para guardar credenciais
+- Nunca commite senha, token ou string de conexão no código
+- Nunca compartilhe a string de conexão em canais públicos (issues, PRs, Discord)
 
 ---
 
@@ -163,4 +163,4 @@ Para visualizar e gerenciar o banco graficamente.
 |---|---|---|
 | Indiano | @seu-github | Banco de Dados / Scrum Master |
 
-> Dúvidas sobre o schema ou acesso ao banco? Abre uma issue com a label `database` ou chama diretamente no grupo. 🐘
+> Dúvidas sobre o schema ou acesso ao banco? Abre uma issue com a label `database` ou chama diretamente no grupo. 

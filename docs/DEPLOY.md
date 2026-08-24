@@ -1,4 +1,4 @@
-# 🚀 Guia de Deploy — Dito e Feito
+# Guia de Deploy — Dito e Feito
 
 Este guia ensina como colocar o projeto **Dito e Feito** em produção usando **Render** (backend) e **Vercel** (frontend).
 
@@ -41,15 +41,15 @@ Antes de começar, você precisa ter acesso às seguintes chaves/credenciais:
 No painel do Render, vá em **Environment → Add Environment Variable** e adicione:
 
 ```
-DATABASE_URL   = postgresql://postgres:SUA_SENHA@db.SEU_PROJETO.supabase.co:5432/postgres
-GROQ_API_KEY   = gsk_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+DATABASE_URL = postgresql://postgres:SUA_SENHA@db.SEU_PROJETO.supabase.co:5432/postgres
+GROQ_API_KEY = gsk_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 OPENROUTER_API_KEY = sk-or-v1-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-FRONTEND_URL   = https://dito-e-feito.vercel.app
+FRONTEND_URL = https://dito-e-feito.vercel.app
 ```
 
-> ⚠️ **NUNCA** coloque as chaves reais no código ou no repositório. Use sempre o painel de variáveis de ambiente do Render.
+> ️ **NUNCA** coloque as chaves reais no código ou no repositório. Use sempre o painel de variáveis de ambiente do Render.
 > 
-> 💡 `FRONTEND_URL` é usada pelo backend para configurar o CORS. Adicione a URL exata da Vercel após o deploy do frontend.
+> `FRONTEND_URL` é usada pelo backend para configurar o CORS. Adicione a URL exata da Vercel após o deploy do frontend.
 
 ### 1.3 Como obter a DATABASE_URL do Supabase
 
@@ -96,7 +96,7 @@ O frontend precisa saber onde está o backend em produção. Adicione a variáve
 VITE_API_URL = https://dito-e-feito-backend.onrender.com
 ```
 
-> ⚠️ Em seguida, verifique se o arquivo `frontend/src/services/api.js` usa `import.meta.env.VITE_API_URL` como base URL. Se ainda estiver hardcoded para `localhost:5001`, será necessário ajustar.
+> ️ Em seguida, verifique se o arquivo `frontend/src/services/api.js` usa `import.meta.env.VITE_API_URL` como base URL. Se ainda estiver hardcoded para `localhost:5001`, será necessário ajustar.
 
 ### 2.3 Deploy
 
@@ -126,7 +126,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    command: python api.py  # Sobrescreve o CMD do Dockerfile para dev local
+    command: python api.py # Sobrescreve o CMD do Dockerfile para dev local
     ports:
       - "5001:5001"
     ...
@@ -167,4 +167,4 @@ if _FRONTEND_URL:
 CORS(app, origins=_CORS_ORIGINS)
 ```
 
-> ⚠️ Se o frontend da Vercel tiver uma URL diferente (ex: com subdomínio de preview), adicione também como variável de ambiente separada ou use um wildcard.
+> ️ Se o frontend da Vercel tiver uma URL diferente (ex: com subdomínio de preview), adicione também como variável de ambiente separada ou use um wildcard.
